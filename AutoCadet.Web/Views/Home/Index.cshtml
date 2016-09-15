@@ -6,35 +6,60 @@
     <script src="~/Scripts/app/app.js"></script>
 }
 
-<div ng-controller="mainPageController as ctrl">
-    <div class="jumbotron">
+<div ng-controller="mainPageController as ctrl" data-spy="scroll" data-target=".navbar" data-offset="50">
+@*    <header class="header-main">*@
+@*        <nav class="navbar">*@
+@*            <div class="container-fluid">*@
+@*                <div class="navbar-header">*@
+@*                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">*@
+@*                        <span class="icon-bar"></span>*@
+@*                        <span class="icon-bar"></span>*@
+@*                        <span class="icon-bar"></span>*@
+@*                    </button>*@
+@*                    <a class="navbar-brand" href="#">Права в кармане</a>*@
+@*                </div>*@
+@*                <div>*@
+@*                    <div class="collapse navbar-collapse" id="myNavbar">*@
+@*                        <ul class="nav navbar-nav">*@
+@*                            <li><a href="#section-persons">Инструкторы</a></li>*@
+@*                            <li><a href="#section1">Цены</a></li>*@
+@*                            <li><a href="#section2">Отзывы</a></li>*@
+@*                            <li><a href="#section3">Маршруты</a></li>*@
+@*                        </ul>*@
+@*                    </div>*@
+@*                </div>*@
+@*            </div>*@
+@*        </nav>*@
+@*    </header>*@
+    <header class="header-faded">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Права в кармане</a>
+                </div>
+                <div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#section-persons">Инструкторы</a></li>
+                            <li><a href="#section1">Цены</a></li>
+                            <li><a href="#section2">Отзывы</a></li>
+                            <li><a href="#section3">Маршруты</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="jumbotron homepage-hero">
         <h1>Курсы вождения автомобиля. Категория B</h1>
         <p>Учись у лучших - Будь лучшим!</p>
     </div>
-
-
-    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="237">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Права в кармане</a>
-            </div>
-            <div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#section-persons">Инструкторы</a></li>
-                        <li><a href="#section1">Цены</a></li>
-                        <li><a href="#section2">Отзывы</a></li>
-                        <li><a href="#section3">Маршруты</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <div id="section-persons" class="container-fluid">
         <h1>Наши специалисты:</h1>
@@ -42,19 +67,19 @@
         <div class="row-fluid">
             <div class="col-lg-4 col-md-6 col-sm-12 person-tile">
                 <h3>Черняков Алексей Владимирович</h3>
-                <img src="~/Content/images/paris.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236" />
+                <img src="~/Content/images/paris.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236"/>
                 <p>высшего педагогического образования;</p>
                 <p>Присуще спокойствие, рассудительность, коммуникабельность, понимание и большой запас терпени</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 person-tile">
                 <h3>Черняков Алексей Владимирович</h3>
-                <img src="~/Content/images/paris.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236" />
+                <img src="~/Content/images/paris.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236"/>
                 <p>высшего педагогического образования;</p>
                 <p>Присуще спокойствие, рассудительность, коммуникабельность, понимание и большой запас терпени</p>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 person-tile">
                 <h3>Черняков Алексей Владимирович</h3>
-                <img src="~/Content/images/paris.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236" />
+                <img src="~/Content/images/paris.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236"/>
                 <p>высшего педагогического образования;</p>
                 <p>Присуще спокойствие, рассудительность, коммуникабельность, понимание и большой запас терпени</p>
             </div>

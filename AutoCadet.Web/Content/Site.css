@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 0;
     padding-bottom: 20px;
 }
 
@@ -87,7 +87,36 @@ textarea {
     margin-bottom: 0;
 }
 
-.navbar-inverse {
-     background-color: #f2f2f2; 
-     border-color: #f2f2f2; 
+header {
+    width: 100%;
+}
+
+.header-main {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 5900;
+}
+.affix-top {
+    background-color:transparent; 
+    border-color: transparent; 
+}
+.affix {
+    background-color:white; 
+    border-color: white; 
+}
+
+.homepage-hero {
+    background: url("http://cdn2.hubspot.net/hub/396606/file-1377920369-jpg/Assets/accelerancebg.jpg") no-repeat;
+    background-position: top center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 80vh;
+    color: #FFF;
+    text-align: center;
+    padding-left: 80px;
+    padding-right: 80px;
+    position: relative;
+    z-index: 90;
 }
