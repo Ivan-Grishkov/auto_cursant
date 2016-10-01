@@ -182,18 +182,27 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\agency.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="img\header-bg-details.jpg" />
+    <Content Include="img\header-bg.jpg" />
+    <Content Include="img\map-image.png" />
+    <Content Include="img\paris.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\agency.js" />
+    <Content Include="Scripts\agency.min.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\controllers\admin-users-controller.js" />
     <Content Include="Scripts\app\controllers\home-index-controller.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\contact_me.js" />
+    <Content Include="Scripts\jqBootstrapValidation.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -240,6 +249,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Home\_IndexNavigation.cshtml" />
+    <Content Include="Views\Home\_IndexHeader.cshtml" />
+    <Content Include="Views\Home\InstructorsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
