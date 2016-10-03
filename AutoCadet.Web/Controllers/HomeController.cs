@@ -1,26 +1,22 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using AutoCadet.Services;
 
 namespace AutoCadet.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IHomeControllerService _homeControllerService;
+
+        public HomeController(IHomeControllerService homeControllerService)
         {
-            return View();
+            _homeControllerService = homeControllerService;
         }
 
-        public ActionResult About()
+        public async Task<ActionResult> Index()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var pageViewModel = await _homeControllerService.GetHomePageViewModelAsync();
+            return View(pageViewModel);
         }
     }
 }
