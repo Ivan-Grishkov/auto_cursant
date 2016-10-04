@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoCadet.Domain;
@@ -7,25 +8,21 @@ using AutoMapper;
 
 namespace AutoCadet.Services.Impl
 {
-    public class HomeControllerService: IHomeControllerService
+    public class AdminControllerService : IAdminControllerService
     {
         private readonly AutoCadetDbContext _autoCadetDbContext;
         private readonly IMapper _mapper;
 
-        public HomeControllerService(AutoCadetDbContext autoCadetDbContext, IMapper mapper)
+        public AdminControllerService(AutoCadetDbContext autoCadetDbContext, IMapper mapper)
         {
             _autoCadetDbContext = autoCadetDbContext;
             _mapper = mapper;
         }
 
-        public async Task<HomePageViewModel> GetHomePageViewModelAsync()
+        public async Task<IList<InstructorGridItemBaseViewModel>> GetAllUsersViewModelsAsync()
         {
             var instructors = await _autoCadetDbContext.Instructors.ToListAsync();
-            var vms = instructors.Select(x => _mapper.Map<InstructorGridItemViewModel>(x)).ToList();
-            return new HomePageViewModel
-            {
-                InstructorGridItemViewModels = vms
-            };
+            return instructors?.Select(i => _mapper.Map<InstructorGridItemBaseViewModel>(i)).ToList();
         }
     }
 }

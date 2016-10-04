@@ -1,13 +1,23 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using AutoCadet.Services;
 
 namespace AutoCadet.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
+        private readonly IAdminControllerService _adminControllerService;
         // GET: Admin
-        public ActionResult Index()
+        public AdminController(IAdminControllerService adminControllerService)
         {
-            return View();
+            _adminControllerService = adminControllerService;
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            var instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
+            return View(instructorsVs);
         }
     }
 }

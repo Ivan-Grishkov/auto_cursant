@@ -8,6 +8,7 @@ namespace AutoCadet.Models.Mapper
         public AutoCadetMapperProfile()
         {
             CreateMap<Instructor, InstructorGridItemViewModel>();
+            CreateMap<Instructor, InstructorGridItemBaseViewModel>();
         }
     }
 }

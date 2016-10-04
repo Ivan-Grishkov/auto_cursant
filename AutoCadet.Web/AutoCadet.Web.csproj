@@ -193,10 +193,13 @@
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
+    <Compile Include="Models\InstructorGridItemBaseViewModel.cs" />
     <Compile Include="Models\InstructorGridItemViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAdminControllerService.cs" />
+    <Compile Include="Services\Impl\AdminControllerService.cs" />
     <Compile Include="Services\Impl\HomeControllerService.cs" />
     <Compile Include="Services\IHomeControllerService.cs" />
     <Compile Include="Startup.cs" />
