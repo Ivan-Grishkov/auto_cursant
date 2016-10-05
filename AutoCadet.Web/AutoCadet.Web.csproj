@@ -276,6 +276,7 @@
     <Content Include="Views\Home\_IndexNavigation.cshtml" />
     <Content Include="Views\Home\_IndexHeader.cshtml" />
     <Content Include="Views\Home\InstructorsList.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

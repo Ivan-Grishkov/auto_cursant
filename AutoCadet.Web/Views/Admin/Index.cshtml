@@ -1,12 +1,35 @@
-﻿@model dynamic
+﻿@model IList<AutoCadet.Models.InstructorGridItemBaseViewModel>
 
 @{
-    ViewBag.Title = "Users";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Instructors";
+    Layout = "~/Views/Shared/_LayoutWithLogin.cshtml";
 }
-
-<div ng-controller="AdminUsersController as ctrl">
-    <h2>title</h2>
-
-
+<div class="section">
+    <table class="irstructors-table">
+        <thead>
+        <th>
+            <td>Ф.И.О.</td>
+            <td>Активен?</td>
+            <td>Номер в списке</td>
+        </th>
+        </thead>
+        <tbody>
+        @{
+            foreach (var gridItemVm in Model.OrderBy(x => x.SortingNumber))
+            {
+                <tr>
+                    <td>
+                        @gridItemVm.FirstName + @gridItemVm.LastName
+                    </td>
+                    <td>
+                        <input type="checkbox" checked="@gridItemVm.IsActive"/>
+                    </td>
+                    <td>
+                        <input type="number" value="@gridItemVm.SortingNumber"/>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
 </div>
