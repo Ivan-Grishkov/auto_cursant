@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoCadet.Models;
 using AutoCadet.Services;
 
 namespace AutoCadet.Controllers
@@ -16,7 +18,7 @@ namespace AutoCadet.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
+            IList<InstructorGridItemBaseViewModel> instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
             return View(instructorsVs);
         }
     }
