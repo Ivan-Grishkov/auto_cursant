@@ -1,0 +1,56 @@
+﻿@model AutoCadet.Models.InstrucrorManageViewModel
+@{
+    ViewBag.Title = "Manage Instructor";
+    Layout = "~/Views/Shared/_LayoutWithLogin.cshtml";
+}
+
+<section class="container-fluid">
+    <h2>Manage Instructor</h2>
+
+    @using (Html.BeginForm("Manage", "Admin"))
+    {
+        @Html.HiddenFor(x => x.Id)
+
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            @Html.TextBoxFor(x => x.FirstName, new {@class = "form-control", id = "firstName"})
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            @Html.TextBoxFor(x => x.LastName, new {@class = "form-control", id = "lastName"})
+        </div>
+
+        <div class="form-group">
+            <label for="Patronymic">Patronymic:</label>
+            @Html.TextBoxFor(x => x.Patronymic, new {@class = "form-control", id = "Patronymic"})
+        </div>
+
+        <div class="form-group">
+            <label for="Phone">Phone:</label>
+            @Html.TextBoxFor(x => x.Phone, new {@class = "form-control", id = "Phone"})
+        </div>
+
+        <div class="form-group">
+            <label for="Phone2">Phone2:</label>
+            @Html.TextBoxFor(x => x.Phone2, new {@class = "form-control", id = "Phone2"})
+        </div>
+
+        <div class="form-group">
+            <label for="IsActive">IsActive:</label>
+            @Html.TextBoxFor(x => x.IsActive, new {@class = "form-control", id = "IsActive"})
+        </div>
+
+        <div class="form-group">
+            <label for="UrlName">UrlName:</label>
+            @Html.TextBoxFor(x => x.UrlName, new {@class = "form-control", id = "UrlName"})
+        </div>
+
+        <div class="form-group">
+            <label for="SortingNumber">SortingNumber:</label>
+            @Html.TextBoxFor(x => x.SortingNumber, new {@class = "form-control", id = "SortingNumber"})
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Save">
+    }
+</section>

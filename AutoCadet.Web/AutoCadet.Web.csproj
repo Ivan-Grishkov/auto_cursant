@@ -193,6 +193,7 @@
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
+    <Compile Include="Models\InstrucrorManageViewModel.cs" />
     <Compile Include="Models\InstructorGridItemBaseViewModel.cs" />
     <Compile Include="Models\InstructorGridItemViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -277,6 +278,7 @@
     <Content Include="Views\Home\_IndexHeader.cshtml" />
     <Content Include="Views\Home\InstructorsList.cshtml" />
     <Content Include="Views\Shared\_LayoutWithLogin.cshtml" />
+    <Content Include="Views\Admin\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

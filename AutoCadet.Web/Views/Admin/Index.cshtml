@@ -4,7 +4,7 @@
     ViewBag.Title = "Instructors";
     Layout = "~/Views/Shared/_LayoutWithLogin.cshtml";
 }
-<div class="section">
+<section class="container-fluid">
     <table class="irstructors-table">
         <thead>
         <th>
@@ -32,4 +32,8 @@
         }
         </tbody>
     </table>
-</div>
+    <br/>
+    <div class="row">
+        @Html.ActionLink("Create", "Manage", "Admin", null, new {@class="btn btn-primary"})
+    </div>
+</section>
