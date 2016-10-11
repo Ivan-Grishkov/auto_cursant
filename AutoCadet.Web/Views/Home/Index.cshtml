@@ -12,7 +12,7 @@
 @{ Html.RenderPartial("_IndexHeader"); }
 
 <section id="portfolio" class="bg-light-gray">
-@{ Html.RenderPartial("_InstructorsList", Model.InstructorGridItemViewModels); }
+@{ Html.RenderPartial("_InstructorsList", Model.InstructorGridItemViewModels.OrderByDescending(x => x.SortingNumber).ToList()); }
 </section>
 
  <!-- Services Section -->

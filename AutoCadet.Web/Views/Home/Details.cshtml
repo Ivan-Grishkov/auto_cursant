@@ -4,5 +4,185 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details @Model.FirstName</h2>
+<header class="no-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 align-center">
+                <a class="btn btn-primary go-home" href="#page-top">Авто-Инструктор</a>
+            </div>
+            <div class="col-lg-10 text-justify">
+                <h2 class="section-heading text-primary">Черняков Алексей Владимирович</h2>
+                <h3 class="section-subheading text-right">
+                    <i>+375 29 379-38-08</i>
+                    </h3>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Portfolio Grid Section -->
+<section id="person" class="bg-light-gray">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <img class="img-responsive img-centered img-circle" src="img/portfolio/roundicons-free.png" alt="" />
+                <ul class="list-inline social-buttons">
+                    <li>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-8 text-left">
+                <p>
+                    <strong>Стоимость занятия: 250 р.</strong>
+                </p>
+                <p>Обучение вождению c инструктором проводится в:Городе: МинскРайоны работы: Московский. Возможен выезд в любые районы города по договоренности.одительский стаж: 19 лет лет </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Portfolio Grid Section -->
+<section id="car">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Автомобиль</h2>
+                <h3 class="section-subheading text-muted">Самый лучший самый управляемый.</h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <img class="img-responsive img-centered  img-circle" src="img/portfolio/roundicons-free.png" alt=""/>
+            </div>
+            <div class="col-md-8 text-left">
+                <p>
+                    <strong>расход топлива на 100 км: 5 л.</strong>
+                </p>
+                <p>Ездит поворачивает оборудован дополнительными педалями </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+		<!-- Team Section -->
+<section id="team" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Отзывы</h2>
+                <h3 class="section-subheading text-muted">Всех послушай, но решай сам.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <blockquote>
+                            <p class="text-left">ПРАВА уже получила терпещите!</p>
+                            <footer class="text-muted text-right">Катюша</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <blockquote>
+                            <p class="text-left">ПРАВА уже получила терпещите!</p>
+                            <footer class="text-muted text-right">Катюша</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <blockquote>
+                            <p class="text-left">ПРАВА уже получила терпещите!</p>
+                            <footer class="text-muted text-right">Катюша</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <blockquote>
+                            <p class="text-left">ПРАВА уже получила терпещите!</p>
+                            <footer class="text-muted text-right">Катюша</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <blockquote>
+                            <p class="text-left">ПРАВА уже получила терпещите!</p>
+                            <footer class="text-muted text-right">Катюша</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <blockquote>
+                            <p class="text-left">ПРАВА уже получила терпещите!</p>
+                            <footer class="text-muted text-right">Катюша</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Оставить Отзыв</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="sentMessage" id="contactForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name." />
+                                <p class="help-block text-danger" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address." />
+                                <p class="help-block text-danger" />
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number." />
+                                <p class="help-block text-danger" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message." />
+                                <p class="help-block text-danger" />
+                            </div>
+                        </div>
+                        <div class="clearfix" />
+                        <div class="col-lg-12 text-center">
+                            <div id="success" />
+                            <button type="submit" class="btn btn-xl">Send Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 

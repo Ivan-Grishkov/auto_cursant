@@ -24,8 +24,8 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(string instructorUrl)
         {
-            InstrucrorManageViewModel pageViewModel = await _homeControllerService.GetInstructorViewModelAsync(instructorUrl).ConfigureAwait(true);
-            return View(pageViewModel);
+            InstrucrorManageViewModel instrucrorManageViewModel = await _homeControllerService.GetInstructorViewModelAsync(instructorUrl).ConfigureAwait(true);
+            return View(instrucrorManageViewModel);
         }
     }
 }
