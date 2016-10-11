@@ -11,9 +11,9 @@
                 <a class="btn btn-primary go-home" href="#page-top">Авто-Инструктор</a>
             </div>
             <div class="col-lg-10 text-justify">
-                <h2 class="section-heading text-primary">@($"{Model.InstructorManageViewModel.LastName} {Model.InstructorManageViewModel.FirstName} {Model.InstructorManageViewModel.Patronymic}")</h2>
+                <h2 class="section-heading text-primary">@($"{Model.Instructor.LastName} {Model.Instructor.FirstName} {Model.Instructor.Patronymic}")</h2>
                 <h3 class="section-subheading text-right">
-                    <i>+375 29 379-38-08</i>
+                    <i>@($"{Model.Instructor.Phone}")</i>
                 </h3>
             </div>
         </div>

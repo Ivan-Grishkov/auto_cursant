@@ -2,6 +2,6 @@
 {
     public class DetailsPageViewModel
     {
-        public InstructorManageViewModel InstructorManageViewModel { get; set; }
+        public InstructorManageViewModel Instructor { get; set; }
     }
 }
