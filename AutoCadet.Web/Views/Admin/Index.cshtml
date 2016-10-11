@@ -1,4 +1,4 @@
-﻿@model IList<AutoCadet.Models.InstructorGridItemBaseViewModel>
+﻿@model IList<AutoCadet.Models.InstructorGridItemViewModel>
 
 @{
     ViewBag.Title = "Instructors";
@@ -11,6 +11,7 @@
             <td>Ф.И.О.</td>
             <td>Активен?</td>
             <td>Номер в списке</td>
+            <td>Картинка в списке</td>
         </th>
         </thead>
         <tbody>
@@ -19,16 +20,25 @@
             {
                 <tr>
                     <td>
-                        @gridItemVm.FirstName + @gridItemVm.LastName
+                        @($"{gridItemVm.FirstName} {gridItemVm.LastName}")
                     </td>
                     <td>
-                        <input type="checkbox" checked="@gridItemVm.IsActive"/>
+                        <input type="checkbox" checked="@gridItemVm.IsActive" value="@gridItemVm.IsActive" />
                     </td>
                     <td>
                         <input type="number" value="@gridItemVm.SortingNumber"/>
                     </td>
+                    <td>
+                        @{
+                            if (gridItemVm.ThumbnailImage != null && gridItemVm.ThumbnailImage.Length > 0)
+                            {
+                                string base64String = Convert.ToBase64String(gridItemVm.ThumbnailImage);
+                                <img src="@($"data:image/png;base64,{base64String}")" width="150px" height="150px" />
+                            }
+                        }
+                    </td>
                 </tr>
-            }
+             }
         }
         </tbody>
     </table>

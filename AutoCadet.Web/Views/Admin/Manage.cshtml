@@ -7,32 +7,39 @@
 <section class="container-fluid">
     <h2>Manage Instructor</h2>
 
-    @using (Html.BeginForm("Manage", "Admin"))
+    @using (Html.BeginForm("Manage", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.HiddenFor(x => x.Id)
 
         <div class="form-group">
-            <label for="firstName">First Name:</label>
+            <label for="firstName">Имя:</label>
             @Html.TextBoxFor(x => x.FirstName, new {@class = "form-control", id = "firstName"})
+            @Html.ValidationMessageFor(x => x.FirstName, "имя обязательно", new {@class = "has-error", id = "firstName"})
         </div>
 
         <div class="form-group">
-            <label for="lastName">Last Name:</label>
+            <label for="lastName">Фамилия:</label>
             @Html.TextBoxFor(x => x.LastName, new {@class = "form-control", id = "lastName"})
+            @Html.ValidationMessageFor(x => x.FirstName, "Фамилия обязательна", new { @class = "has-error", id = "LastName" })
         </div>
 
         <div class="form-group">
-            <label for="Patronymic">Patronymic:</label>
+            <label for="Patronymic">Отчество:</label>
             @Html.TextBoxFor(x => x.Patronymic, new {@class = "form-control", id = "Patronymic"})
+            @Html.ValidationMessageFor(x => x.FirstName, "отчество обязательно", new { @class = "has-error", id = "Patronymic" })
         </div>
 
+        <label for="file">Фото в списке:</label>
+        <input type="file" name="file" id="file" />
+
         <div class="form-group">
-            <label for="Phone">Phone:</label>
+            <label for="Phone">Телефон:</label>
             @Html.TextBoxFor(x => x.Phone, new {@class = "form-control", id = "Phone"})
+            @Html.ValidationMessageFor(x => x.FirstName, "тел обязательно", new { @class = "has-error", id = "Phone" })
         </div>
 
         <div class="form-group">
-            <label for="Phone2">Phone2:</label>
+            <label for="Phone2">Телефон 2:</label>
             @Html.TextBoxFor(x => x.Phone2, new {@class = "form-control", id = "Phone2"})
         </div>
 
@@ -44,6 +51,7 @@
         <div class="form-group">
             <label for="UrlName">UrlName:</label>
             @Html.TextBoxFor(x => x.UrlName, new {@class = "form-control", id = "UrlName"})
+            @Html.ValidationMessageFor(x => x.FirstName, "URL обязательный и уникальный", new { @class = "has-error", id = "UrlName" })
         </div>
 
         <div class="form-group">

@@ -19,5 +19,7 @@ namespace AutoCadet.Models
         public int SortingNumber { get; set; }
         [Required]
         public bool IsActive { get; set; }
+
+        public byte[] UploadedThumbnail { get; set; }
     }
 }

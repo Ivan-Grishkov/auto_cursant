@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using AutoCadet.Models;
 using AutoCadet.Services;
@@ -20,7 +22,7 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            IList<InstructorGridItemBaseViewModel> instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
+            IList<InstructorGridItemViewModel> instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
             return View(instructorsVs);
         }
 
@@ -42,12 +44,20 @@ namespace AutoCadet.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult> Manage(InstrucrorManageViewModel instructorVm)
+        public async Task<ActionResult> Manage(InstrucrorManageViewModel instructorVm, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
                 return View(instructorVm);
             }
+
+            byte[] uploadedFile = null;
+            if (file != null && file.ContentLength > 0)
+            {
+                uploadedFile = new byte[file.InputStream.Length];
+                file.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+            }
+            instructorVm.UploadedThumbnail = uploadedFile;
 
             await _adminControllerService.SaveInstructorAsync(instructorVm).ConfigureAwait(true);
             return RedirectToAction("Index");
