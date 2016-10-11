@@ -1,4 +1,6 @@
-﻿@{
+﻿@model AutoCadet.Models.HomePageViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -10,7 +12,7 @@
 @{ Html.RenderPartial("_IndexHeader"); }
 
 <section id="portfolio" class="bg-light-gray">
-@{ Html.RenderPartial("InstructorsList"); }
+@{ Html.RenderPartial("_InstructorsList", Model.InstructorGridItemViewModels); }
 </section>
 
  <!-- Services Section -->

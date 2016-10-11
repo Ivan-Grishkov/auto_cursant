@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoCadet.Models;
 using AutoCadet.Services;
 
 namespace AutoCadet.Controllers
@@ -13,9 +14,17 @@ namespace AutoCadet.Controllers
             _homeControllerService = homeControllerService;
         }
 
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var pageViewModel = await _homeControllerService.GetHomePageViewModelAsync();
+            var pageViewModel = await _homeControllerService.GetHomePageViewModelAsync().ConfigureAwait(true);
+            return View(pageViewModel);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Details(string instructorUrl)
+        {
+            InstrucrorManageViewModel pageViewModel = await _homeControllerService.GetInstructorViewModelAsync(instructorUrl).ConfigureAwait(true);
             return View(pageViewModel);
         }
     }

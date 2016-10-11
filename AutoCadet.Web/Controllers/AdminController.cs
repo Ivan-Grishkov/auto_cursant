@@ -28,7 +28,7 @@ namespace AutoCadet.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult> Manage(int? instructorId)
+        public async Task<ActionResult> ManageInstructor(int? instructorId)
         {
             InstrucrorManageViewModel instructorVm;
             if (instructorId.HasValue)
@@ -44,7 +44,7 @@ namespace AutoCadet.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult> Manage(InstrucrorManageViewModel instructorVm, HttpPostedFileBase file)
+        public async Task<ActionResult> ManageInstructor(InstrucrorManageViewModel instructorVm, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {

@@ -189,6 +189,15 @@
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="Infrastructure\AppRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
+    <Compile Include="Domain\Migrations\201610030741173_InitialCreate.cs" />
+    <Compile Include="Domain\Migrations\201610030741173_InitialCreate.Designer.cs">
+      <DependentUpon>201610030741173_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\Configuration.cs" />
+    <Compile Include="Migrations\201610111315229_PriceToInstructor.cs" />
+    <Compile Include="Migrations\201610111315229_PriceToInstructor.Designer.cs">
+      <DependentUpon>201610111315229_PriceToInstructor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -276,9 +285,10 @@
     <None Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\_IndexNavigation.cshtml" />
     <Content Include="Views\Home\_IndexHeader.cshtml" />
-    <Content Include="Views\Home\InstructorsList.cshtml" />
+    <Content Include="Views\Home\_InstructorsList.cshtml" />
     <Content Include="Views\Shared\_LayoutWithLogin.cshtml" />
-    <Content Include="Views\Admin\Manage.cshtml" />
+    <Content Include="Views\Admin\ManageInstructor.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -292,6 +302,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Domain\Migrations\201610030741173_InitialCreate.resx">
+      <DependentUpon>201610030741173_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610111315229_PriceToInstructor.resx">
+      <DependentUpon>201610111315229_PriceToInstructor.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
