@@ -30,21 +30,21 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> ManageInstructor(int? instructorId)
         {
-            InstrucrorManageViewModel instructorVm;
+            InstructorManageViewModel instructorVm;
             if (instructorId.HasValue)
             {
                 instructorVm = await _adminControllerService.GetInstructorViewModelAsync(instructorId.Value).ConfigureAwait(true);
             }
             else
             {
-                instructorVm = new InstrucrorManageViewModel();
+                instructorVm = new InstructorManageViewModel();
             }
             return View(instructorVm);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult> ManageInstructor(InstrucrorManageViewModel instructorVm, HttpPostedFileBase file)
+        public async Task<ActionResult> ManageInstructor(InstructorManageViewModel instructorVm, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {

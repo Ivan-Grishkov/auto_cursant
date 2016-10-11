@@ -2,7 +2,7 @@
 
 namespace AutoCadet.Models
 {
-    public class InstrucrorManageViewModel
+    public class InstructorManageViewModel
     {
         [Required]
         public int Id { get; set; }

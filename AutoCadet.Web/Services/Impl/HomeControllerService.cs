@@ -28,13 +28,13 @@ namespace AutoCadet.Services.Impl
             };
         }
 
-        public async Task<InstrucrorManageViewModel> GetInstructorViewModelAsync(string instructorUrl)
+        public async Task<InstructorManageViewModel> GetInstructorViewModelAsync(string instructorUrl)
         {
             var instructor = await _autoCadetDbContext.Instructors
                 .Include(x => x.ThumbnailImage)
                 .FirstOrDefaultAsync(x => x.UrlName == instructorUrl)
                 .ConfigureAwait(false);
-            return _mapper.Map<InstrucrorManageViewModel>(instructor);
+            return _mapper.Map<InstructorManageViewModel>(instructor);
         }
     }
 }

@@ -27,16 +27,16 @@ namespace AutoCadet.Services.Impl
             return instructors?.Select(i => _mapper.Map<InstructorGridItemViewModel>(i)).ToList();
         }
 
-        public async Task<InstrucrorManageViewModel> GetInstructorViewModelAsync(int instructorId)
+        public async Task<InstructorManageViewModel> GetInstructorViewModelAsync(int instructorId)
         {
             var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == instructorId).ConfigureAwait(false);
-            return _mapper.Map<InstrucrorManageViewModel>(instructor);
+            return _mapper.Map<InstructorManageViewModel>(instructor);
         }
 
-        public async Task SaveInstructorAsync(InstrucrorManageViewModel instructorVm)
+        public async Task SaveInstructorAsync(InstructorManageViewModel instructorVm)
         {
             var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == instructorVm.Id).ConfigureAwait(false) ?? new Instructor();
-            _mapper.Map<InstrucrorManageViewModel, Instructor>(instructorVm, instructor);
+            _mapper.Map<InstructorManageViewModel, Instructor>(instructorVm, instructor);
             if (instructorVm.UploadedThumbnail != null)
             {
                 if (instructor.ThumbnailImage == null)

@@ -10,8 +10,8 @@ namespace AutoCadet.Models.Mapper
             CreateMap<Instructor, InstructorGridItemViewModel>()
                 .ForMember(vm => vm.ThumbnailImage, opt => opt.ResolveUsing(x => x.ThumbnailImage?.Bytes));
             CreateMap<Instructor, InstructorGridItemBaseViewModel>();
-            CreateMap<Instructor, InstrucrorManageViewModel>();
-            CreateMap<InstrucrorManageViewModel, Instructor>()
+            CreateMap<Instructor, InstructorManageViewModel>();
+            CreateMap<InstructorManageViewModel, Instructor>()
                 .ForMember(x => x.ThumbnailImage, opt => opt.Ignore());
         }
     }
