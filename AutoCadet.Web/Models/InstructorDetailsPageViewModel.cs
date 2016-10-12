@@ -1,6 +1,6 @@
 ﻿namespace AutoCadet.Models
 {
-    public class DetailsPageViewModel
+    public class InstructorDetailsPageViewModel
     {
         public InstructorManageViewModel Instructor { get; set; }
     }

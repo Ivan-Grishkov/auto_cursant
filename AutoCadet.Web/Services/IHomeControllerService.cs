@@ -6,7 +6,7 @@ namespace AutoCadet.Services
     public interface IHomeControllerService
     {
         Task<HomePageViewModel> GetHomePageViewModelAsync();
-        Task<InstructorManageViewModel> GetInstructorViewModelAsync(string instructorUrl);
+        Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl);
         Task<bool> SaveCommentAsync(CommentViewModel commentVm);
     }
 }

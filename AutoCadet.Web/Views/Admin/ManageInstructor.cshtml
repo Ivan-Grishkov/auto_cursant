@@ -5,60 +5,63 @@
 }
 
 <section class="container-fluid">
-    <h2>Manage Instructor</h2>
+    <div class="container">
+        <div class="row">
+            <h2>Manage Instructor</h2>
 
-    @using (Html.BeginForm("ManageInstructor", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.HiddenFor(x => x.Id)
+            @using (Html.BeginForm("ManageInstructor", "Admin", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+            {
+                @Html.HiddenFor(x => x.Id)
 
-        <div class="form-group error">
-            @Html.ValidationSummary()
+                <div class="form-group error">
+                    @Html.ValidationSummary()
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">Имя:</label>
+                    @Html.TextBoxFor(x => x.FirstName, new {@class = "form-control", id = "firstName"})
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Фамилия:</label>
+                    @Html.TextBoxFor(x => x.LastName, new {@class = "form-control", id = "lastName"})
+                </div>
+
+                <div class="form-group">
+                    <label for="Patronymic">Отчество:</label>
+                    @Html.TextBoxFor(x => x.Patronymic, new {@class = "form-control", id = "Patronymic"})
+                </div>
+
+                <label for="file">Фото в списке:</label>
+                <input type="file" name="file" id="file"/>
+
+                <div class="form-group">
+                    <label for="Phone">Телефон:</label>
+                    @Html.TextBoxFor(x => x.Phone, new {@class = "form-control", id = "Phone"})
+                </div>
+
+                <div class="form-group">
+                    <label for="Phone2">Телефон 2:</label>
+                    @Html.TextBoxFor(x => x.Phone2, new {@class = "form-control", id = "Phone2"})
+                </div>
+
+                <div class="form-group">
+                    <label for="IsActive">IsActive:</label>
+                    @Html.TextBoxFor(x => x.IsActive, new {@class = "form-control", id = "IsActive"})
+                </div>
+
+                <div class="form-group">
+                    <label for="UrlName">UrlName:</label>
+                    @Html.TextBoxFor(x => x.UrlName, new {@class = "form-control", id = "UrlName"})
+                </div>
+
+                <div class="form-group">
+                    <label for="SortingNumber">SortingNumber:</label>
+                    @Html.TextBoxFor(x => x.SortingNumber, new {@class = "form-control", id = "SortingNumber"})
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Save">
+            }
         </div>
-
-
-        <div class="form-group">
-            <label for="firstName">Имя:</label>
-            @Html.TextBoxFor(x => x.FirstName, new {@class = "form-control", id = "firstName"})
-        </div>
-
-        <div class="form-group">
-            <label for="lastName">Фамилия:</label>
-            @Html.TextBoxFor(x => x.LastName, new {@class = "form-control", id = "lastName"})
-        </div>
-
-        <div class="form-group">
-            <label for="Patronymic">Отчество:</label>
-            @Html.TextBoxFor(x => x.Patronymic, new {@class = "form-control", id = "Patronymic"})
-        </div>
-
-        <label for="file">Фото в списке:</label>
-        <input type="file" name="file" id="file" />
-
-        <div class="form-group">
-            <label for="Phone">Телефон:</label>
-            @Html.TextBoxFor(x => x.Phone, new {@class = "form-control", id = "Phone"})
-        </div>
-
-        <div class="form-group">
-            <label for="Phone2">Телефон 2:</label>
-            @Html.TextBoxFor(x => x.Phone2, new {@class = "form-control", id = "Phone2"})
-        </div>
-
-        <div class="form-group">
-            <label for="IsActive">IsActive:</label>
-            @Html.TextBoxFor(x => x.IsActive, new {@class = "form-control", id = "IsActive"})
-        </div>
-
-        <div class="form-group">
-            <label for="UrlName">UrlName:</label>
-            @Html.TextBoxFor(x => x.UrlName, new {@class = "form-control", id = "UrlName"})
-        </div>
-
-        <div class="form-group">
-            <label for="SortingNumber">SortingNumber:</label>
-            @Html.TextBoxFor(x => x.SortingNumber, new {@class = "form-control", id = "SortingNumber"})
-        </div>
-
-        <input type="submit" class="btn btn-primary" value="Save">
-    }
+    </div>
 </section>

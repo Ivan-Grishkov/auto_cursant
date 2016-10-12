@@ -22,10 +22,15 @@ namespace AutoCadet.Services.Impl
 
         public async Task<HomePageViewModel> GetHomePageViewModelAsync()
         {
-            var instructors = await _autoCadetDbContext.Instructors.Include(x => x.ThumbnailImage).ToListAsync().ConfigureAwait(false);
+            var instructors = await _autoCadetDbContext.Instructors
+                .Include(x => x.ThumbnailImage)
+                .ToListAsync()
+                .ConfigureAwait(false);
             var vms = instructors.Select(x => _mapper.Map<InstructorGridItemViewModel>(x)).ToList();
             var comments = await _autoCadetDbContext.Comments
                 .Include(x => x.Instructor)
+                .Where(x => x.IsActive)
+                .Where(x => x.IsVisibleInList)
                 .OrderByDescending(x => x.CreatedDate)
                 .Take(6)
                 .ToListAsync()
@@ -39,13 +44,18 @@ namespace AutoCadet.Services.Impl
             };
         }
 
-        public async Task<InstructorManageViewModel> GetInstructorViewModelAsync(string instructorUrl)
+        public async Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl)
         {
             var instructor = await _autoCadetDbContext.Instructors
                 .Include(x => x.ThumbnailImage)
                 .FirstOrDefaultAsync(x => x.UrlName == instructorUrl)
                 .ConfigureAwait(false);
-            return _mapper.Map<InstructorManageViewModel>(instructor);
+
+            var vm = new InstructorDetailsPageViewModel
+            {
+                Instructor = _mapper.Map<InstructorManageViewModel>(instructor)
+            };
+            return vm;
         }
 
         public async Task<bool> SaveCommentAsync(CommentViewModel commentVm)

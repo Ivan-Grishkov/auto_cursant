@@ -1,0 +1,61 @@
+﻿@model IList<AutoCadet.Models.CommentViewModel>
+
+@{
+    ViewBag.Title = "Instructors";
+    Layout = "~/Views/Shared/_LayoutWithLogin.cshtml";
+}
+
+<section class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <table class="irstructors-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Text</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>InstructorName</th>
+                        <th>IsVisibleInList</th>
+                        <th>IsActive</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var gridItemVm in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @gridItemVm.Name
+                                </td>
+                                <td>
+                                    @gridItemVm.Score
+                                </td>
+                                <td>
+                                    @gridItemVm.Text
+                                </td>
+                                <td>
+                                    @gridItemVm.Email
+                                </td>
+                                <td>
+                                    @gridItemVm.Phone
+                                </td>
+                                <td>
+                                    @gridItemVm.InstructorName
+                                </td>
+                                <td>
+                                    @gridItemVm.IsVisibleInList
+                                </td>
+                                <td>
+                                    @gridItemVm.IsActive
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <br />
+        </div>
+    </div>
+</section>

@@ -5,45 +5,49 @@
     Layout = "~/Views/Shared/_LayoutWithLogin.cshtml";
 }
 <section class="container-fluid">
-    <table class="irstructors-table">
-        <thead>
-        <th>
-            <td>Ф.И.О.</td>
-            <td>Активен?</td>
-            <td>Номер в списке</td>
-            <td>Картинка в списке</td>
-        </th>
-        </thead>
-        <tbody>
-        @{
-            foreach (var gridItemVm in Model.OrderBy(x => x.SortingNumber))
-            {
+    <div class="container">
+        <div class="row">
+            <table class="irstructors-table">
+                <thead>
                 <tr>
-                    <td>
-                        @($"{gridItemVm.FirstName} {gridItemVm.LastName}")
-                    </td>
-                    <td>
-                        <input type="checkbox" checked="@gridItemVm.IsActive" value="@gridItemVm.IsActive" />
-                    </td>
-                    <td>
-                        <input type="number" value="@gridItemVm.SortingNumber"/>
-                    </td>
-                    <td>
-                        @{
-                            if (gridItemVm.ThumbnailImage != null && gridItemVm.ThumbnailImage.Length > 0)
-                            {
-                                string base64String = Convert.ToBase64String(gridItemVm.ThumbnailImage);
-                                <img src="@($"data:image/png;base64,{base64String}")" width="150px" height="150px" />
-                            }
-                        }
-                    </td>
+                    <th>Ф.И.О.</th>
+                    <th>Активен?</th>
+                    <th>Номер в списке</th>
+                    <th>Картинка в списке</th>
                 </tr>
-             }
-        }
-        </tbody>
-    </table>
-    <br/>
-    <div class="row">
-        @Html.ActionLink("Create", "ManageInstructor", "Admin", null, new {@class="btn btn-primary"})
+                </thead>
+                <tbody>
+                @{
+                    foreach (var gridItemVm in Model.OrderBy(x => x.SortingNumber))
+                    {
+                        <tr>
+                            <td>
+                                @($"{gridItemVm.FirstName} {gridItemVm.LastName}")
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="@gridItemVm.IsActive" value="@gridItemVm.IsActive"/>
+                            </td>
+                            <td>
+                                <input type="number" value="@gridItemVm.SortingNumber"/>
+                            </td>
+                            <td>
+                                @{
+                                    if (gridItemVm.ThumbnailImage != null && gridItemVm.ThumbnailImage.Length > 0)
+                                    {
+                                        var base64String = Convert.ToBase64String(gridItemVm.ThumbnailImage);
+                                        <img src="@($"data:image/png;base64,{base64String}")" width="150px" height="150px"/>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+            <br/>
+            <div class="row">
+                @Html.ActionLink("Create", "ManageInstructor", "Admin", null, new {@class = "btn btn-primary"})
+            </div>
+        </div>
     </div>
 </section>

@@ -11,6 +11,8 @@ namespace AutoCadet.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public int Score { get; set; }
+        public bool IsVisibleInList { get; set; }
+        public bool IsActive { get; set; }
         [Required]
         public int InstructorId { get; set; }
         public string InstructorName { get; set; }

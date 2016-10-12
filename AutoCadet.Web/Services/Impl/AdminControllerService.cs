@@ -50,5 +50,11 @@ namespace AutoCadet.Services.Impl
             _autoCadetDbContext.Instructors.AddOrUpdate(instructor);
             await _autoCadetDbContext.SaveChangesAsync();
         }
+
+        public async Task<IList<CommentViewModel>> GetAllCommentViewModelsAsync()
+        {
+            var comments = await _autoCadetDbContext.Comments.Include(x => x.Instructor).ToListAsync().ConfigureAwait(false);
+            return comments?.Select(i => _mapper.Map<CommentViewModel>(i)).ToList();
+        }
     }
 }
