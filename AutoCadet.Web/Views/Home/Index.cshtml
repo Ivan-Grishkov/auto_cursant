@@ -5,7 +5,7 @@
 }
 
 @section scripts{
-    <script src="~/Scripts/app/app.js"></script>
+    <script src="~/Scripts/site-home-juery.js"></script>
 }
 
 @{ Html.RenderPartial("_IndexNavigation"); }
@@ -117,43 +117,66 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <form name="sentMessage" id="contactForm" novalidate>
+                @using (Html.BeginForm("AddComment", "Home", FormMethod.Post, new {name = "sentMessage", id = "addCommentForm"}))
+                {
                     <div class="row">
+                        <div id="addCommentError" class="alert alert-danger" role="alert" style="display: none">
+                            Произошла ошибка. Попробуйте еще раз.
+                        </div>
+                        <div id="addCommentExists" class="alert alert-danger" role="alert" style="display: none">
+                            Произошла ошибка. Такой коментарий уже существует.
+                        </div>
+                        <div id="addCommentSuccess" class="alert alert-success" role="alert" style="display: none">
+                            Ваш Отзыв сохранен.
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                <input type="text" class="form-control" placeholder="Ваше имя и фамилия *" id="name" name="name" required data-validation-required-message="Уточните, пожалуйста как к вам обращаться.">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                <input type="email" class="form-control" placeholder="Ваш Email" id="email" name="email">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <input type="tel" class="form-control" placeholder="Ваш Телефон" id="phone" name="phone">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input class="auto-submit-star" type="radio" name="score" value="1"/>
+                                <input class="auto-submit-star" type="radio" name="score" value="2"/>
+                                <input class="auto-submit-star" type="radio" name="score" value="3"/>
+                                <input class="auto-submit-star" type="radio" name="score" value="4"/>
+                                <input class="auto-submit-star" type="radio" name="score" value="5"/>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <select name="instructorId" required>
+                                    <option value="" disabled selected>Ваш Инструктор</option>
+                                    @foreach (var instructor in Model.InstructorGridItemViewModels.OrderBy(x => x.LastName))
+                                    {
+                                        <option value="@(instructor.Id)">@($"{instructor.LastName} {instructor.LastName}")</option>
+                                    }
+                                </select>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <textarea class="form-control" placeholder="Отзыв *" id="message" name="text" required data-validation-required-message="Что же Вы хотели сказать?"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="col-lg-12 text-center">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
                             <div id="success"></div>
-                            <button type="submit" class="btn btn-xl">Send Message</button>
+                            <button type="submit" class="btn btn-xl">Сохранить</button>
                         </div>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
 </section>
-
-
-
-<div ng-controller="mainPageController as ctrl" data-spy="scroll" data-target=".navbar" data-offset="50">
-
-    </div>
-

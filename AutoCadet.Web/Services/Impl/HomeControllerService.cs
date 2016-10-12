@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoCadet.Domain;
+using AutoCadet.Domain.Entities;
 using AutoCadet.Models;
 using AutoMapper;
 
@@ -35,6 +36,20 @@ namespace AutoCadet.Services.Impl
                 .FirstOrDefaultAsync(x => x.UrlName == instructorUrl)
                 .ConfigureAwait(false);
             return _mapper.Map<InstructorManageViewModel>(instructor);
+        }
+
+        public async Task<bool> SaveCommentAsync(CommentNewViewModel commentVm)
+        {
+            var isSameExists = await _autoCadetDbContext.Comments.AnyAsync(x => x.Text == commentVm.Text && x.Name == commentVm.Name).ConfigureAwait(false);
+            if (!isSameExists)
+            {
+                var comment = _mapper.Map<Comment>(commentVm);
+                _autoCadetDbContext.Comments.Add(comment);
+                _autoCadetDbContext.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using AutoCadet.Models;
 using AutoCadet.Services;
@@ -17,15 +18,35 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var pageViewModel = await _homeControllerService.GetHomePageViewModelAsync().ConfigureAwait(true);
+            HomePageViewModel pageViewModel = await _homeControllerService.GetHomePageViewModelAsync().ConfigureAwait(true);
             return View(pageViewModel);
         }
 
         [HttpGet]
         public async Task<ActionResult> Details(string instructorUrl)
         {
-            InstructorManageViewModel instructorManageViewModel = await _homeControllerService.GetInstructorViewModelAsync(instructorUrl).ConfigureAwait(true);
-            return View(instructorManageViewModel);
+            var vm = new DetailsPageViewModel
+            {
+                Instructor = await _homeControllerService.GetInstructorViewModelAsync(instructorUrl).ConfigureAwait(true)
+            };
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddComment(CommentNewViewModel comment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new JsonResult {Data = new {error = true}};
+            }
+
+            var isSameExists = await _homeControllerService.SaveCommentAsync(comment).ConfigureAwait(true);
+            if (isSameExists)
+            {
+                return new JsonResult {Data = new {isSame = true}};
+            }
+
+            return new JsonResult {Data = new {success = true}};
         }
     }
 }
