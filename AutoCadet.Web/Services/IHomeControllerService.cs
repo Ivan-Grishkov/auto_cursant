@@ -7,6 +7,6 @@ namespace AutoCadet.Services
     {
         Task<HomePageViewModel> GetHomePageViewModelAsync();
         Task<InstructorManageViewModel> GetInstructorViewModelAsync(string instructorUrl);
-        Task<bool> SaveCommentAsync(CommentNewViewModel commentVm);
+        Task<bool> SaveCommentAsync(CommentViewModel commentVm);
     }
 }

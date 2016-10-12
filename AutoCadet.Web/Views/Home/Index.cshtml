@@ -12,7 +12,7 @@
 @{ Html.RenderPartial("_IndexHeader"); }
 
 <section id="portfolio" class="bg-light-gray">
-@{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItemViewModels.OrderByDescending(x => x.SortingNumber).ToList()); }
+@{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems.OrderByDescending(x => x.SortingNumber).ToList()); }
 </section>
 
  <!-- Services Section -->
@@ -63,48 +63,7 @@
 
      <!-- Team Section -->
 <section id="team" class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Отзывы</h2>
-                <h3 class="section-subheading text-muted">Всех послушай, но решай сам.</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="team-member">
-                    <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-                    <blockquote>
-                        <p class="text-left">ПРАВА уже получила терпещите!</p>
-                        <footer class="text-muted text-right">Катюша</footer>
-                    </blockquote>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="team-member">
-                    <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
-                    <blockquote>
-                        <p class="text-left">ПРАВА уже получила терпещите!</p>
-                        <footer class="text-muted text-right">Катюша</footer>
-                    </blockquote>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="team-member">
-                    <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                    <blockquote>
-                        <p class="text-left">ПРАВА уже получила терпещите!</p>
-                        <footer class="text-muted text-right">Катюша</footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-            </div>
-        </div>
-    </div>
+@{ Html.RenderPartial("_IndexCommentsList", Model.Comments); }
 </section>
 
     <!-- Contact Section -->
@@ -153,7 +112,7 @@
                             <div class="form-group">
                                 <select name="instructorId" required>
                                     <option value="" disabled selected>Ваш Инструктор</option>
-                                    @foreach (var instructor in Model.InstructorGridItemViewModels.OrderBy(x => x.LastName))
+                                    @foreach (var instructor in Model.InstructorGridItems.OrderBy(x => x.LastName))
                                     {
                                         <option value="@(instructor.Id)">@($"{instructor.LastName} {instructor.LastName}")</option>
                                     }
@@ -166,14 +125,11 @@
                                 <textarea class="form-control" placeholder="Отзыв *" id="message" name="text" required data-validation-required-message="Что же Вы хотели сказать?"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-xl">Сохранить</button>
+                            </div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="col-md-6">
-                        </div>
-                        <div class="col-md-6">
-                            <div id="success"></div>
-                            <button type="submit" class="btn btn-xl">Сохранить</button>
-                        </div>
                     </div>
                 }
             </div>

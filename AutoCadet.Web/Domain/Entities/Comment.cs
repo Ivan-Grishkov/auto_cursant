@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoCadet.Domain.Entities
 {
@@ -9,7 +10,8 @@ namespace AutoCadet.Domain.Entities
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string Score { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int Score { get; set; }
         [Required]
         public Instructor Instructor { get; set; }
     }

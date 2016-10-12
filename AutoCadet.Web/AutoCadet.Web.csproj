@@ -194,14 +194,18 @@
       <DependentUpon>201610030741173_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Domain\Migrations\Configuration.cs" />
-    <Compile Include="Migrations\201610111315229_PriceToInstructor.cs" />
-    <Compile Include="Migrations\201610111315229_PriceToInstructor.Designer.cs">
+    <Compile Include="Domain\Migrations\201610111315229_PriceToInstructor.cs" />
+    <Compile Include="Domain\Migrations\201610111315229_PriceToInstructor.Designer.cs">
       <DependentUpon>201610111315229_PriceToInstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\201610121118279_Extend_Comment.cs" />
+    <Compile Include="Domain\Migrations\201610121118279_Extend_Comment.Designer.cs">
+      <DependentUpon>201610121118279_Extend_Comment.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
-    <Compile Include="Models\CommentNewViewModel.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\DetailsPageViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
     <Compile Include="Models\InstructorManageViewModel.cs" />
@@ -292,6 +296,7 @@
     <Content Include="Views\Shared\_LayoutWithLogin.cshtml" />
     <Content Include="Views\Admin\ManageInstructor.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\_IndexCommentsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -310,8 +315,11 @@
     <EmbeddedResource Include="Domain\Migrations\201610030741173_InitialCreate.resx">
       <DependentUpon>201610030741173_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610111315229_PriceToInstructor.resx">
+    <EmbeddedResource Include="Domain\Migrations\201610111315229_PriceToInstructor.resx">
       <DependentUpon>201610111315229_PriceToInstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610121118279_Extend_Comment.resx">
+      <DependentUpon>201610121118279_Extend_Comment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

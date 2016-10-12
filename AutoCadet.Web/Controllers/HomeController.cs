@@ -33,20 +33,20 @@ namespace AutoCadet.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddComment(CommentNewViewModel comment)
+        public async Task<ActionResult> AddComment(CommentViewModel comment)
         {
             if (!ModelState.IsValid)
             {
                 return new JsonResult {Data = new {error = true}};
             }
 
-            var isSameExists = await _homeControllerService.SaveCommentAsync(comment).ConfigureAwait(true);
-            if (isSameExists)
+            var isSuccess = await _homeControllerService.SaveCommentAsync(comment).ConfigureAwait(true);
+            if (isSuccess)
             {
-                return new JsonResult {Data = new {isSame = true}};
+                return new JsonResult {Data = new {success = true}};
             }
 
-            return new JsonResult {Data = new {success = true}};
+            return new JsonResult {Data = new {isSame = true}};
         }
     }
 }

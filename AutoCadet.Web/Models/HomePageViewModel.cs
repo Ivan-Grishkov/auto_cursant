@@ -6,10 +6,11 @@ namespace AutoCadet.Models
     {
         public HomePageViewModel()
         {
-            CommentViewModel = new CommentNewViewModel();
+            NewComment = new CommentViewModel();
         }
 
-        public IList<InstructorGridItemViewModel> InstructorGridItemViewModels { get; set; }
-        public CommentNewViewModel CommentViewModel { get; set; }
+        public IList<InstructorGridItemViewModel> InstructorGridItems { get; set; }
+        public CommentViewModel NewComment { get; set; }
+        public IList<CommentViewModel> Comments { get; set; }
     }
 }

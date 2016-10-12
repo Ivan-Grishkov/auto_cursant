@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoCadet.Domain;
@@ -23,9 +24,18 @@ namespace AutoCadet.Services.Impl
         {
             var instructors = await _autoCadetDbContext.Instructors.Include(x => x.ThumbnailImage).ToListAsync().ConfigureAwait(false);
             var vms = instructors.Select(x => _mapper.Map<InstructorGridItemViewModel>(x)).ToList();
+            var comments = await _autoCadetDbContext.Comments
+                .Include(x => x.Instructor)
+                .OrderByDescending(x => x.CreatedDate)
+                .Take(6)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            var commentsVms = comments.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
+
             return new HomePageViewModel
             {
-                InstructorGridItemViewModels = vms
+                InstructorGridItems = vms,
+                Comments = commentsVms
             };
         }
 
@@ -38,15 +48,21 @@ namespace AutoCadet.Services.Impl
             return _mapper.Map<InstructorManageViewModel>(instructor);
         }
 
-        public async Task<bool> SaveCommentAsync(CommentNewViewModel commentVm)
+        public async Task<bool> SaveCommentAsync(CommentViewModel commentVm)
         {
             var isSameExists = await _autoCadetDbContext.Comments.AnyAsync(x => x.Text == commentVm.Text && x.Name == commentVm.Name).ConfigureAwait(false);
             if (!isSameExists)
             {
-                var comment = _mapper.Map<Comment>(commentVm);
-                _autoCadetDbContext.Comments.Add(comment);
-                _autoCadetDbContext.SaveChanges();
-                return true;
+                var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == commentVm.InstructorId);
+                if (instructor != null)
+                {
+                    var comment = _mapper.Map<Comment>(commentVm);
+                    comment.CreatedDate = DateTime.Now;
+                    comment.Instructor = instructor;
+                    _autoCadetDbContext.Comments.Add(comment);
+                    _autoCadetDbContext.SaveChanges();
+                    return true;
+                }
             }
 
             return false;
