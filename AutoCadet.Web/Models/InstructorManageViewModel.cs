@@ -22,5 +22,7 @@ namespace AutoCadet.Models
         [Required]
         public decimal Price { get; set; }
         public byte[] UploadedThumbnail { get; set; }
+
+        public MetadataInfoViewModel MetadataInfo { get; set; }
     }
 }

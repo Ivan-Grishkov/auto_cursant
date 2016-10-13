@@ -183,6 +183,7 @@
     <Compile Include="Domain\Entities\EntityBase.cs" />
     <Compile Include="Domain\Entities\ImageFile.cs" />
     <Compile Include="Domain\Entities\Instructor.cs" />
+    <Compile Include="Domain\Entities\Metadata.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +207,18 @@
     <Compile Include="Domain\Migrations\201610121225562_ShowHideComment.Designer.cs">
       <DependentUpon>201610121225562_ShowHideComment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201610130648544_AddMetadata.cs" />
+    <Compile Include="Domain\Migrations\201610130648544_AddMetadata.Designer.cs">
+      <DependentUpon>201610130648544_AddMetadata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\201610130650037_AddMetadataToInstructor.cs" />
+    <Compile Include="Domain\Migrations\201610130650037_AddMetadataToInstructor.Designer.cs">
+      <DependentUpon>201610130650037_AddMetadataToInstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\201610130651128_OneMetaForInstrucor.cs" />
+    <Compile Include="Domain\Migrations\201610130651128_OneMetaForInstrucor.Designer.cs">
+      <DependentUpon>201610130651128_OneMetaForInstrucor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -217,6 +230,7 @@
     <Compile Include="Models\InstructorGridItemViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
+    <Compile Include="Models\MetadataInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAdminControllerService.cs" />
     <Compile Include="Services\Impl\AdminControllerService.cs" />
@@ -328,6 +342,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201610121225562_ShowHideComment.resx">
       <DependentUpon>201610121225562_ShowHideComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610130648544_AddMetadata.resx">
+      <DependentUpon>201610130648544_AddMetadata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610130650037_AddMetadataToInstructor.resx">
+      <DependentUpon>201610130650037_AddMetadataToInstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610130651128_OneMetaForInstrucor.resx">
+      <DependentUpon>201610130651128_OneMetaForInstrucor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -22,5 +22,6 @@ namespace AutoCadet.Domain.Entities
         public bool IsActive { get; set; }
         public ImageFile ThumbnailImage { get; set; }
         public ISet<Comment> Comments { get; set; }
+        public Metadata Metadata { get; set; }
     }
 }

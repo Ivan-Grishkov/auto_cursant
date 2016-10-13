@@ -60,7 +60,28 @@
                     @Html.TextBoxFor(x => x.SortingNumber, new {@class = "form-control", id = "SortingNumber"})
                 </div>
 
+                if (Model.MetadataInfo != null)
+                {
+
+                    @Html.HiddenFor(x => x.MetadataInfo.Id)
+
+                    <div class="form-group">
+                        <label for="Description">Meta Description:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.Description, new {@class = "form-control", id = "Description"})
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Info">Meta Info:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.Info, new {@class = "form-control", id = "Info"})
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Keywords">Meta Keywords:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.Keywords, new {@class = "form-control", id = "Keywords" })
+                    </div>
+                }
                 <input type="submit" class="btn btn-primary" value="Save">
+                @Html.ActionLink("Cancel", "Index", "Admin", new {@class= "btn btn-default" })
             }
         </div>
     </div>

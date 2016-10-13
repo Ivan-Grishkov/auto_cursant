@@ -10,6 +10,7 @@
             <table class="irstructors-table">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Ф.И.О.</th>
                     <th>Активен?</th>
                     <th>Номер в списке</th>
@@ -21,6 +22,9 @@
                     foreach (var gridItemVm in Model.OrderBy(x => x.SortingNumber))
                     {
                         <tr>
+                            <td>
+                                @Html.ActionLink("Edit","ManageInstructor","Admin",new { instructorId = gridItemVm.Id },null)
+                            </td>
                             <td>
                                 @($"{gridItemVm.FirstName} {gridItemVm.LastName}")
                             </td>

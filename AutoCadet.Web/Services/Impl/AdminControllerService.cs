@@ -29,7 +29,11 @@ namespace AutoCadet.Services.Impl
 
         public async Task<InstructorManageViewModel> GetInstructorViewModelAsync(int instructorId)
         {
-            var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == instructorId).ConfigureAwait(false);
+            var instructor = await _autoCadetDbContext
+                .Instructors
+                .Include(x => x.Metadata)
+                .FirstOrDefaultAsync(x => x.Id == instructorId)
+                .ConfigureAwait(false);
             return _mapper.Map<InstructorManageViewModel>(instructor);
         }
 
@@ -45,6 +49,14 @@ namespace AutoCadet.Services.Impl
                 }
 
                 instructor.ThumbnailImage.Bytes = instructorVm.UploadedThumbnail;
+            }
+
+            instructor.Metadata = _mapper.Map<Metadata>(instructorVm.MetadataInfo);
+            if (instructorVm.MetadataInfo != null && instructorVm.MetadataInfo.Id != 0)
+            {
+                var meta = await _autoCadetDbContext.Metadatas.FirstOrDefaultAsync(x => x.Id == instructorVm.MetadataInfo.Id).ConfigureAwait(false);
+                _mapper.Map(instructorVm.MetadataInfo, meta);
+                instructor.Metadata = meta;
             }
 
             _autoCadetDbContext.Instructors.AddOrUpdate(instructor);
