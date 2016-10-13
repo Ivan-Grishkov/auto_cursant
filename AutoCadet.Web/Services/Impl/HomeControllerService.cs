@@ -48,12 +48,16 @@ namespace AutoCadet.Services.Impl
         {
             var instructor = await _autoCadetDbContext.Instructors
                 .Include(x => x.ThumbnailImage)
+                .Include(x => x.Metadata)
+                .Include(x => x.Comments)
                 .FirstOrDefaultAsync(x => x.UrlName == instructorUrl)
                 .ConfigureAwait(false);
 
             var vm = new InstructorDetailsPageViewModel
             {
-                Instructor = _mapper.Map<InstructorManageViewModel>(instructor)
+                Instructor = _mapper.Map<InstructorManageViewModel>(instructor),
+                Comments = instructor.Comments?.Select(_mapper.Map<CommentViewModel>).ToList(),
+                NewComment = new CommentViewModel()
             };
             return vm;
         }
