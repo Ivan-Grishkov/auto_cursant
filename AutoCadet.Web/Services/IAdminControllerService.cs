@@ -10,5 +10,7 @@ namespace AutoCadet.Services
         Task<InstructorManageViewModel> GetInstructorViewModelAsync(int instructorId);
         Task SaveInstructorAsync(InstructorManageViewModel instructorVm);
         Task<IList<CommentViewModel>> GetAllCommentViewModelsAsync();
+        Task SaveInstructorsAttributesAsync(IList<InstructorGridItemViewModel> instructorGridItemViewModels);
+        Task SaveCommentsAttributesAsync(IList<CommentViewModel> commentViewModels);
     }
 }

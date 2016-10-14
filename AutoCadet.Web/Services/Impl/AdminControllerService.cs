@@ -68,5 +68,43 @@ namespace AutoCadet.Services.Impl
             var comments = await _autoCadetDbContext.Comments.Include(x => x.Instructor).ToListAsync().ConfigureAwait(false);
             return comments?.Select(i => _mapper.Map<CommentViewModel>(i)).ToList();
         }
+
+        public async Task SaveInstructorsAttributesAsync(IList<InstructorGridItemViewModel> instructorGridItemViewModels)
+        {
+            var ids = instructorGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
+            var instructors = await _autoCadetDbContext.Instructors
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync()
+                .ConfigureAwait(false);
+            foreach (var instructor in instructors)
+            {
+                var vm = instructorGridItemViewModels.FirstOrDefault(x => x.Id == instructor.Id);
+                if (vm != null)
+                {
+                    instructor.IsActive = vm.IsActive;
+                    instructor.SortingNumber = vm.SortingNumber;
+                }
+            }
+            await _autoCadetDbContext.SaveChangesAsync();
+        }
+
+        public async Task SaveCommentsAttributesAsync(IList<CommentViewModel> commentViewModels)
+        {
+            var ids = commentViewModels.Where(x => x != null).Select(i => i.Id).ToList();
+            var comments = await _autoCadetDbContext.Comments
+                .Include(x => x.Instructor)
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync()
+                .ConfigureAwait(false);
+            foreach (var comment in comments)
+            {
+                var vm = commentViewModels.FirstOrDefault(x => x.Id == comment.Id);
+                if (vm != null)
+                {
+                    _mapper.Map(vm, comment);
+                }
+            }
+            await _autoCadetDbContext.SaveChangesAsync();
+        }
     }
 }

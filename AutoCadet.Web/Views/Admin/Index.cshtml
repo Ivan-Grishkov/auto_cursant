@@ -7,51 +7,58 @@
 <section class="container-fluid">
     <div class="container">
         <div class="row">
-            <table class="irstructors-table">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Ф.И.О.</th>
-                    <th>Активен?</th>
-                    <th>Номер в списке</th>
-                    <th>Картинка в списке</th>
-                </tr>
-                </thead>
-                <tbody>
-                @{
-                    foreach (var gridItemVm in Model.OrderBy(x => x.SortingNumber))
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink("Edit","ManageInstructor","Admin",new { instructorId = gridItemVm.Id },null)
-                            </td>
-                            <td>
-                                @($"{gridItemVm.FirstName} {gridItemVm.LastName}")
-                            </td>
-                            <td>
-                                <input type="checkbox" checked="@gridItemVm.IsActive" value="@gridItemVm.IsActive"/>
-                            </td>
-                            <td>
-                                <input type="number" value="@gridItemVm.SortingNumber"/>
-                            </td>
-                            <td>
-                                @{
-                                    if (gridItemVm.ThumbnailImage != null && gridItemVm.ThumbnailImage.Length > 0)
-                                    {
-                                        var base64String = Convert.ToBase64String(gridItemVm.ThumbnailImage);
-                                        <img src="@($"data:image/png;base64,{base64String}")" width="150px" height="150px"/>
+            @using (Html.BeginForm("Index", "Admin"))
+            {
+                @Html.ValidationSummary()
+                <table class="irstructors-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Ф.И.О.</th>
+                        <th>Активен?</th>
+                        <th>Номер в списке</th>
+                        <th>Картинка в списке</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        for (int i=0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(x => Model[i].Id)
+                                    @Html.ActionLink("Edit", "ManageInstructor", "Admin", new {instructorId = Model[i].Id}, null)
+                                </td>
+                                <td>
+                                    @($"{Model[i].FirstName} {Model[i].LastName}")
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(x => Model[i].IsActive)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(x => Model[i].SortingNumber)
+                                </td>
+                                <td>
+                                    @{
+                                        if (Model[i].ThumbnailImage != null && Model[i].ThumbnailImage.Length > 0)
+                                        {
+                                            var base64String = Convert.ToBase64String(Model[i].ThumbnailImage);
+                                            <img src="@($"data:image/png;base64,{base64String}")" width="50px" height="50px"/>
+                                        }
                                     }
-                                }
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-                </tbody>
-            </table>
-            <br/>
-            <div class="row">
-                @Html.ActionLink("Create", "ManageInstructor", "Admin", null, new {@class = "btn btn-primary"})
-            </div>
+                    </tbody>
+                </table>
+
+                <br/>
+                <div class="row">
+                    @Html.ActionLink("Create", "ManageInstructor", "Admin", null, new {@class = "btn btn-default"})
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                </div>
+            }
         </div>
     </div>
 </section>

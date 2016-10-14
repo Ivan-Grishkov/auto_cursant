@@ -27,6 +27,17 @@ namespace AutoCadet.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult> Index(IList<InstructorGridItemViewModel> instructorGridItemViewModels)
+        {
+            if (ModelState.IsValid)
+            {
+                await _adminControllerService.SaveInstructorsAttributesAsync(instructorGridItemViewModels).ConfigureAwait(true);
+            }
+            return View(instructorGridItemViewModels);
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> ManageInstructor(int? instructorId)
         {
@@ -68,6 +79,17 @@ namespace AutoCadet.Controllers
         public async Task<ActionResult> Comments()
         {
             IList<CommentViewModel> commentViewModels = await _adminControllerService.GetAllCommentViewModelsAsync().ConfigureAwait(true);
+            return View(commentViewModels);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult> Comments(IList<CommentViewModel> commentViewModels)
+        {
+            if (ModelState.IsValid)
+            {
+                await _adminControllerService.SaveCommentsAttributesAsync(commentViewModels).ConfigureAwait(true);
+            }
             return View(commentViewModels);
         }
     }
