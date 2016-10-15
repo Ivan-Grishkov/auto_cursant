@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -22,13 +21,13 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            IList<InstructorGridItemViewModel> instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
+            IList<InstructorViewModel> instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
             return View(instructorsVs);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult> Index(IList<InstructorGridItemViewModel> instructorGridItemViewModels)
+        public async Task<ActionResult> Index(IList<InstructorViewModel> instructorGridItemViewModels)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +66,7 @@ namespace AutoCadet.Controllers
                 return View(instructorVm);
             }
 
-            instructorVm.Instructor.UploadedThumbnail = GetFileContent(itemFile);
+            instructorVm.Instructor.ThumbnailImage = GetFileContent(itemFile);
             instructorVm.InstructorDetails.DetailsImage = GetFileContent(detailsFile);
             instructorVm.InstructorDetails.VehicleImage = GetFileContent(vehicleFile);
 

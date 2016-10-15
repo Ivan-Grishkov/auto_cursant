@@ -6,11 +6,11 @@ namespace AutoCadet.Services
 {
     public interface IAdminControllerService
     {
-        Task<IList<InstructorGridItemViewModel>> GetAllUsersViewModelsAsync();
+        Task<IList<InstructorViewModel>> GetAllUsersViewModelsAsync();
         Task<InstructorManagePageViewModel> GetInstructorViewModelAsync(int instructorId);
         Task SaveInstructorAsync(InstructorManagePageViewModel pageVm);
         Task<IList<CommentViewModel>> GetAllCommentViewModelsAsync();
-        Task SaveInstructorsAttributesAsync(IList<InstructorGridItemViewModel> instructorGridItemViewModels);
+        Task SaveInstructorsAttributesAsync(IList<InstructorViewModel> instructorGridItemViewModels);
         Task SaveCommentsAttributesAsync(IList<CommentViewModel> commentViewModels);
     }
 }

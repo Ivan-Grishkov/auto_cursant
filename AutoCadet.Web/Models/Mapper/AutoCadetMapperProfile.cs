@@ -7,11 +7,10 @@ namespace AutoCadet.Models.Mapper
     {
         public AutoCadetMapperProfile()
         {
-            CreateMap<Instructor, InstructorGridItemViewModel>()
-                .ForMember(vm => vm.ThumbnailImage, opt => opt.ResolveUsing(x => x.ThumbnailImage?.Bytes));
-
-            CreateMap<Instructor, InstructorViewModel>();
-            CreateMap<InstructorViewModel, Instructor>();
+            CreateMap<Instructor, InstructorViewModel>()
+                .ForMember(x => x.ThumbnailImage, opt => opt.ResolveUsing(x => x.ThumbnailImage?.Bytes));
+            CreateMap<InstructorViewModel, Instructor>()
+                .ForMember(x => x.ThumbnailImage, opt => opt.Ignore());
 
             CreateMap<InstructorDetails, InstructorDetailsViewModel>()
                 .ForMember(x => x.MetadataInfo, opt => opt.ResolveUsing(x => new MetadataInfoViewModel
@@ -20,7 +19,10 @@ namespace AutoCadet.Models.Mapper
                     Description = x.Metadata?.Description,
                     Info = x.Metadata?.Info,
                     Keywords = x.Metadata?.Keywords
-                }));
+                }))
+                .ForMember(x => x.DetailsImage, opt => opt.ResolveUsing(x => x.DetailsImage?.Bytes))
+                .ForMember(x => x.VehicleImage, opt => opt.ResolveUsing(x => x.VehicleImage?.Bytes));
+
             CreateMap<InstructorDetailsViewModel, InstructorDetails>()
                 .ForMember(x => x.Metadata, opt => opt.Ignore())
                 .ForMember(x => x.DetailsImage, opt => opt.Ignore())

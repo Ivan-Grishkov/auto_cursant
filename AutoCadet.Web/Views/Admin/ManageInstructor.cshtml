@@ -43,9 +43,9 @@
                 </div>
 
                 <div class="form-group">
-                    @if (Model.Instructor.UploadedThumbnail != null && Model.Instructor.UploadedThumbnail.Length > 0)
+                    @if (Model.Instructor.ThumbnailImage != null && Model.Instructor.ThumbnailImage.Length > 0)
                     {
-                        string base64String = Convert.ToBase64String(Model.Instructor.UploadedThumbnail);
+                        string base64String = Convert.ToBase64String(Model.Instructor.ThumbnailImage);
                         <img src="@($"data:image/png;base64,{base64String}")" />
                     }
 

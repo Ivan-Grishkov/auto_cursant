@@ -22,10 +22,10 @@ namespace AutoCadet.Services.Impl
             _mapper = mapper;
         }
 
-        public async Task<IList<InstructorGridItemViewModel>> GetAllUsersViewModelsAsync()
+        public async Task<IList<InstructorViewModel>> GetAllUsersViewModelsAsync()
         {
             var instructors = await _autoCadetDbContext.Instructors.Include(x => x.ThumbnailImage).ToListAsync().ConfigureAwait(false);
-            return instructors?.Select(i => _mapper.Map<InstructorGridItemViewModel>(i)).ToList();
+            return instructors?.Select(i => _mapper.Map<InstructorViewModel>(i)).ToList();
         }
 
         public async Task<InstructorManagePageViewModel> GetInstructorViewModelAsync(int instructorId)
@@ -61,14 +61,14 @@ namespace AutoCadet.Services.Impl
                     ?? new Instructor();
             _mapper.Map(pageVm.Instructor, instructor);
 
-            if (pageVm.Instructor.UploadedThumbnail != null)
+            if (pageVm.Instructor.ThumbnailImage != null)
             {
                 if (instructor.ThumbnailImage == null)
                 {
                     instructor.ThumbnailImage = new ImageFile();
                 }
 
-                instructor.ThumbnailImage.Bytes = pageVm.Instructor.UploadedThumbnail;
+                instructor.ThumbnailImage.Bytes = pageVm.Instructor.ThumbnailImage;
             }
 
             var instructorDetails = await _autoCadetDbContext.InstructorDetailses
@@ -116,7 +116,7 @@ namespace AutoCadet.Services.Impl
             return comments?.Select(i => _mapper.Map<CommentViewModel>(i)).ToList();
         }
 
-        public async Task SaveInstructorsAttributesAsync(IList<InstructorGridItemViewModel> instructorGridItemViewModels)
+        public async Task SaveInstructorsAttributesAsync(IList<InstructorViewModel> instructorGridItemViewModels)
         {
             var ids = instructorGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
             var instructors = await _autoCadetDbContext.Instructors

@@ -23,6 +23,6 @@ namespace AutoCadet.Models
         public bool IsActive { get; set; }
         [Required]
         public decimal Price { get; set; }
-        public byte[] UploadedThumbnail { get; set; }
+        public byte[] ThumbnailImage { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace AutoCadet.Models
             NewComment = new CommentViewModel();
         }
 
-        public IList<InstructorGridItemViewModel> InstructorGridItems { get; set; }
+        public IList<InstructorViewModel> InstructorGridItems { get; set; }
         public CommentViewModel NewComment { get; set; }
         public IList<CommentViewModel> Comments { get; set; }
     }

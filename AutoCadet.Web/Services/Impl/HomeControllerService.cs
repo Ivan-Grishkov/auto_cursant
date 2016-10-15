@@ -26,7 +26,7 @@ namespace AutoCadet.Services.Impl
                 .Include(x => x.ThumbnailImage)
                 .ToListAsync()
                 .ConfigureAwait(false);
-            var vms = instructors.Select(x => _mapper.Map<InstructorGridItemViewModel>(x)).ToList();
+            var vms = instructors.Select(x => _mapper.Map<InstructorViewModel>(x)).ToList();
             var comments = await _autoCadetDbContext.Comments
                 .Include(x => x.Instructor)
                 .Where(x => x.IsActive)

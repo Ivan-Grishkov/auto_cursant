@@ -232,7 +232,6 @@
     <Compile Include="Models\HomePageViewModel.cs" />
     <Compile Include="Models\InstructorDetailsViewModel.cs" />
     <Compile Include="Models\InstructorManagePageViewModel.cs" />
-    <Compile Include="Models\InstructorGridItemViewModel.cs" />
     <Compile Include="Models\InstructorViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
