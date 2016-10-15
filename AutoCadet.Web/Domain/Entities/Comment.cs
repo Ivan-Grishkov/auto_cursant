@@ -20,6 +20,6 @@ namespace AutoCadet.Domain.Entities
         [Required]
         public bool IsActive { get; set; }
         [Required]
-        public Instructor Instructor { get; set; }
+        public virtual Instructor Instructor { get; set; }
     }
 }

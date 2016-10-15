@@ -1,4 +1,4 @@
-﻿@model AutoCadet.Models.InstructorManageViewModel
+﻿@model AutoCadet.Models.InstructorManagePageViewModel
 @{
     ViewBag.Title = "Manage Instructor";
     Layout = "~/Views/Shared/_LayoutWithLogin.cshtml";
@@ -9,9 +9,9 @@
         <div class="row">
             <h2>Manage Instructor</h2>
 
-            @using (Html.BeginForm("ManageInstructor", "Admin", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+            @using (Html.BeginForm("ManageInstructor", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.Instructor.Id)
 
                 <div class="form-group error">
                     @Html.ValidationSummary()
@@ -19,45 +19,63 @@
 
                 <div class="form-group">
                     <label for="firstName">Имя:</label>
-                    @Html.TextBoxFor(x => x.FirstName, new {@class = "form-control", id = "firstName"})
+                    @Html.TextBoxFor(x => x.Instructor.FirstName, new { @class = "form-control", id = "firstName" })
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">Фамилия:</label>
-                    @Html.TextBoxFor(x => x.LastName, new {@class = "form-control", id = "lastName"})
+                    @Html.TextBoxFor(x => x.Instructor.LastName, new { @class = "form-control", id = "lastName" })
                 </div>
 
                 <div class="form-group">
                     <label for="Patronymic">Отчество:</label>
-                    @Html.TextBoxFor(x => x.Patronymic, new {@class = "form-control", id = "Patronymic"})
+                    @Html.TextBoxFor(x => x.Instructor.Patronymic, new { @class = "form-control", id = "Patronymic" })
                 </div>
 
-                <label for="file">Фото в списке:</label>
-                <input type="file" name="file" id="file"/>
+                <div class="form-group">
+                    <label for="Email">Email:</label>
+                    @Html.TextBoxFor(x => x.Instructor.Email, new { @class = "form-control", id = "Email" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Price">Price:</label>
+                    @Html.TextBoxFor(x => x.Instructor.Price, new { @class = "form-control", id = "Price" })
+                </div>
+
+                <div class="form-group">
+                    @if (Model.Instructor.UploadedThumbnail != null && Model.Instructor.UploadedThumbnail.Length > 0)
+                    {
+                        string base64String = Convert.ToBase64String(Model.Instructor.UploadedThumbnail);
+                        <img src="@($"data:image/png;base64,{base64String}")" />
+                    }
+
+                    <label for="itemFile">Фото в списке:</label>
+                    <input type="file" name="itemFile" id="itemFile"/>
+                </div>
 
                 <div class="form-group">
                     <label for="Phone">Телефон:</label>
-                    @Html.TextBoxFor(x => x.Phone, new {@class = "form-control", id = "Phone"})
+                    @Html.TextBoxFor(x => x.Instructor.Phone, new { @class = "form-control", id = "Phone" })
                 </div>
 
                 <div class="form-group">
                     <label for="Phone2">Телефон 2:</label>
-                    @Html.TextBoxFor(x => x.Phone2, new {@class = "form-control", id = "Phone2"})
+                    @Html.TextBoxFor(x => x.Instructor.Phone2, new { @class = "form-control", id = "Phone2" })
                 </div>
 
                 <div class="form-group">
                     <label for="IsActive">IsActive:</label>
-                    @Html.TextBoxFor(x => x.IsActive, new {@class = "form-control", id = "IsActive"})
+                    @Html.CheckBoxFor(x => x.Instructor.IsActive, new { @class = "form-control", id = "IsActive" })
                 </div>
 
                 <div class="form-group">
                     <label for="UrlName">UrlName:</label>
-                    @Html.TextBoxFor(x => x.UrlName, new {@class = "form-control", id = "UrlName"})
+                    @Html.TextBoxFor(x => x.Instructor.UrlName, new { @class = "form-control", id = "UrlName" })
                 </div>
 
                 <div class="form-group">
                     <label for="SortingNumber">SortingNumber:</label>
-                    @Html.TextBoxFor(x => x.SortingNumber, new {@class = "form-control", id = "SortingNumber"})
+                    @Html.TextBoxFor(x => x.Instructor.SortingNumber, new { @class = "form-control", id = "SortingNumber" })
                 </div>
 
                 if (Model.MetadataInfo != null)
@@ -67,21 +85,74 @@
 
                     <div class="form-group">
                         <label for="Description">Meta Description:</label>
-                        @Html.TextBoxFor(x => x.MetadataInfo.Description, new {@class = "form-control", id = "Description"})
+                        @Html.TextBoxFor(x => x.MetadataInfo.Description, new { @class = "form-control", id = "Description" })
                     </div>
 
                     <div class="form-group">
                         <label for="Info">Meta Info:</label>
-                        @Html.TextBoxFor(x => x.MetadataInfo.Info, new {@class = "form-control", id = "Info"})
+                        @Html.TextBoxFor(x => x.MetadataInfo.Info, new { @class = "form-control", id = "Info" })
                     </div>
 
                     <div class="form-group">
                         <label for="Keywords">Meta Keywords:</label>
-                        @Html.TextBoxFor(x => x.MetadataInfo.Keywords, new {@class = "form-control", id = "Keywords" })
+                        @Html.TextBoxFor(x => x.MetadataInfo.Keywords, new { @class = "form-control", id = "Keywords" })
+                    </div>
+                }
+
+                if (Model.InstructorDetails != null)
+                {
+
+                    @Html.HiddenFor(x => x.InstructorDetails.Id)
+                    <div class="form-group">
+                        <label for="InstructorDetailsDescription">InstructorDetails Description:</label>
+                        @Html.TextBoxFor(x => x.InstructorDetails.Description, new {@class = "form-control", id = "InstructorDetailsDescription"})
+                    </div>
+
+                    <div class="form-group">
+
+                        @if (Model.InstructorDetails.DetailsImage != null && Model.InstructorDetails.DetailsImage.Length > 0)
+                        {
+                            string base64String = Convert.ToBase64String(Model.InstructorDetails.DetailsImage);
+                            <img src="@($"data:image/png;base64,{base64String}")"/>
+                        }
+                        <label for="detailsFile">Фото на детальной странице:</label>
+                        <input type="file" name="detailsFile" id="detailsFile"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="VehicleTitle">InstructorDetails VehicleTitle:</label>
+                        @Html.TextBoxFor(x => x.InstructorDetails.VehicleTitle, new { @class = "form-control", id = "VehicleTitle" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="VehicleSecondaryTitle">InstructorDetails VehicleSecondaryTitle:</label>
+                        @Html.TextBoxFor(x => x.InstructorDetails.VehicleSecondaryTitle, new {@class = "form-control", id = "VehicleSecondaryTitle"})
+                    </div>
+
+                    <div class="form-group">
+                        <label for="VehicleDescriprion">InstructorDetails VehicleDescriprion:</label>
+                        @Html.TextBoxFor(x => x.InstructorDetails.VehicleDescriprion, new {@class = "form-control", id = "VehicleDescriprion"})
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FuelConsumption">InstructorDetails FuelConsumption:</label>
+                        @Html.TextBoxFor(x => x.InstructorDetails.FuelConsumption, new {@class = "form-control", id = "FuelConsumption" })
+                    </div>
+
+                    <div class="form-group">
+
+                        @if (Model.InstructorDetails.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
+                        {
+                            string base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
+                            <img src="@($"data:image/png;base64,{base64String}")"/>
+
+                        }
+                        <label for="vehicleFile">Фото автомобиля:</label>
+                        <input type="file" name="vehicleFile" id="vehicleFile"/>
                     </div>
                 }
                 <input type="submit" class="btn btn-primary" value="Save">
-                @Html.ActionLink("Cancel", "Index", "Admin", new {@class= "btn btn-default" })
+                @Html.ActionLink("Cancel", "Index", "Admin", new { @class = "btn btn-default" })
             }
         </div>
     </div>

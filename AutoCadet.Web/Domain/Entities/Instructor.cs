@@ -10,6 +10,7 @@ namespace AutoCadet.Domain.Entities
         [Required]
         public string LastName { get; set; }
         public string Patronymic { get; set; }
+        public string Email { get; set; }
         [Required]
         public string Phone { get; set; }
         public string Phone2 { get; set; }
@@ -20,8 +21,8 @@ namespace AutoCadet.Domain.Entities
         public int SortingNumber { get; set; }
         [Required]
         public bool IsActive { get; set; }
-        public ImageFile ThumbnailImage { get; set; }
-        public ISet<Comment> Comments { get; set; }
-        public Metadata Metadata { get; set; }
+        public virtual ImageFile ThumbnailImage { get; set; }
+        public virtual InstructorDetails InstructorDetails { get; set; }
+        public virtual ISet<Comment> Comments { get; set; }
     }
 }

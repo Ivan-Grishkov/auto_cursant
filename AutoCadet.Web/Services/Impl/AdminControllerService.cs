@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -27,38 +28,84 @@ namespace AutoCadet.Services.Impl
             return instructors?.Select(i => _mapper.Map<InstructorGridItemViewModel>(i)).ToList();
         }
 
-        public async Task<InstructorManageViewModel> GetInstructorViewModelAsync(int instructorId)
+        public async Task<InstructorManagePageViewModel> GetInstructorViewModelAsync(int instructorId)
         {
             var instructor = await _autoCadetDbContext
                 .Instructors
-                .Include(x => x.Metadata)
+                .Include(x => x.InstructorDetails)
+                .Include(x => x.InstructorDetails.VehicleImage)
+                .Include(x => x.InstructorDetails.DetailsImage)
+                .Include(x => x.InstructorDetails.Metadata)
+                .Include(x => x.ThumbnailImage)
                 .FirstOrDefaultAsync(x => x.Id == instructorId)
                 .ConfigureAwait(false);
-            return _mapper.Map<InstructorManageViewModel>(instructor);
+
+            return new InstructorManagePageViewModel
+            {
+                Instructor = _mapper.Map<InstructorViewModel>(instructor),
+                InstructorDetails = _mapper.Map<InstructorDetailsViewModel>(instructor?.InstructorDetails),
+                MetadataInfo = _mapper.Map<MetadataInfoViewModel>(instructor?.InstructorDetails?.Metadata)
+            };
         }
 
-        public async Task SaveInstructorAsync(InstructorManageViewModel instructorVm)
+        public async Task SaveInstructorAsync(InstructorManagePageViewModel pageVm)
         {
-            var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == instructorVm.Id).ConfigureAwait(false) ?? new Instructor();
-            _mapper.Map<InstructorManageViewModel, Instructor>(instructorVm, instructor);
-            if (instructorVm.UploadedThumbnail != null)
+            if (pageVm?.Instructor == null)
+            {
+                throw new ArgumentNullException(nameof(pageVm));
+            }
+
+            var instructor = await _autoCadetDbContext.Instructors
+                .FirstOrDefaultAsync(x => x.Id == pageVm.Instructor.Id)
+                .ConfigureAwait(false) 
+                    ?? new Instructor();
+            _mapper.Map(pageVm.Instructor, instructor);
+
+            if (pageVm.Instructor.UploadedThumbnail != null)
             {
                 if (instructor.ThumbnailImage == null)
                 {
                     instructor.ThumbnailImage = new ImageFile();
                 }
 
-                instructor.ThumbnailImage.Bytes = instructorVm.UploadedThumbnail;
+                instructor.ThumbnailImage.Bytes = pageVm.Instructor.UploadedThumbnail;
             }
 
-            instructor.Metadata = _mapper.Map<Metadata>(instructorVm.MetadataInfo);
-            if (instructorVm.MetadataInfo != null && instructorVm.MetadataInfo.Id != 0)
+            var instructorDetails = await _autoCadetDbContext.InstructorDetailses
+                .FirstOrDefaultAsync(x => x.Id == pageVm.InstructorDetails.Id)
+                .ConfigureAwait(false)
+                                    ?? new InstructorDetails();
+            _mapper.Map(pageVm.InstructorDetails, instructorDetails);
+
+            if (pageVm.InstructorDetails.DetailsImage != null)
             {
-                var meta = await _autoCadetDbContext.Metadatas.FirstOrDefaultAsync(x => x.Id == instructorVm.MetadataInfo.Id).ConfigureAwait(false);
-                _mapper.Map(instructorVm.MetadataInfo, meta);
-                instructor.Metadata = meta;
+                if (instructorDetails.DetailsImage == null)
+                {
+                    instructorDetails.DetailsImage = new ImageFile();
+                }
+
+                instructorDetails.DetailsImage.Bytes = pageVm.InstructorDetails.DetailsImage;
             }
 
+            if (pageVm.InstructorDetails.VehicleImage != null)
+            {
+                if (instructorDetails.VehicleImage == null)
+                {
+                    instructorDetails.VehicleImage = new ImageFile();
+                }
+
+                instructorDetails.VehicleImage.Bytes = pageVm.InstructorDetails.VehicleImage;
+            }
+
+            instructorDetails.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
+            if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
+            {
+                var meta = await _autoCadetDbContext.Metadatas.FirstOrDefaultAsync(x => x.Id == pageVm.MetadataInfo.Id).ConfigureAwait(false);
+                _mapper.Map(pageVm.MetadataInfo, meta);
+                instructorDetails.Metadata = meta;
+            }
+
+            instructor.InstructorDetails = instructorDetails;
             _autoCadetDbContext.Instructors.AddOrUpdate(instructor);
             await _autoCadetDbContext.SaveChangesAsync();
         }

@@ -25,9 +25,9 @@ namespace AutoCadet.Controllers
         public async Task<ActionResult> InstructorDetails(string instructorUrl)
         {
             InstructorDetailsPageViewModel vm = await _homeControllerService.GetInstructorDetailsViewModelAsync(instructorUrl).ConfigureAwait(true);
-            ViewData["MetaInfo"] = vm?.Instructor?.MetadataInfo?.Info;
-            ViewData["MetaDescription"] = vm?.Instructor?.MetadataInfo?.Description;
-            ViewData["MetaKeywords"] = vm?.Instructor?.MetadataInfo?.Keywords;
+            ViewData["MetaInfo"] = vm?.InstructorDetails?.MetadataInfo?.Info;
+            ViewData["MetaDescription"] = vm?.InstructorDetails?.MetadataInfo?.Description;
+            ViewData["MetaKeywords"] = vm?.InstructorDetails?.MetadataInfo?.Keywords;
             return View(vm);
         }
 

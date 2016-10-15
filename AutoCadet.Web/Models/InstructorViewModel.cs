@@ -2,12 +2,14 @@
 
 namespace AutoCadet.Models
 {
-    public class InstructorManageViewModel
+    public class InstructorViewModel
     {
         [Required]
         public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
+        [Required]
+        public string Email { get; set; }
         [Required]
         public string LastName { get; set; }
         public string Patronymic { get; set; }
@@ -22,7 +24,5 @@ namespace AutoCadet.Models
         [Required]
         public decimal Price { get; set; }
         public byte[] UploadedThumbnail { get; set; }
-
-        public MetadataInfoViewModel MetadataInfo { get; set; }
     }
 }

@@ -41,37 +41,49 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> ManageInstructor(int? instructorId)
         {
-            InstructorManageViewModel instructorVm;
+            InstructorManagePageViewModel instructorVm = null;
             if (instructorId.HasValue)
             {
                 instructorVm = await _adminControllerService.GetInstructorViewModelAsync(instructorId.Value).ConfigureAwait(true);
             }
-            else
+            if (instructorVm == null)
             {
-                instructorVm = new InstructorManageViewModel {MetadataInfo = new MetadataInfoViewModel()};
+                instructorVm = new InstructorManagePageViewModel();
             }
+
+            instructorVm.Instructor = instructorVm.Instructor ?? new InstructorViewModel();
+            instructorVm.MetadataInfo = instructorVm.MetadataInfo ?? new MetadataInfoViewModel();
+            instructorVm.InstructorDetails = instructorVm.InstructorDetails ?? new InstructorDetailsViewModel();
+
             return View(instructorVm);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult> ManageInstructor(InstructorManageViewModel instructorVm, HttpPostedFileBase file)
+        public async Task<ActionResult> ManageInstructor(InstructorManagePageViewModel instructorVm, HttpPostedFileBase itemFile, HttpPostedFileBase detailsFile, HttpPostedFileBase vehicleFile)
         {
             if (!ModelState.IsValid)
             {
                 return View(instructorVm);
             }
 
+            instructorVm.Instructor.UploadedThumbnail = GetFileContent(itemFile);
+            instructorVm.InstructorDetails.DetailsImage = GetFileContent(detailsFile);
+            instructorVm.InstructorDetails.VehicleImage = GetFileContent(vehicleFile);
+
+            await _adminControllerService.SaveInstructorAsync(instructorVm).ConfigureAwait(true);
+            return RedirectToAction("Index");
+        }
+
+        private byte[] GetFileContent(HttpPostedFileBase file)
+        {
             byte[] uploadedFile = null;
             if (file != null && file.ContentLength > 0)
             {
                 uploadedFile = new byte[file.InputStream.Length];
                 file.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
             }
-            instructorVm.UploadedThumbnail = uploadedFile;
-
-            await _adminControllerService.SaveInstructorAsync(instructorVm).ConfigureAwait(true);
-            return RedirectToAction("Index");
+            return uploadedFile;
         }
 
         [Authorize(Roles = "Admin")]

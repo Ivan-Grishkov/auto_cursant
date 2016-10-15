@@ -183,6 +183,7 @@
     <Compile Include="Domain\Entities\EntityBase.cs" />
     <Compile Include="Domain\Entities\ImageFile.cs" />
     <Compile Include="Domain\Entities\Instructor.cs" />
+    <Compile Include="Domain\Entities\InstructorDetails.cs" />
     <Compile Include="Domain\Entities\Metadata.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,15 +220,20 @@
     <Compile Include="Domain\Migrations\201610130651128_OneMetaForInstrucor.Designer.cs">
       <DependentUpon>201610130651128_OneMetaForInstrucor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201610151231090_addInstructorDetails.cs" />
+    <Compile Include="Domain\Migrations\201610151231090_addInstructorDetails.Designer.cs">
+      <DependentUpon>201610151231090_addInstructorDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\InstructorDetailsPageViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
-    <Compile Include="Models\InstructorManageViewModel.cs" />
-    <Compile Include="Models\InstructorGridItemBaseViewModel.cs" />
+    <Compile Include="Models\InstructorDetailsViewModel.cs" />
+    <Compile Include="Models\InstructorManagePageViewModel.cs" />
     <Compile Include="Models\InstructorGridItemViewModel.cs" />
+    <Compile Include="Models\InstructorViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
     <Compile Include="Models\MetadataInfoViewModel.cs" />
@@ -351,6 +357,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201610130651128_OneMetaForInstrucor.resx">
       <DependentUpon>201610130651128_OneMetaForInstrucor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610151231090_addInstructorDetails.resx">
+      <DependentUpon>201610151231090_addInstructorDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
