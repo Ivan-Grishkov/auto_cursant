@@ -1,45 +1,48 @@
 ﻿@model IList<AutoCadet.Models.InstructorViewModel>
 <!-- Portfolio Grid Section -->
-    <div class="container">
-        <div class="row">
-            @foreach (var instructor in Model)
+<div class="container">
+    <div class="row">
+        @foreach (var instructor in Model)
             {
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="@Url.Action("InstructorDetails", new { instructorUrl = instructor.UrlName})" class="portfolio-link">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-list fa-3x"></i>
-                            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="@Url.Action("InstructorDetails", new { instructorUrl = instructor.UrlName})" class="portfolio-link">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-list fa-3x"></i>
                         </div>
-                        @{
-                            if (instructor.ThumbnailImage != null && instructor.ThumbnailImage.Length > 0)
-                            {
-                                string base64String = Convert.ToBase64String(instructor.ThumbnailImage);
-                                <img src="@($"data:image/png;base64,{base64String}")" alt="@($"{instructor.FirstName} {instructor.LastName}")"/>
-                            }
-                            else
-                            {
-                                <img src="img/paris.png" class="img-responsive" alt="@($"фото: {instructor.FirstName} {instructor.LastName}")">
-                            }
-                        }
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>@($"{instructor.FirstName} {instructor.LastName}")</h4>
-                        <p class="text-muted">@($"{instructor.Price} р.")</p>
-                        <ul class="list-inline social-buttons">
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
                     </div>
+                    @{
+                        if (instructor.ThumbnailImage != null && instructor.ThumbnailImage.Length > 0)
+                        {
+                            string base64String = Convert.ToBase64String(instructor.ThumbnailImage);
+                            <img src="@($"data:image/png;base64,{base64String}")" alt="@($"{instructor.FirstName} {instructor.LastName}")" />
+                        }
+                        else
+                        {
+                            <img src="img/paris.png" class="img-responsive" alt="@($"фото: {instructor.FirstName} {instructor.LastName}")">
+                        }
+                    }
+                </a>
+                <div class="portfolio-caption">
+                    <h4>@($"{instructor.FirstName} {instructor.LastName}")</h4>
+                    <div class="row text-muted text-right">
+                        <span class="text-left pull-left">@instructor.AverageScore </span>
+                        <span class="text-right pull-right">@($"{instructor.Price} р.")</span>
+                    </div>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
                 </div>
-            }
-        </div>
+            </div>
+                        }
     </div>
+</div>
 

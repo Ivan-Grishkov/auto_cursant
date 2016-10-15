@@ -17,7 +17,9 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            HomePageViewModel pageViewModel = await _homeControllerService.GetHomePageViewModelAsync().ConfigureAwait(true);
+            HomePageViewModel pageViewModel = await _homeControllerService
+                .GetHomePageViewModelAsync()
+                .ConfigureAwait(true);
             return View(pageViewModel);
         }
 

@@ -24,5 +24,6 @@ namespace AutoCadet.Models
         [Required]
         public decimal Price { get; set; }
         public byte[] ThumbnailImage { get; set; }
+        public double? AverageScore { get; set; }
     }
 }

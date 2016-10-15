@@ -22,11 +22,21 @@ namespace AutoCadet.Services.Impl
 
         public async Task<HomePageViewModel> GetHomePageViewModelAsync()
         {
-            var instructors = await _autoCadetDbContext.Instructors
+            var instructors =  await _autoCadetDbContext.Instructors
                 .Include(x => x.ThumbnailImage)
-                .ToListAsync()
-                .ConfigureAwait(false);
-            var vms = instructors.Select(x => _mapper.Map<InstructorViewModel>(x)).ToList();
+                .Select(x => new {Instr = x, AvS = x.Comments.Where(c => c.IsActive).Average(c => (int?)c.Score)})
+                .ToListAsync();
+
+            var vms = instructors.Select(x =>
+            {
+                var vm = new InstructorViewModel
+                {
+                    AverageScore = x.AvS
+                };
+                _mapper.Map(x.Instr, vm);
+                return vm;
+            }).ToList();
+
             var comments = await _autoCadetDbContext.Comments
                 .Include(x => x.Instructor)
                 .Where(x => x.IsActive)
