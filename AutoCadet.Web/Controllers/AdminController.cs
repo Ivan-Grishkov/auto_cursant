@@ -48,7 +48,7 @@ namespace AutoCadet.Controllers
             }
             else
             {
-                instructorVm = new InstructorManageViewModel();
+                instructorVm = new InstructorManageViewModel {MetadataInfo = new MetadataInfoViewModel()};
             }
             return View(instructorVm);
         }

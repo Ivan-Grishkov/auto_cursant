@@ -15,7 +15,7 @@
                             if (instructor.ThumbnailImage != null && instructor.ThumbnailImage.Length > 0)
                             {
                                 string base64String = Convert.ToBase64String(instructor.ThumbnailImage);
-                                <img src="@($"data:image/png;base64,{base64String}")" width="150px" height="150px" alt="@($"{instructor.FirstName} {instructor.LastName}")"/>
+                                <img src="@($"data:image/png;base64,{base64String}")" width="400px" height="289px" alt="@($"{instructor.FirstName} {instructor.LastName}")"/>
                             }
                             else
                             {
