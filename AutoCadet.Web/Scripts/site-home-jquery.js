@@ -4,7 +4,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'Home/AddComment',
+            url: '/Home/AddComment',
             data: $('#addCommentForm').serialize(),
             success: function(data) {
                 $('#addCommentError').hide();
