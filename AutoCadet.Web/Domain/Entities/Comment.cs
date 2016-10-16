@@ -14,7 +14,7 @@ namespace AutoCadet.Domain.Entities
         [Required]
         public DateTime CreatedDate { get; set; }
         [Required]
-        public int Score { get; set; }
+        public double Score { get; set; }
         [Required]
         public bool IsVisibleInList { get; set; }
         [Required]

@@ -24,14 +24,14 @@ namespace AutoCadet.Services.Impl
         {
             var instructors =  await _autoCadetDbContext.Instructors
                 .Include(x => x.ThumbnailImage)
-                .Select(x => new {Instr = x, AvS = x.Comments.Where(c => c.IsActive).Average(c => (int?)c.Score)})
+                .Select(x => new {Instr = x, AvS = x.Comments.Where(c => c.IsActive).Average(c => (double?)c.Score)})
                 .ToListAsync();
 
             var vms = instructors.Select(x =>
             {
                 var vm = new InstructorViewModel
                 {
-                    AverageScore = x.AvS
+                    AverageScore =  x.AvS
                 };
                 _mapper.Map(x.Instr, vm);
                 return vm;

@@ -26,7 +26,11 @@
                 <div class="portfolio-caption">
                     <h4>@($"{instructor.FirstName} {instructor.LastName}")</h4>
                     <div class="row text-muted text-right">
-                        <span class="text-left pull-left">@instructor.AverageScore </span>
+                        <span class="text-left pull-left">
+                        @{
+                            @Html.DisplayFor(x => instructor.AverageScore)
+                        }
+                        </span>
                         <span class="text-right pull-right">@($"{instructor.Price} р.")</span>
                     </div>
                     <ul class="list-inline social-buttons">

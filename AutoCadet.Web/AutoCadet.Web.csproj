@@ -224,6 +224,10 @@
     <Compile Include="Domain\Migrations\201610151231090_addInstructorDetails.Designer.cs">
       <DependentUpon>201610151231090_addInstructorDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201610160810391_RatingDouble.cs" />
+    <Compile Include="Domain\Migrations\201610160810391_RatingDouble.Designer.cs">
+      <DependentUpon>201610160810391_RatingDouble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -236,6 +240,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
     <Compile Include="Models\MetadataInfoViewModel.cs" />
+    <Compile Include="Models\ScoreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAdminControllerService.cs" />
     <Compile Include="Services\Impl\AdminControllerService.cs" />
@@ -250,6 +255,8 @@
     <Content Include="Content\agency.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\stars-rating.css" />
+    <Content Include="Content\stars-rating2.css" />
     <Content Include="img\header-bg-details.jpg" />
     <Content Include="img\header-bg.jpg" />
     <Content Include="img\map-image.png" />
@@ -321,6 +328,9 @@
     <Content Include="Views\Admin\ManageInstructor.cshtml" />
     <Content Include="Views\Home\InstructorDetails.cshtml" />
     <Content Include="Views\Home\_IndexCommentsList.cshtml" />
+    <Content Include="Views\Home\_StarsRating.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Score.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Score2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -359,6 +369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201610151231090_addInstructorDetails.resx">
       <DependentUpon>201610151231090_addInstructorDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610160810391_RatingDouble.resx">
+      <DependentUpon>201610160810391_RatingDouble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

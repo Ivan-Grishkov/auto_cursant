@@ -98,12 +98,7 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="auto-submit-star" type="radio" name="score" value="1"/>
-                                <input class="auto-submit-star" type="radio" name="score" value="2"/>
-                                <input class="auto-submit-star" type="radio" name="score" value="3"/>
-                                <input class="auto-submit-star" type="radio" name="score" value="4"/>
-                                <input class="auto-submit-star" type="radio" name="score" value="5"/>
-                                <p class="help-block text-danger"></p>
+                                @Html.EditorFor(x => x.NewComment.Score)
                             </div>
                             <div class="form-group">
                                 <select name="instructorId" required>

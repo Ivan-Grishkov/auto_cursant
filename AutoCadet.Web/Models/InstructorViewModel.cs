@@ -24,6 +24,7 @@ namespace AutoCadet.Models
         [Required]
         public decimal Price { get; set; }
         public byte[] ThumbnailImage { get; set; }
+        [UIHint("Score")]
         public double? AverageScore { get; set; }
     }
 }
