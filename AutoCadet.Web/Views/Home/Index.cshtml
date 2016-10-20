@@ -99,9 +99,11 @@
                             </div>
                             <div class="form-group">
                                 @Html.EditorFor(x => x.NewComment.Score)
+                                <p class="help-block text-danger"></p>
+                                <br/>
                             </div>
                             <div class="form-group">
-                                <select name="instructorId" required>
+                                <select name="instructorId" required class="dropdown">
                                     <option value="" disabled selected>Ваш Инструктор</option>
                                     @foreach (var instructor in Model.InstructorGridItems.OrderBy(x => x.LastName))
                                     {

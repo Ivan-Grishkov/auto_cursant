@@ -8,27 +8,30 @@
         </div>
     </div>
     <div class="row">
-        @foreach (var comment in Model)
+        @if (Model != null)
         {
-            <div class="col-sm-4">
-                <div class="team-member">
-                    @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
-                    <blockquote>
-                        <div class="row">
-                            <div class="col-lg-9">
-                                <span class="text-right">@comment.InstructorName</span>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="text-right">
-                                    @Html.DisplayFor(x => comment.DisplayScore)
+            foreach (var comment in Model)
+             {
+                 <div class="col-sm-4">
+                     <div class="team-member">
+                         @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
+                         <blockquote>
+                             <div class="row">
+                                 <div class="col-lg-9">
+                                     <span class="text-right">@comment.InstructorName</span>
+                                 </div>
+                                 <div class="col-lg-3">
+                                     <span class="text-right">
+                                    @Html.DisplayFor(x => comment.Score)
                                 </span>
-                            </div>
-                        </div>
-                        <p class="text-left">@comment.Text</p>
-                        <footer class="text-muted text-right">@comment.Name</footer>
-                    </blockquote>
-                </div>
-            </div>
+                                 </div>
+                             </div>
+                             <p class="text-left">@comment.Text</p>
+                             <footer class="text-muted text-right">@comment.Name</footer>
+                         </blockquote>
+                     </div>
+                 </div>
+             }
         }
     </div>
 

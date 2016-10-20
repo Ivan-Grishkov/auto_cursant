@@ -107,7 +107,7 @@ namespace AutoCadet.Services.Impl
 
             instructor.InstructorDetails = instructorDetails;
             _autoCadetDbContext.Instructors.AddOrUpdate(instructor);
-            await _autoCadetDbContext.SaveChangesAsync();
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
         public async Task<IList<CommentViewModel>> GetAllCommentViewModelsAsync()
@@ -132,7 +132,7 @@ namespace AutoCadet.Services.Impl
                     instructor.SortingNumber = vm.SortingNumber;
                 }
             }
-            await _autoCadetDbContext.SaveChangesAsync();
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
         public async Task SaveCommentsAttributesAsync(IList<CommentViewModel> commentViewModels)
@@ -151,7 +151,7 @@ namespace AutoCadet.Services.Impl
                     _mapper.Map(vm, comment);
                 }
             }
-            await _autoCadetDbContext.SaveChangesAsync();
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
     }
 }

@@ -4,10 +4,10 @@
   }
   .rating-input {
       float: right;
-      width: 16px;
-      height: 16px;
+      width: 21px;
+      height: 20px;
       padding: 0;
-      margin: 0 0 0 -16px;
+      margin: 0 0 0 -20px;
       opacity: 0;
   }
   .rating-star:hover {
@@ -17,8 +17,8 @@
       position: relative;
       float: right;
       display: block;
-      width: 16px;
-      height: 16px;
+      width: 21px;
+      height: 20px;
       content: "\f005";
   }
 
@@ -42,7 +42,7 @@
       position: relative;
       float: right;
       display: block;
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       content: "\f005";
   }

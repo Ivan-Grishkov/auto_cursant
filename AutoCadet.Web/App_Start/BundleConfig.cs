@@ -26,8 +26,8 @@ namespace AutoCadet
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/agency.css",
-                "~/Content/stars-rating.css",
-                "~/Content/stars-rating2.css",
+                "~/Content/stars-rating-display.css",
+                "~/Content/stars-rating-edit.css",
                 "~/Content/site.css"));
         }
     }

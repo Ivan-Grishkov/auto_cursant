@@ -7,7 +7,7 @@ using AutoCadet.Services;
 
 namespace AutoCadet.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IAdminControllerService _adminControllerService;
@@ -29,7 +29,7 @@ namespace AutoCadet.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(IList<InstructorViewModel> instructorGridItemViewModels)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || instructorGridItemViewModels == null)
             {
                 await _adminControllerService.SaveInstructorsAttributesAsync(instructorGridItemViewModels).ConfigureAwait(true);
             }
@@ -61,7 +61,7 @@ namespace AutoCadet.Controllers
         [HttpPost]
         public async Task<ActionResult> ManageInstructor(InstructorManagePageViewModel instructorVm, HttpPostedFileBase itemFile, HttpPostedFileBase detailsFile, HttpPostedFileBase vehicleFile)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || instructorVm == null)
             {
                 return View(instructorVm);
             }
@@ -97,7 +97,7 @@ namespace AutoCadet.Controllers
         [HttpPost]
         public async Task<ActionResult> Comments(IList<CommentViewModel> commentViewModels)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || commentViewModels == null)
             {
                 await _adminControllerService.SaveCommentsAttributesAsync(commentViewModels).ConfigureAwait(true);
             }

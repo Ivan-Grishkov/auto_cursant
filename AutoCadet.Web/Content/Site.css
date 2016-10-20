@@ -124,3 +124,7 @@ header {
 .bg-none {
   background-color: transparent;
 }
+
+.img-list-instructors {
+    height: 290px;
+}

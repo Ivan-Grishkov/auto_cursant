@@ -1,7 +1,7 @@
 ﻿@model double?
 @{ var guid = Guid.NewGuid();}
 
-<fieldset class="rating">
+<fieldset class="rating-display">
     <input type="radio" id="star5" name="Score-@guid" value="5" checked="@(Model >= 4.8 ? true : (bool?)null)" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
     <input type="radio" id="star4half" name="Score-@guid" value="4.5" checked="@(Model < 4.8 && Model >= 4.3 ? true : (bool?)null)" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
     <input type="radio" id="star4" name="Score-@guid" value="4" checked="@(Model < 4.3 && Model >= 3.8 ? true : (bool?)null)" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>

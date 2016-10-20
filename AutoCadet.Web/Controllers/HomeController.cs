@@ -26,17 +26,26 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> InstructorDetails(string instructorUrl)
         {
-            InstructorDetailsPageViewModel vm = await _homeControllerService.GetInstructorDetailsViewModelAsync(instructorUrl).ConfigureAwait(true);
-            ViewData["MetaInfo"] = vm?.InstructorDetails?.MetadataInfo?.Info;
-            ViewData["MetaDescription"] = vm?.InstructorDetails?.MetadataInfo?.Description;
-            ViewData["MetaKeywords"] = vm?.InstructorDetails?.MetadataInfo?.Keywords;
+            InstructorDetailsPageViewModel vm = await _homeControllerService.GetInstructorDetailsViewModelAsync(instructorUrl).ConfigureAwait(true) ?? new InstructorDetailsPageViewModel();
+            if (vm.InstructorDetails == null)
+            {
+                vm.InstructorDetails = new InstructorDetailsViewModel();
+            }
+            if (vm.Instructor == null)
+            {
+                vm.Instructor = new InstructorViewModel();
+            }
+
+            ViewData["MetaInfo"] = vm.InstructorDetails.MetadataInfo?.Info;
+            ViewData["MetaDescription"] = vm.InstructorDetails.MetadataInfo?.Description;
+            ViewData["MetaKeywords"] = vm.InstructorDetails.MetadataInfo?.Keywords;
             return View(vm);
         }
 
         [HttpPost]
         public async Task<ActionResult> AddComment(CommentViewModel comment)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || comment == null)
             {
                 return new JsonResult {Data = new {error = true}};
             }

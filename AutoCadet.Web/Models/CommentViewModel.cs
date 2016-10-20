@@ -16,19 +16,9 @@ namespace AutoCadet.Models
         public string Phone { get; set; }
         public string Email { get; set; }
 
-        [UIHint("Score2")]
-        [Required]
-        public double? Score { get; set; }
-
         [UIHint("Score")]
         [Required]
-        public double? DisplayScore
-        {
-            get
-            {
-                return Score;
-            }
-        }
+        public double? Score { get; set; }
 
         public bool IsVisibleInList { get; set; }
         public bool IsActive { get; set; }

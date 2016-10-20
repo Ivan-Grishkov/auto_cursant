@@ -25,7 +25,8 @@ namespace AutoCadet.Services.Impl
             var instructors =  await _autoCadetDbContext.Instructors
                 .Include(x => x.ThumbnailImage)
                 .Select(x => new {Instr = x, AvS = x.Comments.Where(c => c.IsActive).Average(c => (double?)c.Score)})
-                .ToListAsync();
+                .ToListAsync()
+                .ConfigureAwait(false);
 
             var vms = instructors.Select(x =>
             {
@@ -63,16 +64,25 @@ namespace AutoCadet.Services.Impl
                 .Include(x => x.InstructorDetails.Metadata)
                 .Include(x => x.InstructorDetails.VehicleImage)
                 .Include(x => x.InstructorDetails.DetailsImage)
-                .FirstOrDefaultAsync(x => x.UrlName == instructorUrl)
+                .FirstOrDefaultAsync(x => x.UrlName.ToLower() == instructorUrl.ToLower())
                 .ConfigureAwait(false);
 
             var vm = new InstructorDetailsPageViewModel
             {
                 Instructor = _mapper.Map<InstructorViewModel>(instructor),
                 InstructorDetails = _mapper.Map<InstructorDetailsViewModel>(instructor.InstructorDetails),
-                Comments = instructor.Comments?.Select(_mapper.Map<CommentViewModel>).ToList(),
+                Comments = instructor.Comments?.Where(x=>x.IsActive).Select(_mapper.Map<CommentViewModel>).ToList(),
                 NewComment = new CommentViewModel()
             };
+
+            if (vm.Instructor == null)
+            {
+                vm.Instructor = new InstructorViewModel();
+            }
+            if (vm.Comments.Any())
+            {
+                vm.Instructor.AverageScore = vm.Comments?.Average(x => x.Score);
+            }
             return vm;
         }
 
@@ -81,7 +91,7 @@ namespace AutoCadet.Services.Impl
             var isSameExists = await _autoCadetDbContext.Comments.AnyAsync(x => x.Text == commentVm.Text && x.Name == commentVm.Name).ConfigureAwait(false);
             if (!isSameExists)
             {
-                var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == commentVm.InstructorId);
+                var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == commentVm.InstructorId).ConfigureAwait(false);
                 if (instructor != null)
                 {
                     var comment = _mapper.Map<Comment>(commentVm);
