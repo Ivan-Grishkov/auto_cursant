@@ -35,18 +35,31 @@
                     </div>
                     <ul class="list-inline social-buttons">
                         <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            @{
+                                var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{instructor.FirstName}%20{instructor.LastName}";
+                            }
+                            <a href="@hrefTwitter" class="twitter-share-button">
+                                <i class="fa fa-twitter"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#">
+                                <div class="fb-like" data-href="@Url.Action("InstructorDetails","Home", new { instructorUrl=instructor.UrlName})" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
+                                <i class="fa fa-facebook"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            @{
+                                var hrefVK = "http://vk.com/share.php?url=" + Url.Action("InstructorDetails", "Home", new {instructorUrl = instructor.UrlName});
+                            }
+                            <a href="@hrefVK">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-                        }
+                                }
     </div>
 </div>
 
