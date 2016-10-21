@@ -128,3 +128,7 @@ header {
 .img-list-instructors {
     height: 290px;
 }
+
+section#contact .form-group textarea.form-control {
+    height: 280px;
+}

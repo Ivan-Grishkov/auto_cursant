@@ -1,6 +1,7 @@
 ﻿ .rating {
       overflow: hidden;
       display: inline-block;
+      font-size: 14px;
   }
   .rating-input {
       float: right;
@@ -10,39 +11,24 @@
       margin: 0 0 0 -20px;
       opacity: 0;
   }
-  .rating-star:hover {
-      background-position: 0 0;
-  }
-   .rating-star {
-      position: relative;
-      float: right;
-      display: block;
-      width: 21px;
-      height: 20px;
-      content: "\f005";
-  }
 
-  .rating-star:hover,
-  .rating-star:hover ~ .rating-star {
-      background-position: 0 0;
-  }
-   .rating-star:hover,
-  .rating-star:hover ~ .rating-star,
-  .rating-input:checked ~ .rating-star {
-      background-position: 0 0;
-  }
+  .rating > label:before { 
+  margin: 0px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+  .rating > label { 
+  color: #ddd; 
+ float: right; 
+}
 
-     .rating:hover .rating-star:hover,
-  .rating:hover .rating-star:hover ~ .rating-star,
-  .rating-input:checked ~ .rating-star {
-      background-position: 0 0;
-  }
-  .rating-star,
-  .rating:hover .rating-star {
-      position: relative;
-      float: right;
-      display: block;
-      width: 20px;
-      height: 20px;
-      content: "\f005";
-  }
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 

@@ -11,27 +11,25 @@
         @if (Model != null)
         {
             foreach (var comment in Model)
-             {
-                 <div class="col-sm-4">
-                     <div class="team-member">
-                         @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
-                         <blockquote>
-                             <div class="row">
-                                 <div class="col-lg-9">
-                                     <span class="text-right">@comment.InstructorName</span>
-                                 </div>
-                                 <div class="col-lg-3">
-                                     <span class="text-right">
+            {
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
+                        <blockquote>
+                            <p title="@comment.InstructorName">
+                                @comment.InstructorName
+                            </p>
+                            <p class="text-left" title="@comment.Text">@comment.Text</p>
+                            <footer class="text-muted text-right">
+                                <span class="text-left pull-left">
                                     @Html.DisplayFor(x => comment.Score)
                                 </span>
-                                 </div>
-                             </div>
-                             <p class="text-left">@comment.Text</p>
-                             <footer class="text-muted text-right">@comment.Name</footer>
-                         </blockquote>
-                     </div>
-                 </div>
-             }
+                                <span class="text-right">@comment.Name</span>
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            }
         }
     </div>
 
