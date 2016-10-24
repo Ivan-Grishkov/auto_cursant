@@ -19,7 +19,9 @@ namespace AutoCadet.Models.Mapper
                     Id = x.Metadata?.Id ?? default(int),
                     Description = x.Metadata?.Description,
                     Info = x.Metadata?.Info,
-                    Keywords = x.Metadata?.Keywords
+                    Keywords = x.Metadata?.Keywords,
+                    H1 = x.Metadata?.H1,
+                    Title = x.Metadata?.Title
                 }))
                 .ForMember(x => x.DetailsImage, opt => opt.ResolveUsing(x => x.DetailsImage?.Bytes))
                 .ForMember(x => x.VehicleImage, opt => opt.ResolveUsing(x => x.VehicleImage?.Bytes));
