@@ -39,6 +39,8 @@ namespace AutoCadet.Controllers
             ViewData["MetaInfo"] = vm.InstructorDetails.MetadataInfo?.Info;
             ViewData["MetaDescription"] = vm.InstructorDetails.MetadataInfo?.Description;
             ViewData["MetaKeywords"] = vm.InstructorDetails.MetadataInfo?.Keywords;
+            ViewData["Title"] = vm.InstructorDetails.MetadataInfo?.Title;
+            ViewData["H1"] = vm.InstructorDetails.MetadataInfo?.H1;
             return View(vm);
         }
 

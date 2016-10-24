@@ -228,6 +228,10 @@
     <Compile Include="Domain\Migrations\201610160810391_RatingDouble.Designer.cs">
       <DependentUpon>201610160810391_RatingDouble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201610240626266_MetaEnhancment.cs" />
+    <Compile Include="Domain\Migrations\201610240626266_MetaEnhancment.Designer.cs">
+      <DependentUpon>201610240626266_MetaEnhancment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -372,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201610160810391_RatingDouble.resx">
       <DependentUpon>201610160810391_RatingDouble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610240626266_MetaEnhancment.resx">
+      <DependentUpon>201610240626266_MetaEnhancment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
