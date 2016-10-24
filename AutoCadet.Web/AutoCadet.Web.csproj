@@ -256,6 +256,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\stars-rating-display.css" />
     <Content Include="Content\stars-rating-edit.css" />
+    <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
     <Content Include="img\header-bg-details.jpg" />
     <Content Include="img\header-bg.jpg" />
     <Content Include="img\map-image.png" />

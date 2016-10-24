@@ -26,6 +26,7 @@ namespace AutoCadet
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/agency.css",
+                "~/fonts/font-awesome/css/font-awesome.min.css",
                 "~/Content/stars-rating-display.css",
                 "~/Content/stars-rating-edit.css",
                 "~/Content/site.css"));

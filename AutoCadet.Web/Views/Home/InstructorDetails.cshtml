@@ -20,130 +20,160 @@
     </div>
 </header>
 
-<h1> Nycnhernjh @Html.DisplayFor(x => x.Instructor.AverageScore)</h1>
-<!-- Portfolio Grid Section -->
-<section id="person" class="bg-light-gray">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4">
-                @if (Model.InstructorDetails?.DetailsImage != null && Model.InstructorDetails.DetailsImage.Length > 0)
-                {
-                    string base64String = Convert.ToBase64String(Model.InstructorDetails.DetailsImage);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")" 
-                         alt="@($"{Model.Instructor.FirstName} {Model.Instructor.LastName}")" />
+
+            <h1 class="section-heading">
+                h1 ht  headterdlsk l;dgfh;lskgh;shg
+                @{
+                    var instructorUrl = Url.Action("InstructorDetails", "Home", new { instructorUrl = Model.Instructor.UrlName }, Request?.Url?.Scheme);
+                    var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
+                    var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
+                    var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{Model.Instructor.FirstName}%20{Model.Instructor.LastName}%20{instructorUrl}";
                 }
-                <ul class="list-inline social-buttons">
-                    <li>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
+                <ul class="list-inline social-buttons text-center" style="float:right">
+                    <li title="Twitter">
+                        <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    <li title="Facebook">
+                        <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <li title="VK">
+                        <a href="@hrefVk"><i class="fa fa-vk"></i></a>
                     </li>
                 </ul>
-            </div>
-            <div class="col-md-8 text-left">
-                <p>
-                    <strong>Стоимость занятия: @Model.Instructor.Price р.</strong>
-                </p>
-                <p>@Model.InstructorDetails?.Description</p>
-            </div>
-        </div>
+            </h1>
+
+        <h2 class="section-subheading text-muted">
+            <label for="average-score">Средний рейтинг инструктора:</label>
+            <span style="float:right">
+                @Html.DisplayFor(x => x.Instructor.AverageScore, new { id = "average-score" })
+            </span>
+        </h2>
     </div>
-</section>
-<!-- Portfolio Grid Section -->
-<section id="car">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">@Model.InstructorDetails?.VehicleTitle</h2>
-                <h3 class="section-subheading text-muted">@Model.InstructorDetails?.VehicleSecondaryTitle</h3>
+
+    <!-- Portfolio Grid Section -->
+    <section id="person" class="bg-light-gray">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    @if (Model.InstructorDetails?.DetailsImage != null && Model.InstructorDetails.DetailsImage.Length > 0)
+                    {
+                        string base64String = Convert.ToBase64String(Model.InstructorDetails.DetailsImage);
+                        <img class="img-responsive img-centered img-circle"
+                             src="@($"data:image/png;base64,{base64String}")"
+                             alt="@($"{Model.Instructor.FirstName} {Model.Instructor.LastName}")" />
+                    }
+                    <ul class="list-inline social-buttons text-center">
+                        <li title="Twitter">
+                            <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li title="Facebook">
+                            <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li title="VK">
+                            <a href="@hrefVk"><i class="fa fa-vk"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8 text-left">
+                    <p>
+                        <strong>Стоимость занятия: @Model.Instructor.Price р.</strong>
+                    </p>
+                    <p>@(Model.InstructorDetails?.Description)</p>
+                </div>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-4">
-                @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
+    </section>
+    <!-- Portfolio Grid Section -->
+    <section id="car">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">@(Model.InstructorDetails?.VehicleTitle)</h2>
+                    <h3 class="section-subheading text-muted">@(Model.InstructorDetails?.VehicleSecondaryTitle)</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
                 {
                     string base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.InstructorDetails.VehicleTitle}")" />
+                <img class="img-responsive img-centered img-circle"
+                     src="@($"data:image/png;base64,{base64String}")"
+                     alt="@($"{Model.InstructorDetails.VehicleTitle}")" />
                 }
-            </div>
-            <div class="col-md-8 text-left">
-                <p>
-                    <strong>Расход топлива на 100 км: @Model.InstructorDetails?.FuelConsumption л.</strong>
-                </p>
-                <p>@Model.InstructorDetails?.VehicleDescriprion</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Team Section -->
-<section id="team" class="bg-light-gray">
-@{ Html.RenderPartial("_IndexCommentsList", Model.Comments); }
-</section>
-
-<!-- Contact Section -->
-<section id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Оставить отзыв об инструкторе (@($"{Model.Instructor.LastName} {Model.Instructor.FirstName}"))</h2>
+                </div>
+                <div class="col-md-8 text-left">
+                    <p>
+                        <strong>Расход топлива на 100 км: @Model.InstructorDetails?.FuelConsumption л.</strong>
+                    </p>
+                    <p>@(Model.InstructorDetails?.VehicleDescriprion)</p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                @using (Html.BeginForm("AddComment", "Home", FormMethod.Post, new { name = "sentMessage", id = "addCommentForm" }))
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="bg-light-gray">
+        @{ Html.RenderPartial("_IndexCommentsList", Model.Comments); }
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Оставить отзыв об инструкторе (@($"{Model.Instructor.LastName} {Model.Instructor.FirstName}"))</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    @using (Html.BeginForm("AddComment", "Home", FormMethod.Post, new { name = "sentMessage", id = "addCommentForm" }))
                 {
-                    <div class="row">
-                        <div id="addCommentError" class="alert alert-danger" role="alert" style="display: none">
-                            Произошла ошибка. Попробуйте еще раз.
-                        </div>
-                        <div id="addCommentExists" class="alert alert-danger" role="alert" style="display: none">
-                            Произошла ошибка. Такой коментарий уже существует.
-                        </div>
-                        <div id="addCommentSuccess" class="alert alert-success" role="alert" style="display: none">
-                            Ваш Отзыв сохранен.
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Ваше имя и фамилия *" id="name" name="name" required data-validation-required-message="Уточните, пожалуйста как к вам обращаться.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Ваш Email" id="email" name="email">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Ваш Телефон" id="phone" name="phone">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                @Html.EditorFor(x=> x.NewComment.Score)
-                            </div>
-                            <div class="form-group">
-                                @Html.Hidden("instructorId", Model.Instructor.Id)
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Отзыв *" id="message" name="text" required data-validation-required-message="Что же Вы хотели сказать?"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-xl">Сохранить</button>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
+                <div class="row">
+                    <div id="addCommentError" class="alert alert-danger" role="alert" style="display: none">
+                        Произошла ошибка. Попробуйте еще раз.
                     </div>
+                    <div id="addCommentExists" class="alert alert-danger" role="alert" style="display: none">
+                        Произошла ошибка. Такой коментарий уже существует.
+                    </div>
+                    <div id="addCommentSuccess" class="alert alert-success" role="alert" style="display: none">
+                        Ваш Отзыв сохранен.
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Ваше имя и фамилия *" id="name" name="name" required data-validation-required-message="Уточните, пожалуйста как к вам обращаться.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Ваш Email" id="email" name="email">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Ваш Телефон" id="phone" name="phone">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(x=> x.NewComment.Score)
+                        </div>
+                        <div class="form-group">
+                            @Html.Hidden("instructorId", Model.Instructor.Id)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Отзыв *" id="message" name="text" required data-validation-required-message="Что же Вы хотели сказать?"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-xl">Сохранить</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
                 }
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 

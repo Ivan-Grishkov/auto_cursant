@@ -3,9 +3,9 @@
 <div class="container">
     <div class="row">
         @foreach (var instructor in Model)
-            {
+        {
             <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="@Url.Action("InstructorDetails", new { instructorUrl = instructor.UrlName})" class="portfolio-link">
+                <a href="@Url.Action("InstructorDetails", new {instructorUrl = instructor.UrlName})" class="portfolio-link">
                     <div class="portfolio-hover">
                         <div class="portfolio-hover-content">
                             <i class="fa fa-list fa-3x"></i>
@@ -14,8 +14,8 @@
                     @{
                         if (instructor.ThumbnailImage != null && instructor.ThumbnailImage.Length > 0)
                         {
-                            string base64String = Convert.ToBase64String(instructor.ThumbnailImage);
-                            <img src="@($"data:image/png;base64,{base64String}")" alt="@($"фото: {instructor.FirstName} {instructor.LastName}")"  class="img-responsive img-list-instructors"/>
+                            var base64String = Convert.ToBase64String(instructor.ThumbnailImage);
+                            <img src="@($"data:image/png;base64,{base64String}")" alt="@($"фото: {instructor.FirstName} {instructor.LastName}")" class="img-responsive img-list-instructors"/>
                         }
                         else
                         {
@@ -33,33 +33,25 @@
                         </span>
                         <span class="text-right pull-right">@($"{instructor.Price} р.")</span>
                     </div>
-                    <ul class="list-inline social-buttons">
-                        <li>
-                            @{
-                                var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{instructor.FirstName}%20{instructor.LastName}";
-                            }
-                            <a href="@hrefTwitter" class="twitter-share-button">
-                                <i class="fa fa-twitter"></i>
-                            </a>
+                    @{
+                        var instructorUrl = Url.Action("InstructorDetails", "Home", new { instructorUrl = instructor.UrlName }, Request?.Url?.Scheme);
+                        var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
+                        var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
+                        var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{instructor.FirstName}%20{instructor.LastName}%20{instructorUrl}";
+                    }
+                    <ul class="list-inline social-buttons text-center">
+                        <li title="Twitter">
+                            <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="fb-like" data-href="@Url.Action("InstructorDetails","Home", new { instructorUrl=instructor.UrlName})" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
-                                <i class="fa fa-facebook"></i>
-                            </a>
+                        <li title="Facebook">
+                            <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
                         </li>
-                        <li>
-                            @{
-                                var hrefVK = "http://vk.com/share.php?url=" + Url.Action("InstructorDetails", "Home", new {instructorUrl = instructor.UrlName});
-                            }
-                            <a href="@hrefVK">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
+                        <li title="VK">
+                            <a href="@hrefVk"><i class="fa fa-vk"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
-                                }
+        }
     </div>
 </div>
-
