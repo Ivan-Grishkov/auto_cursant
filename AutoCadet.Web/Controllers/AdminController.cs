@@ -32,6 +32,7 @@ namespace AutoCadet.Controllers
             if (ModelState.IsValid || instructorGridItemViewModels == null)
             {
                 await _adminControllerService.SaveInstructorsAttributesAsync(instructorGridItemViewModels).ConfigureAwait(true);
+                ViewBag.IsSuccess = true;
             }
             return View(instructorGridItemViewModels);
         }
@@ -100,6 +101,7 @@ namespace AutoCadet.Controllers
             if (ModelState.IsValid || commentViewModels == null)
             {
                 await _adminControllerService.SaveCommentsAttributesAsync(commentViewModels).ConfigureAwait(true);
+                ViewBag.IsSuccess = true;
             }
             return View(commentViewModels);
         }

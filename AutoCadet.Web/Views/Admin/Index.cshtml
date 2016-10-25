@@ -6,15 +6,28 @@
 }
 <section class="container-fluid">
     <div class="container">
+        @if (ViewBag.IsSuccess == true)
+        {
+            <div class="row text-success">
+                Данные сохранены успешно
+            </div>
+        }
+        <div class="row text-danger">
+            @Html.ValidationSummary()
+        </div>
         <div class="row">
             @using (Html.BeginForm("Index", "Admin"))
             {
                 @Html.ValidationSummary()
-                <table class="irstructors-table">
+                <table class="irstructors-table table">
                     <thead>
                     <tr>
-                        <th></th>
+                        <th>Редактировать</th>
                         <th>Ф.И.О.</th>
+                        <th>Email</th>
+                        <th>Телефон</th>
+                        <th>URL</th>
+                        <th>Цена</th>
                         <th>Активен?</th>
                         <th>Номер в списке</th>
                         <th>Картинка в списке</th>
@@ -22,21 +35,35 @@
                     </thead>
                     <tbody>
                     @{
-                        for (int i=0; i < Model.Count; i++)
+                        for (int i = 0; i < Model.Count; i++)
                         {
                             <tr>
                                 <td>
                                     @Html.HiddenFor(x => Model[i].Id)
+                                    @Html.HiddenFor(x => Model[i].FirstName)
+                                    @Html.HiddenFor(x => Model[i].LastName)
                                     @Html.ActionLink("Edit", "ManageInstructor", "Admin", new {instructorId = Model[i].Id}, null)
                                 </td>
                                 <td>
                                     @($"{Model[i].FirstName} {Model[i].LastName}")
                                 </td>
                                 <td>
-                                    @Html.CheckBoxFor(x => Model[i].IsActive)
+                                    @Html.EditorFor(x => Model[i].Email)
                                 </td>
                                 <td>
-                                    @Html.TextBoxFor(x => Model[i].SortingNumber)
+                                    @Html.EditorFor(x => Model[i].Phone)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(x => Model[i].UrlName)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(x => Model[i].Price)
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
+                                </td>
+                                <td>
+                                    @Html.EditorFor(x => Model[i].SortingNumber)
                                 </td>
                                 <td>
                                     @{

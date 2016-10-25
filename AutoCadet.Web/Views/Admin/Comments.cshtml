@@ -7,61 +7,70 @@
 
 <section class="container-fluid">
     <div class="container">
-        <div class="row">
-@using (Html.BeginForm("Comments", "Admin"))
-{
-    <table class="irstructors-table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Score</th>
-            <th>Text</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>InstructorName</th>
-            <th>IsVisibleInList</th>
-            <th>IsActive</th>
-        </tr>
-        </thead>
-        <tbody>
-        @{
-                for (int i = 0; i < Model.Count; i++)
-                {
-                <tr>
-                    <td>
-                        @Html.HiddenFor(x => Model[i].Id)
-                        @Html.HiddenFor(x => Model[i].InstructorId)
-                        @Html.TextBoxFor(x => Model[i].Name)
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => Model[i].Score)
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => Model[i].Text)
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => Model[i].Email)
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => Model[i].Phone)
-                    </td>
-                    <td>
-                        @Model[i].InstructorName
-                    </td>
-                    <td>
-                        @Html.CheckBoxFor(x => Model[i].IsVisibleInList)
-                    </td>
-                    <td>
-                        @Html.CheckBoxFor(x => Model[i].IsActive)
-                    </td>
-                </tr>
-            }
+        @if (ViewBag.IsSuccess == true)
+        {
+            <div class="row text-success">
+                Данные сохранены успешно
+            </div>
         }
-        </tbody>
-    </table>
-    <br/>
-    <input type="submit" value="Save" class="btn btn-primary" />
-}
+        <div class="row text-danger">
+            @Html.ValidationSummary()
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("Comments", "Admin"))
+            {
+                <table class="irstructors-table table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Text</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>InstructorName</th>
+                        <th>IsVisibleInList</th>
+                        <th>IsActive</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        for (var i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(x => Model[i].Id)
+                                    @Html.HiddenFor(x => Model[i].InstructorId)
+                                    @Html.TextBoxFor(x => Model[i].Name)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(x => Model[i].Score)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(x => Model[i].Text)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(x => Model[i].Email)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(x => Model[i].Phone)
+                                </td>
+                                <td>
+                                    @Model[i].InstructorName
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(x => Model[i].IsVisibleInList, new {@class = "form-control"})
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+                <br/>
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            }
         </div>
     </div>
 </section>
