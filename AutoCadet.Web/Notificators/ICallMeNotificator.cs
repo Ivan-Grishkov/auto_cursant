@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using AutoCadet.Domain.Entities;
 
 namespace AutoCadet.Notificators
 {
     public interface ICallMeNotificator
     {
-        Task<bool> NotifyAsync(string phone, string instructorPhone);
+        bool Notify(string phone, Instructor instructor);
     }
 }

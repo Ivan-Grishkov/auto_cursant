@@ -119,13 +119,12 @@ namespace AutoCadet.Services.Impl
                 _autoCadetDbContext.CallMes.Add(callMe);
                 await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
 
-                string instructorPhone =
+                var instructor =
                     await
                         _autoCadetDbContext.Instructors.Where(x => x.Id == callMeVm.InstructorId)
-                            .Select(x => x.Phone)
                             .FirstOrDefaultAsync()
                             .ConfigureAwait(false);
-                return await _callMeNotificator.NotifyAsync(callMe.Phone, instructorPhone).ConfigureAwait(false);
+                return _callMeNotificator.Notify(callMe.Phone, instructor);
             }
             return false;
         }

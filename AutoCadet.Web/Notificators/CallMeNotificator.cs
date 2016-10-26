@@ -1,29 +1,34 @@
 ﻿using System;
 using System.Net.Mail;
-using System.Threading.Tasks;
+using AutoCadet.Domain.Entities;
 
 namespace AutoCadet.Notificators
 {
     public class CallMeNotificator : ICallMeNotificator
     {
         private const string AdminEmail = "grishkov.ivan@gmail.com";
-        private const string AdminEmail2 = "auto.dev2016@gmail.com";
+
         /// <param name="phone"></param>
-        /// <param name="instructorPhone">admin if no instructor</param>
+        /// <param name="instructor">admin if no instructor</param>
         /// <returns>is success</returns>
-        public async Task<bool> NotifyAsync(string phone, string instructorPhone)
+        public bool Notify(string phone, Instructor instructor)
         {
             try
             {
                 MailMessage message = new MailMessage();
-                message.From = new MailAddress(AdminEmail2);
                 message.To.Add(new MailAddress(AdminEmail));
-                message.Subject = "This is my subject";
-                message.Body = "This is the content";
+                message.Subject = "Перезвоните Auto Instructor";
+                var messageText = $"Перезвоните, пожалуйста, на номер {phone}.";
+                if (instructor != null)
+                {
+                    messageText += $" Инструктор {instructor.LastName} {instructor.FirstName}. тел. инструктораL {instructor.Phone}";
+                }
+                message.Body = messageText;
 
-                SmtpClient client = new SmtpClient();
-                client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
+                SmtpClient client = new SmtpClient
+                {
+                    Timeout = 2000
+                };
 
                 client.Send(message);
             }
