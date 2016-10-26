@@ -98,11 +98,25 @@ namespace AutoCadet.Services.Impl
                     comment.CreatedDate = DateTime.Now;
                     comment.Instructor = instructor;
                     _autoCadetDbContext.Comments.Add(comment);
-                    _autoCadetDbContext.SaveChanges();
+                    await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
                     return true;
                 }
             }
 
+            return false;
+        }
+
+        public async Task<bool> ProcessCallMeAsync(CallMeViewModel callMeVm)
+        {
+            var isExists = await _autoCadetDbContext.CallMes.AnyAsync(x => x.Phone == callMeVm.Phone).ConfigureAwait(false);
+            if (!isExists)
+            {
+                var callMe = _mapper.Map<CallMe>(callMeVm);
+
+                _autoCadetDbContext.CallMes.Add(callMe);
+                await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+                return true;
+            }
             return false;
         }
     }

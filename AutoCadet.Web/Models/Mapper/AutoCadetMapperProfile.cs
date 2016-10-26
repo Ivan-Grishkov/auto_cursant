@@ -14,7 +14,14 @@ namespace AutoCadet.Models.Mapper
                 .ForMember(x => x.ThumbnailImage, opt => opt.Ignore());
 
             CreateMap<InstructorDetails, InstructorDetailsViewModel>()
-                .ForMember(x => x.MetadataInfo, opt => opt.ResolveUsing(x => new MetadataInfoViewModel
+                .ForMember(x => x.MetadataInfo, opt => opt
+
+                //.MapFrom(x=>x.Metadata)
+
+
+
+
+                .ResolveUsing(x => new MetadataInfoViewModel
                 {
                     Id = x.Metadata?.Id ?? default(int),
                     Description = x.Metadata?.Description,
@@ -22,7 +29,9 @@ namespace AutoCadet.Models.Mapper
                     Keywords = x.Metadata?.Keywords,
                     H1 = x.Metadata?.H1,
                     Title = x.Metadata?.Title
-                }))
+                })
+                
+                )
                 .ForMember(x => x.DetailsImage, opt => opt.ResolveUsing(x => x.DetailsImage?.Bytes))
                 .ForMember(x => x.VehicleImage, opt => opt.ResolveUsing(x => x.VehicleImage?.Bytes));
 
@@ -39,6 +48,9 @@ namespace AutoCadet.Models.Mapper
 
             CreateMap<Metadata, MetadataInfoViewModel>();
             CreateMap<MetadataInfoViewModel, Metadata>();
+
+            CreateMap<CallMe, CallMeViewModel>();
+            CreateMap<CallMeViewModel, CallMe>();
 
         }
     }

@@ -60,5 +60,22 @@ namespace AutoCadet.Controllers
 
             return new JsonResult {Data = new {isSame = true}};
         }
+
+        [HttpPost]
+        public async Task<ActionResult> CallMe(CallMeViewModel callMe)
+        {
+            if (!ModelState.IsValid || callMe == null)
+            {
+                return new JsonResult {Data = new {error = true}};
+            }
+
+            var isSuccess = await _homeControllerService.ProcessCallMeAsync(callMe).ConfigureAwait(true);
+            if (isSuccess)
+            {
+                return new JsonResult {Data = new {success = true}};
+            }
+
+            return new JsonResult {Data = new {isSame = true}};
+        }
     }
 }

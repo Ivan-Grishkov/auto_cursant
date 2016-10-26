@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Domain\Entities\CallMe.cs" />
     <Compile Include="Domain\Entities\Comment.cs" />
     <Compile Include="Domain\Entities\EntityBase.cs" />
     <Compile Include="Domain\Entities\ImageFile.cs" />
@@ -232,9 +233,14 @@
     <Compile Include="Domain\Migrations\201610240626266_MetaEnhancment.Designer.cs">
       <DependentUpon>201610240626266_MetaEnhancment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610260759394_CallMeAdded.cs" />
+    <Compile Include="Migrations\201610260759394_CallMeAdded.Designer.cs">
+      <DependentUpon>201610260759394_CallMeAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
+    <Compile Include="Models\CallMeViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\InstructorDetailsPageViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
@@ -379,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201610240626266_MetaEnhancment.resx">
       <DependentUpon>201610240626266_MetaEnhancment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610260759394_CallMeAdded.resx">
+      <DependentUpon>201610260759394_CallMeAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
