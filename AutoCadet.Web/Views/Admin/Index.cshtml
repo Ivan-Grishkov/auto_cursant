@@ -35,46 +35,49 @@
                     </thead>
                     <tbody>
                     @{
-                        for (int i = 0; i < Model.Count; i++)
+                        if (Model != null)
                         {
-                            <tr>
-                                <td>
-                                    @Html.HiddenFor(x => Model[i].Id)
-                                    @Html.HiddenFor(x => Model[i].FirstName)
-                                    @Html.HiddenFor(x => Model[i].LastName)
-                                    @Html.ActionLink("Edit", "ManageInstructor", "Admin", new {instructorId = Model[i].Id}, null)
-                                </td>
-                                <td>
-                                    @($"{Model[i].FirstName} {Model[i].LastName}")
-                                </td>
-                                <td>
-                                    @Html.EditorFor(x => Model[i].Email)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(x => Model[i].Phone)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(x => Model[i].UrlName)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(x => Model[i].Price)
-                                </td>
-                                <td>
-                                    @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
-                                </td>
-                                <td>
-                                    @Html.EditorFor(x => Model[i].SortingNumber)
-                                </td>
-                                <td>
-                                    @{
-                                        if (Model[i].ThumbnailImage != null && Model[i].ThumbnailImage.Length > 0)
-                                        {
-                                            var base64String = Convert.ToBase64String(Model[i].ThumbnailImage);
-                                            <img src="@($"data:image/png;base64,{base64String}")" width="50px" height="50px"/>
+                            for (var i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(x => Model[i].Id)
+                                        @Html.HiddenFor(x => Model[i].FirstName)
+                                        @Html.HiddenFor(x => Model[i].LastName)
+                                        @Html.ActionLink("Edit", "ManageInstructor", "Admin", new {instructorId = Model[i].Id}, null)
+                                    </td>
+                                    <td>
+                                        @($"{Model[i].FirstName} {Model[i].LastName}")
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].Email)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].Phone)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].UrlName)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].Price)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].SortingNumber)
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (Model[i].ThumbnailImage != null && Model[i].ThumbnailImage.Length > 0)
+                                            {
+                                                var base64String = Convert.ToBase64String(Model[i].ThumbnailImage);
+                                                <img src="@($"data:image/png;base64,{base64String}")" width="50px" height="50px"/>
+                                            }
                                         }
-                                    }
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            }
                         }
                     }
                     </tbody>

@@ -30,23 +30,26 @@
                     </thead>
                     <tbody>
                     @{
-                        for (var i = 0; i < Model.Count; i++)
+                        if (Model != null)
                         {
-                            <tr>
-                                <td>
-                                    @Html.HiddenFor(x => Model[i].Id)
-                                    @Html.TextBoxFor(x => Model[i].Phone)
-                                </td>
-                                <td>
-                                    @Html.CheckBoxFor(x => Model[i].IsHandled, new {@class = "form-control"})
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(x => Model[i].InstructorId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(x => Model[i].CreatedDate)
-                                </td>
-                            </tr>
+                            for (var i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(x => Model[i].Id)
+                                        @Html.TextBoxFor(x => Model[i].Phone)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(x => Model[i].IsHandled, new {@class = "form-control"})
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model[i].InstructorId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model[i].CreatedDate)
+                                    </td>
+                                </tr>
+                            }
                         }
                     }
                     </tbody>

@@ -34,36 +34,39 @@
                     </thead>
                     <tbody>
                     @{
-                        for (var i = 0; i < Model.Count; i++)
+                        if (Model != null)
                         {
-                            <tr>
-                                <td>
-                                    @Html.HiddenFor(x => Model[i].Id)
-                                    @Html.HiddenFor(x => Model[i].InstructorId)
-                                    @Html.TextBoxFor(x => Model[i].Name)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(x => Model[i].Score)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(x => Model[i].Text)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(x => Model[i].Email)
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(x => Model[i].Phone)
-                                </td>
-                                <td>
-                                    @Model[i].InstructorName
-                                </td>
-                                <td>
-                                    @Html.CheckBoxFor(x => Model[i].IsVisibleInList, new {@class = "form-control"})
-                                </td>
-                                <td>
-                                    @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
-                                </td>
-                            </tr>
+                            for (var i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(x => Model[i].Id)
+                                        @Html.HiddenFor(x => Model[i].InstructorId)
+                                        @Html.TextBoxFor(x => Model[i].Name)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(x => Model[i].Score)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(x => Model[i].Text)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(x => Model[i].Email)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(x => Model[i].Phone)
+                                    </td>
+                                    <td>
+                                        @Model[i].InstructorName
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(x => Model[i].IsVisibleInList, new {@class = "form-control"})
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
+                                    </td>
+                                </tr>
+                            }
                         }
                     }
                     </tbody>
