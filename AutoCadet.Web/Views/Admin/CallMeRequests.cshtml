@@ -25,6 +25,7 @@
                         <th>Телефон</th>
                         <th>Запрос Обработан?</th>
                         <th>ID Инструктора</th>
+                        <th>Created Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(x => Model[i].InstructorId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => Model[i].CreatedDate)
                                 </td>
                             </tr>
                         }

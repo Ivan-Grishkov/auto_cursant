@@ -150,23 +150,11 @@
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook">
-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Security.Cookies">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google">
-      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter">
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +225,10 @@
     <Compile Include="Domain\Migrations\201610260759394_CallMeAdded.Designer.cs">
       <DependentUpon>201610260759394_CallMeAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201610260915334_CallMeCreatedDateAdded.cs" />
+    <Compile Include="Domain\Migrations\201610260915334_CallMeCreatedDateAdded.Designer.cs">
+      <DependentUpon>201610260915334_CallMeCreatedDateAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -251,6 +243,7 @@
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
     <Compile Include="Models\MetadataInfoViewModel.cs" />
     <Compile Include="Notificators\CallMeNotificator.cs" />
+    <Compile Include="Notificators\ICallMeNotificator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAdminControllerService.cs" />
     <Compile Include="Services\Impl\AdminControllerService.cs" />
@@ -298,7 +291,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -390,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201610260759394_CallMeAdded.resx">
       <DependentUpon>201610260759394_CallMeAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201610260915334_CallMeCreatedDateAdded.resx">
+      <DependentUpon>201610260915334_CallMeCreatedDateAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

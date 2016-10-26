@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoCadet.Domain.Entities
 {
@@ -7,6 +8,7 @@ namespace AutoCadet.Domain.Entities
         [Required]
         public string Phone { get; set; }
         public bool IsHandled { get; set; }
+        public DateTime CreatedDate { get; set; }
         public virtual Instructor Instructor { get; set; }
     }
 }

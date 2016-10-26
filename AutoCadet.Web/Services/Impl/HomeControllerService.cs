@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoCadet.Domain;
 using AutoCadet.Domain.Entities;
 using AutoCadet.Models;
+using AutoCadet.Notificators;
 using AutoMapper;
 
 namespace AutoCadet.Services.Impl
@@ -13,11 +14,13 @@ namespace AutoCadet.Services.Impl
     {
         private readonly AutoCadetDbContext _autoCadetDbContext;
         private readonly IMapper _mapper;
+        private readonly ICallMeNotificator _callMeNotificator;
 
-        public HomeControllerService(AutoCadetDbContext autoCadetDbContext, IMapper mapper)
+        public HomeControllerService(AutoCadetDbContext autoCadetDbContext, IMapper mapper, ICallMeNotificator callMeNotificator)
         {
             _autoCadetDbContext = autoCadetDbContext;
             _mapper = mapper;
+            _callMeNotificator = callMeNotificator;
         }
 
         public async Task<HomePageViewModel> GetHomePageViewModelAsync()
@@ -115,7 +118,14 @@ namespace AutoCadet.Services.Impl
 
                 _autoCadetDbContext.CallMes.Add(callMe);
                 await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
-                return true;
+
+                string instructorPhone =
+                    await
+                        _autoCadetDbContext.Instructors.Where(x => x.Id == callMeVm.InstructorId)
+                            .Select(x => x.Phone)
+                            .FirstOrDefaultAsync()
+                            .ConfigureAwait(false);
+                return await _callMeNotificator.NotifyAsync(callMe.Phone, instructorPhone).ConfigureAwait(false);
             }
             return false;
         }
