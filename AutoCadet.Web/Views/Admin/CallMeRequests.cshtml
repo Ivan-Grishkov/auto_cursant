@@ -1,0 +1,55 @@
+﻿@model IList<AutoCadet.Models.CallMeViewModel>
+
+@{
+    ViewBag.Title = "Call Me Requests";
+    Layout = "~/Views/Shared/_LayoutWithLogin.cshtml";
+}
+
+<section class="container-fluid">
+    <div class="container">
+        @if (ViewBag.IsSuccess == true)
+        {
+            <div class="row text-success">
+                Данные сохранены успешно
+            </div>
+        }
+        <div class="row text-danger">
+            @Html.ValidationSummary()
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("CallMeRequests", "Admin"))
+            {
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Телефон</th>
+                        <th>Запрос Обработан?</th>
+                        <th>ID Инструктора</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        for (var i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(x => Model[i].Id)
+                                    @Html.TextBoxFor(x => Model[i].Phone)
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(x => Model[i].IsHandled, new {@class = "form-control"})
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => Model[i].InstructorId)
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+                <br/>
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            }
+        </div>
+    </div>
+</section>

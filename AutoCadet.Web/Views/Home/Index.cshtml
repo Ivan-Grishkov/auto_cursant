@@ -158,7 +158,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <select name="instructorId" required class="dropdown form-control">
+                                <select name="instructorId" class="dropdown form-control">
                                     <option value="" disabled selected>Ваш Инструктор</option>
                                     @foreach (var instructor in Model.InstructorGridItems.OrderBy(x => x.LastName))
                                     {

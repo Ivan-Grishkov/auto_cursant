@@ -153,5 +153,29 @@ namespace AutoCadet.Services.Impl
             }
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
+
+        public async Task<IList<CallMeViewModel>> GetAllCallMeViewModelsAsync()
+        {
+            var callMes = await _autoCadetDbContext.CallMes.ToListAsync().ConfigureAwait(false);
+            return callMes?.Select(i => _mapper.Map<CallMeViewModel>(i)).ToList();
+        }
+
+        public async Task SaveCallMeViewModelsAsync(IList<CallMeViewModel> callMeViewModels)
+        {
+            var ids = callMeViewModels.Where(x => x != null).Select(i => i.Id).ToList();
+            var callMes = await _autoCadetDbContext.CallMes
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync()
+                .ConfigureAwait(false);
+            foreach (var callMe in callMes)
+            {
+                var vm = callMeViewModels.FirstOrDefault(x => x.Id == callMe.Id);
+                if (vm != null)
+                {
+                    _mapper.Map(vm, callMe);
+                }
+            }
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
 }

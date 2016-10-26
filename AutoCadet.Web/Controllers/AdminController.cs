@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -29,7 +30,7 @@ namespace AutoCadet.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(IList<InstructorViewModel> instructorGridItemViewModels)
         {
-            if (ModelState.IsValid || instructorGridItemViewModels == null)
+            if (ModelState.IsValid && instructorGridItemViewModels != null)
             {
                 await _adminControllerService.SaveInstructorsAttributesAsync(instructorGridItemViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
@@ -98,12 +99,32 @@ namespace AutoCadet.Controllers
         [HttpPost]
         public async Task<ActionResult> Comments(IList<CommentViewModel> commentViewModels)
         {
-            if (ModelState.IsValid || commentViewModels == null)
+            if (ModelState.IsValid && commentViewModels != null)
             {
                 await _adminControllerService.SaveCommentsAttributesAsync(commentViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
             }
             return View(commentViewModels);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult> CallMeRequests()
+        {
+            IList<CallMeViewModel> callMeViewModels = await _adminControllerService.GetAllCallMeViewModelsAsync().ConfigureAwait(true);
+            return View(callMeViewModels);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult> CallMeRequests(IList<CallMeViewModel> callMeViewModels)
+        {
+            if (ModelState.IsValid && callMeViewModels != null && callMeViewModels.Any())
+            {
+                await _adminControllerService.SaveCallMeViewModelsAsync(callMeViewModels).ConfigureAwait(true);
+                ViewBag.IsSuccess = true;
+            }
+            return View(callMeViewModels);
         }
     }
 }
