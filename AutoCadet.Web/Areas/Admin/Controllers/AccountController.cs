@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
-namespace AutoCadet.Controllers
+namespace AutoCadet.Areas.Admin.Controllers
 {
     [Authorize]
     public class AccountController : Controller

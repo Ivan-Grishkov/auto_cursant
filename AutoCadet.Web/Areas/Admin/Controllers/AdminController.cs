@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using AutoCadet.Models;
 using AutoCadet.Services;
 
-namespace AutoCadet.Controllers
+namespace AutoCadet.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
