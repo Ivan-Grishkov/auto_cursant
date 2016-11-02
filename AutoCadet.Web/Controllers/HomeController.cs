@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoCadet.Attributes;
 using AutoCadet.Models;
 using AutoCadet.Services;
 
@@ -24,9 +25,20 @@ namespace AutoCadet.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> InstructorDetails(string instructorUrl)
+        [RequireRequestValue("")]
+        public async Task<ActionResult> Instructors()
         {
-            InstructorDetailsPageViewModel vm = await _homeControllerService.GetInstructorDetailsViewModelAsync(instructorUrl).ConfigureAwait(true) ?? new InstructorDetailsPageViewModel();
+            var instructorsVm = await _homeControllerService.GetInstructorsPageViewModelAsync().ConfigureAwait(true);
+            return View("InstructorsList", instructorsVm);
+        }
+
+        [HttpGet]
+        [RequireRequestValue("prettyUrl")]
+        public async Task<ActionResult> Instructors(string prettyUrl)
+        {
+            InstructorDetailsPageViewModel vm = await _homeControllerService
+                .GetInstructorDetailsViewModelAsync(prettyUrl)
+                .ConfigureAwait(true) ?? new InstructorDetailsPageViewModel();
             if (vm.InstructorDetails == null)
             {
                 vm.InstructorDetails = new InstructorDetailsViewModel();

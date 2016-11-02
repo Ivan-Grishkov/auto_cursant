@@ -24,7 +24,7 @@
         <h1 class="section-heading">
             @(Model.InstructorDetails?.MetadataInfo?.H1)
             @{
-                var instructorUrl = Url.Action("InstructorDetails", "Home", new {instructorUrl = Model.Instructor.UrlName}, Request?.Url?.Scheme);
+                var instructorUrl = Url.Action("Instructors", "Home", new { prettyUrl = Model.Instructor.UrlName}, Request?.Url?.Scheme);
                 var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
                 var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
                 var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{Model.Instructor.FirstName}%20{Model.Instructor.LastName}%20{instructorUrl}";

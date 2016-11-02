@@ -10,9 +10,15 @@ namespace AutoCadet
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "Site",
+                "{action}/{prettyUrl}",
+                new { controller = "Home", action = "Index", prettyUrl = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 "Default",
-                "{controller}/{action}/{id}",
-                new {controller = "Home", action = "Index", id = UrlParameter.Optional}
+                "{controller}/{action}/{prettyUrl}",
+                new {controller = "Home", action = "Index", prettyUrl = UrlParameter.Optional}
                 );
         }
     }

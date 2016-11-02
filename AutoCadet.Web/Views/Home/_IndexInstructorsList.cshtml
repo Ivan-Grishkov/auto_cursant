@@ -5,7 +5,7 @@
         @foreach (var instructor in Model)
         {
             <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="@Url.Action("InstructorDetails", new {instructorUrl = instructor.UrlName})" class="portfolio-link">
+                <a href="@Url.Action("Instructors", new {prettyUrl = instructor.UrlName})" class="portfolio-link">
                     <div class="portfolio-hover">
                         <div class="portfolio-hover-content">
                             <i class="fa fa-list fa-3x"></i>
@@ -34,7 +34,7 @@
                         <span class="text-right pull-right">@($"{instructor.Price} р.")</span>
                     </div>
                     @{
-                        var instructorUrl = Url.Action("InstructorDetails", "Home", new { instructorUrl = instructor.UrlName }, Request?.Url?.Scheme);
+                        var instructorUrl = Url.Action("Instructors", "Home", new { prettyUrl = instructor.UrlName }, Request?.Url?.Scheme);
                         var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
                         var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
                         var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{instructor.FirstName}%20{instructor.LastName}%20{instructorUrl}";

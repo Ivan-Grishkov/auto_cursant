@@ -58,6 +58,30 @@ namespace AutoCadet.Services.Impl
             };
         }
 
+        public async Task<InstructorsListPageViewModel> GetInstructorsPageViewModelAsync()
+        {
+            var instructors = await _autoCadetDbContext.Instructors
+                .Include(x => x.ThumbnailImage)
+                .Select(x => new { Instr = x, AvS = x.Comments.Where(c => c.IsActive).Average(c => (double?)c.Score) })
+                .ToListAsync()
+                .ConfigureAwait(false);
+
+            var vms = instructors.Select(x =>
+            {
+                var vm = new InstructorViewModel
+                {
+                    AverageScore = x.AvS
+                };
+                _mapper.Map(x.Instr, vm);
+                return vm;
+            }).ToList();
+
+            return new InstructorsListPageViewModel
+            {
+                InstructorGridItems = vms
+            };
+        }
+
         public async Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl)
         {
             var instructor = await _autoCadetDbContext.Instructors

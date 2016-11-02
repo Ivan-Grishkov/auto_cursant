@@ -163,6 +163,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Attributes\RequireRequestValueAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -249,6 +251,7 @@
     <Compile Include="Services\Impl\AdminControllerService.cs" />
     <Compile Include="Services\Impl\HomeControllerService.cs" />
     <Compile Include="Services\IHomeControllerService.cs" />
+    <Compile Include="Models\InstructorsListPageViewModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +263,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\stars-rating-display.css" />
     <Content Include="Content\stars-rating-edit.css" />
+    <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="img\header-bg-details.jpg" />
     <Content Include="img\header-bg.jpg" />
     <Content Include="img\map-image.png" />
@@ -276,6 +281,12 @@
     <Content Include="Scripts\app\controllers\home-index-controller.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\contact_me.js" />
     <Content Include="Scripts\site-home-jquery.js" />
@@ -333,14 +344,18 @@
     <Content Include="Views\Home\_IndexInstructorsList.cshtml" />
     <Content Include="Views\Shared\_LayoutWithLogin.cshtml" />
     <Content Include="Views\Admin\ManageInstructor.cshtml" />
-    <Content Include="Views\Home\InstructorDetails.cshtml" />
+    <Content Include="Views\Home\Instructors.cshtml" />
     <Content Include="Views\Home\_IndexCommentsList.cshtml" />
     <Content Include="Views\Home\_StarsRating.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Score.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Score.cshtml" />
+    <Content Include="Views\Home\InstructorsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Scripts\app\directives\" />
     <Folder Include="Scripts\app\services\" />
     <Folder Include="Scripts\app\templates\" />

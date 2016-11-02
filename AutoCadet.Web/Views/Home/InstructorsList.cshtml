@@ -1,0 +1,8 @@
+﻿@model AutoCadet.Models.InstructorsListPageViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="portfolio" class="bg-light-gray">
+    @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems.OrderByDescending(x => x.SortingNumber).ToList()); }
+</section>
