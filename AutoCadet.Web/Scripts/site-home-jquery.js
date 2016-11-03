@@ -4,7 +4,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: '/Home/AddComment',
+            url: '/AddComment',
             data: $('#addCommentForm').serialize(),
             success: function(data) {
                 $('#addCommentError').hide();
@@ -26,7 +26,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: '/Home/CallMe',
+            url: '/CallMe',
             data: $('#callMeForm').serialize(),
             success: function(data) {
                 $('#addCallMeError').hide();
