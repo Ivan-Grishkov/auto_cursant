@@ -1,17 +1,21 @@
-﻿
+﻿@model AutoCadet.Models.VideoLessonsPageViewModel
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>VideoLessonsList</title>
-</head>
-<body>
-    <div> 
+<header class="no-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 align-center">
+                <a class="btn btn-primary go-home" href="/">Уроки вождения</a>
+            </div>
+            <div class="col-lg-10 text-justify">
+                <h1 class="section-heading text-primary">Интерактивное обучение не выходя из дома</h1>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</header>
+
+<section id="portfolio" class="bg-light-gray">
+    @{ Html.RenderPartial("_IndexVideosList", Model.VideoLessonViewModels.OrderByDescending(x => x.SortingNumber).ToList()); }
+</section>
