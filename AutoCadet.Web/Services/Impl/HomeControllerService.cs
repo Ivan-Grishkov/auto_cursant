@@ -51,10 +51,22 @@ namespace AutoCadet.Services.Impl
                 .ConfigureAwait(false);
             var commentsVms = comments.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
 
+
+            var videoLessons = await _autoCadetDbContext.VideoLessons
+                .Include(x => x.ThumbnailImageFile)
+                .Include(x => x.Metadata)
+                .Where(x => x.IsActive)
+                .OrderByDescending(x => x.CreatedDate)
+                .Take(6)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            var videoLessonVms = videoLessons.Select(x => _mapper.Map<VideoLessonViewModel>(x)).ToList();
+
             return new HomePageViewModel
             {
                 InstructorGridItems = vms,
-                Comments = commentsVms
+                Comments = commentsVms,
+                VideosGridItems = videoLessonVms
             };
         }
 
@@ -167,7 +179,7 @@ namespace AutoCadet.Services.Impl
                         _autoCadetDbContext.Instructors.Where(x => x.Id == callMeVm.InstructorId)
                             .FirstOrDefaultAsync()
                             .ConfigureAwait(false);
-                return _callMeNotificator.Notify(callMe.Phone, instructor);
+                return _callMeNotificator.Notify(callMe.Phone, callMe.RequesterName, instructor);
             }
             return false;
         }

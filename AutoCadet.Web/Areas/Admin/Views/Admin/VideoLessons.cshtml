@@ -1,0 +1,92 @@
+﻿@model IList<AutoCadet.Models.VideoLessonViewModel>
+
+@{
+    ViewBag.Title = "Video Lessons";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
+}
+<section class="container-fluid">
+    <div class="container">
+        @if (ViewBag.IsSuccess == true)
+        {
+            <div class="row text-success">
+                Данные сохранены успешно
+            </div>
+        }
+        <div class="row text-danger">
+            @Html.ValidationSummary()
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("VideoLessons", "Admin"))
+            {
+                @Html.ValidationSummary()
+                <table class="irstructors-table table">
+                    <thead>
+                    <tr>
+                        <th>Редактировать</th>
+                        <th>CreatedDate.</th>
+                        <th>ListHeader</th>
+                        <th>YoutubeUrl</th>
+                        <th>URL</th>
+                        <th>Text</th>
+                        <th>Активен?</th>
+                        <th>Номер в списке</th>
+                        <th>Картинка в списке</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        if (Model != null)
+                        {
+                            for (var i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(x => Model[i].Id)
+                                        @Html.ActionLink("Edit", "ManageVideoLesson", "Admin", new {lessonId = Model[i].Id}, null)
+                                    </td>
+                                    <td>
+                                        @($"{Model[i].CreatedDate}")
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].ListHeader)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].YoutubeUrl)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].UrlName)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].Text)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].SortingNumber)
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (Model[i].ThumbnailImageFile != null && Model[i].ThumbnailImageFile.Length > 0)
+                                            {
+                                                var base64String = Convert.ToBase64String(Model[i].ThumbnailImageFile);
+                                                <img src="@($"data:image/png;base64,{base64String}")" width="50px" height="50px"/>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                    </tbody>
+                </table>
+
+                <br/>
+                <div class="row">
+                    @Html.ActionLink("Create", "ManageVideoLesson", "Admin", null, new {@class = "btn btn-default"})
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                </div>
+            }
+        </div>
+    </div>
+</section>

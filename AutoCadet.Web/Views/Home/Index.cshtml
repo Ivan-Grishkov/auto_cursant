@@ -10,7 +10,7 @@
 @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems.OrderByDescending(x => x.SortingNumber).ToList()); }
 </section>
 
- <!-- Services Section -->
+<!-- Services Section -->
 <section id="services">
     <div class="container">
         <div class="row">
@@ -56,7 +56,12 @@
     </div>
 </section>
 
-     <!-- Team Section -->
+<!-- Team Section -->
+<section id="videos">
+    @{ Html.RenderPartial("_IndexVideosList", Model.VideosGridItems); }
+</section>
+
+<!-- Team Section -->
 <section id="team" class="bg-light-gray">
 @{ Html.RenderPartial("_IndexCommentsList", Model.Comments); }
 </section>

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoCadet.Areas.Admin.Models;
 using AutoCadet.Models;
 using AutoCadet.Services;
 
@@ -22,7 +23,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            IList<InstructorViewModel> instructorsVs = await _adminControllerService.GetAllUsersViewModelsAsync().ConfigureAwait(true);
+            IList<InstructorViewModel> instructorsVs = await _adminControllerService.GetAllInstructorsViewModelsAsync().ConfigureAwait(true);
             return View(instructorsVs);
         }
 
@@ -74,6 +75,61 @@ namespace AutoCadet.Areas.Admin.Controllers
 
             await _adminControllerService.SaveInstructorAsync(instructorVm).ConfigureAwait(true);
             return RedirectToAction("Index");
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult> VideoLessons()
+        {
+            IList<VideoLessonViewModel> instructorsVs = await _adminControllerService.GetAllVideoLessonViewModelsAsync().ConfigureAwait(true);
+            return View(instructorsVs);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult> VideoLessons(IList<VideoLessonViewModel> videoLessonsGridItemViewModels)
+        {
+            if (ModelState.IsValid && videoLessonsGridItemViewModels != null)
+            {
+                await _adminControllerService.SaveVideoLessonsAttributesAsync(videoLessonsGridItemViewModels).ConfigureAwait(true);
+                ViewBag.IsSuccess = true;
+            }
+            return View(videoLessonsGridItemViewModels);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult> ManageVideoLesson(int? lessonId)
+        {
+            VideoLessonsManagePageViewModel videoLessonVm = null;
+            if (lessonId.HasValue)
+            {
+                videoLessonVm = await _adminControllerService.GetVideoLessonViewModelAsync(lessonId.Value).ConfigureAwait(true);
+            }
+            if (videoLessonVm == null)
+            {
+                videoLessonVm = new VideoLessonsManagePageViewModel();
+            }
+
+            videoLessonVm.VideoLessonViewModel = videoLessonVm.VideoLessonViewModel ?? new VideoLessonViewModel();
+            videoLessonVm.MetadataInfo = videoLessonVm.MetadataInfo ?? new MetadataInfoViewModel();
+
+            return View(videoLessonVm);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult> ManageVideoLesson(VideoLessonsManagePageViewModel lessonVm, HttpPostedFileBase itemFile)
+        {
+            if (!ModelState.IsValid || lessonVm == null)
+            {
+                return View(lessonVm);
+            }
+            lessonVm.VideoLessonViewModel.ThumbnailImageFile = GetFileContent(itemFile);
+
+            await _adminControllerService.SaveVideoLessonAsync(lessonVm).ConfigureAwait(true);
+            return RedirectToAction("VideoLessons");
         }
 
         private byte[] GetFileContent(HttpPostedFileBase file)

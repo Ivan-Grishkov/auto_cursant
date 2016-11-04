@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoCadet.Areas.Admin.Models;
 using AutoCadet.Domain;
 using AutoCadet.Domain.Entities;
 using AutoCadet.Models;
@@ -22,7 +23,7 @@ namespace AutoCadet.Services.Impl
             _mapper = mapper;
         }
 
-        public async Task<IList<InstructorViewModel>> GetAllUsersViewModelsAsync()
+        public async Task<IList<InstructorViewModel>> GetAllInstructorsViewModelsAsync()
         {
             var instructors = await _autoCadetDbContext.Instructors.Include(x => x.ThumbnailImage).ToListAsync().ConfigureAwait(false);
             return instructors?.Select(i => _mapper.Map<InstructorViewModel>(i)).ToList();
@@ -110,12 +111,6 @@ namespace AutoCadet.Services.Impl
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<IList<CommentViewModel>> GetAllCommentViewModelsAsync()
-        {
-            var comments = await _autoCadetDbContext.Comments.Include(x => x.Instructor).ToListAsync().ConfigureAwait(false);
-            return comments?.Select(i => _mapper.Map<CommentViewModel>(i)).ToList();
-        }
-
         public async Task SaveInstructorsAttributesAsync(IList<InstructorViewModel> instructorGridItemViewModels)
         {
             var ids = instructorGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
@@ -130,9 +125,100 @@ namespace AutoCadet.Services.Impl
                 {
                     instructor.IsActive = vm.IsActive;
                     instructor.SortingNumber = vm.SortingNumber;
+                    instructor.Email = vm.Email;
+                    instructor.UrlName = vm.UrlName;
+                    instructor.Price = vm.Price;
+                    instructor.Phone = vm.Phone;
                 }
             }
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task<IList<VideoLessonViewModel>> GetAllVideoLessonViewModelsAsync()
+        {
+            var videoLessons = await _autoCadetDbContext.VideoLessons
+                .Include(x => x.Metadata)
+                .Include(x => x.ThumbnailImageFile)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            return videoLessons?.Select(i => _mapper.Map<VideoLessonViewModel>(i)).ToList();
+        }
+
+        public async Task<VideoLessonsManagePageViewModel> GetVideoLessonViewModelAsync(int lessonId)
+        {
+            var instructor = await _autoCadetDbContext
+                .VideoLessons
+                .Include(x => x.Metadata)
+                .Include(x => x.ThumbnailImageFile)
+                .FirstOrDefaultAsync(x => x.Id == lessonId)
+                .ConfigureAwait(false);
+
+            return new VideoLessonsManagePageViewModel
+            {
+                VideoLessonViewModel = _mapper.Map<VideoLessonViewModel>(instructor),
+                MetadataInfo = _mapper.Map<MetadataInfoViewModel>(instructor?.Metadata)
+            };
+        }
+
+        public async Task SaveVideoLessonsAttributesAsync(IList<VideoLessonViewModel> videoLessonsGridItemViewModels)
+        {
+            var ids = videoLessonsGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
+            var lessons = await _autoCadetDbContext.VideoLessons
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync()
+                .ConfigureAwait(false);
+            foreach (var instructor in lessons)
+            {
+                var vm = videoLessonsGridItemViewModels.FirstOrDefault(x => x.Id == instructor.Id);
+                if (vm != null)
+                {
+                    instructor.IsActive = vm.IsActive;
+                    instructor.SortingNumber = vm.SortingNumber;
+                }
+            }
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task SaveVideoLessonAsync(VideoLessonsManagePageViewModel pageVm)
+        {
+            if (pageVm?.VideoLessonViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(pageVm));
+            }
+
+            var lesson = await _autoCadetDbContext.VideoLessons
+                .FirstOrDefaultAsync(x => x.Id == pageVm.VideoLessonViewModel.Id)
+                .ConfigureAwait(false)
+                    ?? new VideoLesson();
+            _mapper.Map(pageVm.VideoLessonViewModel, lesson);
+
+            if (pageVm.VideoLessonViewModel.ThumbnailImageFile != null)
+            {
+                if (lesson.ThumbnailImageFile == null)
+                {
+                    lesson.ThumbnailImageFile = new ImageFile();
+                }
+
+                lesson.ThumbnailImageFile.Bytes = pageVm.VideoLessonViewModel.ThumbnailImageFile;
+            }
+
+            lesson.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
+            if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
+            {
+                var meta = await _autoCadetDbContext.Metadatas.FirstOrDefaultAsync(x => x.Id == pageVm.MetadataInfo.Id).ConfigureAwait(false);
+                _mapper.Map(pageVm.MetadataInfo, meta);
+                lesson.Metadata = meta;
+            }
+            
+            lesson.CreatedDate = DateTime.Now;
+            _autoCadetDbContext.VideoLessons.AddOrUpdate(lesson);
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task<IList<CommentViewModel>> GetAllCommentViewModelsAsync()
+        {
+            var comments = await _autoCadetDbContext.Comments.Include(x => x.Instructor).ToListAsync().ConfigureAwait(false);
+            return comments?.Select(i => _mapper.Map<CommentViewModel>(i)).ToList();
         }
 
         public async Task SaveCommentsAttributesAsync(IList<CommentViewModel> commentViewModels)

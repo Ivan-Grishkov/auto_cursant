@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace AutoCadet.Models
+namespace AutoCadet.Areas.Admin.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

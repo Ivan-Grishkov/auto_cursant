@@ -1,0 +1,56 @@
+﻿@model IList<AutoCadet.Models.VideoLessonViewModel>
+<!-- Portfolio Grid Section -->
+<div class="container">
+    <div class="row">
+        @foreach (var videoLesson in Model)
+        {
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="@Url.Action("VideoLessons", new {prettyUrl = videoLesson.UrlName})" class="portfolio-link">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-list fa-3x"></i>
+                        </div>
+                    </div>
+                    @{
+                        if (videoLesson.ThumbnailImageFile != null && videoLesson.ThumbnailImageFile.Length > 0)
+                        {
+                            var base64String = Convert.ToBase64String(videoLesson.ThumbnailImageFile);
+                            <img src="@($"data:image/png;base64,{base64String}")" alt="@($"фото: {videoLesson.ListHeader}")" class="img-responsive img-list-instructors"/>
+                        }
+                        else
+                        {
+                            <img src="img/paris.jpg" class="img-responsive img-list-instructors" alt="@($"фото: {videoLesson.ListHeader}")">
+                        }
+                    }
+                </a>
+                <div class="portfolio-caption" title="@videoLesson.ListHeader">
+                    <h4>@($"{videoLesson.ListHeader}")</h4>
+                    <div class="clearfix"></div>
+                    @{
+                        var instructorUrl = Url.Action("VideoLessons", "Home", new {prettyUrl = videoLesson.UrlName}, Request?.Url?.Scheme);
+                        var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
+                        var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
+                        var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20по%20видео%20урокам%20" + $"{instructorUrl}";
+                    }
+                    <ul class="list-inline social-buttons text-center">
+                        <li title="Twitter">
+                            <a href="@hrefTwitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li title="Facebook">
+                            <a href="@hrefFb">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li title="VK">
+                            <a href="@hrefVk">
+                                <i class="fa fa-vk"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>

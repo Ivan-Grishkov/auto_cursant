@@ -9,16 +9,17 @@ namespace AutoCadet.Notificators
         private const string AdminEmail = "grishkov.ivan@gmail.com";
 
         /// <param name="phone"></param>
+        /// <param name="requesterName"></param>
         /// <param name="instructor">admin if no instructor</param>
         /// <returns>is success</returns>
-        public bool Notify(string phone, Instructor instructor)
+        public bool Notify(string phone, string requesterName, Instructor instructor)
         {
             try
             {
                 MailMessage message = new MailMessage();
                 message.To.Add(new MailAddress(AdminEmail));
                 message.Subject = "Перезвоните Auto Instructor";
-                var messageText = $"Перезвоните, пожалуйста, на номер {phone}.";
+                var messageText = $"Перезвоните, пожалуйста, на номер {phone}. {requesterName}";
                 if (instructor != null)
                 {
                     messageText += $" Инструктор {instructor.LastName} {instructor.FirstName}. тел. инструктораL {instructor.Phone}";

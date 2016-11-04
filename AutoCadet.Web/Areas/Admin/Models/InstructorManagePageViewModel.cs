@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AutoCadet.Models;
 
-namespace AutoCadet.Models
+namespace AutoCadet.Areas.Admin.Models
 {
     public class InstructorManagePageViewModel
     {

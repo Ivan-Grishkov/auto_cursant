@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace AutoCadet.Models
+namespace AutoCadet.Areas.Admin.Models
 {
     public class IndexViewModel
     {
