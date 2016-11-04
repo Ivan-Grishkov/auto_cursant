@@ -82,6 +82,25 @@ namespace AutoCadet.Services.Impl
             };
         }
 
+        public async Task<VideoLessonsPageViewModel> GetVideoLessonsPageViewModelAsync()
+        {
+            var videoLessons = await _autoCadetDbContext.VideoLessons.Include(x => x.Metadata).ToListAsync().ConfigureAwait(false);
+
+            return new VideoLessonsPageViewModel
+            {
+                VideoLessonViewModels = videoLessons?.Select(x => _mapper.Map<VideoLessonViewModel>(x)).ToList()
+            };
+        }
+
+        public async Task<VideoLessonViewModel> GetVideoLessonViewModelAsync(string prettyUrl)
+        {
+            var videoLesson = await _autoCadetDbContext.VideoLessons
+                .Include(x => x.Metadata)
+                .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
+                .ConfigureAwait(false);
+            return _mapper.Map<VideoLessonViewModel>(videoLesson);
+        }
+
         public async Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl)
         {
             var instructor = await _autoCadetDbContext.Instructors

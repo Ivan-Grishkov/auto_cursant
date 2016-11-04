@@ -14,6 +14,7 @@ namespace AutoCadet.Models
         public int? InstructorId { get; set; }
         [Required]
         public string Phone { get; set; }
+        public string RequesterName { get; set; }
         public bool IsHandled { get; set; }
         public DateTime CreatedDate { get; set; }
     }

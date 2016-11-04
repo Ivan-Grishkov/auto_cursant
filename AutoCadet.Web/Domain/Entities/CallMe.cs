@@ -7,6 +7,7 @@ namespace AutoCadet.Domain.Entities
     {
         [Required]
         public string Phone { get; set; }
+        public string RequesterName { get; set; }
         public bool IsHandled { get; set; }
         public DateTime CreatedDate { get; set; }
         public virtual Instructor Instructor { get; set; }

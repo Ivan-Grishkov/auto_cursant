@@ -562,6 +562,11 @@ section#contact {
   background-position: center;
   background-repeat: no-repeat;
 }
+@media (max-width: 767px) {
+    section#contact {
+        background-image: none;
+    }
+}
 section#contact .section-heading {
   color: white;
 }

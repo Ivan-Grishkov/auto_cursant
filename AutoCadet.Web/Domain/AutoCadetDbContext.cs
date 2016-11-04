@@ -19,6 +19,7 @@ namespace AutoCadet.Domain
         public IDbSet<ImageFile> ImageFiles { get; set; }
         public IDbSet<Metadata> Metadatas { get; set; }
         public IDbSet<CallMe> CallMes { get; set; }
+        public IDbSet<VideoLesson> VideoLessons { get; set; }
 
         public static AutoCadetDbContext Create()
         {

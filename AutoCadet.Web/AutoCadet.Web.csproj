@@ -177,6 +177,7 @@
     <Compile Include="Domain\Entities\Instructor.cs" />
     <Compile Include="Domain\Entities\InstructorDetails.cs" />
     <Compile Include="Domain\Entities\Metadata.cs" />
+    <Compile Include="Domain\Entities\VideoLesson.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +233,10 @@
     <Compile Include="Domain\Migrations\201610260915334_CallMeCreatedDateAdded.Designer.cs">
       <DependentUpon>201610260915334_CallMeCreatedDateAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201611040813050_VideoLessons.cs" />
+    <Compile Include="Domain\Migrations\201611040813050_VideoLessons.Designer.cs">
+      <DependentUpon>201611040813050_VideoLessons.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -245,6 +250,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
     <Compile Include="Models\MetadataInfoViewModel.cs" />
+    <Compile Include="Models\VideoLessonsPageViewModel.cs" />
+    <Compile Include="Models\VideoLessonViewModel.cs" />
     <Compile Include="Notificators\CallMeNotificator.cs" />
     <Compile Include="Notificators\ICallMeNotificator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -365,6 +372,8 @@
     <Content Include="Views\Home\InstructorsList.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Home\VideoLessonsList.cshtml" />
+    <Content Include="Views\Home\VideoLessons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -412,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201610260915334_CallMeCreatedDateAdded.resx">
       <DependentUpon>201610260915334_CallMeCreatedDateAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201611040813050_VideoLessons.resx">
+      <DependentUpon>201611040813050_VideoLessons.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -56,6 +56,30 @@ namespace AutoCadet.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        [RequireRequestValue("")]
+        public async Task<ActionResult> VideoLessons()
+        {
+            var instructorsVm = await _homeControllerService.GetVideoLessonsPageViewModelAsync().ConfigureAwait(true);
+            return View("VideoLessonsList", instructorsVm);
+        }
+
+        [HttpGet]
+        [RequireRequestValue("prettyUrl")]
+        public async Task<ActionResult> VideoLessons(string prettyUrl)
+        {
+            VideoLessonViewModel vm = await _homeControllerService
+                .GetVideoLessonViewModelAsync(prettyUrl)
+                .ConfigureAwait(true) ?? new VideoLessonViewModel();
+
+            ViewData["MetaInfo"] = vm.Metadata?.Info;
+            ViewData["MetaDescription"] = vm.Metadata?.Description;
+            ViewData["MetaKeywords"] = vm.Metadata?.Keywords;
+            ViewData["Title"] = vm.Metadata?.Title;
+            ViewData["H1"] = vm.Metadata?.H1;
+            return View(vm);
+        }
+
         [HttpPost]
         public async Task<ActionResult> AddComment(CommentViewModel comment)
         {

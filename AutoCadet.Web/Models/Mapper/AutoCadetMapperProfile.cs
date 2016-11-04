@@ -29,6 +29,11 @@ namespace AutoCadet.Models.Mapper
             CreateMap<CommentViewModel, Comment>()
                 .ForMember(x => x.Instructor, opt => opt.Ignore());
 
+            CreateMap<VideoLesson, VideoLessonViewModel>()
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
+            CreateMap<VideoLessonViewModel, VideoLesson>()
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
+
             CreateMap<Metadata, MetadataInfoViewModel>();
             CreateMap<MetadataInfoViewModel, Metadata>();
 
