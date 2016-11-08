@@ -7,29 +7,71 @@
             <h3 class="section-subheading text-muted">Всех послушай, но решай сам.</h3>
         </div>
     </div>
-    <div class="row">
+    <div class="row carousel-row">
         @if (Model != null)
         {
-            foreach (var comment in Model)
-            {
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
-                        <blockquote>
-                            <p title="@comment.InstructorName">
-                                @comment.InstructorName
-                            </p>
-                            <p class="text-left" title="@comment.Text">@comment.Text</p>
-                            <footer class="text-muted text-right">
-                                <span class="text-left pull-left">
-                                    @Html.DisplayFor(x => comment.Score)
-                                </span>
-                                <span class="text-right">@comment.Name</span>
-                            </footer>
-                        </blockquote>
-                    </div>
+            <div id="commentsCarousel" class="carousel slide col-md-12" data-ride="carousel">
+                @{
+                    var itemsCount = Model.Count;
+                    var itemsPerPage = 6;
+                    var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
+                }
+
+                <ol class="carousel-indicators">
+                    @for (var i = 0; i < pagesCount; i++)
+                    {
+                        <li data-target="#commentsCarousel" data-slide-to="@i" class="@(i == 0 ? " active" : string.Empty)"></li>
+                    }
+                </ol>
+
+                <div class="carousel-inner" role="listbox">
+                    @for (var j = 0; j < pagesCount; j++)
+                    {
+                        <div class="row item@(j == 0 ? " active" : string.Empty)">
+                            @for (var i = 0; i < itemsPerPage; i++)
+                            {
+                                var k = j * itemsPerPage + i;
+
+                                if (itemsCount <= k)
+                                {
+                                    break;
+                                }
+
+                                <div class="col-sm-4">
+                                    <div class="team-member">
+                                        @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
+                                        <blockquote>
+                                            <p title="@Model[k].InstructorName">
+                                                @Model[k].InstructorName
+                                            </p>
+                                            <p class="text-left" title="@Model[k].Text">@Model[k].Text</p>
+                                            <footer class="text-muted text-right">
+                                                <span class="text-left pull-left">
+                                                    @Html.DisplayFor(x => Model[k].Score)
+                                                </span>
+                                                <span class="text-right">@Model[k].Name</span>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+
                 </div>
-            }
+
+                @if (pagesCount > 1)
+                {
+                    <a class="right carousel-control" href="#commentsCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <a class="left carousel-control" href="#commentsCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                }
+            </div>
         }
     </div>
 

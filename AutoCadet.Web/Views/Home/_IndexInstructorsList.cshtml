@@ -1,24 +1,25 @@
 ﻿@model IList<AutoCadet.Models.InstructorViewModel>
 <!-- Portfolio Grid Section -->
 
-    <div class="row instructors-row">
+    <div class="row carousel-row">
 
         <div id="instructorsCarousel" class="carousel slide col-md-12" data-ride="carousel">
 
             @{
-                var instructorsCount = Model.Count;
-                var itemsPerPage = 6;
+                var itemsCount = Model.Count;
+                var itemsPerPage = 3;
+                var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
             }
 
             <ol class="carousel-indicators">
-                @for (var i = 0; i < instructorsCount / itemsPerPage + 1; i++)
+                @for (var i = 0; i < pagesCount; i++)
                 {
                     <li data-target="#instructorsCarousel" data-slide-to="@i" class="@(i == 0 ? " active" : string.Empty)"></li>
                 }
             </ol>
 
             <div class="carousel-inner" role="listbox">
-                @for (var j = 0; j < instructorsCount / itemsPerPage + 1; j++)
+                @for (var j = 0; j < pagesCount; j++)
                 {
                     <div class="row item@(j == 0 ? " active" : string.Empty)">
 
@@ -26,7 +27,7 @@
                         {
                             var k = j * itemsPerPage + i;
 
-                            if (instructorsCount <= k)
+                            if (itemsCount <= k)
                             {
                                 break;
                             }

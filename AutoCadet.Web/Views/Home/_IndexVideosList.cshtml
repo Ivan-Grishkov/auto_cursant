@@ -1,62 +1,105 @@
 ﻿@model IList<AutoCadet.Models.VideoLessonViewModel>
 <!-- Portfolio Grid Section -->
+
 <div class="container">
-    <div class="row">
+    <div class="row carousel-row">
         <div class="col-lg-12 text-center">
             <h2 class="section-heading">Видео уроки вождения</h2>
             <h3 class="section-subheading text-muted">Эх, прокачу!</h3>
         </div>
     </div>
-    <div class="row">
-        @foreach (var videoLesson in Model)
-        {
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="@Url.Action("VideoLessons", new {prettyUrl = videoLesson.UrlName})" class="portfolio-link">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-list fa-3x"></i>
-                        </div>
+    <div class="row carousel-row">
+
+        <div id="lessonsCarousel" class="carousel slide col-md-12" data-ride="carousel">
+            @{
+                var itemsCount = Model.Count;
+                var itemsPerPage = 6;
+                var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
+            }
+
+            <ol class="carousel-indicators">
+                @for (var i = 0; i < pagesCount; i++)
+                {
+                    <li data-target="#lessonsCarousel" data-slide-to="@i" class="@(i == 0 ? " active" : string.Empty)"></li>
+                }
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+                @for (var j = 0; j < pagesCount; j++)
+                {
+                    <div class="row item@(j == 0 ? " active" : string.Empty)">
+                        @for (var i = 0; i < itemsPerPage; i++)
+                        {
+                            var k = j * itemsPerPage + i;
+
+                            if (itemsCount <= k)
+                            {
+                                break;
+                            }
+
+                            <div class="col-md-4 col-sm-6 portfolio-item">
+                                <a href="@Url.Action("VideoLessons", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                            <i class="fa fa-list fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    @{
+                                        if (Model[k].ThumbnailImageFile != null && Model[k].ThumbnailImageFile.Length > 0)
+                                        {
+                                            var base64String = Convert.ToBase64String(Model[k].ThumbnailImageFile);
+                                            <img src="@($"data:image/png;base64,{base64String}")" alt="@($"фото: {Model[k].ListHeader}")" class="img-responsive img-list-instructors"/>
+                                        }
+                                        else
+                                        {
+                                            <img src="img/paris.jpg" class="img-responsive img-list-instructors" alt="@($"фото: {Model[k].ListHeader}")">
+                                        }
+                                    }
+                                </a>
+                                <div class="portfolio-caption" title="@Model[k].ListHeader">
+                                    <h4>@($"{Model[k].ListHeader}")</h4>
+                                    <div class="clearfix"></div>
+                                    @{
+                                        var instructorUrl = Url.Action("VideoLessons", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
+                                        var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
+                                        var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
+                                        var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20по%20видео%20урокам%20" + $"{instructorUrl}";
+                                    }
+                                    <ul class="list-inline social-buttons text-center">
+                                        <li title="Twitter">
+                                            <a href="@hrefTwitter">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li title="Facebook">
+                                            <a href="@hrefFb">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li title="VK">
+                                            <a href="@hrefVk">
+                                                <i class="fa fa-vk"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
                     </div>
-                    @{
-                        if (videoLesson.ThumbnailImageFile != null && videoLesson.ThumbnailImageFile.Length > 0)
-                        {
-                            var base64String = Convert.ToBase64String(videoLesson.ThumbnailImageFile);
-                            <img src="@($"data:image/png;base64,{base64String}")" alt="@($"фото: {videoLesson.ListHeader}")" class="img-responsive img-list-instructors"/>
-                        }
-                        else
-                        {
-                            <img src="img/paris.jpg" class="img-responsive img-list-instructors" alt="@($"фото: {videoLesson.ListHeader}")">
-                        }
-                    }
-                </a>
-                <div class="portfolio-caption" title="@videoLesson.ListHeader">
-                    <h4>@($"{videoLesson.ListHeader}")</h4>
-                    <div class="clearfix"></div>
-                    @{
-                        var instructorUrl = Url.Action("VideoLessons", "Home", new {prettyUrl = videoLesson.UrlName}, Request?.Url?.Scheme);
-                        var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
-                        var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
-                        var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20по%20видео%20урокам%20" + $"{instructorUrl}";
-                    }
-                    <ul class="list-inline social-buttons text-center">
-                        <li title="Twitter">
-                            <a href="@hrefTwitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li title="Facebook">
-                            <a href="@hrefFb">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li title="VK">
-                            <a href="@hrefVk">
-                                <i class="fa fa-vk"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                }
             </div>
-        }
+
+            @if (itemsCount / itemsPerPage > 1)
+            {
+                <a class="right carousel-control" href="#lessonsCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <a class="left carousel-control" href="#lessonsCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            }
+        </div>
     </div>
 </div>

@@ -46,7 +46,6 @@ namespace AutoCadet.Services.Impl
                 .Where(x => x.IsActive)
                 .Where(x => x.IsVisibleInList)
                 .OrderByDescending(x => x.CreatedDate)
-                .Take(6)
                 .ToListAsync()
                 .ConfigureAwait(false);
             var commentsVms = comments.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
@@ -57,7 +56,6 @@ namespace AutoCadet.Services.Impl
                 .Include(x => x.Metadata)
                 .Where(x => x.IsActive)
                 .OrderByDescending(x => x.CreatedDate)
-                .Take(6)
                 .ToListAsync()
                 .ConfigureAwait(false);
             var videoLessonVms = videoLessons.Select(x => _mapper.Map<VideoLessonViewModel>(x)).ToList();
