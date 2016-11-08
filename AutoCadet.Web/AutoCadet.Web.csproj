@@ -362,7 +362,7 @@
     <Content Include="Areas\Admin\Views\Manage\SetPassword.cshtml" />
     <Content Include="Areas\Admin\Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Comments.cshtml" />
     <None Include="Areas\Admin\Views\Admin\CallMeRequests.cshtml" />
     <None Include="Areas\Admin\Views\Admin\Index.cshtml" />

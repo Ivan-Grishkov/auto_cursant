@@ -14,3 +14,11 @@
 header h3 i {
     background-color: rgba(254, 209, 54, 0.7);
 }
+
+.instructors-row {
+    padding: 10px;
+}
+
+.carousel-control {
+    width: 10%;
+}
