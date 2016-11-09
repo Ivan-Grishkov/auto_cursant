@@ -20,6 +20,7 @@ namespace AutoCadet.Domain
         public IDbSet<Metadata> Metadatas { get; set; }
         public IDbSet<CallMe> CallMes { get; set; }
         public IDbSet<VideoLesson> VideoLessons { get; set; }
+        public IDbSet<Service> Services { get; set; }
 
         public static AutoCadetDbContext Create()
         {

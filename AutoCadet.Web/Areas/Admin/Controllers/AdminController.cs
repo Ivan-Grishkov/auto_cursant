@@ -19,7 +19,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             _adminControllerService = adminControllerService;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> Index()
         {
@@ -27,7 +26,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(instructorsVs);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> Index(IList<InstructorViewModel> instructorGridItemViewModels)
         {
@@ -39,7 +37,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(instructorGridItemViewModels);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> ManageInstructor(int? instructorId)
         {
@@ -60,7 +57,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(instructorVm);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> ManageInstructor(InstructorManagePageViewModel instructorVm, HttpPostedFileBase itemFile, HttpPostedFileBase detailsFile, HttpPostedFileBase vehicleFile)
         {
@@ -78,7 +74,6 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> VideoLessons()
         {
@@ -86,7 +81,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(instructorsVs);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> VideoLessons(IList<VideoLessonViewModel> videoLessonsGridItemViewModels)
         {
@@ -98,7 +92,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(videoLessonsGridItemViewModels);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> ManageVideoLesson(int? lessonId)
         {
@@ -118,7 +111,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(videoLessonVm);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> ManageVideoLesson(VideoLessonsManagePageViewModel lessonVm, HttpPostedFileBase itemFile)
         {
@@ -129,6 +121,57 @@ namespace AutoCadet.Areas.Admin.Controllers
             lessonVm.VideoLessonViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
             await _adminControllerService.SaveVideoLessonAsync(lessonVm).ConfigureAwait(true);
+            return RedirectToAction("VideoLessons");
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> Services()
+        {
+            IList<ServiceViewModel> items = await _adminControllerService.GetAllServicesViewModelsAsync().ConfigureAwait(true);
+            return View(items);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Services(IList<ServiceViewModel> servicesGridItemViewModels)
+        {
+            if (ModelState.IsValid && servicesGridItemViewModels != null)
+            {
+                await _adminControllerService.SaveServicesAttributesAsync(servicesGridItemViewModels).ConfigureAwait(true);
+                ViewBag.IsSuccess = true;
+            }
+            return View(servicesGridItemViewModels);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ManageService(int? serviceId)
+        {
+            ServicesManagePageViewModel videoLessonVm = null;
+            if (serviceId.HasValue)
+            {
+                videoLessonVm = await _adminControllerService.GetServiceViewModelAsync(serviceId.Value).ConfigureAwait(true);
+            }
+            if (videoLessonVm == null)
+            {
+                videoLessonVm = new ServicesManagePageViewModel();
+            }
+
+            videoLessonVm.ServiceViewModel = videoLessonVm.ServiceViewModel ?? new ServiceViewModel();
+            videoLessonVm.MetadataInfo = videoLessonVm.MetadataInfo ?? new MetadataInfoViewModel();
+
+            return View(videoLessonVm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ManageService(ServicesManagePageViewModel serviceVm, HttpPostedFileBase itemFile)
+        {
+            if (!ModelState.IsValid || serviceVm == null)
+            {
+                return View(serviceVm);
+            }
+            serviceVm.ServiceViewModel.ThumbnailImageFile = GetFileContent(itemFile);
+
+            await _adminControllerService.SaveServiceAsync(serviceVm).ConfigureAwait(true);
             return RedirectToAction("VideoLessons");
         }
 
@@ -143,7 +186,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return uploadedFile;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> Comments()
         {
@@ -151,7 +193,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(commentViewModels);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> Comments(IList<CommentViewModel> commentViewModels)
         {
@@ -163,7 +204,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(commentViewModels);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> CallMeRequests()
         {
@@ -171,7 +211,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             return View(callMeViewModels);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> CallMeRequests(IList<CallMeViewModel> callMeViewModels)
         {

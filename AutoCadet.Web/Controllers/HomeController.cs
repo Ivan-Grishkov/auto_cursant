@@ -60,8 +60,8 @@ namespace AutoCadet.Controllers
         [RequireRequestValue("")]
         public async Task<ActionResult> VideoLessons()
         {
-            var instructorsVm = await _homeControllerService.GetVideoLessonsPageViewModelAsync().ConfigureAwait(true);
-            return View("VideoLessonsList", instructorsVm);
+            var lessonsPageViewModel = await _homeControllerService.GetVideoLessonsPageViewModelAsync().ConfigureAwait(true);
+            return View("VideoLessonsList", lessonsPageViewModel);
         }
 
         [HttpGet]
@@ -71,6 +71,30 @@ namespace AutoCadet.Controllers
             VideoLessonViewModel vm = await _homeControllerService
                 .GetVideoLessonViewModelAsync(prettyUrl)
                 .ConfigureAwait(true) ?? new VideoLessonViewModel();
+
+            ViewData["MetaInfo"] = vm.Metadata?.Info;
+            ViewData["MetaDescription"] = vm.Metadata?.Description;
+            ViewData["MetaKeywords"] = vm.Metadata?.Keywords;
+            ViewData["Title"] = vm.Metadata?.Title;
+            ViewData["H1"] = vm.Metadata?.H1;
+            return View(vm);
+        }
+
+        [HttpGet]
+        [RequireRequestValue("")]
+        public async Task<ActionResult> Services()
+        {
+            var pageVm = await _homeControllerService.GetServicesPageViewModelAsync().ConfigureAwait(true);
+            return View("ServicesList", pageVm);
+        }
+
+        [HttpGet]
+        [RequireRequestValue("prettyUrl")]
+        public async Task<ActionResult> Services(string prettyUrl)
+        {
+            ServiceViewModel vm = await _homeControllerService
+                .GetServiceViewModelAsync(prettyUrl)
+                .ConfigureAwait(true) ?? new ServiceViewModel();
 
             ViewData["MetaInfo"] = vm.Metadata?.Info;
             ViewData["MetaDescription"] = vm.Metadata?.Description;

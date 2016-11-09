@@ -1,0 +1,96 @@
+﻿@model IList<AutoCadet.Models.ServiceViewModel>
+
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
+}
+<section class="container-fluid">
+    <div class="container">
+        @if (ViewBag.IsSuccess == true)
+        {
+            <div class="row text-success">
+                Данные сохранены успешно
+            </div>
+        }
+        <div class="row text-danger">
+            @Html.ValidationSummary()
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("Services", "Admin"))
+            {
+                @Html.ValidationSummary()
+                <table class="irstructors-table table">
+                    <thead>
+                    <tr>
+                        <th>Редактировать</th>
+                        <th>CreatedDate.</th>
+                        <th>ListHeader</th>
+                        <th>ListDescription</th>
+                        <th>ListIcon</th>
+                        <th>URL</th>
+                        <th>DetailText</th>
+                        <th>Активен?</th>
+                        <th>Номер в списке</th>
+                        <th>Картинка в списке</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        if (Model != null)
+                        {
+                            for (var i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(x => Model[i].Id)
+                                        @Html.ActionLink("Edit", "ManageService", "Admin", new {serviceId = Model[i].Id}, null)
+                                    </td>
+                                    <td>
+                                        @($"{Model[i].CreatedDate}")
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].ListHeader)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].ListDescription)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].ListIcon)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].UrlName)
+                                    </td>
+                                    <td>
+                                        @Html.TextAreaFor(x => Model[i].DetailText)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].SortingNumber)
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (Model[i].ThumbnailImageFile != null && Model[i].ThumbnailImageFile.Length > 0)
+                                            {
+                                                var base64String = Convert.ToBase64String(Model[i].ThumbnailImageFile);
+                                                <img src="@($"data:image/png;base64,{base64String}")" width="50px" height="50px"/>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                    </tbody>
+                </table>
+
+                <br/>
+                <div class="row">
+                    @Html.ActionLink("Create", "ManageService", "Admin", null, new {@class = "btn btn-default"})
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                </div>
+            }
+        </div>
+    </div>
+</section>

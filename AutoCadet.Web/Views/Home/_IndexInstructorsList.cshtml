@@ -1,13 +1,14 @@
 ﻿@model IList<AutoCadet.Models.InstructorViewModel>
 <!-- Portfolio Grid Section -->
 
+<div class="container section-container">
     <div class="row carousel-row">
 
         <div id="instructorsCarousel" class="carousel slide col-md-12" data-ride="carousel">
 
             @{
                 var itemsCount = Model.Count;
-                var itemsPerPage = 3;
+                var itemsPerPage = 6;
                 var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
             }
 
@@ -104,3 +105,4 @@
 
 
     </div>
+</div>

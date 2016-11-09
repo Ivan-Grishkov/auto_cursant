@@ -165,6 +165,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Models\ServicesManagePageViewModel.cs" />
     <Compile Include="Areas\Admin\Models\VideoLessonsManagePageViewModel.cs" />
     <Compile Include="Attributes\RequireRequestValueAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Domain\Entities\Instructor.cs" />
     <Compile Include="Domain\Entities\InstructorDetails.cs" />
     <Compile Include="Domain\Entities\Metadata.cs" />
+    <Compile Include="Domain\Entities\Service.cs" />
     <Compile Include="Domain\Entities\VideoLesson.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -245,6 +247,10 @@
     <Compile Include="Domain\Migrations\201611040953392_enhanceVideoLessons.Designer.cs">
       <DependentUpon>201611040953392_enhanceVideoLessons.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201611090713092_ServicesAdded.cs" />
+    <Compile Include="Domain\Migrations\201611090713092_ServicesAdded.Designer.cs">
+      <DependentUpon>201611090713092_ServicesAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CallMeViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\InstructorDetailsPageViewModel.cs" />
@@ -255,6 +261,8 @@
     <Compile Include="Areas\Admin\Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
     <Compile Include="Models\MetadataInfoViewModel.cs" />
+    <Compile Include="Models\ServicesListPageViewModel.cs" />
+    <Compile Include="Models\ServiceViewModel.cs" />
     <Compile Include="Models\VideoLessonsPageViewModel.cs" />
     <Compile Include="Models\VideoLessonViewModel.cs" />
     <Compile Include="Notificators\CallMeNotificator.cs" />
@@ -311,6 +319,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Admin\Views\Admin\VideoLessons.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\ManageVideoLesson.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Services.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ManageService.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -382,6 +392,9 @@
     <Content Include="Views\Home\VideoLessonsList.cshtml" />
     <Content Include="Views\Home\VideoLessons.cshtml" />
     <Content Include="Views\Home\_IndexVideosList.cshtml" />
+    <Content Include="Views\Home\_IndexServicesList.cshtml" />
+    <Content Include="Views\Home\ServicesList.cshtml" />
+    <Content Include="Views\Home\Services.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -434,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201611040953392_enhanceVideoLessons.resx">
       <DependentUpon>201611040953392_enhanceVideoLessons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201611090713092_ServicesAdded.resx">
+      <DependentUpon>201611090713092_ServicesAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

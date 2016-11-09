@@ -19,6 +19,11 @@ header h3 i {
     padding: 10px;
 }
 
-.carousel-control {
-    width: 10%;
+.section-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.carousel-inner .row {
+    padding: 0 30px;
 }

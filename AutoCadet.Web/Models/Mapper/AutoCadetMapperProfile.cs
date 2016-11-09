@@ -36,6 +36,13 @@ namespace AutoCadet.Models.Mapper
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
+            CreateMap<Service, ServiceViewModel>()
+                .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
+            CreateMap<ServiceViewModel, Service>()
+                .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
+
             CreateMap<Metadata, MetadataInfoViewModel>();
             CreateMap<MetadataInfoViewModel, Metadata>();
 

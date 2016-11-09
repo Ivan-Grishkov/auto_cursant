@@ -172,6 +172,10 @@ namespace AutoCadet.Services.Impl
                 var vm = videoLessonsGridItemViewModels.FirstOrDefault(x => x.Id == instructor.Id);
                 if (vm != null)
                 {
+                    instructor.ListHeader = vm.ListHeader;
+                    instructor.YoutubeUrl = vm.YoutubeUrl;
+                    instructor.UrlName = vm.UrlName;
+                    instructor.Text = vm.Text;
                     instructor.IsActive = vm.IsActive;
                     instructor.SortingNumber = vm.SortingNumber;
                 }
@@ -212,6 +216,92 @@ namespace AutoCadet.Services.Impl
             
             lesson.CreatedDate = DateTime.Now;
             _autoCadetDbContext.VideoLessons.AddOrUpdate(lesson);
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task<IList<ServiceViewModel>> GetAllServicesViewModelsAsync()
+        {
+            var entities = await _autoCadetDbContext.Services
+               .Include(x => x.Metadata)
+               .Include(x => x.ThumbnailImageFile)
+               .ToListAsync()
+               .ConfigureAwait(false);
+            return entities?.Select(i => _mapper.Map<ServiceViewModel>(i)).ToList();
+        }
+
+        public async Task<ServicesManagePageViewModel> GetServiceViewModelAsync(int serviceId)
+        {
+            var entity = await _autoCadetDbContext
+               .Services
+               .Include(x => x.Metadata)
+               .Include(x => x.ThumbnailImageFile)
+               .FirstOrDefaultAsync(x => x.Id == serviceId)
+               .ConfigureAwait(false);
+
+            return new ServicesManagePageViewModel
+            {
+                ServiceViewModel = _mapper.Map<ServiceViewModel>(entity),
+                MetadataInfo = _mapper.Map<MetadataInfoViewModel>(entity?.Metadata)
+            };
+        }
+
+        public async Task SaveServicesAttributesAsync(IList<ServiceViewModel> servicesGridItemVms)
+        {
+            var ids = servicesGridItemVms.Where(x => x != null).Select(i => i.Id).ToList();
+            var entities = await _autoCadetDbContext.Services
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync()
+                .ConfigureAwait(false);
+            foreach (var entity in entities)
+            {
+                var vm = servicesGridItemVms.FirstOrDefault(x => x.Id == entity.Id);
+                if (vm != null)
+                {
+                    entity.ListHeader = vm.ListHeader;
+                    entity.ListDescription = vm.ListDescription;
+                    entity.ListIcon = vm.ListIcon;
+                    entity.UrlName = vm.UrlName;
+                    entity.DetailText = vm.DetailText;
+                    entity.IsActive = vm.IsActive;
+                    entity.SortingNumber = vm.SortingNumber;
+                }
+            }
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task SaveServiceAsync(ServicesManagePageViewModel pageVm)
+        {
+            if (pageVm?.ServiceViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(pageVm));
+            }
+
+            var entity = await _autoCadetDbContext.Services
+                .FirstOrDefaultAsync(x => x.Id == pageVm.ServiceViewModel.Id)
+                .ConfigureAwait(false)
+                    ?? new Service();
+            _mapper.Map(pageVm.ServiceViewModel, entity);
+
+            if (pageVm.ServiceViewModel.ThumbnailImageFile != null)
+            {
+                if (entity.ThumbnailImageFile == null)
+                {
+                    entity.ThumbnailImageFile = new ImageFile();
+                }
+
+                entity.ThumbnailImageFile.Bytes = pageVm.ServiceViewModel.ThumbnailImageFile;
+            }
+
+            entity.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
+            if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
+            {
+                var meta = await _autoCadetDbContext.Metadatas.FirstOrDefaultAsync(x => x.Id == pageVm.MetadataInfo.Id).ConfigureAwait(false);
+                _mapper.Map(pageVm.MetadataInfo, meta);
+                entity.Metadata = meta;
+            }
+
+            entity.CreatedDate = DateTime.Now;
+            _autoCadetDbContext.Services.AddOrUpdate(entity);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
