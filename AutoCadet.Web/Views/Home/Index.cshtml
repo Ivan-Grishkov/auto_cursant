@@ -39,7 +39,7 @@
 @{ Html.RenderPartial("_IndexCommentsList", Model.Comments); }
 </section>
 
-    <!-- Contact Section -->
+    <!-- Review Section -->
 <section id="contact">
     <div class="container">
         <div class="row">
@@ -63,6 +63,16 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <select name="instructorId" required class="dropdown form-control">
+                                    <option value="" disabled selected>Ваш Инструктор</option>
+                                    @foreach (var instructor in Model.InstructorGridItems.OrderBy(x => x.LastName))
+                                    {
+                                        <option value="@(instructor.Id)">@($"{instructor.LastName} {instructor.LastName}")</option>
+                                    }
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Ваше имя и фамилия *" id="name" name="name" required data-validation-required-message="Уточните, пожалуйста как к вам обращаться.">
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -77,17 +87,7 @@
                             <div class="form-group">
                                 @Html.EditorFor(x => x.NewComment.Score)
                                 <p class="help-block text-danger"></p>
-                                <br/>
-                            </div>
-                            <div class="form-group">
-                                <select name="instructorId" required class="dropdown form-control">
-                                    <option value="" disabled selected>Ваш Инструктор</option>
-                                    @foreach (var instructor in Model.InstructorGridItems.OrderBy(x => x.LastName))
-                                    {
-                                        <option value="@(instructor.Id)">@($"{instructor.LastName} {instructor.LastName}")</option>
-                                    }
-                                </select>
-                                <p class="help-block text-danger"></p>
+                                <br />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -95,7 +95,7 @@
                                 <textarea class="form-control" placeholder="Отзыв *" id="message" name="text" required data-validation-required-message="Что же Вы хотели сказать?"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group pull-right">
                                 <button type="submit" class="btn btn-xl">Сохранить</button>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
     </div>
 </section>
 
-    <!-- Contact Section -->
+    <!-- call me Section -->
 <section id="callMe">
     <div class="container">
         <div class="row">

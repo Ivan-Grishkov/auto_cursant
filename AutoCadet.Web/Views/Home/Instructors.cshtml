@@ -1,56 +1,56 @@
 ﻿@model AutoCadet.Models.InstructorDetailsPageViewModel
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_DetailsPageLayout.cshtml";
+    ViewBag.HeaderTitle = $"{Model.Instructor.LastName} {Model.Instructor.FirstName} {Model.Instructor.Patronymic}";
+    ViewBag.HeaderSubTitle = $"{Model.Instructor.Phone}";
+
+    ViewData["MetaInfo"] = Model.InstructorDetails.MetadataInfo?.Info;
+    ViewData["MetaDescription"] = Model.InstructorDetails.MetadataInfo?.Description;
+    ViewData["MetaKeywords"] = Model.InstructorDetails.MetadataInfo?.Keywords;
+    ViewData["Title"] = Model.InstructorDetails.MetadataInfo?.Title;
 }
 
-<header class="no-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-2 align-center">
-                <a class="btn btn-primary go-home" href="/">Уроки вождения</a>
-            </div>
-            <div class="col-lg-10 text-justify">
-                <h2 class="section-heading text-primary">@($"{Model.Instructor.LastName} {Model.Instructor.FirstName} {Model.Instructor.Patronymic}")</h2>
-                <h3 class="section-subheading text-right">
-                    <i>@($"{Model.Instructor.Phone}")</i>
-                </h3>
-            </div>
-        </div>
-    </div>
-</header>
+@{
+    var instructorUrl = Url.Action("Instructors", "Home", new {prettyUrl = Model.Instructor.UrlName}, Request?.Url?.Scheme);
+    var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
+    var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
+    var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{Model.Instructor.FirstName}%20{Model.Instructor.LastName}%20{instructorUrl}";
+}
 
-    <div class="container">
+@section detailsH1 {
+    @(Model.InstructorDetails?.MetadataInfo?.H1)
 
-        <h1 class="section-heading">
-            @(Model.InstructorDetails?.MetadataInfo?.H1)
-            @{
-                var instructorUrl = Url.Action("Instructors", "Home", new { prettyUrl = Model.Instructor.UrlName}, Request?.Url?.Scheme);
-                var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
-                var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
-                var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{Model.Instructor.FirstName}%20{Model.Instructor.LastName}%20{instructorUrl}";
-            }
-            <ul class="list-inline social-buttons text-center" style="float: right">
-                <li title="Twitter">
-                    <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li title="Facebook">
-                    <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li title="VK">
-                    <a href="@hrefVk"><i class="fa fa-vk"></i></a>
-                </li>
-            </ul>
-        </h1>
+    <ul class="list-inline social-buttons text-center" style="float: right">
+        <li title="Twitter">
+            <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
+        </li>
+        <li title="Facebook">
+            <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
+        </li>
+        <li title="VK">
+            <a href="@hrefVk"><i class="fa fa-vk"></i></a>
+        </li>
+    </ul>
+}
 
-        <h2 class="section-subheading text-muted">
-            <label for="average-score">Средний рейтинг инструктора:</label>
-            <span style="float:right">
-                @Html.DisplayFor(x => x.Instructor.AverageScore, new { id = "average-score" })
-            </span>
-        </h2>
-    </div>
+@section breadcrumb {
+    <ul class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/Instructors">Инструкторы</a></li>
+    <li class="active">@($"{Model.Instructor.LastName} {Model.Instructor.FirstName}")</li>
+</ul>
 
-    <!-- Portfolio Grid Section -->
+
+}
+@section detailsH2 {
+    <h2 class="section-subheading text-muted">
+    <label for="average-score">Средний рейтинг инструктора:</label>
+    <span style="float:right">
+        @Html.DisplayFor(x => x.Instructor.AverageScore, new { id = "average-score" })
+    </span>
+</h2>
+}
+
     <section id="person" class="bg-light-gray">
         <div class="container">
             <div class="row text-center">

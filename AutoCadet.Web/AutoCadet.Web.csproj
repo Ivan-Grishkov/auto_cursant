@@ -393,8 +393,9 @@
     <Content Include="Views\Home\VideoLessons.cshtml" />
     <Content Include="Views\Home\_IndexVideosList.cshtml" />
     <Content Include="Views\Home\_IndexServicesList.cshtml" />
-    <Content Include="Views\Home\ServicesList.cshtml" />
-    <Content Include="Views\Home\Services.cshtml" />
+    <Content Include="Views\Home\TrainingList.cshtml" />
+    <Content Include="Views\Home\Training.cshtml" />
+    <Content Include="Views\Shared\_DetailsPageLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="no-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 align-center">
+                <a class="btn btn-primary go-home" href="/">Уроки вождения</a>
+            </div>
+            <div class="col-lg-10 text-justify">
+                <h2 class="section-heading text-primary">@ViewBag.HeaderTitle</h2>
+                <h3 class="section-subheading text-right">
+                    <i>@ViewBag.HeaderSubTitle</i>
+                </h3>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <p>
+        @RenderSection("breadcrumb", true)
+    </p>
+    <div class="row">
+        <h1 class="section-heading">
+            @RenderSection("detailsH1", true)
+        </h1>
+    </div>
+    @RenderSection("detailsH2", false)
+</div>
+
+@RenderBody()
+
+@section scripts {
+    @RenderSection("scripts", false)
+}

@@ -48,11 +48,6 @@ namespace AutoCadet.Controllers
                 vm.Instructor = new InstructorViewModel();
             }
 
-            ViewData["MetaInfo"] = vm.InstructorDetails.MetadataInfo?.Info;
-            ViewData["MetaDescription"] = vm.InstructorDetails.MetadataInfo?.Description;
-            ViewData["MetaKeywords"] = vm.InstructorDetails.MetadataInfo?.Keywords;
-            ViewData["Title"] = vm.InstructorDetails.MetadataInfo?.Title;
-            ViewData["H1"] = vm.InstructorDetails.MetadataInfo?.H1;
             return View(vm);
         }
 
@@ -72,35 +67,25 @@ namespace AutoCadet.Controllers
                 .GetVideoLessonViewModelAsync(prettyUrl)
                 .ConfigureAwait(true) ?? new VideoLessonViewModel();
 
-            ViewData["MetaInfo"] = vm.Metadata?.Info;
-            ViewData["MetaDescription"] = vm.Metadata?.Description;
-            ViewData["MetaKeywords"] = vm.Metadata?.Keywords;
-            ViewData["Title"] = vm.Metadata?.Title;
-            ViewData["H1"] = vm.Metadata?.H1;
             return View(vm);
         }
 
         [HttpGet]
         [RequireRequestValue("")]
-        public async Task<ActionResult> Services()
+        public async Task<ActionResult> Training()
         {
             var pageVm = await _homeControllerService.GetServicesPageViewModelAsync().ConfigureAwait(true);
-            return View("ServicesList", pageVm);
+            return View("TrainingList", pageVm);
         }
 
         [HttpGet]
         [RequireRequestValue("prettyUrl")]
-        public async Task<ActionResult> Services(string prettyUrl)
+        public async Task<ActionResult> Training(string prettyUrl)
         {
             ServiceViewModel vm = await _homeControllerService
                 .GetServiceViewModelAsync(prettyUrl)
                 .ConfigureAwait(true) ?? new ServiceViewModel();
 
-            ViewData["MetaInfo"] = vm.Metadata?.Info;
-            ViewData["MetaDescription"] = vm.Metadata?.Description;
-            ViewData["MetaKeywords"] = vm.Metadata?.Keywords;
-            ViewData["Title"] = vm.Metadata?.Title;
-            ViewData["H1"] = vm.Metadata?.H1;
             return View(vm);
         }
 

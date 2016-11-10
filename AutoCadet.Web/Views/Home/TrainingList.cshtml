@@ -1,24 +1,24 @@
-﻿@model AutoCadet.Models.InstructorsListPageViewModel
+﻿@model AutoCadet.Models.ServicesListPageViewModel
 @{
     Layout = "~/Views/Shared/_DetailsPageLayout.cshtml";
-    ViewBag.HeaderTitle = "Лучшие инструкторы минска";
-    ViewBag.HeaderSubTitle = "Выбирайте СВОЕГО инструктра";
+    ViewBag.HeaderTitle = "Наши услуги";
+    ViewBag.HeaderSubTitle = "С нами Вы сдадите на права!";
 
-    ViewData["MetaInfo"] = "Список инструкторов";
-    ViewData["MetaDescription"] = "Инструкторы по вождению";
-    ViewData["MetaKeywords"] = "Вождение автомобиля, Инструктор";
-    ViewData["Title"] = "Инструкторы Минск";
+    ViewData["MetaInfo"] = "";
+    ViewData["MetaDescription"] = "";
+    ViewData["MetaKeywords"] = "";
+    ViewData["Title"] = "Обучение вождению";
 }
 
 @{
-    var currentPageUrl = Url.Action("Instructors", "Home", Request?.Url?.Scheme);
+    var currentPageUrl = Url.Action("Training", "Home", Request?.Url?.Scheme);
     var hrefFb = "http://www.facebook.com/sharer.php?u=" + currentPageUrl;
     var hrefVk = "http://vk.com/share.php?url=" + currentPageUrl;
     var hrefTwitter = "https://twitter.com/intent/tweet?text=" + $"{currentPageUrl}";
 }
 
 @section detailsH1 {
-    Наши инструкторы по вождению автомобиля
+    Лучшие инструкторы минска объясняют как проехать маршруты ГАИ
 
     <ul class="list-inline social-buttons text-center" style="float: right">
         <li title="Twitter">
@@ -36,10 +36,10 @@
 @section breadcrumb {
     <ul class="breadcrumb">
         <li><a href="/">Главная</a></li>
-        <li class="active">Инструкторы</li>
+        <li class="active">Обучение</li>
     </ul>
 }
 
 <section id="portfolio" class="bg-light-gray">
-    @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems.OrderByDescending(x => x.SortingNumber).ToList()); }
+    @{ Html.RenderPartial("_IndexServicesList", Model.ItemsViewModels.OrderByDescending(x => x.SortingNumber).ToList()); }
 </section>
