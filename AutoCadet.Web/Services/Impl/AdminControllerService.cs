@@ -219,17 +219,17 @@ namespace AutoCadet.Services.Impl
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<IList<ServiceViewModel>> GetAllServicesViewModelsAsync()
+        public async Task<IList<TrainingViewModel>> GetAllTrainingsViewModelsAsync()
         {
             var entities = await _autoCadetDbContext.Services
                .Include(x => x.Metadata)
                .Include(x => x.ThumbnailImageFile)
                .ToListAsync()
                .ConfigureAwait(false);
-            return entities?.Select(i => _mapper.Map<ServiceViewModel>(i)).ToList();
+            return entities?.Select(i => _mapper.Map<TrainingViewModel>(i)).ToList();
         }
 
-        public async Task<ServicesManagePageViewModel> GetServiceViewModelAsync(int serviceId)
+        public async Task<TrainingManagePageViewModel> GetTrainingViewModelAsync(int serviceId)
         {
             var entity = await _autoCadetDbContext
                .Services
@@ -238,23 +238,23 @@ namespace AutoCadet.Services.Impl
                .FirstOrDefaultAsync(x => x.Id == serviceId)
                .ConfigureAwait(false);
 
-            return new ServicesManagePageViewModel
+            return new TrainingManagePageViewModel
             {
-                ServiceViewModel = _mapper.Map<ServiceViewModel>(entity),
+                TrainingViewModel = _mapper.Map<TrainingViewModel>(entity),
                 MetadataInfo = _mapper.Map<MetadataInfoViewModel>(entity?.Metadata)
             };
         }
 
-        public async Task SaveServicesAttributesAsync(IList<ServiceViewModel> servicesGridItemVms)
+        public async Task SaveTrainingsAttributesAsync(IList<TrainingViewModel> trainingGridItemVms)
         {
-            var ids = servicesGridItemVms.Where(x => x != null).Select(i => i.Id).ToList();
+            var ids = trainingGridItemVms.Where(x => x != null).Select(i => i.Id).ToList();
             var entities = await _autoCadetDbContext.Services
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync()
                 .ConfigureAwait(false);
             foreach (var entity in entities)
             {
-                var vm = servicesGridItemVms.FirstOrDefault(x => x.Id == entity.Id);
+                var vm = trainingGridItemVms.FirstOrDefault(x => x.Id == entity.Id);
                 if (vm != null)
                 {
                     entity.ListHeader = vm.ListHeader;
@@ -269,27 +269,27 @@ namespace AutoCadet.Services.Impl
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task SaveServiceAsync(ServicesManagePageViewModel pageVm)
+        public async Task SaveTrainingAsync(TrainingManagePageViewModel pageVm)
         {
-            if (pageVm?.ServiceViewModel == null)
+            if (pageVm?.TrainingViewModel == null)
             {
                 throw new ArgumentNullException(nameof(pageVm));
             }
 
             var entity = await _autoCadetDbContext.Services
-                .FirstOrDefaultAsync(x => x.Id == pageVm.ServiceViewModel.Id)
+                .FirstOrDefaultAsync(x => x.Id == pageVm.TrainingViewModel.Id)
                 .ConfigureAwait(false)
-                    ?? new Service();
-            _mapper.Map(pageVm.ServiceViewModel, entity);
+                    ?? new Training();
+            _mapper.Map(pageVm.TrainingViewModel, entity);
 
-            if (pageVm.ServiceViewModel.ThumbnailImageFile != null)
+            if (pageVm.TrainingViewModel.ThumbnailImageFile != null)
             {
                 if (entity.ThumbnailImageFile == null)
                 {
                     entity.ThumbnailImageFile = new ImageFile();
                 }
 
-                entity.ThumbnailImageFile.Bytes = pageVm.ServiceViewModel.ThumbnailImageFile;
+                entity.ThumbnailImageFile.Bytes = pageVm.TrainingViewModel.ThumbnailImageFile;
             }
 
             entity.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);

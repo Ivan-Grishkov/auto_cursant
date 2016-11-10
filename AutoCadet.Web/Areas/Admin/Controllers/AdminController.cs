@@ -128,16 +128,16 @@ namespace AutoCadet.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Training()
         {
-            IList<ServiceViewModel> items = await _adminControllerService.GetAllServicesViewModelsAsync().ConfigureAwait(true);
+            IList<TrainingViewModel> items = await _adminControllerService.GetAllTrainingsViewModelsAsync().ConfigureAwait(true);
             return View(items);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Training(IList<ServiceViewModel> servicesGridItemViewModels)
+        public async Task<ActionResult> Training(IList<TrainingViewModel> servicesGridItemViewModels)
         {
             if (ModelState.IsValid && servicesGridItemViewModels != null)
             {
-                await _adminControllerService.SaveServicesAttributesAsync(servicesGridItemViewModels).ConfigureAwait(true);
+                await _adminControllerService.SaveTrainingsAttributesAsync(servicesGridItemViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
             }
             return View(servicesGridItemViewModels);
@@ -146,32 +146,32 @@ namespace AutoCadet.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> ManageTraining(int? serviceId)
         {
-            ServicesManagePageViewModel videoLessonVm = null;
+            TrainingManagePageViewModel videoLessonVm = null;
             if (serviceId.HasValue)
             {
-                videoLessonVm = await _adminControllerService.GetServiceViewModelAsync(serviceId.Value).ConfigureAwait(true);
+                videoLessonVm = await _adminControllerService.GetTrainingViewModelAsync(serviceId.Value).ConfigureAwait(true);
             }
             if (videoLessonVm == null)
             {
-                videoLessonVm = new ServicesManagePageViewModel();
+                videoLessonVm = new TrainingManagePageViewModel();
             }
 
-            videoLessonVm.ServiceViewModel = videoLessonVm.ServiceViewModel ?? new ServiceViewModel();
+            videoLessonVm.TrainingViewModel = videoLessonVm.TrainingViewModel ?? new TrainingViewModel();
             videoLessonVm.MetadataInfo = videoLessonVm.MetadataInfo ?? new MetadataInfoViewModel();
 
             return View(videoLessonVm);
         }
 
         [HttpPost]
-        public async Task<ActionResult> ManageTraining(ServicesManagePageViewModel serviceVm, HttpPostedFileBase itemFile)
+        public async Task<ActionResult> ManageTraining(TrainingManagePageViewModel trainingVm, HttpPostedFileBase itemFile)
         {
-            if (!ModelState.IsValid || serviceVm == null)
+            if (!ModelState.IsValid || trainingVm == null)
             {
-                return View(serviceVm);
+                return View(trainingVm);
             }
-            serviceVm.ServiceViewModel.ThumbnailImageFile = GetFileContent(itemFile);
+            trainingVm.TrainingViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
-            await _adminControllerService.SaveServiceAsync(serviceVm).ConfigureAwait(true);
+            await _adminControllerService.SaveTrainingAsync(trainingVm).ConfigureAwait(true);
             return RedirectToAction("Training");
         }
 

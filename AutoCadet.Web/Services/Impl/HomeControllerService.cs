@@ -67,7 +67,7 @@ namespace AutoCadet.Services.Impl
                 .OrderByDescending(x => x.CreatedDate)
                 .ToListAsync()
                 .ConfigureAwait(false);
-            var servicesVms = services.Select(x => _mapper.Map<ServiceViewModel>(x)).ToList();
+            var servicesVms = services.Select(x => _mapper.Map<TrainingViewModel>(x)).ToList();
 
             return new HomePageViewModel
             {
@@ -126,7 +126,7 @@ namespace AutoCadet.Services.Impl
             return _mapper.Map<VideoLessonViewModel>(videoLesson);
         }
 
-        public async Task<ServicesListPageViewModel> GetServicesPageViewModelAsync()
+        public async Task<TrainingListPageViewModel> GetTrainingPageViewModelAsync()
         {
             var items = await _autoCadetDbContext.Services
                 .Include(x => x.Metadata)
@@ -134,20 +134,20 @@ namespace AutoCadet.Services.Impl
                 .ToListAsync()
                 .ConfigureAwait(false);
 
-            return new ServicesListPageViewModel
+            return new TrainingListPageViewModel
             {
-                ItemsViewModels = items?.Select(x => _mapper.Map<ServiceViewModel>(x)).ToList()
+                ItemsViewModels = items?.Select(x => _mapper.Map<TrainingViewModel>(x)).ToList()
             };
         }
 
-        public async Task<ServiceViewModel> GetServiceViewModelAsync(string prettyUrl)
+        public async Task<TrainingViewModel> GetTrainingViewModelAsync(string prettyUrl)
         {
             var items = await _autoCadetDbContext.Services
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
-            return _mapper.Map<ServiceViewModel>(items);
+            return _mapper.Map<TrainingViewModel>(items);
         }
 
         public async Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl)

@@ -74,7 +74,7 @@ namespace AutoCadet.Controllers
         [RequireRequestValue("")]
         public async Task<ActionResult> Training()
         {
-            var pageVm = await _homeControllerService.GetServicesPageViewModelAsync().ConfigureAwait(true);
+            var pageVm = await _homeControllerService.GetTrainingPageViewModelAsync().ConfigureAwait(true);
             return View("TrainingList", pageVm);
         }
 
@@ -82,9 +82,9 @@ namespace AutoCadet.Controllers
         [RequireRequestValue("prettyUrl")]
         public async Task<ActionResult> Training(string prettyUrl)
         {
-            ServiceViewModel vm = await _homeControllerService
-                .GetServiceViewModelAsync(prettyUrl)
-                .ConfigureAwait(true) ?? new ServiceViewModel();
+            TrainingViewModel vm = await _homeControllerService
+                .GetTrainingViewModelAsync(prettyUrl)
+                .ConfigureAwait(true) ?? new TrainingViewModel();
 
             return View(vm);
         }

@@ -1,4 +1,4 @@
-﻿@model AutoCadet.Areas.Admin.Models.ServicesManagePageViewModel
+﻿@model AutoCadet.Areas.Admin.Models.TrainingManagePageViewModel
 @{
     ViewBag.Title = "Manage Training";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
@@ -11,7 +11,7 @@
 
             @using (Html.BeginForm("ManageTraining", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.HiddenFor(x => x.ServiceViewModel.Id)
+                @Html.HiddenFor(x => x.TrainingViewModel.Id)
 
                 <div class="form-group error">
                     @Html.ValidationSummary()
@@ -19,38 +19,38 @@
 
                 <div class="form-group">
                     <label for="firstName">ListHeader:</label>
-                    @Html.TextBoxFor(x => x.ServiceViewModel.ListHeader, new { @class = "form-control", id = "firstName" })
+                    @Html.TextBoxFor(x => x.TrainingViewModel.ListHeader, new { @class = "form-control", id = "firstName" })
                 </div>
 
                 <div class="form-group">
                     <label for="ListDescription">ListDescription:</label>
-                    @Html.TextBoxFor(x => x.ServiceViewModel.ListDescription, new { @class = "form-control", id = "ListDescription" })
+                    @Html.TextBoxFor(x => x.TrainingViewModel.ListDescription, new { @class = "form-control", id = "ListDescription" })
                 </div>
 
                 <div class="form-group">
                     <label for="ListIcon">ListIcon http://fontawesome.io/icons/  (пример: fa-file) :   </label>
-                    @Html.TextBoxFor(x => x.ServiceViewModel.ListIcon, new { @class = "form-control", id = "ListIcon" })
+                    @Html.TextBoxFor(x => x.TrainingViewModel.ListIcon, new { @class = "form-control", id = "ListIcon" })
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">SortingNumber:</label>
-                    @Html.TextBoxFor(x => x.ServiceViewModel.SortingNumber, new { @class = "form-control", id = "lastName" })
+                    @Html.TextBoxFor(x => x.TrainingViewModel.SortingNumber, new { @class = "form-control", id = "lastName" })
                 </div>
 
                 <div class="form-group">
                     <label for="Email">UrlName:</label>
-                    @Html.TextBoxFor(x => x.ServiceViewModel.UrlName, new { @class = "form-control", id = "Email" })
+                    @Html.TextBoxFor(x => x.TrainingViewModel.UrlName, new { @class = "form-control", id = "Email" })
                 </div>
 
                 <div class="form-group">
                     <label for="Price">DetailText </label>
-                    @Html.TextBoxFor(x => x.ServiceViewModel.DetailText, new { @class = "form-control", id = "Price" })
+                    @Html.TextBoxFor(x => x.TrainingViewModel.DetailText, new { @class = "form-control", id = "Price" })
                 </div>
 
                 <div class="form-group">
-                    @if (Model.ServiceViewModel.ThumbnailImageFile != null && Model.ServiceViewModel.ThumbnailImageFile.Length > 0)
+                    @if (Model.TrainingViewModel.ThumbnailImageFile != null && Model.TrainingViewModel.ThumbnailImageFile.Length > 0)
                     {
-                        string base64String = Convert.ToBase64String(Model.ServiceViewModel.ThumbnailImageFile);
+                        string base64String = Convert.ToBase64String(Model.TrainingViewModel.ThumbnailImageFile);
                         <img src="@($"data:image/png;base64,{base64String}")" />
                     }
                 </div>
@@ -61,7 +61,7 @@
 
                 <div class="form-group">
                     <label for="IsActive">IsActive:</label>
-                    @Html.CheckBoxFor(x => x.ServiceViewModel.IsActive, new { @class = "form-control", id = "IsActive" })
+                    @Html.CheckBoxFor(x => x.TrainingViewModel.IsActive, new { @class = "form-control", id = "IsActive" })
                 </div>
 
                 if (Model.MetadataInfo != null)

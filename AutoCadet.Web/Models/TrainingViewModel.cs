@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AutoCadet.Models
 {
-    public class ServiceViewModel
+    public class TrainingViewModel
     {
         public int Id { get; set; }
         [Required]
