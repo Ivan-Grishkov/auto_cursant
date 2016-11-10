@@ -80,5 +80,15 @@
                 </li>
             </ul>
         </div>
+        @if (!string.IsNullOrWhiteSpace(Model.YoutubeUrl))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="videoWrapper">
+                        <embed src="@Model.YoutubeUrl" width="100%" height="349"/>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </section>
