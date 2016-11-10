@@ -16,7 +16,7 @@
             @Html.ValidationSummary()
         </div>
         <div class="row">
-            @using (Html.BeginForm("Services", "Admin"))
+            @using (Html.BeginForm("Training", "Admin"))
             {
                 @Html.ValidationSummary()
                 <table class="irstructors-table table">
@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>
                                         @Html.HiddenFor(x => Model[i].Id)
-                                        @Html.ActionLink("Edit", "ManageService", "Admin", new {serviceId = Model[i].Id}, null)
+                                        @Html.ActionLink("Edit", "ManageTraining", "Admin", new {serviceId = Model[i].Id}, null)
                                     </td>
                                     <td>
                                         @($"{Model[i].CreatedDate}")
@@ -87,7 +87,7 @@
 
                 <br/>
                 <div class="row">
-                    @Html.ActionLink("Create", "ManageService", "Admin", null, new {@class = "btn btn-default"})
+                    @Html.ActionLink("Create", "ManageTraining", "Admin", null, new {@class = "btn btn-default"})
                     <input type="submit" value="Save" class="btn btn-primary"/>
                 </div>
             }

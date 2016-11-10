@@ -126,14 +126,14 @@ namespace AutoCadet.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> Services()
+        public async Task<ActionResult> Training()
         {
             IList<ServiceViewModel> items = await _adminControllerService.GetAllServicesViewModelsAsync().ConfigureAwait(true);
             return View(items);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Services(IList<ServiceViewModel> servicesGridItemViewModels)
+        public async Task<ActionResult> Training(IList<ServiceViewModel> servicesGridItemViewModels)
         {
             if (ModelState.IsValid && servicesGridItemViewModels != null)
             {
@@ -144,7 +144,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ManageService(int? serviceId)
+        public async Task<ActionResult> ManageTraining(int? serviceId)
         {
             ServicesManagePageViewModel videoLessonVm = null;
             if (serviceId.HasValue)
@@ -163,7 +163,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ManageService(ServicesManagePageViewModel serviceVm, HttpPostedFileBase itemFile)
+        public async Task<ActionResult> ManageTraining(ServicesManagePageViewModel serviceVm, HttpPostedFileBase itemFile)
         {
             if (!ModelState.IsValid || serviceVm == null)
             {
@@ -172,7 +172,7 @@ namespace AutoCadet.Areas.Admin.Controllers
             serviceVm.ServiceViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
             await _adminControllerService.SaveServiceAsync(serviceVm).ConfigureAwait(true);
-            return RedirectToAction("VideoLessons");
+            return RedirectToAction("Training");
         }
 
         private byte[] GetFileContent(HttpPostedFileBase file)

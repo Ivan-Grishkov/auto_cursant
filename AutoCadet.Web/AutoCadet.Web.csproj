@@ -319,8 +319,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Admin\Views\Admin\VideoLessons.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\ManageVideoLesson.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Services.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\ManageService.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Training.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ManageTraining.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
