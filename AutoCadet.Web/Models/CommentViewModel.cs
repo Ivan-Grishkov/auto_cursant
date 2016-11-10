@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoCadet.Models
 {
@@ -15,6 +16,7 @@ namespace AutoCadet.Models
 
         public string Phone { get; set; }
         public string Email { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [UIHint("Score")]
         [Required]

@@ -1,0 +1,120 @@
+﻿@model AutoCadet.Areas.Admin.Models.BlogManagePageViewModel
+@{
+    ViewBag.Title = "Manage Blog";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
+}
+
+<section class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <h2>Manage Blog</h2>
+
+            @using (Html.BeginForm("ManageBlog", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(x => x.BlogViewModel.Id)
+
+                <div class="form-group error">
+                    @Html.ValidationSummary()
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">ListHeader:</label>
+                    @Html.TextBoxFor(x => x.BlogViewModel.ListHeader, new { @class = "form-control", id = "firstName" })
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">ListDescription:</label>
+                    @Html.TextBoxFor(x => x.BlogViewModel.ListDescription, new { @class = "form-control", id = "firstName" })
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">SortingNumber:</label>
+                    @Html.TextBoxFor(x => x.BlogViewModel.SortingNumber, new { @class = "form-control", id = "lastName" })
+                </div>
+
+                <div class="form-group">
+                    <label for="DetailsSectionHeader">DetailsSectionHeader:</label>
+                    @Html.TextBoxFor(x => x.BlogViewModel.DetailsSectionHeader, new { @class = "form-control", id = "DetailsSectionHeader" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Patronymic">DetailsText:</label>
+                    @Html.TextBoxFor(x => x.BlogViewModel.DetailsText, new { @class = "form-control", id = "Patronymic" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">UrlName:</label>
+                    @Html.TextBoxFor(x => x.BlogViewModel.UrlName, new { @class = "form-control", id = "Email" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Price">YoutubeUrl format http://www.youtube.com/embed/0PWN97WDfFY </label>
+                    @Html.TextBoxFor(x => x.BlogViewModel.YoutubeUrl, new { @class = "form-control", id = "Price" })
+                </div>
+
+                <div class="form-group">
+                    @if (Model.BlogViewModel.ThumbnailImageFile != null && Model.BlogViewModel.ThumbnailImageFile.Length > 0)
+                    {
+                        string base64String = Convert.ToBase64String(Model.BlogViewModel.ThumbnailImageFile);
+                        <img src="@($"data:image/png;base64,{base64String}")" />
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="itemFile">Фото в списке (400 x 289):</label>
+                    <input type="file" name="itemFile" id="itemFile" />
+                </div>
+
+                <div class="form-group">
+                    @if (Model.BlogViewModel.DetailsImageFile != null && Model.BlogViewModel.DetailsImageFile.Length > 0)
+                    {
+                        string base64String = Convert.ToBase64String(Model.BlogViewModel.DetailsImageFile);
+                        <img src="@($"data:image/png;base64,{base64String}")" />
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="detailsFile">Фото детали:</label>
+                    <input type="file" name="detailsFile" id="detailsFile" />
+                </div>
+
+                <div class="form-group">
+                    <label for="IsActive">IsActive:</label>
+                    @Html.CheckBoxFor(x => x.BlogViewModel.IsActive, new { @class = "form-control", id = "IsActive" })
+                </div>
+
+                if (Model.MetadataInfo != null)
+                {
+
+                    @Html.HiddenFor(x => x.MetadataInfo.Id)
+
+                    <div class="form-group">
+                        <label for="Title">Meta Title:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.Title, new { @class = "form-control", id = "Title" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="H1">Meta H1:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.H1, new { @class = "form-control", id = "H1" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Description">Meta Description:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.Description, new { @class = "form-control", id = "Description" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Info">Meta Info:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.Info, new { @class = "form-control", id = "Info" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Keywords">Meta Keywords:</label>
+                        @Html.TextBoxFor(x => x.MetadataInfo.Keywords, new { @class = "form-control", id = "Keywords" })
+                    </div>
+                }
+
+                <input type="submit" class="btn btn-primary" value="Save">
+                @Html.ActionLink("Cancel", "Blog", "Admin", new { @class = "btn btn-default" })
+            }
+        </div>
+    </div>
+</section>

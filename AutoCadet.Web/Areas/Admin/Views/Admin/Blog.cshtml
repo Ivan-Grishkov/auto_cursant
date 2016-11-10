@@ -1,7 +1,7 @@
-﻿@model IList<AutoCadet.Models.TrainingViewModel>
+﻿@model IList<AutoCadet.Models.BlogViewModel>
 
 @{
-    ViewBag.Title = "Trainings";
+    ViewBag.Title = "Blog";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
 }
 <section class="container-fluid">
@@ -16,7 +16,7 @@
             @Html.ValidationSummary()
         </div>
         <div class="row">
-            @using (Html.BeginForm("Training", "Admin"))
+            @using (Html.BeginForm("Blog", "Admin"))
             {
                 @Html.ValidationSummary()
                 <table class="irstructors-table table">
@@ -24,11 +24,12 @@
                     <tr>
                         <th>Редактировать</th>
                         <th>CreatedDate.</th>
+                        <th>URL</th>
                         <th>ListHeader</th>
                         <th>ListDescription</th>
-                        <th>ListIcon</th>
-                        <th>URL</th>
-                        <th>DetailText</th>
+                        <th>YoutubeUrl</th>
+                        <th>DetailsSectionHeader</th>
+                        <th>DetailsText</th>
                         <th>Активен?</th>
                         <th>Номер в списке</th>
                         <th>Картинка в списке</th>
@@ -43,10 +44,13 @@
                                 <tr>
                                     <td>
                                         @Html.HiddenFor(x => Model[i].Id)
-                                        @Html.ActionLink("Edit", "ManageTraining", "Admin", new {trainingId = Model[i].Id}, null)
+                                        @Html.ActionLink("Edit", "ManageBlog", "Admin", new {blogId = Model[i].Id}, null)
                                     </td>
                                     <td>
                                         @($"{Model[i].CreatedDate}")
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(x => Model[i].UrlName)
                                     </td>
                                     <td>
                                         @Html.EditorFor(x => Model[i].ListHeader)
@@ -55,13 +59,13 @@
                                         @Html.EditorFor(x => Model[i].ListDescription)
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].ListIcon)
+                                        @Html.EditorFor(x => Model[i].YoutubeUrl)
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].UrlName)
+                                        @Html.EditorFor(x => Model[i].DetailsSectionHeader)
                                     </td>
                                     <td>
-                                        @Html.TextAreaFor(x => Model[i].DetailText)
+                                        @Html.EditorFor(x => Model[i].DetailsText)
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
@@ -87,7 +91,7 @@
 
                 <br/>
                 <div class="row">
-                    @Html.ActionLink("Create", "ManageTraining", "Admin", null, new {@class = "btn btn-default"})
+                    @Html.ActionLink("Create", "ManageBlog", "Admin", null, new {@class = "btn btn-default"})
                     <input type="submit" value="Save" class="btn btn-primary"/>
                 </div>
             }

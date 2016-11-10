@@ -18,9 +18,14 @@ namespace AutoCadet.Services
         Task SaveVideoLessonAsync(VideoLessonsManagePageViewModel lessonVm);
 
         Task<IList<TrainingViewModel>> GetAllTrainingsViewModelsAsync();
-        Task<TrainingManagePageViewModel> GetTrainingViewModelAsync(int serviceId);
+        Task<TrainingManagePageViewModel> GetTrainingViewModelAsync(int trainingId);
         Task SaveTrainingsAttributesAsync(IList<TrainingViewModel> trainingGridItemVms);
         Task SaveTrainingAsync(TrainingManagePageViewModel trainingVm);
+
+        Task<IList<BlogViewModel>> GetAllBlogsViewModelsAsync();
+        Task<BlogManagePageViewModel> GetBlogViewModelAsync(int blogId);
+        Task SaveBlogsAttributesAsync(IList<BlogViewModel> blogGridItemVms);
+        Task SaveBlogAsync(BlogManagePageViewModel blogVm);
 
         Task<IList<CommentViewModel>> GetAllCommentViewModelsAsync();
         Task SaveCommentsAttributesAsync(IList<CommentViewModel> commentViewModels);

@@ -43,6 +43,15 @@ namespace AutoCadet.Models.Mapper
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
+            CreateMap<Blog, BlogViewModel>()
+                .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
+                .ForMember(x => x.DetailsImageFile, opt => opt.ResolveUsing(x => x.DetailsImageFile?.Bytes))
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
+            CreateMap<BlogViewModel, Blog>()
+                .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
+                .ForMember(x => x.DetailsImageFile, opt => opt.Ignore())
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
+
             CreateMap<Metadata, MetadataInfoViewModel>();
             CreateMap<MetadataInfoViewModel, Metadata>();
 

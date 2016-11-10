@@ -221,7 +221,7 @@ namespace AutoCadet.Services.Impl
 
         public async Task<IList<TrainingViewModel>> GetAllTrainingsViewModelsAsync()
         {
-            var entities = await _autoCadetDbContext.Services
+            var entities = await _autoCadetDbContext.Trainings
                .Include(x => x.Metadata)
                .Include(x => x.ThumbnailImageFile)
                .ToListAsync()
@@ -229,13 +229,13 @@ namespace AutoCadet.Services.Impl
             return entities?.Select(i => _mapper.Map<TrainingViewModel>(i)).ToList();
         }
 
-        public async Task<TrainingManagePageViewModel> GetTrainingViewModelAsync(int serviceId)
+        public async Task<TrainingManagePageViewModel> GetTrainingViewModelAsync(int trainingId)
         {
             var entity = await _autoCadetDbContext
-               .Services
+               .Trainings
                .Include(x => x.Metadata)
                .Include(x => x.ThumbnailImageFile)
-               .FirstOrDefaultAsync(x => x.Id == serviceId)
+               .FirstOrDefaultAsync(x => x.Id == trainingId)
                .ConfigureAwait(false);
 
             return new TrainingManagePageViewModel
@@ -248,7 +248,7 @@ namespace AutoCadet.Services.Impl
         public async Task SaveTrainingsAttributesAsync(IList<TrainingViewModel> trainingGridItemVms)
         {
             var ids = trainingGridItemVms.Where(x => x != null).Select(i => i.Id).ToList();
-            var entities = await _autoCadetDbContext.Services
+            var entities = await _autoCadetDbContext.Trainings
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync()
                 .ConfigureAwait(false);
@@ -276,7 +276,7 @@ namespace AutoCadet.Services.Impl
                 throw new ArgumentNullException(nameof(pageVm));
             }
 
-            var entity = await _autoCadetDbContext.Services
+            var entity = await _autoCadetDbContext.Trainings
                 .FirstOrDefaultAsync(x => x.Id == pageVm.TrainingViewModel.Id)
                 .ConfigureAwait(false)
                     ?? new Training();
@@ -301,7 +301,106 @@ namespace AutoCadet.Services.Impl
             }
 
             entity.CreatedDate = DateTime.Now;
-            _autoCadetDbContext.Services.AddOrUpdate(entity);
+            _autoCadetDbContext.Trainings.AddOrUpdate(entity);
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task<IList<BlogViewModel>> GetAllBlogsViewModelsAsync()
+        {
+            var entities = await _autoCadetDbContext.Blogs
+               .Include(x => x.Metadata)
+               .Include(x => x.ThumbnailImageFile)
+               .Include(x => x.DetailsImageFile)
+               .ToListAsync()
+               .ConfigureAwait(false);
+            return entities?.Select(i => _mapper.Map<BlogViewModel>(i)).ToList();
+        }
+
+        public async Task<BlogManagePageViewModel> GetBlogViewModelAsync(int blogId)
+        {
+            var entity = await _autoCadetDbContext
+                .Blogs
+                .Include(x => x.Metadata)
+                .Include(x => x.ThumbnailImageFile)
+                .Include(x => x.DetailsImageFile)
+                .FirstOrDefaultAsync(x => x.Id == blogId)
+                .ConfigureAwait(false);
+
+            return new BlogManagePageViewModel
+            {
+                BlogViewModel = _mapper.Map<BlogViewModel>(entity),
+                MetadataInfo = _mapper.Map<MetadataInfoViewModel>(entity?.Metadata)
+            };
+        }
+
+        public async Task SaveBlogsAttributesAsync(IList<BlogViewModel> blogGridItemVms)
+        {
+            var ids = blogGridItemVms.Where(x => x != null).Select(i => i.Id).ToList();
+            var entities = await _autoCadetDbContext.Blogs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync()
+                .ConfigureAwait(false);
+            foreach (var entity in entities)
+            {
+                var vm = blogGridItemVms.FirstOrDefault(x => x.Id == entity.Id);
+                if (vm != null)
+                {
+                    entity.ListHeader = vm.ListHeader;
+                    entity.ListDescription = vm.ListDescription;
+                    entity.UrlName = vm.UrlName;
+                    entity.YoutubeUrl = vm.YoutubeUrl;
+                    entity.DetailsText = vm.DetailsText;
+                    entity.DetailsSectionHeader = vm.DetailsSectionHeader;
+                    entity.IsActive = vm.IsActive;
+                    entity.SortingNumber = vm.SortingNumber;
+                }
+            }
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task SaveBlogAsync(BlogManagePageViewModel pageVm)
+        {
+            if (pageVm?.BlogViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(pageVm));
+            }
+
+            var entity = await _autoCadetDbContext.Blogs
+                .FirstOrDefaultAsync(x => x.Id == pageVm.BlogViewModel.Id)
+                .ConfigureAwait(false)
+                    ?? new Blog();
+            _mapper.Map(pageVm.BlogViewModel, entity);
+
+            if (pageVm.BlogViewModel.ThumbnailImageFile != null)
+            {
+                if (entity.ThumbnailImageFile == null)
+                {
+                    entity.ThumbnailImageFile = new ImageFile();
+                }
+
+                entity.ThumbnailImageFile.Bytes = pageVm.BlogViewModel.ThumbnailImageFile;
+            }
+
+            if (pageVm.BlogViewModel.DetailsImageFile != null)
+            {
+                if (entity.DetailsImageFile == null)
+                {
+                    entity.DetailsImageFile = new ImageFile();
+                }
+
+                entity.DetailsImageFile.Bytes = pageVm.BlogViewModel.DetailsImageFile;
+            }
+
+            entity.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
+            if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
+            {
+                var meta = await _autoCadetDbContext.Metadatas.FirstOrDefaultAsync(x => x.Id == pageVm.MetadataInfo.Id).ConfigureAwait(false);
+                _mapper.Map(pageVm.MetadataInfo, meta);
+                entity.Metadata = meta;
+            }
+
+            entity.CreatedDate = DateTime.Now;
+            _autoCadetDbContext.Blogs.AddOrUpdate(entity);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 

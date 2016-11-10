@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using AutoCadet.Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -20,7 +19,8 @@ namespace AutoCadet.Domain
         public IDbSet<Metadata> Metadatas { get; set; }
         public IDbSet<CallMe> CallMes { get; set; }
         public IDbSet<VideoLesson> VideoLessons { get; set; }
-        public IDbSet<Training> Services { get; set; }
+        public IDbSet<Training> Trainings { get; set; }
+        public IDbSet<Blog> Blogs { get; set; }
 
         public static AutoCadetDbContext Create()
         {

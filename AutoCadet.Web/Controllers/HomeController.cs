@@ -89,6 +89,25 @@ namespace AutoCadet.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        [RequireRequestValue("")]
+        public async Task<ActionResult> Blog()
+        {
+            var pageVm = await _homeControllerService.GetBlogListPageViewModelAsync().ConfigureAwait(true);
+            return View("BlogList", pageVm);
+        }
+
+        [HttpGet]
+        [RequireRequestValue("prettyUrl")]
+        public async Task<ActionResult> Blog(string prettyUrl)
+        {
+            BlogViewModel vm = await _homeControllerService
+                .GetBlogViewModelAsync(prettyUrl)
+                .ConfigureAwait(true) ?? new BlogViewModel();
+
+            return View(vm);
+        }
+
         [HttpPost]
         public async Task<ActionResult> AddComment(CommentViewModel comment)
         {

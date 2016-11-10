@@ -55,26 +55,36 @@ namespace AutoCadet.Services.Impl
                 .Include(x => x.ThumbnailImageFile)
                 .Include(x => x.Metadata)
                 .Where(x => x.IsActive)
-                .OrderByDescending(x => x.CreatedDate)
+                .OrderByDescending(x => x.SortingNumber)
                 .ToListAsync()
                 .ConfigureAwait(false);
             var videoLessonVms = videoLessons.Select(x => _mapper.Map<VideoLessonViewModel>(x)).ToList();
 
-            var services = await _autoCadetDbContext.Services
+            var services = await _autoCadetDbContext.Trainings
                 .Include(x => x.ThumbnailImageFile)
                 .Include(x => x.Metadata)
                 .Where(x => x.IsActive)
-                .OrderByDescending(x => x.CreatedDate)
+                .OrderByDescending(x => x.SortingNumber)
                 .ToListAsync()
                 .ConfigureAwait(false);
             var servicesVms = services.Select(x => _mapper.Map<TrainingViewModel>(x)).ToList();
+
+            var blogs = await _autoCadetDbContext.Blogs
+                .Include(x => x.ThumbnailImageFile)
+                .Include(x => x.Metadata)
+                .Where(x => x.IsActive)
+                .OrderByDescending(x => x.SortingNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            var blogsVms = blogs.Select(x => _mapper.Map<BlogViewModel>(x)).ToList();
 
             return new HomePageViewModel
             {
                 InstructorGridItems = vms,
                 Comments = commentsVms,
                 VideosGridItems = videoLessonVms,
-                Services = servicesVms
+                Trainings = servicesVms,
+                Blogs = blogsVms
             };
         }
 
@@ -128,7 +138,7 @@ namespace AutoCadet.Services.Impl
 
         public async Task<TrainingListPageViewModel> GetTrainingPageViewModelAsync()
         {
-            var items = await _autoCadetDbContext.Services
+            var items = await _autoCadetDbContext.Trainings
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
@@ -142,12 +152,38 @@ namespace AutoCadet.Services.Impl
 
         public async Task<TrainingViewModel> GetTrainingViewModelAsync(string prettyUrl)
         {
-            var items = await _autoCadetDbContext.Services
+            var items = await _autoCadetDbContext.Trainings
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
             return _mapper.Map<TrainingViewModel>(items);
+        }
+
+        public async Task<BlogListPageViewModel> GetBlogListPageViewModelAsync()
+        {
+            var items = await _autoCadetDbContext.Blogs
+                .Include(x => x.Metadata)
+                .Include(x => x.ThumbnailImageFile)
+                .Include(x => x.DetailsImageFile)
+                .ToListAsync()
+                .ConfigureAwait(false);
+
+            return new BlogListPageViewModel
+            {
+                ItemsViewModels = items?.Select(x => _mapper.Map<BlogViewModel>(x)).ToList()
+            };
+        }
+
+        public async Task<BlogViewModel> GetBlogViewModelAsync(string prettyUrl)
+        {
+            var items = await _autoCadetDbContext.Blogs
+                .Include(x => x.Metadata)
+                .Include(x => x.ThumbnailImageFile)
+                .Include(x => x.DetailsImageFile)
+                .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
+                .ConfigureAwait(false);
+            return _mapper.Map<BlogViewModel>(items);
         }
 
         public async Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl)

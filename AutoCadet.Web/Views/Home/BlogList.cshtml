@@ -1,24 +1,24 @@
-﻿@model AutoCadet.Models.VideoLessonsPageViewModel
+﻿@model AutoCadet.Models.BlogListPageViewModel
 @{
     Layout = "~/Views/Shared/_DetailsPageLayout.cshtml";
-    ViewBag.HeaderTitle = "Видео уроки вождения";
-    ViewBag.HeaderSubTitle = "Интерактивное обучение вождению автомобиля не выходя из дома";
+    ViewBag.HeaderTitle = "Полезные советы";
+    ViewBag.HeaderSubTitle = "Рекомендации от инструкторов по вождению";
 
-    ViewData["MetaInfo"] = "Видео уроки вождения";
-    ViewData["MetaDescription"] = "Интерактивное обучение вождению автомобиля не выходя из дома";
-    ViewData["MetaKeywords"] = "Вождение";
-    ViewData["Title"] = "Видео уроки вождения список";
+    ViewData["MetaInfo"] = "Рекомендации от инструкторов по вождению. как сдать экзамен";
+    ViewData["MetaDescription"] = "Полезные советы";
+    ViewData["MetaKeywords"] = "Полезные советы, сдать экзамен по вождению";
+    ViewData["Title"] = "Полезные советы сдающим на категорию B";
 }
 
 @{
-    var currentPageUrl = Url.Action("VideoLessons", "Home", Request?.Url?.Scheme);
+    var currentPageUrl = Url.Action("Blog", "Home", Request?.Url?.Scheme);
     var hrefFb = "http://www.facebook.com/sharer.php?u=" + currentPageUrl;
     var hrefVk = "http://vk.com/share.php?url=" + currentPageUrl;
     var hrefTwitter = "https://twitter.com/intent/tweet?text=" + $"{currentPageUrl}";
 }
 
 @section detailsH1 {
-    Лучшие инструкторы минска объясняют как проехать маршруты ГАИ
+    Полезные советы сдающим на категорию B
 
     <ul class="list-inline social-buttons text-center" style="float: right">
         <li title="Twitter">
@@ -41,5 +41,5 @@
 }
 
 <section id="portfolio" class="bg-light-gray">
-    @{ Html.RenderPartial("_IndexVideosList", Model.VideoLessonViewModels?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    @{ Html.RenderPartial("_IndexBlogList", Model.ItemsViewModels?.OrderByDescending(x => x.SortingNumber).ToList()); }
 </section>

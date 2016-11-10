@@ -13,6 +13,9 @@ namespace AutoCadet.Services
         Task<TrainingListPageViewModel> GetTrainingPageViewModelAsync();
         Task<TrainingViewModel> GetTrainingViewModelAsync(string prettyUrl);
 
+        Task<BlogListPageViewModel> GetBlogListPageViewModelAsync();
+        Task<BlogViewModel> GetBlogViewModelAsync(string prettyUrl);
+
         Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl);
         Task<bool> SaveCommentAsync(CommentViewModel commentVm);
         Task<bool> ProcessCallMeAsync(CallMeViewModel callMe);

@@ -1,0 +1,84 @@
+﻿@model AutoCadet.Models.BlogViewModel
+@{
+    Layout = "~/Views/Shared/_DetailsPageLayout.cshtml";
+    ViewBag.HeaderTitle = Model.ListHeader;
+    ViewBag.HeaderSubTitle = $"{Model.Metadata?.Title}";
+
+    ViewData["MetaInfo"] = Model.Metadata?.Info;
+    ViewData["MetaDescription"] = Model.Metadata?.Description;
+    ViewData["MetaKeywords"] = Model.Metadata?.Keywords;
+    ViewData["Title"] = Model.Metadata?.Title;
+}
+
+@{
+    var instructorUrl = Url.Action("Blog", "Home", new { prettyUrl = Model.UrlName }, Request?.Url?.Scheme);
+    var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
+    var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
+    var hrefTwitter = "https://twitter.com/intent/tweet?text=" + $"{instructorUrl}";
+}
+
+@section detailsH1 {
+    @(Model.Metadata?.H1)
+
+    <ul class="list-inline social-buttons text-center" style="float: right">
+        <li title="Twitter">
+            <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
+        </li>
+        <li title="Facebook">
+            <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
+        </li>
+        <li title="VK">
+            <a href="@hrefVk"><i class="fa fa-vk"></i></a>
+        </li>
+    </ul>
+}
+
+@section breadcrumb {
+    <ul class="breadcrumb">
+        <li><a href="/">Главная</a></li>
+        <li><a href="/Blog">Полезные советы</a></li>
+        <li class="active">@Model.ListHeader</li>
+    </ul>
+}
+@section detailsH2 {
+    <h2 class="section-subheading text-muted">
+        <label>@Model.ListDescription</label>
+    </h2>
+}
+
+<section id="person" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">@Model.DetailsSectionHeader</h2>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                @if (Model.DetailsImageFile != null && Model.DetailsImageFile.Length > 0)
+                {
+                    string base64String = Convert.ToBase64String(Model.DetailsImageFile);
+                    <img class="img-responsive img-centered img-circle"
+                         src="@($"data:image/png;base64,{base64String}")"
+                         alt="@($"{Model.ListHeader}")"/>
+                }
+            </div>
+            <div class="col-md-8">
+                @Model.DetailsText
+            </div>
+        </div>
+        <div class="row text-center">
+            <ul class="list-inline social-buttons text-center">
+                <li title="Twitter">
+                    <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li title="Facebook">
+                    <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li title="VK">
+                    <a href="@hrefVk"><i class="fa fa-vk"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

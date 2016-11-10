@@ -7,7 +7,7 @@ namespace AutoCadet.Attributes
 {
     public class RequireRequestValueAttribute : ActionMethodSelectorAttribute
     {
-        private readonly IList<string> _listActions = new List<string> { "Instructors", "Training", "VideoLessons" };
+        private readonly IList<string> _listActions = new List<string> { "Instructors", "Training", "VideoLessons", "Blog" };
         public RequireRequestValueAttribute(string valueName)
         {
             ValueName = valueName;

@@ -133,23 +133,23 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Training(IList<TrainingViewModel> servicesGridItemViewModels)
+        public async Task<ActionResult> Training(IList<TrainingViewModel> trainingsGridItemViewModels)
         {
-            if (ModelState.IsValid && servicesGridItemViewModels != null)
+            if (ModelState.IsValid && trainingsGridItemViewModels != null)
             {
-                await _adminControllerService.SaveTrainingsAttributesAsync(servicesGridItemViewModels).ConfigureAwait(true);
+                await _adminControllerService.SaveTrainingsAttributesAsync(trainingsGridItemViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
             }
-            return View(servicesGridItemViewModels);
+            return View(trainingsGridItemViewModels);
         }
 
         [HttpGet]
-        public async Task<ActionResult> ManageTraining(int? serviceId)
+        public async Task<ActionResult> ManageTraining(int? trainingId)
         {
             TrainingManagePageViewModel videoLessonVm = null;
-            if (serviceId.HasValue)
+            if (trainingId.HasValue)
             {
-                videoLessonVm = await _adminControllerService.GetTrainingViewModelAsync(serviceId.Value).ConfigureAwait(true);
+                videoLessonVm = await _adminControllerService.GetTrainingViewModelAsync(trainingId.Value).ConfigureAwait(true);
             }
             if (videoLessonVm == null)
             {
@@ -173,6 +173,58 @@ namespace AutoCadet.Areas.Admin.Controllers
 
             await _adminControllerService.SaveTrainingAsync(trainingVm).ConfigureAwait(true);
             return RedirectToAction("Training");
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> Blog()
+        {
+            IList<BlogViewModel> items = await _adminControllerService.GetAllBlogsViewModelsAsync().ConfigureAwait(true);
+            return View(items);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Blog(IList<BlogViewModel> blogGridItemViewModels)
+        {
+            if (ModelState.IsValid && blogGridItemViewModels != null)
+            {
+                await _adminControllerService.SaveBlogsAttributesAsync(blogGridItemViewModels).ConfigureAwait(true);
+                ViewBag.IsSuccess = true;
+            }
+            return View(blogGridItemViewModels);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ManageBlog(int? blogId)
+        {
+            BlogManagePageViewModel videoLessonVm = null;
+            if (blogId.HasValue)
+            {
+                videoLessonVm = await _adminControllerService.GetBlogViewModelAsync(blogId.Value).ConfigureAwait(true);
+            }
+            if (videoLessonVm == null)
+            {
+                videoLessonVm = new BlogManagePageViewModel();
+            }
+
+            videoLessonVm.BlogViewModel = videoLessonVm.BlogViewModel ?? new BlogViewModel();
+            videoLessonVm.MetadataInfo = videoLessonVm.MetadataInfo ?? new MetadataInfoViewModel();
+
+            return View(videoLessonVm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ManageBlog(BlogManagePageViewModel vm, HttpPostedFileBase itemFile, HttpPostedFileBase detailsFile)
+        {
+            if (!ModelState.IsValid || vm == null)
+            {
+                return View(vm);
+            }
+            vm.BlogViewModel.ThumbnailImageFile = GetFileContent(itemFile);
+            vm.BlogViewModel.DetailsImageFile = GetFileContent(detailsFile);
+
+            await _adminControllerService.SaveBlogAsync(vm).ConfigureAwait(true);
+            return RedirectToAction("Blog");
         }
 
         private byte[] GetFileContent(HttpPostedFileBase file)

@@ -11,7 +11,8 @@ namespace AutoCadet.Models
 
         public IList<InstructorViewModel> InstructorGridItems { get; set; }
         public IList<VideoLessonViewModel> VideosGridItems { get; set; }
-        public IList<TrainingViewModel> Services { get; set; }
+        public IList<TrainingViewModel> Trainings { get; set; }
+        public IList<BlogViewModel> Blogs { get; set; }
         public CommentViewModel NewComment { get; set; }
         public IList<CommentViewModel> Comments { get; set; }
     }

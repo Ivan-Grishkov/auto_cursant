@@ -23,6 +23,7 @@
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Created Date</th>
                         <th>Score</th>
                         <th>Text</th>
                         <th>Email</th>
@@ -43,6 +44,9 @@
                                         @Html.HiddenFor(x => Model[i].Id)
                                         @Html.HiddenFor(x => Model[i].InstructorId)
                                         @Html.TextBoxFor(x => Model[i].Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model[i].CreatedDate)
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(x => Model[i].Score)
