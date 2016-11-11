@@ -305,6 +305,7 @@
     <Content Include="img\header-bg-details.jpg" />
     <Content Include="img\header-bg.jpg" />
     <Content Include="img\map-image.png" />
+    <Content Include="img\not-a-lawyer-accident-cartoon.jpg" />
     <Content Include="img\paris.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
