@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace AutoCadet.Models
 {
@@ -9,6 +10,7 @@ namespace AutoCadet.Models
         [Required]
         public string UrlName { get; set; }
         public string YoutubeUrl { get; set; }
+        [AllowHtml]
         public string DetailsText { get; set; }
         public string DetailsSectionHeader { get; set; }
         public string ListHeader { get; set; }

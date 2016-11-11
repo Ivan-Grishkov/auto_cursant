@@ -1,5 +1,4 @@
 ﻿@model IList<AutoCadet.Models.InstructorViewModel>
-<!-- Portfolio Grid Section -->
 
 <div class="container section-container">
     <div class="row carousel-row">
@@ -92,17 +91,18 @@
 
             </div>
 
-
-            <a class="right carousel-control" href="#instructorsCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            <a class="left carousel-control" href="#instructorsCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
+            @if (itemsCount / itemsPerPage > 1)
+            {
+                <a class="right carousel-control" href="#instructorsCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <a class="left carousel-control" href="#instructorsCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            }
         </div>
-
 
     </div>
 </div>

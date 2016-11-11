@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace AutoCadet.Models
 {
@@ -8,6 +9,7 @@ namespace AutoCadet.Models
         public int Id { get; set; }
         [Required]
         public string UrlName { get; set; }
+        [AllowHtml]
         public string DetailText { get; set; }
         [Required]
         public string ListHeader { get; set; }

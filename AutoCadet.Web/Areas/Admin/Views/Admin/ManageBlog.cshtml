@@ -29,7 +29,7 @@
 
                 <div class="form-group">
                     <label for="lastName">SortingNumber:</label>
-                    @Html.TextBoxFor(x => x.BlogViewModel.SortingNumber, new { @class = "form-control", id = "lastName" })
+                    @Html.TextBoxFor(x => x.BlogViewModel.SortingNumber, new { @class = "form-control", id = "lastName", type = "number" })
                 </div>
 
                 <div class="form-group">
@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="Patronymic">DetailsText:</label>
-                    @Html.TextBoxFor(x => x.BlogViewModel.DetailsText, new { @class = "form-control", id = "Patronymic" })
+                    @Html.TextAreaFor(x => x.BlogViewModel.DetailsText, new { @class = "form-control", id = "Patronymic" })
                 </div>
 
                 <div class="form-group">

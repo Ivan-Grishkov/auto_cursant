@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="Price">Price:</label>
-                    @Html.TextBoxFor(x => x.Instructor.Price, new { @class = "form-control", id = "Price" })
+                    @Html.TextBoxFor(x => x.Instructor.Price, new { @class = "form-control", id = "Price", type="number"})
                 </div>
 
                 <div class="form-group">
@@ -76,7 +76,7 @@
 
                 <div class="form-group">
                     <label for="SortingNumber">SortingNumber:</label>
-                    @Html.TextBoxFor(x => x.Instructor.SortingNumber, new { @class = "form-control", id = "SortingNumber" })
+                    @Html.TextBoxFor(x => x.Instructor.SortingNumber, new { @class = "form-control", id = "SortingNumber", type = "number" })
                 </div>
 
                 if (Model.MetadataInfo != null)
@@ -116,7 +116,7 @@
                     @Html.HiddenFor(x => x.InstructorDetails.Id)
                     <div class="form-group">
                         <label for="InstructorDetailsDescription">InstructorDetails Description:</label>
-                        @Html.TextBoxFor(x => x.InstructorDetails.Description, new {@class = "form-control", id = "InstructorDetailsDescription"})
+                        @Html.TextAreaFor(x => x.InstructorDetails.Description, new {@class = "form-control", id = "InstructorDetailsDescription"})
                     </div>
 
                     <div class="form-group">
@@ -143,12 +143,12 @@
 
                     <div class="form-group">
                         <label for="VehicleDescriprion">InstructorDetails VehicleDescriprion:</label>
-                        @Html.TextBoxFor(x => x.InstructorDetails.VehicleDescriprion, new {@class = "form-control", id = "VehicleDescriprion"})
+                        @Html.TextAreaFor(x => x.InstructorDetails.VehicleDescriprion, new {@class = "form-control", id = "VehicleDescriprion"})
                     </div>
 
                     <div class="form-group">
                         <label for="FuelConsumption">InstructorDetails FuelConsumption:</label>
-                        @Html.TextBoxFor(x => x.InstructorDetails.FuelConsumption, new {@class = "form-control", id = "FuelConsumption" })
+                        @Html.TextBoxFor(x => x.InstructorDetails.FuelConsumption, new {@class = "form-control", id = "FuelConsumption", type = "number" })
                     </div>
 
 
