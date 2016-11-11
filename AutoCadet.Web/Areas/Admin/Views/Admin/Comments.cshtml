@@ -43,22 +43,22 @@
                                     <td>
                                         @Html.HiddenFor(x => Model[i].Id)
                                         @Html.HiddenFor(x => Model[i].InstructorId)
-                                        @Html.TextBoxFor(x => Model[i].Name)
+                                        @Html.TextBoxFor(x => Model[i].Name, new { @class = "form-control" })
                                     </td>
                                     <td>
                                         @Html.DisplayFor(x => Model[i].CreatedDate)
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(x => Model[i].Score)
+                                        @Html.TextBoxFor(x => Model[i].Score, new { @class = "form-control", type="number" })
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(x => Model[i].Text)
+                                        @Html.TextBoxFor(x => Model[i].Text, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(x => Model[i].Email)
+                                        @Html.TextBoxFor(x => Model[i].Email, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(x => Model[i].Phone)
+                                        @Html.TextBoxFor(x => Model[i].Phone, new { @class = "form-control" })
                                     </td>
                                     <td>
                                         @Model[i].InstructorName

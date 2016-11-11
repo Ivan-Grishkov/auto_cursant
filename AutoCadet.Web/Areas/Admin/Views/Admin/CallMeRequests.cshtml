@@ -23,8 +23,9 @@
                     <thead>
                     <tr>
                         <th>Телефон</th>
+                        <th>Requester Name</th>
                         <th>Запрос Обработан?</th>
-                        <th>ID Инструктора</th>
+                        <th>Инструктор</th>
                         <th>Created Date</th>
                     </tr>
                     </thead>
@@ -37,16 +38,19 @@
                                 <tr>
                                     <td>
                                         @Html.HiddenFor(x => Model[i].Id)
-                                        @Html.TextBoxFor(x => Model[i].Phone)
+                                        @Html.DisplayFor(x => Model[i].Phone, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model[i].RequesterName, new { @class = "form-control" })
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsHandled, new {@class = "form-control"})
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(x => Model[i].InstructorId)
+                                        @Html.DisplayFor(x => Model[i].InstructorName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(x => Model[i].CreatedDate)
+                                        @Html.DisplayFor(x => Model[i].CreatedDate, new { @class = "form-control" })
                                     </td>
                                 </tr>
                             }

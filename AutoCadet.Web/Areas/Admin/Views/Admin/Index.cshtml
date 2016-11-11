@@ -50,22 +50,22 @@
                                         @($"{Model[i].FirstName} {Model[i].LastName}")
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].Email)
+                                        @Html.TextBoxFor(x => Model[i].Email, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].Phone)
+                                        @Html.TextBoxFor(x => Model[i].Phone, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].UrlName)
+                                        @Html.TextBoxFor(x => Model[i].UrlName, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].Price)
+                                        @Html.TextBoxFor(x => Model[i].Price, new { @class = "form-control", type = "number" })
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].SortingNumber)
+                                        @Html.TextBoxFor(x => Model[i].SortingNumber, new { @class = "form-control", type = "number" })
                                     </td>
                                     <td>
                                         @{

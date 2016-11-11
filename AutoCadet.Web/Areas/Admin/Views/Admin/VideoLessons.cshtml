@@ -48,22 +48,22 @@
                                         @($"{Model[i].CreatedDate}")
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].ListHeader)
+                                        @Html.TextBoxFor(x => Model[i].ListHeader, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].YoutubeUrl)
+                                        @Html.TextBoxFor(x => Model[i].YoutubeUrl, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].UrlName)
+                                        @Html.TextBoxFor(x => Model[i].UrlName, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].Text)
+                                        @Html.TextBoxFor(x => Model[i].Text, new { @class = "form-control" })
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].SortingNumber)
+                                        @Html.TextBoxFor(x => Model[i].SortingNumber, new { @class = "form-control", type="number" })
                                     </td>
                                     <td>
                                         @{

@@ -55,8 +55,11 @@ namespace AutoCadet.Models.Mapper
             CreateMap<Metadata, MetadataInfoViewModel>();
             CreateMap<MetadataInfoViewModel, Metadata>();
 
-            CreateMap<CallMe, CallMeViewModel>();
-            CreateMap<CallMeViewModel, CallMe>();
+            CreateMap<CallMe, CallMeViewModel>()
+                .ForMember(x => x.InstructorName, opt => opt.ResolveUsing(x => $"{x.Instructor?.LastName} {x.Instructor?.FirstName}"))
+                .ForMember(x => x.InstructorId, opt => opt.ResolveUsing(x => x.Instructor?.Id)); ;
+            CreateMap<CallMeViewModel, CallMe>()
+                .ForMember(x => x.Instructor, opt => opt.Ignore());
 
         }
     }

@@ -23,7 +23,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         public async Task<ActionResult> Index()
         {
             IList<InstructorViewModel> instructorsVs = await _adminControllerService.GetAllInstructorsViewModelsAsync().ConfigureAwait(true);
-            return View(instructorsVs);
+            return View(instructorsVs?.OrderByDescending(x => x.SortingNumber).ToList());
         }
 
         [HttpPost]
@@ -78,7 +78,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         public async Task<ActionResult> VideoLessons()
         {
             IList<VideoLessonViewModel> instructorsVs = await _adminControllerService.GetAllVideoLessonViewModelsAsync().ConfigureAwait(true);
-            return View(instructorsVs);
+            return View(instructorsVs?.OrderByDescending(x => x.SortingNumber).ToList());
         }
 
         [HttpPost]
@@ -129,7 +129,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         public async Task<ActionResult> Training()
         {
             IList<TrainingViewModel> items = await _adminControllerService.GetAllTrainingsViewModelsAsync().ConfigureAwait(true);
-            return View(items);
+            return View(items?.OrderByDescending(x => x.SortingNumber).ToList());
         }
 
         [HttpPost]
@@ -180,7 +180,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         public async Task<ActionResult> Blog()
         {
             IList<BlogViewModel> items = await _adminControllerService.GetAllBlogsViewModelsAsync().ConfigureAwait(true);
-            return View(items);
+            return View(items?.OrderByDescending(x => x.SortingNumber).ToList());
         }
 
         [HttpPost]
@@ -242,7 +242,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         public async Task<ActionResult> Comments()
         {
             IList<CommentViewModel> commentViewModels = await _adminControllerService.GetAllCommentViewModelsAsync().ConfigureAwait(true);
-            return View(commentViewModels);
+            return View(commentViewModels?.OrderByDescending(x => x.CreatedDate).ToList());
         }
 
         [HttpPost]
@@ -260,7 +260,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         public async Task<ActionResult> CallMeRequests()
         {
             IList<CallMeViewModel> callMeViewModels = await _adminControllerService.GetAllCallMeViewModelsAsync().ConfigureAwait(true);
-            return View(callMeViewModels);
+            return View(callMeViewModels?.OrderBy(x => x.IsHandled).ToList());
         }
 
         [HttpPost]

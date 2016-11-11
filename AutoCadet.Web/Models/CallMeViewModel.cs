@@ -12,6 +12,8 @@ namespace AutoCadet.Models
 
         public int Id { get; set; }
         public int? InstructorId { get; set; }
+        public string InstructorName { get; set; }
+
         [Required]
         public string Phone { get; set; }
         public string RequesterName { get; set; }

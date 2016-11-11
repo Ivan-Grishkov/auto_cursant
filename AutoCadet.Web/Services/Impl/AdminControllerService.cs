@@ -261,7 +261,6 @@ namespace AutoCadet.Services.Impl
                     entity.ListDescription = vm.ListDescription;
                     entity.ListIcon = vm.ListIcon;
                     entity.UrlName = vm.UrlName;
-                    entity.DetailText = vm.DetailText;
                     entity.IsActive = vm.IsActive;
                     entity.SortingNumber = vm.SortingNumber;
                 }
@@ -349,8 +348,6 @@ namespace AutoCadet.Services.Impl
                     entity.ListDescription = vm.ListDescription;
                     entity.UrlName = vm.UrlName;
                     entity.YoutubeUrl = vm.YoutubeUrl;
-                    entity.DetailsText = vm.DetailsText;
-                    entity.DetailsSectionHeader = vm.DetailsSectionHeader;
                     entity.IsActive = vm.IsActive;
                     entity.SortingNumber = vm.SortingNumber;
                 }
@@ -431,7 +428,7 @@ namespace AutoCadet.Services.Impl
 
         public async Task<IList<CallMeViewModel>> GetAllCallMeViewModelsAsync()
         {
-            var callMes = await _autoCadetDbContext.CallMes.ToListAsync().ConfigureAwait(false);
+            var callMes = await _autoCadetDbContext.CallMes.Include(x => x.Instructor).ToListAsync().ConfigureAwait(false);
             return callMes?.Select(i => _mapper.Map<CallMeViewModel>(i)).ToList();
         }
 

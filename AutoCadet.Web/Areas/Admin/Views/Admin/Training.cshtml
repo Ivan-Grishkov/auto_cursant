@@ -28,7 +28,6 @@
                         <th>ListDescription</th>
                         <th>ListIcon</th>
                         <th>URL</th>
-                        <th>DetailText</th>
                         <th>Активен?</th>
                         <th>Номер в списке</th>
                         <th>Картинка в списке</th>
@@ -49,25 +48,22 @@
                                         @($"{Model[i].CreatedDate}")
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].ListHeader)
+                                        @Html.TextBoxFor(x => Model[i].ListHeader, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].ListDescription)
+                                        @Html.TextBoxFor(x => Model[i].ListDescription, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].ListIcon)
+                                        @Html.TextBoxFor(x => Model[i].ListIcon, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].UrlName)
-                                    </td>
-                                    <td>
-                                        @Html.TextAreaFor(x => Model[i].DetailText)
+                                        @Html.TextBoxFor(x => Model[i].UrlName, new { @class = "form-control" })
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].SortingNumber)
+                                        @Html.TextBoxFor(x => Model[i].SortingNumber, new { @class = "form-control", type="number"})
                                     </td>
                                     <td>
                                         @{
