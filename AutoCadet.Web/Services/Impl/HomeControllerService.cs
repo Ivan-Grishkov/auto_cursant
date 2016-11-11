@@ -243,15 +243,16 @@ namespace AutoCadet.Services.Impl
             if (!isExists)
             {
                 var callMe = _mapper.Map<CallMe>(callMeVm);
+                Instructor instructor = null;
+                if (callMeVm.InstructorId != null)
+                {
+                    instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == callMeVm.InstructorId).ConfigureAwait(false);
+                    callMe.Instructor = instructor;
+                }
 
                 _autoCadetDbContext.CallMes.Add(callMe);
                 await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
 
-                var instructor =
-                    await
-                        _autoCadetDbContext.Instructors.Where(x => x.Id == callMeVm.InstructorId)
-                            .FirstOrDefaultAsync()
-                            .ConfigureAwait(false);
                 return _callMeNotificator.Notify(callMe.Phone, callMe.RequesterName, instructor);
             }
             return false;

@@ -260,7 +260,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         public async Task<ActionResult> CallMeRequests()
         {
             IList<CallMeViewModel> callMeViewModels = await _adminControllerService.GetAllCallMeViewModelsAsync().ConfigureAwait(true);
-            return View(callMeViewModels?.OrderBy(x => x.IsHandled).ToList());
+            return View(callMeViewModels?.OrderBy(x => x.IsHandled).ThenByDescending(x => x.CreatedDate).ToList());
         }
 
         [HttpPost]

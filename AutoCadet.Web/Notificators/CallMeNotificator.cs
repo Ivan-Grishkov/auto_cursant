@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using System.Net.Mail;
 using AutoCadet.Domain.Entities;
 
@@ -7,7 +8,8 @@ namespace AutoCadet.Notificators
 {
     public class CallMeNotificator : ICallMeNotificator
     {
-        private readonly string _adminEmail = ConfigurationManager.AppSettings["NotifyMeDefaultEmail"] ?? "grishkov.ivan@gmail.com";
+        private const char EmailSplitter = ';';
+        private readonly string _adminEmail = ConfigurationManager.AppSettings["NotifyMeDefaultEmails"] ?? "grishkov.ivan@gmail.com";
 
         /// <param name="phone"></param>
         /// <param name="requesterName"></param>
@@ -22,8 +24,13 @@ namespace AutoCadet.Notificators
                 {
                     message.To.Add(instructor.Email);
                 }
-                message.CC.Add(new MailAddress(_adminEmail));
-                message.Subject = "Перезвоните Auto Instructor";
+
+                var defaultEmails = _adminEmail.Split(EmailSplitter);
+                foreach (var defaultEmail in defaultEmails.Where(x => !string.IsNullOrWhiteSpace(x)))
+                {
+                    message.CC.Add(new MailAddress(defaultEmail));
+                }
+                message.Subject = "Перезвоните uroki-vozhdeniya.by";
                 var messageText = $"Перезвоните, пожалуйста, на номер {phone}. {requesterName}";
                 if (instructor != null)
                 {
