@@ -285,12 +285,17 @@
     <Compile Include="Services\Impl\HomeControllerService.cs" />
     <Compile Include="Services\IHomeControllerService.cs" />
     <Compile Include="Models\InstructorsListPageViewModel.cs" />
+    <Compile Include="Services\Impl\SiteMapService.cs" />
+    <Compile Include="Services\ISiteMapService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="403.html" />
     <Content Include="404.html" />
     <Content Include="500.html" />
+    <Content Include="App_Data\sitemap_base.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\agency.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -416,7 +421,6 @@
     <Content Include="Views\Home\_IndexBlogList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Scripts\app\directives\" />
     <Folder Include="Scripts\app\services\" />
     <Folder Include="Scripts\app\templates\" />

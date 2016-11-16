@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoCadet.Attributes;
 using AutoCadet.Models;
@@ -9,10 +10,12 @@ namespace AutoCadet.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeControllerService _homeControllerService;
+        private readonly ISiteMapService _siteMapService;
 
-        public HomeController(IHomeControllerService homeControllerService)
+        public HomeController(IHomeControllerService homeControllerService, ISiteMapService siteMapService)
         {
             _homeControllerService = homeControllerService;
+            _siteMapService = siteMapService;
         }
 
         [HttpGet]
@@ -140,6 +143,13 @@ namespace AutoCadet.Controllers
             }
 
             return new JsonResult {Data = new {isSame = true}};
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> SiteMap()
+        {
+            var sitemap = await _siteMapService.GenetateSiteMapAsync().ConfigureAwait(true);
+            return Content(sitemap, "xml", Encoding.UTF8);
         }
     }
 }
