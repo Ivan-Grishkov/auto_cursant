@@ -43,6 +43,15 @@ namespace AutoCadet
                     Response.AddHeader("Location", lowercaseUrl);
                     Response.End();
                 }
+
+                if (HttpContext.Current.Request.Url.AbsolutePath.ToLower() == "/index")
+                {
+                    Response.Clear();
+                    Response.Status = "301 Moved Permanently";
+                    var homeUrl = Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority;
+                    Response.AddHeader("Location", homeUrl);
+                    Response.End();
+                }
             }
         }
     }
