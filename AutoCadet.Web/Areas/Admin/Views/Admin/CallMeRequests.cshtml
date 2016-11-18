@@ -38,16 +38,16 @@
                                 <tr>
                                     <td>
                                         @Html.HiddenFor(x => Model[i].Id)
-                                        @Html.DisplayFor(x => Model[i].Phone, new { @class = "form-control" })
+                                        @Html.EditorFor(x => Model[i].Phone, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(x => Model[i].RequesterName, new { @class = "form-control" })
+                                        @Html.EditorFor(x => Model[i].RequesterName, new { @class = "form-control" })
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsHandled, new {@class = "form-control"})
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(x => Model[i].InstructorName)
+                                        @Html.EditorFor(x => Model[i].InstructorName, new { @class = "form-control" })
                                     </td>
                                     <td>
                                         @Html.DisplayFor(x => Model[i].CreatedDate, new { @class = "form-control" })

@@ -46,3 +46,11 @@ ul.social-buttons {
     margin-bottom: 15px;
     margin-top: 15px;
 }
+
+.carousel-row ul.social-buttons {
+    margin: 0
+}
+
+a h2.section-heading {
+    color: #222222;
+}

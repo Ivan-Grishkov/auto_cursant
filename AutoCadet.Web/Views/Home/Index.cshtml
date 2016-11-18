@@ -7,30 +7,72 @@
 @{ Html.RenderPartial("_IndexHeader"); }
 
 <section id="portfolio" class="bg-light-gray">
-@{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    <div class="container section-container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="@Url.Action("Instructors")">
+                    <h2 class="section-heading">Наши инструкторы</h2>
+                </a>
+            </div>
+        </div>
+        @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    </div>
 </section>
 
-<!-- Trainings Section -->
 <section id="services">
-    @{ Html.RenderPartial("_IndexTrainingList", Model.Trainings?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="@Url.Action("Training")">
+                    <h2 class="section-heading">Частные уроки вождения</h2>
+                    <h3 class="section-subheading text-muted">Нацеленность на результат</h3>
+                </a>
+            </div>
+        </div>
+        @{ Html.RenderPartial("_IndexTrainingList", Model.Trainings?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    </div>
 </section>
 
-<!-- Videos Section -->
 <section id="videos" class="bg-light-gray">
-    @{ Html.RenderPartial("_IndexVideosList", Model.VideosGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    <div class="container section-container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="@Url.Action("VideoLessons")">
+                    <h2 class="section-heading">Видео уроки вождения</h2>
+                    <h3 class="section-subheading text-muted">Эх, прокачу!</h3>
+                </a>
+            </div>
+        </div>
+        @{ Html.RenderPartial("_IndexVideosList", Model.VideosGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    </div>
 </section>
 
-<!-- Videos Section -->
 <section id="blog">
-    @{ Html.RenderPartial("_IndexBlogList", Model.Blogs?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    <div class="container section-container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="@Url.Action("Blog")">
+                    <h2 class="section-heading">Полезные советы</h2>
+                    <h3 class="section-subheading text-muted">добавляем...</h3>
+                </a>
+            </div>
+        </div>
+        @{ Html.RenderPartial("_IndexBlogList", Model.Blogs?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    </div>
 </section>
 
-<!-- Team Section -->
 <section id="team" class="bg-light-gray">
-@{ Html.RenderPartial("_IndexCommentsList", Model.Comments?.OrderByDescending(x => x.CreatedDate).ToList()); }
+    <div class="container section-container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Отзывы</h2>
+                <h3 class="section-subheading text-muted">Всех послушай, но решай сам.</h3>
+            </div>
+        </div>
+        @{ Html.RenderPartial("_IndexCommentsList", Model.Comments?.OrderByDescending(x => x.CreatedDate).ToList()); }
+    </div>
 </section>
 
-    <!-- Review Section -->
 <section id="contact">
     <div class="container">
         <div class="row">
@@ -98,7 +140,6 @@
     </div>
 </section>
 
-    <!-- call me Section -->
 <section id="callMe">
     <div class="container">
         <div class="row">

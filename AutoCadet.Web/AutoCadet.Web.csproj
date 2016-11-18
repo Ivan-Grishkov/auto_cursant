@@ -407,7 +407,6 @@
     <Content Include="Areas\Admin\Views\Admin\ManageInstructor.cshtml" />
     <Content Include="Views\Home\Instructors.cshtml" />
     <Content Include="Views\Home\_IndexCommentsList.cshtml" />
-    <Content Include="Views\Home\_StarsRating.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Score.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Score.cshtml" />
     <Content Include="Views\Home\InstructorsList.cshtml" />

@@ -49,16 +49,19 @@
         </li>
         <li class="active">@($"{Model.Instructor.LastName} {Model.Instructor.FirstName}")</li>
     </ul>
-
-
 }
+
 @section detailsH2 {
     <h2 class="section-subheading text-muted">
         <label for="average-score">Средний рейтинг инструктора:</label>
         <span class="pull-right">
-        @Html.DisplayFor(x => x.Instructor.AverageScore, new {id = "average-score"})
-    </span>
+            @Html.DisplayFor(x => x.Instructor.AverageScore, new {id = "average-score"})
+        </span>
     </h2>
+    <h3 class="section-subheading">
+        <label for="InstructorPhone">Телефон:</label>
+        <span id="InstructorPhone">@Model.Instructor.Phone</span>
+    </h3>
 }
 
 <section id="person" class="bg-light-gray">
