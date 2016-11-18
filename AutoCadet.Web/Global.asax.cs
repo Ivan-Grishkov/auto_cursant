@@ -5,6 +5,7 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Canonicalize;
 
 namespace AutoCadet
 {
@@ -12,6 +13,7 @@ namespace AutoCadet
     {
         protected void Application_Start()
         {
+            RouteTable.Routes.Canonicalize().NoWww().Lowercase().NoTrailingSlash();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
