@@ -7,7 +7,8 @@ namespace AutoCadet.Domain.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "AutoCadet.Domain.AutoCadetDbContext";
+            // register mysql code generator
+            SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator());
         }
 
         protected override void Seed(AutoCadet.Domain.AutoCadetDbContext context)
