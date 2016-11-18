@@ -9,6 +9,8 @@ namespace AutoCadet
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.LowercaseUrls = true;
+
             routes.MapRoute("Sitemap", "sitemap.xml", new { controller = "Home", action = "SiteMap"});
 
             routes.MapRoute(

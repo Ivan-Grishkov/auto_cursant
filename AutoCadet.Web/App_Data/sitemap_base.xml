@@ -6,22 +6,22 @@
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>http://www.uroki-vozhdeniya.by/Instructors</loc>
+        <loc>http://www.uroki-vozhdeniya.by/instructors</loc>
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>http://www.uroki-vozhdeniya.by/VideoLessons</loc>
+        <loc>http://www.uroki-vozhdeniya.by/videolessons</loc>
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>http://www.uroki-vozhdeniya.by/Training</loc>
+        <loc>http://www.uroki-vozhdeniya.by/training</loc>
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>http://www.uroki-vozhdeniya.by/Blog</loc>
+        <loc>http://www.uroki-vozhdeniya.by/blog</loc>
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>

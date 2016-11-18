@@ -10,10 +10,10 @@ namespace AutoCadet.Services.Impl
     public class SiteMapService: ISiteMapService
     {
         private const string BaseUrl = "http://www.uroki-vozhdeniya.by/";
-        private const string ActionInstructors = "Instructors";
-        private const string ActionVideoLessons = "VideoLessons";
-        private const string ActionTraining = "Training";
-        private const string ActionBlog = "Blog";
+        private const string ActionInstructors = "instructors";
+        private const string ActionVideoLessons = "videolessons";
+        private const string ActionTraining = "training";
+        private const string ActionBlog = "blog";
         private readonly string _pathToSiteMap = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/sitemap_base.xml");
         private readonly AutoCadetDbContext _autoCadetDbContext;
 
