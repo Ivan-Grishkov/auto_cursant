@@ -10,7 +10,7 @@
     <div class="row carousel-row">
         @if (Model != null)
         {
-            <div id="commentsCarousel" class="carousel slide col-md-12" data-ride="carousel">
+            <div id="commentsCarousel" class="carousel slide col-md-12" data-ride="carousel" data-interval="false">
                 @{
                     var itemsCount = Model.Count;
                     var itemsPerPage = 6;
