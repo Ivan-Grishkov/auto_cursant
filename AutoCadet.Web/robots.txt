@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /Admin/
+Disallow: /App_Data/
+Disallow: /bin/
+Disallow: /Content/
+Disallow: /fonts/
+Disallow: /Scripts/
+Disallow: /Views/
+Disallow: /Global.asax
+Disallow: /Web.config
+Disallow: /packages.config

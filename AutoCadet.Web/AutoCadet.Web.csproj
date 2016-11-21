@@ -281,6 +281,7 @@
     <Content Include="Areas\Admin\Views\Admin\ManageObuchenie.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Blog.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\ManageBlog.cshtml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
