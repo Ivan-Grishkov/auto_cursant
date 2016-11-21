@@ -9,7 +9,7 @@ namespace AutoCadet.Services.Impl
 {
     public class SiteMapService: ISiteMapService
     {
-        private const string BaseUrl = "http://www.uroki-vozhdeniya.by/";
+        private const string BaseUrl = "http://uroki-vozhdeniya.by/";
         private const string ActionInstructors = "instructors";
         private const string ActionVideo = "video";
         private const string ActionObuchenie = "obuchenie";
