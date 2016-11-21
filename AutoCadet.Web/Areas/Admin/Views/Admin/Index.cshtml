@@ -59,7 +59,7 @@
                                         @Html.TextBoxFor(x => Model[i].UrlName, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(x => Model[i].Price, new { @class = "form-control", type = "number" })
+                                        @Html.EditorFor(x => Model[i].Price, new { @class = "form-control", type = "number" })
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})

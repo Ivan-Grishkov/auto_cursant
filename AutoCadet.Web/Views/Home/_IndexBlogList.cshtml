@@ -46,7 +46,7 @@
                                 <h4>@($"{Model[k].ListHeader}")</h4>
                                 <div class="clearfix"></div>
                                 @{
-                                    var instructorUrl = Url.Action("VideoLessons", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
+                                    var instructorUrl = Url.Action("Video", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
                                     var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
                                     var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
                                     var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20по%20видео%20урокам%20" + $"{instructorUrl}";

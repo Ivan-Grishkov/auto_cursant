@@ -2,7 +2,7 @@ using System.Data.Entity.Migrations;
 
 namespace AutoCadet.Domain.Migrations
 {
-    public partial class InitMySql : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -11,15 +11,15 @@ namespace AutoCadet.Domain.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UrlName = c.String(nullable: false, unicode: false),
-                        YoutubeUrl = c.String(unicode: false),
-                        DetailsText = c.String(unicode: false),
-                        DetailsSectionHeader = c.String(unicode: false),
-                        ListHeader = c.String(unicode: false),
-                        ListDescription = c.String(unicode: false),
+                        UrlName = c.String(nullable: false),
+                        YoutubeUrl = c.String(),
+                        DetailsText = c.String(),
+                        DetailsSectionHeader = c.String(),
+                        ListHeader = c.String(),
+                        ListDescription = c.String(),
                         IsActive = c.Boolean(nullable: false),
                         SortingNumber = c.Int(nullable: false),
-                        CreatedDate = c.DateTime(nullable: false, precision: 0),
+                        CreatedDate = c.DateTime(nullable: false),
                         DetailsImageFile_Id = c.Int(),
                         Metadata_Id = c.Int(),
                         ThumbnailImageFile_Id = c.Int(),
@@ -46,11 +46,11 @@ namespace AutoCadet.Domain.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Description = c.String(unicode: false),
-                        Info = c.String(unicode: false),
-                        Keywords = c.String(unicode: false),
-                        Title = c.String(unicode: false),
-                        H1 = c.String(unicode: false),
+                        Description = c.String(),
+                        Info = c.String(),
+                        Keywords = c.String(),
+                        Title = c.String(),
+                        H1 = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -59,10 +59,10 @@ namespace AutoCadet.Domain.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Phone = c.String(nullable: false, unicode: false),
-                        RequesterName = c.String(unicode: false),
+                        Phone = c.String(nullable: false),
+                        RequesterName = c.String(),
                         IsHandled = c.Boolean(nullable: false),
-                        CreatedDate = c.DateTime(nullable: false, precision: 0),
+                        CreatedDate = c.DateTime(nullable: false),
                         Instructor_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -74,13 +74,13 @@ namespace AutoCadet.Domain.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(nullable: false, unicode: false),
-                        LastName = c.String(nullable: false, unicode: false),
-                        Patronymic = c.String(unicode: false),
-                        Email = c.String(unicode: false),
-                        Phone = c.String(nullable: false, unicode: false),
-                        Phone2 = c.String(unicode: false),
-                        UrlName = c.String(nullable: false, unicode: false),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                        Patronymic = c.String(),
+                        Email = c.String(),
+                        Phone = c.String(nullable: false),
+                        Phone2 = c.String(),
+                        UrlName = c.String(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         SortingNumber = c.Int(nullable: false),
                         IsActive = c.Boolean(nullable: false),
@@ -95,11 +95,11 @@ namespace AutoCadet.Domain.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Text = c.String(nullable: false, unicode: false),
-                        Name = c.String(nullable: false, unicode: false),
-                        Phone = c.String(unicode: false),
-                        Email = c.String(unicode: false),
-                        CreatedDate = c.DateTime(nullable: false, precision: 0),
+                        Text = c.String(nullable: false),
+                        Name = c.String(nullable: false),
+                        Phone = c.String(),
+                        Email = c.String(),
+                        CreatedDate = c.DateTime(nullable: false),
                         Score = c.Double(nullable: false),
                         IsVisibleInList = c.Boolean(nullable: false),
                         IsActive = c.Boolean(nullable: false),
@@ -117,11 +117,11 @@ namespace AutoCadet.Domain.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false),
-                        Description = c.String(unicode: false),
-                        VehicleDescriprion = c.String(unicode: false),
-                        VehicleTitle = c.String(unicode: false),
-                        VehicleSecondaryTitle = c.String(unicode: false),
-                        FuelConsumption = c.String(unicode: false),
+                        Description = c.String(),
+                        VehicleDescriprion = c.String(),
+                        VehicleTitle = c.String(),
+                        VehicleSecondaryTitle = c.String(),
+                        FuelConsumption = c.String(),
                         DetailsImage_Id = c.Int(),
                         Metadata_Id = c.Int(),
                         VehicleImage_Id = c.Int(),
@@ -137,41 +137,18 @@ namespace AutoCadet.Domain.Migrations
                 .Index(t => t.VehicleImage_Id);
             
             CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        Name = c.String(nullable: false, maxLength: 256, storeType: "nvarchar"),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        RoleId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.Trainings",
+                "dbo.Obuchenies",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UrlName = c.String(nullable: false, unicode: false),
-                        DetailText = c.String(unicode: false),
-                        ListHeader = c.String(nullable: false, unicode: false),
-                        ListDescription = c.String(unicode: false),
-                        ListIcon = c.String(nullable: false, unicode: false),
+                        UrlName = c.String(nullable: false),
+                        DetailText = c.String(),
+                        ListHeader = c.String(nullable: false),
+                        ListDescription = c.String(),
+                        ListIcon = c.String(nullable: false),
                         IsActive = c.Boolean(nullable: false),
                         SortingNumber = c.Int(nullable: false),
-                        CreatedDate = c.DateTime(nullable: false, precision: 0),
+                        CreatedDate = c.DateTime(nullable: false),
                         Metadata_Id = c.Int(),
                         ThumbnailImageFile_Id = c.Int(),
                     })
@@ -182,21 +159,44 @@ namespace AutoCadet.Domain.Migrations
                 .Index(t => t.ThumbnailImageFile_Id);
             
             CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        Email = c.String(maxLength: 256, storeType: "nvarchar"),
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(unicode: false),
-                        SecurityStamp = c.String(unicode: false),
-                        PhoneNumber = c.String(unicode: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
                         PhoneNumberConfirmed = c.Boolean(nullable: false),
                         TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(precision: 0),
+                        LockoutEndDateUtc = c.DateTime(),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256, storeType: "nvarchar"),
+                        UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
@@ -206,9 +206,9 @@ namespace AutoCadet.Domain.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        ClaimType = c.String(unicode: false),
-                        ClaimValue = c.String(unicode: false),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
@@ -218,26 +218,26 @@ namespace AutoCadet.Domain.Migrations
                 "dbo.AspNetUserLogins",
                 c => new
                     {
-                        LoginProvider = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        ProviderKey = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        UserId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.VideoLessons",
+                "dbo.Videos",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UrlName = c.String(nullable: false, unicode: false),
-                        YoutubeUrl = c.String(nullable: false, unicode: false),
-                        Text = c.String(unicode: false),
-                        ListHeader = c.String(unicode: false),
+                        UrlName = c.String(nullable: false),
+                        YoutubeUrl = c.String(nullable: false),
+                        Text = c.String(),
+                        ListHeader = c.String(),
                         IsActive = c.Boolean(nullable: false),
                         SortingNumber = c.Int(nullable: false),
-                        CreatedDate = c.DateTime(nullable: false, precision: 0),
+                        CreatedDate = c.DateTime(nullable: false),
                         Metadata_Id = c.Int(),
                         ThumbnailImageFile_Id = c.Int(),
                     })
@@ -251,14 +251,14 @@ namespace AutoCadet.Domain.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.VideoLessons", "ThumbnailImageFile_Id", "dbo.ImageFiles");
-            DropForeignKey("dbo.VideoLessons", "Metadata_Id", "dbo.Metadatas");
+            DropForeignKey("dbo.Videos", "ThumbnailImageFile_Id", "dbo.ImageFiles");
+            DropForeignKey("dbo.Videos", "Metadata_Id", "dbo.Metadatas");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Trainings", "ThumbnailImageFile_Id", "dbo.ImageFiles");
-            DropForeignKey("dbo.Trainings", "Metadata_Id", "dbo.Metadatas");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Obuchenies", "ThumbnailImageFile_Id", "dbo.ImageFiles");
+            DropForeignKey("dbo.Obuchenies", "Metadata_Id", "dbo.Metadatas");
             DropForeignKey("dbo.CallMes", "Instructor_Id", "dbo.Instructors");
             DropForeignKey("dbo.Instructors", "ThumbnailImage_Id", "dbo.ImageFiles");
             DropForeignKey("dbo.InstructorDetails", "VehicleImage_Id", "dbo.ImageFiles");
@@ -270,16 +270,16 @@ namespace AutoCadet.Domain.Migrations
             DropForeignKey("dbo.Blogs", "ThumbnailImageFile_Id", "dbo.ImageFiles");
             DropForeignKey("dbo.Blogs", "Metadata_Id", "dbo.Metadatas");
             DropForeignKey("dbo.Blogs", "DetailsImageFile_Id", "dbo.ImageFiles");
-            DropIndex("dbo.VideoLessons", new[] { "ThumbnailImageFile_Id" });
-            DropIndex("dbo.VideoLessons", new[] { "Metadata_Id" });
+            DropIndex("dbo.Videos", new[] { "ThumbnailImageFile_Id" });
+            DropIndex("dbo.Videos", new[] { "Metadata_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Trainings", new[] { "ThumbnailImageFile_Id" });
-            DropIndex("dbo.Trainings", new[] { "Metadata_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Obuchenies", new[] { "ThumbnailImageFile_Id" });
+            DropIndex("dbo.Obuchenies", new[] { "Metadata_Id" });
             DropIndex("dbo.InstructorDetails", new[] { "VehicleImage_Id" });
             DropIndex("dbo.InstructorDetails", new[] { "Metadata_Id" });
             DropIndex("dbo.InstructorDetails", new[] { "DetailsImage_Id" });
@@ -291,13 +291,13 @@ namespace AutoCadet.Domain.Migrations
             DropIndex("dbo.Blogs", new[] { "ThumbnailImageFile_Id" });
             DropIndex("dbo.Blogs", new[] { "Metadata_Id" });
             DropIndex("dbo.Blogs", new[] { "DetailsImageFile_Id" });
-            DropTable("dbo.VideoLessons");
+            DropTable("dbo.Videos");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Trainings");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Obuchenies");
             DropTable("dbo.InstructorDetails");
             DropTable("dbo.Comments");
             DropTable("dbo.Instructors");

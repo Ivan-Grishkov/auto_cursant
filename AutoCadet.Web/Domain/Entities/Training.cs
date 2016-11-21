@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AutoCadet.Domain.Entities
 {
-    public class Training:EntityBase
+    public class Obuchenie:EntityBase
     {
         [Required]
         public string UrlName { get; set; }

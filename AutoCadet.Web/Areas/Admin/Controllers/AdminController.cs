@@ -75,104 +75,104 @@ namespace AutoCadet.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> VideoLessons()
+        public async Task<ActionResult> Video()
         {
-            IList<VideoLessonViewModel> instructorsVs = await _adminControllerService.GetAllVideoLessonViewModelsAsync().ConfigureAwait(true);
+            IList<VideoViewModel> instructorsVs = await _adminControllerService.GetAllVideoViewModelsAsync().ConfigureAwait(true);
             return View(instructorsVs?.OrderByDescending(x => x.SortingNumber).ToList());
         }
 
         [HttpPost]
-        public async Task<ActionResult> VideoLessons(IList<VideoLessonViewModel> videoLessonsGridItemViewModels)
+        public async Task<ActionResult> Video(IList<VideoViewModel> VideoGridItemViewModels)
         {
-            if (ModelState.IsValid && videoLessonsGridItemViewModels != null)
+            if (ModelState.IsValid && VideoGridItemViewModels != null)
             {
-                await _adminControllerService.SaveVideoLessonsAttributesAsync(videoLessonsGridItemViewModels).ConfigureAwait(true);
+                await _adminControllerService.SaveVideoAttributesAsync(VideoGridItemViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
             }
-            return View(videoLessonsGridItemViewModels);
+            return View(VideoGridItemViewModels);
         }
 
         [HttpGet]
-        public async Task<ActionResult> ManageVideoLesson(int? lessonId)
+        public async Task<ActionResult> ManageVideo(int? lessonId)
         {
-            VideoLessonsManagePageViewModel videoLessonVm = null;
+            VideoManagePageViewModel videoVm = null;
             if (lessonId.HasValue)
             {
-                videoLessonVm = await _adminControllerService.GetVideoLessonViewModelAsync(lessonId.Value).ConfigureAwait(true);
+                videoVm = await _adminControllerService.GetVideoViewModelAsync(lessonId.Value).ConfigureAwait(true);
             }
-            if (videoLessonVm == null)
+            if (videoVm == null)
             {
-                videoLessonVm = new VideoLessonsManagePageViewModel();
+                videoVm = new VideoManagePageViewModel();
             }
 
-            videoLessonVm.VideoLessonViewModel = videoLessonVm.VideoLessonViewModel ?? new VideoLessonViewModel();
-            videoLessonVm.MetadataInfo = videoLessonVm.MetadataInfo ?? new MetadataInfoViewModel();
+            videoVm.VideoViewModel = videoVm.VideoViewModel ?? new VideoViewModel();
+            videoVm.MetadataInfo = videoVm.MetadataInfo ?? new MetadataInfoViewModel();
 
-            return View(videoLessonVm);
+            return View(videoVm);
         }
 
         [HttpPost]
-        public async Task<ActionResult> ManageVideoLesson(VideoLessonsManagePageViewModel lessonVm, HttpPostedFileBase itemFile)
+        public async Task<ActionResult> ManageVideo(VideoManagePageViewModel lessonVm, HttpPostedFileBase itemFile)
         {
             if (!ModelState.IsValid || lessonVm == null)
             {
                 return View(lessonVm);
             }
-            lessonVm.VideoLessonViewModel.ThumbnailImageFile = GetFileContent(itemFile);
+            lessonVm.VideoViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
-            await _adminControllerService.SaveVideoLessonAsync(lessonVm).ConfigureAwait(true);
-            return RedirectToAction("VideoLessons");
+            await _adminControllerService.SaveVideoAsync(lessonVm).ConfigureAwait(true);
+            return RedirectToAction("Video");
         }
 
 
         [HttpGet]
-        public async Task<ActionResult> Training()
+        public async Task<ActionResult> Obuchenie()
         {
-            IList<TrainingViewModel> items = await _adminControllerService.GetAllTrainingsViewModelsAsync().ConfigureAwait(true);
+            IList<ObuchenieViewModel> items = await _adminControllerService.GetAllObuchenieViewModelsAsync().ConfigureAwait(true);
             return View(items?.OrderByDescending(x => x.SortingNumber).ToList());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Training(IList<TrainingViewModel> trainingsGridItemViewModels)
+        public async Task<ActionResult> Obuchenie(IList<ObuchenieViewModel> ObuchenieGridItemViewModels)
         {
-            if (ModelState.IsValid && trainingsGridItemViewModels != null)
+            if (ModelState.IsValid && ObuchenieGridItemViewModels != null)
             {
-                await _adminControllerService.SaveTrainingsAttributesAsync(trainingsGridItemViewModels).ConfigureAwait(true);
+                await _adminControllerService.SaveObuchenieAttributesAsync(ObuchenieGridItemViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
             }
-            return View(trainingsGridItemViewModels);
+            return View(ObuchenieGridItemViewModels);
         }
 
         [HttpGet]
-        public async Task<ActionResult> ManageTraining(int? trainingId)
+        public async Task<ActionResult> ManageObuchenie(int? obuchenieId)
         {
-            TrainingManagePageViewModel videoLessonVm = null;
-            if (trainingId.HasValue)
+            ObuchenieManagePageViewModel videoVm = null;
+            if (obuchenieId.HasValue)
             {
-                videoLessonVm = await _adminControllerService.GetTrainingViewModelAsync(trainingId.Value).ConfigureAwait(true);
+                videoVm = await _adminControllerService.GetObuchenieViewModelAsync(obuchenieId.Value).ConfigureAwait(true);
             }
-            if (videoLessonVm == null)
+            if (videoVm == null)
             {
-                videoLessonVm = new TrainingManagePageViewModel();
+                videoVm = new ObuchenieManagePageViewModel();
             }
 
-            videoLessonVm.TrainingViewModel = videoLessonVm.TrainingViewModel ?? new TrainingViewModel();
-            videoLessonVm.MetadataInfo = videoLessonVm.MetadataInfo ?? new MetadataInfoViewModel();
+            videoVm.ObuchenieViewModel = videoVm.ObuchenieViewModel ?? new ObuchenieViewModel();
+            videoVm.MetadataInfo = videoVm.MetadataInfo ?? new MetadataInfoViewModel();
 
-            return View(videoLessonVm);
+            return View(videoVm);
         }
 
         [HttpPost]
-        public async Task<ActionResult> ManageTraining(TrainingManagePageViewModel trainingVm, HttpPostedFileBase itemFile)
+        public async Task<ActionResult> ManageObuchenie(ObuchenieManagePageViewModel obuchenieVm, HttpPostedFileBase itemFile)
         {
-            if (!ModelState.IsValid || trainingVm == null)
+            if (!ModelState.IsValid || obuchenieVm == null)
             {
-                return View(trainingVm);
+                return View(obuchenieVm);
             }
-            trainingVm.TrainingViewModel.ThumbnailImageFile = GetFileContent(itemFile);
+            obuchenieVm.ObuchenieViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
-            await _adminControllerService.SaveTrainingAsync(trainingVm).ConfigureAwait(true);
-            return RedirectToAction("Training");
+            await _adminControllerService.SaveObuchenieAsync(obuchenieVm).ConfigureAwait(true);
+            return RedirectToAction("Obuchenie");
         }
 
 
@@ -197,20 +197,20 @@ namespace AutoCadet.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> ManageBlog(int? blogId)
         {
-            BlogManagePageViewModel videoLessonVm = null;
+            BlogManagePageViewModel videoVm = null;
             if (blogId.HasValue)
             {
-                videoLessonVm = await _adminControllerService.GetBlogViewModelAsync(blogId.Value).ConfigureAwait(true);
+                videoVm = await _adminControllerService.GetBlogViewModelAsync(blogId.Value).ConfigureAwait(true);
             }
-            if (videoLessonVm == null)
+            if (videoVm == null)
             {
-                videoLessonVm = new BlogManagePageViewModel();
+                videoVm = new BlogManagePageViewModel();
             }
 
-            videoLessonVm.BlogViewModel = videoLessonVm.BlogViewModel ?? new BlogViewModel();
-            videoLessonVm.MetadataInfo = videoLessonVm.MetadataInfo ?? new MetadataInfoViewModel();
+            videoVm.BlogViewModel = videoVm.BlogViewModel ?? new BlogViewModel();
+            videoVm.MetadataInfo = videoVm.MetadataInfo ?? new MetadataInfoViewModel();
 
-            return View(videoLessonVm);
+            return View(videoVm);
         }
 
         [HttpPost]

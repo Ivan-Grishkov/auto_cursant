@@ -1,4 +1,4 @@
-﻿@model AutoCadet.Models.TrainingViewModel
+﻿@model AutoCadet.Models.VideoViewModel
 @{
     Layout = "~/Views/Shared/_DetailsPageLayout.cshtml";
     ViewBag.HeaderTitle = Model.ListHeader;
@@ -11,10 +11,10 @@
 }
 
 @{
-    var instructorUrl = Url.Action("Training", "Home", new { prettyUrl = Model.UrlName }, Request?.Url?.Scheme);
+    var instructorUrl = Url.Action("Video", "Home", new { prettyUrl = Model.UrlName }, Request?.Url?.Scheme);
     var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
     var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
-    var hrefTwitter = "https://twitter.com/intent/tweet?text=" + $"{instructorUrl}";
+    var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20по%20видео%20урокам%20тут%20" + $"{instructorUrl}";
 }
 
 @section detailsH1 {
@@ -36,30 +36,29 @@
 @section breadcrumb {
     <ul class="breadcrumb">
         <li><a href="/">Главная</a></li>
-        <li><a href="/training">Обучение</a></li>
+        <li><a href="/video">Видео уроки</a></li>
         <li class="active">@Model.ListHeader</li>
     </ul>
+
+
 }
 @section detailsH2 {
     <h2 class="section-subheading text-muted">
-        <label>@Model.ListDescription</label>
+        <label for="average-score">Предлагаем ознакомиться с уроком от наших инструкторов</label>
+        <span class="pull-right">
+            наш инструктор проедим по маршруту №1
+        </span>
     </h2>
 }
+
 
 <section id="person" class="bg-light-gray">
     <div class="container">
         <div class="row text-center">
-            <div class="col-md-4">
-                @if (Model.ThumbnailImageFile != null && Model.ThumbnailImageFile.Length > 0)
-                {
-                    string base64String = Convert.ToBase64String(Model.ThumbnailImageFile);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.ListHeader}")" />
-                }
-            </div>
-            <div class="col-md-8">
-                @Html.Raw(Model.DetailText)
+            <div class="col-md-12">
+                <div class="videoWrapper">
+                    <embed src="@Model.YoutubeUrl" width="100%" height="349" />
+                </div>
             </div>
         </div>
         <div class="row text-center">
@@ -74,6 +73,11 @@
                     <a href="@hrefVk"><i class="fa fa-vk"></i></a>
                 </li>
             </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Raw(Model.Text)
+            </div>
         </div>
     </div>
 </section>

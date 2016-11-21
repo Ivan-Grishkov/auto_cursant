@@ -1,7 +1,7 @@
-﻿@model IList<AutoCadet.Models.TrainingViewModel>
+﻿@model IList<AutoCadet.Models.ObuchenieViewModel>
 
 @{
-    ViewBag.Title = "Trainings";
+    ViewBag.Title = "Obuchenie";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
 }
 <section class="container-fluid">
@@ -16,7 +16,7 @@
             @Html.ValidationSummary()
         </div>
         <div class="row">
-            @using (Html.BeginForm("Training", "Admin"))
+            @using (Html.BeginForm("Obuchenie", "Admin"))
             {
                 @Html.ValidationSummary()
                 <table class="irstructors-table table">
@@ -42,7 +42,7 @@
                                 <tr>
                                     <td>
                                         @Html.HiddenFor(x => Model[i].Id)
-                                        @Html.ActionLink("Edit", "ManageTraining", "Admin", new {trainingId = Model[i].Id}, null)
+                                        @Html.ActionLink("Edit", "ManageObuchenie", "Admin", new {obuchenieId = Model[i].Id}, null)
                                     </td>
                                     <td>
                                         @($"{Model[i].CreatedDate}")
@@ -83,7 +83,7 @@
 
                 <br/>
                 <div class="row">
-                    @Html.ActionLink("Create", "ManageTraining", "Admin", null, new {@class = "btn btn-default"})
+                    @Html.ActionLink("Create", "ManageObuchenie", "Admin", null, new {@class = "btn btn-default"})
                     <input type="submit" value="Save" class="btn btn-primary"/>
                 </div>
             }

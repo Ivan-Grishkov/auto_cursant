@@ -1,4 +1,4 @@
-﻿@model IList<AutoCadet.Models.TrainingViewModel>
+﻿@model IList<AutoCadet.Models.ObuchenieViewModel>
 
 @{
     var itemsCount = Model.Count;
@@ -18,7 +18,7 @@
             }
 
             <div class="col-md-3">
-                <a href="@Url.Action("Training", new {prettyUrl = Model[k].UrlName})">
+                <a href="@Url.Action("Obuchenie", new {prettyUrl = Model[k].UrlName})">
                     <span class="fa-stack fa-4x">
                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                             <i class="fa @Model[k].ListIcon fa-stack-1x fa-inverse"></i>

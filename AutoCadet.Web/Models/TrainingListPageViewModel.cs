@@ -2,9 +2,9 @@
 
 namespace AutoCadet.Models
 {
-    public class TrainingListPageViewModel
+    public class ObuchenieListPageViewModel
     {
-        public IList<TrainingViewModel> ItemsViewModels { get; set; }
+        public IList<ObuchenieViewModel> ItemsViewModels { get; set; }
 
     }
 }

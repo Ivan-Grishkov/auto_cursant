@@ -29,17 +29,17 @@ namespace AutoCadet.Models.Mapper
             CreateMap<CommentViewModel, Comment>()
                 .ForMember(x => x.Instructor, opt => opt.Ignore());
 
-            CreateMap<VideoLesson, VideoLessonViewModel>()
+            CreateMap<Video, VideoViewModel>()
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
-            CreateMap<VideoLessonViewModel, VideoLesson>()
+            CreateMap<VideoViewModel, Video>()
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
-            CreateMap<Training, TrainingViewModel>()
+            CreateMap<Obuchenie, ObuchenieViewModel>()
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
-            CreateMap<TrainingViewModel, Training>()
+            CreateMap<ObuchenieViewModel, Obuchenie>()
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 

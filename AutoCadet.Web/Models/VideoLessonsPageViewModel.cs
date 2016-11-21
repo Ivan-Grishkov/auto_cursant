@@ -2,8 +2,8 @@
 
 namespace AutoCadet.Models
 {
-    public class VideoLessonsPageViewModel
+    public class VideoPageViewModel
     {
-        public IList<VideoLessonViewModel> VideoLessonViewModels { get; set; }
+        public IList<VideoViewModel> VideoViewModels { get; set; }
     }
 }

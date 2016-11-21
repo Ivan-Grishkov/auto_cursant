@@ -56,38 +56,38 @@ namespace AutoCadet.Controllers
 
         [HttpGet]
         [RequireRequestValue("")]
-        public async Task<ActionResult> VideoLessons()
+        public async Task<ActionResult> Video()
         {
-            var lessonsPageViewModel = await _homeControllerService.GetVideoLessonsPageViewModelAsync().ConfigureAwait(true);
-            return View("VideoLessonsList", lessonsPageViewModel);
+            var lessonsPageViewModel = await _homeControllerService.GetVideoPageViewModelAsync().ConfigureAwait(true);
+            return View("VideoList", lessonsPageViewModel);
         }
 
         [HttpGet]
         [RequireRequestValue("prettyUrl")]
-        public async Task<ActionResult> VideoLessons(string prettyUrl)
+        public async Task<ActionResult> Video(string prettyUrl)
         {
-            VideoLessonViewModel vm = await _homeControllerService
-                .GetVideoLessonViewModelAsync(prettyUrl)
-                .ConfigureAwait(true) ?? new VideoLessonViewModel();
+            VideoViewModel vm = await _homeControllerService
+                .GetVideoViewModelAsync(prettyUrl)
+                .ConfigureAwait(true) ?? new VideoViewModel();
 
             return View(vm);
         }
 
         [HttpGet]
         [RequireRequestValue("")]
-        public async Task<ActionResult> Training()
+        public async Task<ActionResult> Obuchenie()
         {
-            var pageVm = await _homeControllerService.GetTrainingPageViewModelAsync().ConfigureAwait(true);
-            return View("TrainingList", pageVm);
+            var pageVm = await _homeControllerService.GetObucheniePageViewModelAsync().ConfigureAwait(true);
+            return View("ObuchenieList", pageVm);
         }
 
         [HttpGet]
         [RequireRequestValue("prettyUrl")]
-        public async Task<ActionResult> Training(string prettyUrl)
+        public async Task<ActionResult> Obuchenie(string prettyUrl)
         {
-            TrainingViewModel vm = await _homeControllerService
-                .GetTrainingViewModelAsync(prettyUrl)
-                .ConfigureAwait(true) ?? new TrainingViewModel();
+            ObuchenieViewModel vm = await _homeControllerService
+                .GetObuchenieViewModelAsync(prettyUrl)
+                .ConfigureAwait(true) ?? new ObuchenieViewModel();
 
             return View(vm);
         }

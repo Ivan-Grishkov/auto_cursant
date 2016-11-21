@@ -11,12 +11,12 @@
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>http://www.uroki-vozhdeniya.by/videolessons</loc>
+        <loc>http://www.uroki-vozhdeniya.by/video</loc>
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>http://www.uroki-vozhdeniya.by/training</loc>
+        <loc>http://www.uroki-vozhdeniya.by/obuchenie</loc>
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>

@@ -12,15 +12,15 @@ namespace AutoCadet.Services
         Task SaveInstructorAsync(InstructorManagePageViewModel pageVm);
         Task SaveInstructorsAttributesAsync(IList<InstructorViewModel> instructorGridItemViewModels);
 
-        Task<IList<VideoLessonViewModel>> GetAllVideoLessonViewModelsAsync();
-        Task<VideoLessonsManagePageViewModel> GetVideoLessonViewModelAsync(int lessonId);
-        Task SaveVideoLessonsAttributesAsync(IList<VideoLessonViewModel> videoLessonsGridItemViewModels);
-        Task SaveVideoLessonAsync(VideoLessonsManagePageViewModel lessonVm);
+        Task<IList<VideoViewModel>> GetAllVideoViewModelsAsync();
+        Task<VideoManagePageViewModel> GetVideoViewModelAsync(int lessonId);
+        Task SaveVideoAttributesAsync(IList<VideoViewModel> VideoGridItemViewModels);
+        Task SaveVideoAsync(VideoManagePageViewModel lessonVm);
 
-        Task<IList<TrainingViewModel>> GetAllTrainingsViewModelsAsync();
-        Task<TrainingManagePageViewModel> GetTrainingViewModelAsync(int trainingId);
-        Task SaveTrainingsAttributesAsync(IList<TrainingViewModel> trainingGridItemVms);
-        Task SaveTrainingAsync(TrainingManagePageViewModel trainingVm);
+        Task<IList<ObuchenieViewModel>> GetAllObuchenieViewModelsAsync();
+        Task<ObuchenieManagePageViewModel> GetObuchenieViewModelAsync(int obuchenieId);
+        Task SaveObuchenieAttributesAsync(IList<ObuchenieViewModel> obuchenieGridItemVms);
+        Task SaveObuchenieAsync(ObuchenieManagePageViewModel obuchenieVm);
 
         Task<IList<BlogViewModel>> GetAllBlogsViewModelsAsync();
         Task<BlogManagePageViewModel> GetBlogViewModelAsync(int blogId);

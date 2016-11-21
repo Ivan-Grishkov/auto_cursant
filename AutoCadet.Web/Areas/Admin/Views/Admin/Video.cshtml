@@ -1,4 +1,4 @@
-﻿@model IList<AutoCadet.Models.VideoLessonViewModel>
+﻿@model IList<AutoCadet.Models.VideoViewModel>
 
 @{
     ViewBag.Title = "Video Lessons";
@@ -16,7 +16,7 @@
             @Html.ValidationSummary()
         </div>
         <div class="row">
-            @using (Html.BeginForm("VideoLessons", "Admin"))
+            @using (Html.BeginForm("Video", "Admin"))
             {
                 @Html.ValidationSummary()
                 <table class="irstructors-table table">
@@ -42,7 +42,7 @@
                                 <tr>
                                     <td>
                                         @Html.HiddenFor(x => Model[i].Id)
-                                        @Html.ActionLink("Edit", "ManageVideoLesson", "Admin", new {lessonId = Model[i].Id}, null)
+                                        @Html.ActionLink("Edit", "ManageVideo", "Admin", new {lessonId = Model[i].Id}, null)
                                     </td>
                                     <td>
                                         @($"{Model[i].CreatedDate}")
@@ -83,7 +83,7 @@
 
                 <br/>
                 <div class="row">
-                    @Html.ActionLink("Create", "ManageVideoLesson", "Admin", null, new {@class = "btn btn-default"})
+                    @Html.ActionLink("Create", "ManageVideo", "Admin", null, new {@class = "btn btn-default"})
                     <input type="submit" value="Save" class="btn btn-primary"/>
                 </div>
             }

@@ -72,7 +72,7 @@ namespace AutoCadet.Services.Impl
                 instructor.ThumbnailImage.Bytes = pageVm.Instructor.ThumbnailImage;
             }
 
-            var instructorDetails = await _autoCadetDbContext.InstructorDetailses
+            var instructorDetails = await _autoCadetDbContext.InstructorDetails
                 .FirstOrDefaultAsync(x => x.Id == pageVm.InstructorDetails.Id)
                 .ConfigureAwait(false)
                                     ?? new InstructorDetails();
@@ -134,42 +134,42 @@ namespace AutoCadet.Services.Impl
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<IList<VideoLessonViewModel>> GetAllVideoLessonViewModelsAsync()
+        public async Task<IList<VideoViewModel>> GetAllVideoViewModelsAsync()
         {
-            var videoLessons = await _autoCadetDbContext.VideoLessons
+            var Video = await _autoCadetDbContext.Video
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
-            return videoLessons?.Select(i => _mapper.Map<VideoLessonViewModel>(i)).ToList();
+            return Video?.Select(i => _mapper.Map<VideoViewModel>(i)).ToList();
         }
 
-        public async Task<VideoLessonsManagePageViewModel> GetVideoLessonViewModelAsync(int lessonId)
+        public async Task<VideoManagePageViewModel> GetVideoViewModelAsync(int lessonId)
         {
             var instructor = await _autoCadetDbContext
-                .VideoLessons
+                .Video
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.Id == lessonId)
                 .ConfigureAwait(false);
 
-            return new VideoLessonsManagePageViewModel
+            return new VideoManagePageViewModel
             {
-                VideoLessonViewModel = _mapper.Map<VideoLessonViewModel>(instructor),
+                VideoViewModel = _mapper.Map<VideoViewModel>(instructor),
                 MetadataInfo = _mapper.Map<MetadataInfoViewModel>(instructor?.Metadata)
             };
         }
 
-        public async Task SaveVideoLessonsAttributesAsync(IList<VideoLessonViewModel> videoLessonsGridItemViewModels)
+        public async Task SaveVideoAttributesAsync(IList<VideoViewModel> VideoGridItemViewModels)
         {
-            var ids = videoLessonsGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
-            var lessons = await _autoCadetDbContext.VideoLessons
+            var ids = VideoGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
+            var lessons = await _autoCadetDbContext.Video
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync()
                 .ConfigureAwait(false);
             foreach (var instructor in lessons)
             {
-                var vm = videoLessonsGridItemViewModels.FirstOrDefault(x => x.Id == instructor.Id);
+                var vm = VideoGridItemViewModels.FirstOrDefault(x => x.Id == instructor.Id);
                 if (vm != null)
                 {
                     instructor.ListHeader = vm.ListHeader;
@@ -183,27 +183,27 @@ namespace AutoCadet.Services.Impl
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task SaveVideoLessonAsync(VideoLessonsManagePageViewModel pageVm)
+        public async Task SaveVideoAsync(VideoManagePageViewModel pageVm)
         {
-            if (pageVm?.VideoLessonViewModel == null)
+            if (pageVm?.VideoViewModel == null)
             {
                 throw new ArgumentNullException(nameof(pageVm));
             }
 
-            var lesson = await _autoCadetDbContext.VideoLessons
-                .FirstOrDefaultAsync(x => x.Id == pageVm.VideoLessonViewModel.Id)
+            var lesson = await _autoCadetDbContext.Video
+                .FirstOrDefaultAsync(x => x.Id == pageVm.VideoViewModel.Id)
                 .ConfigureAwait(false)
-                    ?? new VideoLesson();
-            _mapper.Map(pageVm.VideoLessonViewModel, lesson);
+                    ?? new Video();
+            _mapper.Map(pageVm.VideoViewModel, lesson);
 
-            if (pageVm.VideoLessonViewModel.ThumbnailImageFile != null)
+            if (pageVm.VideoViewModel.ThumbnailImageFile != null)
             {
                 if (lesson.ThumbnailImageFile == null)
                 {
                     lesson.ThumbnailImageFile = new ImageFile();
                 }
 
-                lesson.ThumbnailImageFile.Bytes = pageVm.VideoLessonViewModel.ThumbnailImageFile;
+                lesson.ThumbnailImageFile.Bytes = pageVm.VideoViewModel.ThumbnailImageFile;
             }
 
             lesson.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
@@ -215,46 +215,46 @@ namespace AutoCadet.Services.Impl
             }
             
             lesson.CreatedDate = DateTime.Now;
-            _autoCadetDbContext.VideoLessons.AddOrUpdate(lesson);
+            _autoCadetDbContext.Video.AddOrUpdate(lesson);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<IList<TrainingViewModel>> GetAllTrainingsViewModelsAsync()
+        public async Task<IList<ObuchenieViewModel>> GetAllObuchenieViewModelsAsync()
         {
-            var entities = await _autoCadetDbContext.Trainings
+            var entities = await _autoCadetDbContext.Obuchenie
                .Include(x => x.Metadata)
                .Include(x => x.ThumbnailImageFile)
                .ToListAsync()
                .ConfigureAwait(false);
-            return entities?.Select(i => _mapper.Map<TrainingViewModel>(i)).ToList();
+            return entities?.Select(i => _mapper.Map<ObuchenieViewModel>(i)).ToList();
         }
 
-        public async Task<TrainingManagePageViewModel> GetTrainingViewModelAsync(int trainingId)
+        public async Task<ObuchenieManagePageViewModel> GetObuchenieViewModelAsync(int obuchenieId)
         {
             var entity = await _autoCadetDbContext
-               .Trainings
+               .Obuchenie
                .Include(x => x.Metadata)
                .Include(x => x.ThumbnailImageFile)
-               .FirstOrDefaultAsync(x => x.Id == trainingId)
+               .FirstOrDefaultAsync(x => x.Id == obuchenieId)
                .ConfigureAwait(false);
 
-            return new TrainingManagePageViewModel
+            return new ObuchenieManagePageViewModel
             {
-                TrainingViewModel = _mapper.Map<TrainingViewModel>(entity),
+                ObuchenieViewModel = _mapper.Map<ObuchenieViewModel>(entity),
                 MetadataInfo = _mapper.Map<MetadataInfoViewModel>(entity?.Metadata)
             };
         }
 
-        public async Task SaveTrainingsAttributesAsync(IList<TrainingViewModel> trainingGridItemVms)
+        public async Task SaveObuchenieAttributesAsync(IList<ObuchenieViewModel> obuchenieGridItemVms)
         {
-            var ids = trainingGridItemVms.Where(x => x != null).Select(i => i.Id).ToList();
-            var entities = await _autoCadetDbContext.Trainings
+            var ids = obuchenieGridItemVms.Where(x => x != null).Select(i => i.Id).ToList();
+            var entities = await _autoCadetDbContext.Obuchenie
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync()
                 .ConfigureAwait(false);
             foreach (var entity in entities)
             {
-                var vm = trainingGridItemVms.FirstOrDefault(x => x.Id == entity.Id);
+                var vm = obuchenieGridItemVms.FirstOrDefault(x => x.Id == entity.Id);
                 if (vm != null)
                 {
                     entity.ListHeader = vm.ListHeader;
@@ -268,27 +268,27 @@ namespace AutoCadet.Services.Impl
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task SaveTrainingAsync(TrainingManagePageViewModel pageVm)
+        public async Task SaveObuchenieAsync(ObuchenieManagePageViewModel pageVm)
         {
-            if (pageVm?.TrainingViewModel == null)
+            if (pageVm?.ObuchenieViewModel == null)
             {
                 throw new ArgumentNullException(nameof(pageVm));
             }
 
-            var entity = await _autoCadetDbContext.Trainings
-                .FirstOrDefaultAsync(x => x.Id == pageVm.TrainingViewModel.Id)
+            var entity = await _autoCadetDbContext.Obuchenie
+                .FirstOrDefaultAsync(x => x.Id == pageVm.ObuchenieViewModel.Id)
                 .ConfigureAwait(false)
-                    ?? new Training();
-            _mapper.Map(pageVm.TrainingViewModel, entity);
+                    ?? new Obuchenie();
+            _mapper.Map(pageVm.ObuchenieViewModel, entity);
 
-            if (pageVm.TrainingViewModel.ThumbnailImageFile != null)
+            if (pageVm.ObuchenieViewModel.ThumbnailImageFile != null)
             {
                 if (entity.ThumbnailImageFile == null)
                 {
                     entity.ThumbnailImageFile = new ImageFile();
                 }
 
-                entity.ThumbnailImageFile.Bytes = pageVm.TrainingViewModel.ThumbnailImageFile;
+                entity.ThumbnailImageFile.Bytes = pageVm.ObuchenieViewModel.ThumbnailImageFile;
             }
 
             entity.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
@@ -300,7 +300,7 @@ namespace AutoCadet.Services.Impl
             }
 
             entity.CreatedDate = DateTime.Now;
-            _autoCadetDbContext.Trainings.AddOrUpdate(entity);
+            _autoCadetDbContext.Obuchenie.AddOrUpdate(entity);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 

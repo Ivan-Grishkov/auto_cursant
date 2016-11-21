@@ -13,13 +13,13 @@ namespace AutoCadet.Domain
 
 
         public IDbSet<Instructor> Instructors { get; set; }
-        public IDbSet<InstructorDetails> InstructorDetailses { get; set; }
+        public IDbSet<InstructorDetails> InstructorDetails { get; set; }
         public IDbSet<Comment> Comments { get; set; }
         public IDbSet<ImageFile> ImageFiles { get; set; }
         public IDbSet<Metadata> Metadatas { get; set; }
         public IDbSet<CallMe> CallMes { get; set; }
-        public IDbSet<VideoLesson> VideoLessons { get; set; }
-        public IDbSet<Training> Trainings { get; set; }
+        public IDbSet<Video> Video { get; set; }
+        public IDbSet<Obuchenie> Obuchenie { get; set; }
         public IDbSet<Blog> Blogs { get; set; }
 
         public static AutoCadetDbContext Create()

@@ -7,13 +7,13 @@ using System.Resources;
 namespace AutoCadet.Domain.Migrations
 {
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitMySql : IMigrationMetadata
+    public sealed partial class Init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitMySql));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611181606235_InitMySql"; }
+            get { return "201611210631188_Init"; }
         }
         
         string IMigrationMetadata.Source

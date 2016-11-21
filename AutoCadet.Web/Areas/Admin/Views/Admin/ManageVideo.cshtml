@@ -1,17 +1,17 @@
-﻿@model AutoCadet.Areas.Admin.Models.TrainingManagePageViewModel
+﻿@model AutoCadet.Areas.Admin.Models.VideoManagePageViewModel
 @{
-    ViewBag.Title = "Manage Training";
+    ViewBag.Title = "Manage Video Lesson";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
 }
 
 <section class="container-fluid">
     <div class="container">
         <div class="row">
-            <h2>Manage Training</h2>
+            <h2>Manage Video Lesson</h2>
 
-            @using (Html.BeginForm("ManageTraining", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("ManageVideo", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.HiddenFor(x => x.TrainingViewModel.Id)
+                @Html.HiddenFor(x => x.VideoViewModel.Id)
 
                 <div class="form-group error">
                     @Html.ValidationSummary()
@@ -19,49 +19,44 @@
 
                 <div class="form-group">
                     <label for="firstName">ListHeader:</label>
-                    @Html.TextBoxFor(x => x.TrainingViewModel.ListHeader, new { @class = "form-control", id = "firstName" })
-                </div>
-
-                <div class="form-group">
-                    <label for="ListDescription">ListDescription:</label>
-                    @Html.TextBoxFor(x => x.TrainingViewModel.ListDescription, new { @class = "form-control", id = "ListDescription" })
-                </div>
-
-                <div class="form-group">
-                    <label for="ListIcon">ListIcon http://fontawesome.io/icons/#web-application  или http://www.w3schools.com/icons/fontawesome_icons_text.asp  (пример: fa-file) :   </label>
-                    @Html.TextBoxFor(x => x.TrainingViewModel.ListIcon, new { @class = "form-control", id = "ListIcon" })
+                    @Html.TextBoxFor(x => x.VideoViewModel.ListHeader, new { @class = "form-control", id = "firstName" })
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">SortingNumber:</label>
-                    @Html.TextBoxFor(x => x.TrainingViewModel.SortingNumber, new { @class = "form-control", id = "lastName", type = "number" })
+                    @Html.TextBoxFor(x => x.VideoViewModel.SortingNumber, new { @class = "form-control", id = "lastName", type="number" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Patronymic">Text:</label>
+                    @Html.TextAreaFor(x => x.VideoViewModel.Text, new { @class = "form-control", id = "Patronymic" })
                 </div>
 
                 <div class="form-group">
                     <label for="Email">UrlName:</label>
-                    @Html.TextBoxFor(x => x.TrainingViewModel.UrlName, new { @class = "form-control", id = "Email" })
+                    @Html.TextBoxFor(x => x.VideoViewModel.UrlName, new { @class = "form-control", id = "Email" })
                 </div>
 
                 <div class="form-group">
-                    <label for="Price">DetailText </label>
-                    @Html.TextAreaFor(x => x.TrainingViewModel.DetailText, new { @class = "form-control", id = "Price" })
+                    <label for="Price">YoutubeUrl format http://www.youtube.com/embed/0PWN97WDfFY </label>
+                    @Html.TextBoxFor(x => x.VideoViewModel.YoutubeUrl, new { @class = "form-control", id = "Price" })
                 </div>
 
                 <div class="form-group">
-                    @if (Model.TrainingViewModel.ThumbnailImageFile != null && Model.TrainingViewModel.ThumbnailImageFile.Length > 0)
+                    @if (Model.VideoViewModel.ThumbnailImageFile != null && Model.VideoViewModel.ThumbnailImageFile.Length > 0)
                     {
-                        string base64String = Convert.ToBase64String(Model.TrainingViewModel.ThumbnailImageFile);
+                        string base64String = Convert.ToBase64String(Model.VideoViewModel.ThumbnailImageFile);
                         <img src="@($"data:image/png;base64,{base64String}")" />
                     }
                 </div>
                 <div class="form-group">
-                    <label for="itemFile">Фото details:</label>
-                    <input type="file" name="itemFile" id="itemFile" />
+                    <label for="itemFile">Фото в списке (400 x 289):</label>
+                    <input type="file" name="itemFile" id="itemFile"/>
                 </div>
 
                 <div class="form-group">
                     <label for="IsActive">IsActive:</label>
-                    @Html.CheckBoxFor(x => x.TrainingViewModel.IsActive, new { @class = "form-control", id = "IsActive" })
+                    @Html.CheckBoxFor(x => x.VideoViewModel.IsActive, new { @class = "form-control", id = "IsActive" })
                 </div>
 
                 if (Model.MetadataInfo != null)
@@ -96,7 +91,7 @@
                 }
 
                 <input type="submit" class="btn btn-primary" value="Save">
-                @Html.ActionLink("Cancel", "Training", "Admin", new { @class = "btn btn-default" })
+                @Html.ActionLink("Cancel", "Video", "Admin", new { @class = "btn btn-default" })
             }
         </div>
     </div>

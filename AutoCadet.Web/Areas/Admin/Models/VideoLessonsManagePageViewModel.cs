@@ -3,10 +3,10 @@ using AutoCadet.Models;
 
 namespace AutoCadet.Areas.Admin.Models
 {
-    public class VideoLessonsManagePageViewModel
+    public class VideoManagePageViewModel
     {
         [Required]
-        public VideoLessonViewModel VideoLessonViewModel { get; set; }
+        public VideoViewModel VideoViewModel { get; set; }
         [Required]
         public MetadataInfoViewModel MetadataInfo { get; set; }
     }

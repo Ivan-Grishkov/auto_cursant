@@ -5,7 +5,7 @@ using AutoCadet.Domain.Entities;
 
 namespace AutoCadet.Models
 {
-    public class VideoLessonViewModel
+    public class VideoViewModel
     {
         public int Id { get; set; }
         [Required]

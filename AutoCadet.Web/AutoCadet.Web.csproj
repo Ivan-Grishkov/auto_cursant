@@ -204,11 +204,11 @@
     <Compile Include="Areas\Admin\Models\AccountViewModels.cs" />
     <Compile Include="Domain\AutoCadetDbContext.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
-    <Compile Include="Domain\Migrations\201611181606235_InitMySql.cs" />
-    <Compile Include="Domain\Migrations\201611181606235_InitMySql.Designer.cs">
-      <DependentUpon>201611181606235_InitMySql.cs</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Migrations\Configuration.cs" />
+    <Compile Include="Domain\Migrations\201611210631188_Init.cs" />
+    <Compile Include="Domain\Migrations\201611210631188_Init.Designer.cs">
+      <DependentUpon>201611210631188_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BlogListPageViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\CallMeViewModel.cs" />
@@ -283,10 +283,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Areas\Admin\Views\Admin\VideoLessons.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\ManageVideoLesson.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Training.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\ManageTraining.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Video.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ManageVideo.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Obuchenie.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ManageObuchenie.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Blog.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\ManageBlog.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -356,12 +356,12 @@
     <Content Include="Views\Home\InstructorsList.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\Home\VideoLessonsList.cshtml" />
-    <Content Include="Views\Home\VideoLessons.cshtml" />
-    <Content Include="Views\Home\_IndexVideosList.cshtml" />
-    <Content Include="Views\Home\_IndexTrainingList.cshtml" />
-    <Content Include="Views\Home\TrainingList.cshtml" />
-    <Content Include="Views\Home\Training.cshtml" />
+    <Content Include="Views\Home\VideoList.cshtml" />
+    <Content Include="Views\Home\Video.cshtml" />
+    <Content Include="Views\Home\_IndexVideoList.cshtml" />
+    <Content Include="Views\Home\_IndexObuchenieList.cshtml" />
+    <Content Include="Views\Home\ObuchenieList.cshtml" />
+    <Content Include="Views\Home\Obuchenie.cshtml" />
     <Content Include="Views\Shared\_DetailsPageLayout.cshtml" />
     <Content Include="Views\Home\BlogList.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
@@ -376,8 +376,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Domain\Migrations\201611181606235_InitMySql.resx">
-      <DependentUpon>201611181606235_InitMySql.cs</DependentUpon>
+    <EmbeddedResource Include="Domain\Migrations\201611210631188_Init.resx">
+      <DependentUpon>201611210631188_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

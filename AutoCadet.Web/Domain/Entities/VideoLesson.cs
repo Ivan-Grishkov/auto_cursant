@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AutoCadet.Domain.Entities
 {
-    public class VideoLesson:EntityBase
+    public class Video:EntityBase
     {
         [Required]
         public string UrlName { get; set; }

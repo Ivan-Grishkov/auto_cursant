@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace AutoCadet.Models
 {
-    public class TrainingViewModel
+    public class ObuchenieViewModel
     {
         public int Id { get; set; }
         [Required]

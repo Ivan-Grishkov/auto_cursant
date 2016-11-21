@@ -51,23 +51,23 @@ namespace AutoCadet.Services.Impl
             var commentsVms = comments.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
 
 
-            var videoLessons = await _autoCadetDbContext.VideoLessons
+            var Video = await _autoCadetDbContext.Video
                 .Include(x => x.ThumbnailImageFile)
                 .Include(x => x.Metadata)
                 .Where(x => x.IsActive)
                 .OrderByDescending(x => x.SortingNumber)
                 .ToListAsync()
                 .ConfigureAwait(false);
-            var videoLessonVms = videoLessons.Select(x => _mapper.Map<VideoLessonViewModel>(x)).ToList();
+            var videoVms = Video.Select(x => _mapper.Map<VideoViewModel>(x)).ToList();
 
-            var services = await _autoCadetDbContext.Trainings
+            var services = await _autoCadetDbContext.Obuchenie
                 .Include(x => x.ThumbnailImageFile)
                 .Include(x => x.Metadata)
                 .Where(x => x.IsActive)
                 .OrderByDescending(x => x.SortingNumber)
                 .ToListAsync()
                 .ConfigureAwait(false);
-            var servicesVms = services.Select(x => _mapper.Map<TrainingViewModel>(x)).ToList();
+            var servicesVms = services.Select(x => _mapper.Map<ObuchenieViewModel>(x)).ToList();
 
             var blogs = await _autoCadetDbContext.Blogs
                 .Include(x => x.ThumbnailImageFile)
@@ -82,8 +82,8 @@ namespace AutoCadet.Services.Impl
             {
                 InstructorGridItems = vms,
                 Comments = commentsVms,
-                VideosGridItems = videoLessonVms,
-                Trainings = servicesVms,
+                VideoGridItems = videoVms,
+                Obuchenie = servicesVms,
                 Blogs = blogsVms
             };
         }
@@ -112,52 +112,52 @@ namespace AutoCadet.Services.Impl
             };
         }
 
-        public async Task<VideoLessonsPageViewModel> GetVideoLessonsPageViewModelAsync()
+        public async Task<VideoPageViewModel> GetVideoPageViewModelAsync()
         {
-            var videoLessons = await _autoCadetDbContext.VideoLessons
+            var Video = await _autoCadetDbContext.Video
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
-            return new VideoLessonsPageViewModel
+            return new VideoPageViewModel
             {
-                VideoLessonViewModels = videoLessons?.Select(x => _mapper.Map<VideoLessonViewModel>(x)).ToList()
+                VideoViewModels = Video?.Select(x => _mapper.Map<VideoViewModel>(x)).ToList()
             };
         }
 
-        public async Task<VideoLessonViewModel> GetVideoLessonViewModelAsync(string prettyUrl)
+        public async Task<VideoViewModel> GetVideoViewModelAsync(string prettyUrl)
         {
-            var videoLesson = await _autoCadetDbContext.VideoLessons
+            var video = await _autoCadetDbContext.Video
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
-            return _mapper.Map<VideoLessonViewModel>(videoLesson);
+            return _mapper.Map<VideoViewModel>(video);
         }
 
-        public async Task<TrainingListPageViewModel> GetTrainingPageViewModelAsync()
+        public async Task<ObuchenieListPageViewModel> GetObucheniePageViewModelAsync()
         {
-            var items = await _autoCadetDbContext.Trainings
+            var items = await _autoCadetDbContext.Obuchenie
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
-            return new TrainingListPageViewModel
+            return new ObuchenieListPageViewModel
             {
-                ItemsViewModels = items?.Select(x => _mapper.Map<TrainingViewModel>(x)).ToList()
+                ItemsViewModels = items?.Select(x => _mapper.Map<ObuchenieViewModel>(x)).ToList()
             };
         }
 
-        public async Task<TrainingViewModel> GetTrainingViewModelAsync(string prettyUrl)
+        public async Task<ObuchenieViewModel> GetObuchenieViewModelAsync(string prettyUrl)
         {
-            var items = await _autoCadetDbContext.Trainings
+            var items = await _autoCadetDbContext.Obuchenie
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
-            return _mapper.Map<TrainingViewModel>(items);
+            return _mapper.Map<ObuchenieViewModel>(items);
         }
 
         public async Task<BlogListPageViewModel> GetBlogListPageViewModelAsync()

@@ -7,11 +7,11 @@ namespace AutoCadet.Services
     {
         Task<HomePageViewModel> GetHomePageViewModelAsync();
         Task<InstructorsListPageViewModel> GetInstructorsPageViewModelAsync();
-        Task<VideoLessonsPageViewModel> GetVideoLessonsPageViewModelAsync();
-        Task<VideoLessonViewModel> GetVideoLessonViewModelAsync(string prettyUrl);
+        Task<VideoPageViewModel> GetVideoPageViewModelAsync();
+        Task<VideoViewModel> GetVideoViewModelAsync(string prettyUrl);
 
-        Task<TrainingListPageViewModel> GetTrainingPageViewModelAsync();
-        Task<TrainingViewModel> GetTrainingViewModelAsync(string prettyUrl);
+        Task<ObuchenieListPageViewModel> GetObucheniePageViewModelAsync();
+        Task<ObuchenieViewModel> GetObuchenieViewModelAsync(string prettyUrl);
 
         Task<BlogListPageViewModel> GetBlogListPageViewModelAsync();
         Task<BlogViewModel> GetBlogViewModelAsync(string prettyUrl);

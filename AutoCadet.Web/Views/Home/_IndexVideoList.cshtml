@@ -1,4 +1,4 @@
-﻿@model IList<AutoCadet.Models.VideoLessonViewModel>
+﻿@model IList<AutoCadet.Models.VideoViewModel>
 
 <div class="row carousel-row">
     <div id="lessonsCarousel" class="carousel slide col-md-12" data-ride="carousel" data-interval="false">
@@ -29,7 +29,7 @@
                         }
 
                         <div class="col-md-4 col-sm-6 portfolio-item">
-                            <a href="@Url.Action("VideoLessons", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
+                            <a href="@Url.Action("Video", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
                                 @{
                                     if (Model[k].ThumbnailImageFile != null && Model[k].ThumbnailImageFile.Length > 0)
                                     {
@@ -46,7 +46,7 @@
                                 <h4>@($"{Model[k].ListHeader}")</h4>
                                 <div class="clearfix"></div>
                                 @{
-                                    var instructorUrl = Url.Action("VideoLessons", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
+                                    var instructorUrl = Url.Action("Video", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
                                     var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
                                     var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
                                     var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20по%20видео%20урокам%20" + $"{instructorUrl}";

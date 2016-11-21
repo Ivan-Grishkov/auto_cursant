@@ -11,8 +11,8 @@ namespace AutoCadet.Services.Impl
     {
         private const string BaseUrl = "http://www.uroki-vozhdeniya.by/";
         private const string ActionInstructors = "instructors";
-        private const string ActionVideoLessons = "videolessons";
-        private const string ActionTraining = "training";
+        private const string ActionVideo = "video";
+        private const string ActionObuchenie = "obuchenie";
         private const string ActionBlog = "blog";
         private readonly string _pathToSiteMap = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/sitemap_base.xml");
         private readonly AutoCadetDbContext _autoCadetDbContext;
@@ -34,11 +34,11 @@ namespace AutoCadet.Services.Impl
             var instructorsUrls = await _autoCadetDbContext.Instructors.Select(x => x.UrlName).ToListAsync().ConfigureAwait(false);
             AddNewNodes(root, ActionInstructors, instructorsUrls);
 
-            var videoUrls = await _autoCadetDbContext.VideoLessons.Select(x => x.UrlName).ToListAsync().ConfigureAwait(false);
-            AddNewNodes(root, ActionVideoLessons, videoUrls);
+            var videoUrls = await _autoCadetDbContext.Video.Select(x => x.UrlName).ToListAsync().ConfigureAwait(false);
+            AddNewNodes(root, ActionVideo, videoUrls);
 
-            var trainingUrls = await _autoCadetDbContext.Trainings.Select(x => x.UrlName).ToListAsync().ConfigureAwait(false);
-            AddNewNodes(root, ActionTraining, trainingUrls);
+            var obuchenieUrls = await _autoCadetDbContext.Obuchenie.Select(x => x.UrlName).ToListAsync().ConfigureAwait(false);
+            AddNewNodes(root, ActionObuchenie, obuchenieUrls);
 
             var blogUrls = await _autoCadetDbContext.Blogs.Select(x => x.UrlName).ToListAsync().ConfigureAwait(false);
             AddNewNodes(root, ActionBlog, blogUrls);
