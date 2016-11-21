@@ -366,6 +366,7 @@
     <Content Include="Views\Home\BlogList.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\_IndexBlogList.cshtml" />
+    <Content Include="Views\Home\_SocialButtons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\app\directives\" />

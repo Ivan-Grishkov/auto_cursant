@@ -45,29 +45,6 @@
                             <div class="portfolio-caption" title="@Model[k].ListHeader">
                                 <h4>@($"{Model[k].ListHeader}")</h4>
                                 <div class="clearfix"></div>
-                                @{
-                                    var instructorUrl = Url.Action("Video", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
-                                    var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
-                                    var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
-                                    var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20по%20видео%20урокам%20" + $"{instructorUrl}";
-                                }
-                                <ul class="list-inline social-buttons text-center">
-                                    <li title="Twitter">
-                                        <a href="@hrefTwitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li title="Facebook">
-                                        <a href="@hrefFb">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li title="VK">
-                                        <a href="@hrefVk">
-                                            <i class="fa fa-vk"></i>
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     }

@@ -58,28 +58,9 @@
                                     <span class="text-right pull-right">@($"{Model[k].Price} р.")</span>
                                 </div>
                                 @{
-                                    var instructorUrl = Url.Action("Instructors", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
-                                    var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
-                                    var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
-                                    var hrefTwitter = "https://twitter.com/intent/tweet?text=Я%20учусь%20управлять%20автомобилем%20у%20инструктора%20" + $"{Model[k].FirstName}%20{Model[k].LastName}%20{instructorUrl}";
+                                    var pageUrl = Url.Action("Instructors", "Home", new { prettyUrl = Model[k].UrlName }, Request?.Url?.Scheme);
+                                    Html.RenderPartial("_SocialButtons", pageUrl);
                                 }
-                                <ul class="list-inline social-buttons text-center">
-                                    <li title="Twitter">
-                                        <a href="@hrefTwitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li title="Facebook">
-                                        <a href="@hrefFb">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li title="VK">
-                                        <a href="@hrefVk">
-                                            <i class="fa fa-vk"></i>
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     }

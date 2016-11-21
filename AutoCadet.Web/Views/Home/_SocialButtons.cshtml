@@ -1,0 +1,13 @@
+﻿@model string
+
+<ul class="list-inline social-buttons text-center">
+    <li title="Twitter">
+        <a href="@($"https://twitter.com/intent/tweet?text={Model}")"><i class="fa fa-twitter"></i></a>
+    </li>
+    <li title="Facebook">
+        <a href="@($"http://www.facebook.com/sharer.php?u={Model}")"><i class="fa fa-facebook"></i></a>
+    </li>
+    <li title="VK">
+        <a href="@($"http://vk.com/share.php?url={Model}")"><i class="fa fa-vk"></i></a>
+    </li>
+</ul>

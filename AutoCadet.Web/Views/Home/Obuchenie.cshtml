@@ -11,32 +11,25 @@
 }
 
 @{
-    var instructorUrl = Url.Action("Obuchenie", "Home", new { prettyUrl = Model.UrlName }, Request?.Url?.Scheme);
-    var hrefFb = "http://www.facebook.com/sharer.php?u=" + instructorUrl;
-    var hrefVk = "http://vk.com/share.php?url=" + instructorUrl;
-    var hrefTwitter = "https://twitter.com/intent/tweet?text=" + $"{instructorUrl}";
+    var pageUrl = Url.Action("Obuchenie", "Home", new {prettyUrl = Model.UrlName}, Request?.Url?.Scheme);
 }
 
 @section detailsH1 {
     @(Model.Metadata?.H1)
 
-    <ul class="list-inline social-buttons text-center pull-right">
-        <li title="Twitter">
-            <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
-        </li>
-        <li title="Facebook">
-            <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
-        </li>
-        <li title="VK">
-            <a href="@hrefVk"><i class="fa fa-vk"></i></a>
-        </li>
-    </ul>
+    <span class="pull-right">
+    @{ Html.RenderPartial("_SocialButtons", pageUrl); }
+</span>
 }
 
 @section breadcrumb {
     <ul class="breadcrumb">
-        <li><a href="/">Главная</a></li>
-        <li><a href="/obuchenie">Обучение</a></li>
+        <li>
+            <a href="/">Главная</a>
+        </li>
+        <li>
+            <a href="/obuchenie">Обучение</a>
+        </li>
         <li class="active">@Model.ListHeader</li>
     </ul>
 }
@@ -52,10 +45,10 @@
             <div class="col-md-4">
                 @if (Model.ThumbnailImageFile != null && Model.ThumbnailImageFile.Length > 0)
                 {
-                    string base64String = Convert.ToBase64String(Model.ThumbnailImageFile);
+                    var base64String = Convert.ToBase64String(Model.ThumbnailImageFile);
                     <img class="img-responsive img-centered img-circle"
                          src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.ListHeader}")" />
+                         alt="@($"{Model.ListHeader}")"/>
                 }
             </div>
             <div class="col-md-8">
@@ -63,17 +56,7 @@
             </div>
         </div>
         <div class="row text-center">
-            <ul class="list-inline social-buttons text-center">
-                <li title="Twitter">
-                    <a href="@hrefTwitter"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li title="Facebook">
-                    <a href="@hrefFb"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li title="VK">
-                    <a href="@hrefVk"><i class="fa fa-vk"></i></a>
-                </li>
-            </ul>
+            @{ Html.RenderPartial("_SocialButtons", pageUrl); }
         </div>
     </div>
 </section>
