@@ -7,6 +7,7 @@ using Owin;
 using StructureMap;
 
 [assembly: OwinStartup(typeof(Startup))]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Web.config", Watch = true)]
 namespace AutoCadet
 {
     public partial class Startup

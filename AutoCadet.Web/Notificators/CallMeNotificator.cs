@@ -3,13 +3,20 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using AutoCadet.Domain.Entities;
+using log4net;
 
 namespace AutoCadet.Notificators
 {
     public class CallMeNotificator : ICallMeNotificator
     {
+        private readonly ILog _log;
         private const char EmailSplitter = ';';
         private readonly string _adminEmail = ConfigurationManager.AppSettings["NotifyMeDefaultEmails"] ?? "grishkov.ivan@gmail.com";
+
+        public CallMeNotificator(ILog log)
+        {
+            _log = log;
+        }
 
         /// <param name="phone"></param>
         /// <param name="requesterName"></param>
@@ -47,7 +54,7 @@ namespace AutoCadet.Notificators
             }
             catch (Exception e)
             {
-                //TODO[2016/10/26 IG]: handle exception properly.
+                _log.Error(e);
                 return false;
             }
             return true;

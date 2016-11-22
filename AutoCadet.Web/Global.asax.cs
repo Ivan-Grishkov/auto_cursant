@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Helpers;
@@ -6,13 +7,17 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Canonicalize;
+using log4net;
 
 namespace AutoCadet
 {
     public class MvcApplication : HttpApplication
     {
+        private ILog _log;
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
+            _log = LogManager.GetLogger("AutoCadet");
             RouteTable.Routes.Canonicalize().NoWww().Lowercase().NoTrailingSlash();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -53,6 +58,12 @@ namespace AutoCadet
                     Response.End();
                 }
             }
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            _log.Error(exception);
         }
     }
 }

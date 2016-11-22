@@ -70,7 +70,7 @@
         </div>
     </div>
 </section>
-<!-- Portfolio Grid Section -->
+
 <section id="car">
     <div class="container">
         <div class="row">
@@ -89,11 +89,23 @@
                          alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
                 }
             </div>
-            <div class="col-md-8 text-left">
-                <p>
-                    <strong>Расход топлива на 100 км: @Model.InstructorDetails?.FuelConsumption л.</strong>
-                </p>
-                <p>@Html.Raw(Model.InstructorDetails?.VehicleDescriprion)</p>
+            <div class="col-md-4">
+                @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
+                {
+                    var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
+                    <img class="img-responsive img-centered img-circle"
+                         src="@($"data:image/png;base64,{base64String}")"
+                         alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
+                }
+            </div>
+            <div class="col-md-4">
+                @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
+                {
+                    var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
+                    <img class="img-responsive img-centered img-circle"
+                         src="@($"data:image/png;base64,{base64String}")"
+                         alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
+                }
             </div>
         </div>
     </div>

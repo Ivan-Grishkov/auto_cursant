@@ -179,9 +179,9 @@
                             <div class="form-group">
                                 <select name="instructorId" class="dropdown form-control">
                                     <option value="" disabled selected>Ваш Инструктор</option>
-                                    @foreach (var instructor in Model.InstructorGridItems.OrderBy(x => x.LastName))
+                                    @foreach (var instructor in Model.InstructorGridItems?.Where(x => x != null).OrderBy(x => x.LastName))
                                     {
-                                        <option value="@(instructor.Id)">@($"{instructor.LastName} {instructor.LastName}")</option>
+                                        <option value="@(instructor.Id)">@($"{instructor.LastName} {instructor.FirstName}")</option>
                                     }
                                 </select>
                                 <p class="help-block text-danger"></p>

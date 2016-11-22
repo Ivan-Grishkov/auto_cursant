@@ -3,6 +3,7 @@ using System.Web;
 using AutoCadet.Domain;
 using AutoCadet.Models.Mapper;
 using AutoMapper;
+using log4net;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,6 +16,8 @@ namespace AutoCadet.Infrastructure
     {
         public AppRegistry()
         {
+            For<ILog>().Use(x => LogManager.GetLogger("AutoCadet"));
+
             Scan(scan =>
             {
                 scan.AssembliesFromApplicationBaseDirectory();
