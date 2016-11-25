@@ -420,7 +420,13 @@ namespace AutoCadet.Services.Impl
                 var vm = commentViewModels.FirstOrDefault(x => x.Id == comment.Id);
                 if (vm != null)
                 {
-                    _mapper.Map(vm, comment);
+                    comment.Email = vm.Email;
+                    comment.IsVisibleInList = vm.IsVisibleInList;
+                    comment.IsActive = vm.IsActive;
+                    comment.Name = vm.Name;
+                    comment.Phone = vm.Phone;
+                    comment.Score = vm.Score;
+                    comment.Text = vm.Text;
                 }
             }
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
@@ -444,7 +450,9 @@ namespace AutoCadet.Services.Impl
                 var vm = callMeViewModels.FirstOrDefault(x => x.Id == callMe.Id);
                 if (vm != null)
                 {
-                    _mapper.Map(vm, callMe);
+                    callMe.IsHandled = vm.IsHandled;
+                    callMe.RequesterName = vm.RequesterName;
+                    callMe.Phone = vm.Phone;
                 }
             }
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);

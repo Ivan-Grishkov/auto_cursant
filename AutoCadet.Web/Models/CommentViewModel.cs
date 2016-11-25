@@ -20,7 +20,7 @@ namespace AutoCadet.Models
 
         [UIHint("Score")]
         [Required]
-        public double? Score { get; set; }
+        public double Score { get; set; }
 
         public bool IsVisibleInList { get; set; }
         public bool IsActive { get; set; }

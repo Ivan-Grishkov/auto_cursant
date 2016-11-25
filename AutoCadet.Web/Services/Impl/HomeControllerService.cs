@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoCadet.Domain;
@@ -244,7 +245,12 @@ namespace AutoCadet.Services.Impl
 
         public async Task<bool> ProcessCallMeAsync(CallMeViewModel callMeVm)
         {
-            var isExists = await _autoCadetDbContext.CallMes.AnyAsync(x => x.Phone == callMeVm.Phone).ConfigureAwait(false);
+            var isExists = await _autoCadetDbContext.CallMes
+                .AnyAsync(
+                    x => x.Phone == callMeVm.Phone 
+                        && !x.IsHandled 
+                        && SqlFunctions.DateDiff("hh", x.CreatedDate, DateTime.Now) < 1 )
+                .ConfigureAwait(false);
             if (!isExists)
             {
                 var callMe = _mapper.Map<CallMe>(callMeVm);

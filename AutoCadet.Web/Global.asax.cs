@@ -63,6 +63,11 @@ namespace AutoCadet
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
+            if (_log == null)
+            {
+                _log = LogManager.GetLogger("AutoCadet");
+            }
+
             _log.Error(exception);
         }
     }
