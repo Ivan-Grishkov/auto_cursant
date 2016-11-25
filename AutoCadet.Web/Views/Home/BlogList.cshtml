@@ -15,8 +15,9 @@
 }
 
 @section detailsH1 {
-    Полезные советы сдающим на категорию B
-
+    <h1 class="section-heading">
+        Полезные советы сдающим на категорию B
+    </h1>
     <span class="pull-right">
         @{ Html.RenderPartial("_SocialButtons", pageUrl); }
     </span>
@@ -24,11 +25,15 @@
 
 @section breadcrumb {
     <ul class="breadcrumb">
-        <li><a href="/">Главная</a></li>
+        <li>
+            <a href="/">Главная</a>
+        </li>
         <li class="active">Видео Уроки</li>
     </ul>
 }
 
 <section id="portfolio" class="bg-light-gray">
-    @{ Html.RenderPartial("_IndexBlogList", Model.ItemsViewModels?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    <div class="container">
+        @{ Html.RenderPartial("_IndexBlogList", Model.ItemsViewModels?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    </div>
 </section>

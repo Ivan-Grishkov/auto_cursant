@@ -11,12 +11,13 @@
 }
 
 @{
-    var pageUrl = Url.Action("Blog", "Home", new { prettyUrl = Model.UrlName }, Request?.Url?.Scheme);
+    var pageUrl = Url.Action("Blog", "Home", new {prettyUrl = Model.UrlName}, Request?.Url?.Scheme);
 }
 
 @section detailsH1 {
-    @(Model.Metadata?.H1)
-
+    <h1 class="section-heading">
+        @(Model.Metadata?.H1)
+    </h1>
     <span class="pull-right">
         @{ Html.RenderPartial("_SocialButtons", pageUrl); }
     </span>
@@ -24,8 +25,12 @@
 
 @section breadcrumb {
     <ul class="breadcrumb">
-        <li><a href="/">Главная</a></li>
-        <li><a href="/blog">Полезные советы</a></li>
+        <li>
+            <a href="/">Главная</a>
+        </li>
+        <li>
+            <a href="/blog">Полезные советы</a>
+        </li>
         <li class="active">@Model.ListHeader</li>
     </ul>
 }
@@ -46,13 +51,13 @@
             <div class="col-md-4">
                 @if (Model.DetailsImageFile != null && Model.DetailsImageFile.Length > 0)
                 {
-                    string base64String = Convert.ToBase64String(Model.DetailsImageFile);
+                    var base64String = Convert.ToBase64String(Model.DetailsImageFile);
                     <img class="img-responsive img-centered img-circle"
                          src="@($"data:image/png;base64,{base64String}")"
                          alt="@($"{Model.ListHeader}")"/>
                 }
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 text-left">
                 @Html.Raw(Model.DetailsText)
             </div>
         </div>

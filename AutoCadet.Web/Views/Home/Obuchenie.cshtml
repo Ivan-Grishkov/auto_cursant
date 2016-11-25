@@ -15,8 +15,9 @@
 }
 
 @section detailsH1 {
-    @(Model.Metadata?.H1)
-
+    <h1 class="section-heading">
+        @(Model.Metadata?.H1)
+    </h1>
     <span class="pull-right">
     @{ Html.RenderPartial("_SocialButtons", pageUrl); }
 </span>
@@ -51,7 +52,7 @@
                          alt="@($"{Model.ListHeader}")"/>
                 }
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 text-left">
                 @Html.Raw(Model.DetailText)
             </div>
         </div>

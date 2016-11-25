@@ -15,17 +15,22 @@
 }
 
 @section detailsH1 {
-    @(Model.Metadata?.H1)
-
-<span class="pull-right">
-    @{ Html.RenderPartial("_SocialButtons", pageUrl); }
-</span>
+    <h1 class="section-heading">
+        @(Model.Metadata?.H1)
+    </h1>
+    <span class="pull-right">
+        @{ Html.RenderPartial("_SocialButtons", pageUrl); }
+    </span>
 }
 
 @section breadcrumb {
     <ul class="breadcrumb">
-        <li><a href="/">Главная</a></li>
-        <li><a href="/video">Видео уроки</a></li>
+        <li>
+            <a href="/">Главная</a>
+        </li>
+        <li>
+            <a href="/video">Видео уроки</a>
+        </li>
         <li class="active">@Model.ListHeader</li>
     </ul>
 
@@ -46,7 +51,7 @@
         <div class="row text-center">
             <div class="col-md-12">
                 <div class="videoWrapper">
-                    <embed src="@Model.YoutubeUrl" width="100%" height="349" />
+                    <embed src="@Model.YoutubeUrl" width="100%" height="349"/>
                 </div>
             </div>
         </div>
@@ -54,7 +59,7 @@
             @{ Html.RenderPartial("_SocialButtons", pageUrl); }
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-left">
                 @Html.Raw(Model.Text)
             </div>
         </div>

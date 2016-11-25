@@ -15,20 +15,26 @@
 }
 
 @section detailsH1 {
-    Лучшие инструкторы минска объясняют как проехать маршруты ГАИ
+    <h1>
+        Лучшие инструкторы минска объясняют как проехать маршруты ГАИ
+    </h1>
 
-<span class="pull-right">
+    <span class="pull-right">
     @{ Html.RenderPartial("_SocialButtons", pageUrl); }
 </span>
 }
 
 @section breadcrumb {
     <ul class="breadcrumb">
-        <li><a href="/">Главная</a></li>
+        <li>
+            <a href="/">Главная</a>
+        </li>
         <li class="active">Видео Уроки</li>
     </ul>
 }
 
 <section id="portfolio" class="bg-light-gray">
-    @{ Html.RenderPartial("_IndexVideoList", Model.VideoViewModels?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    <div class="container">
+        @{ Html.RenderPartial("_IndexVideoList", Model.VideoViewModels?.OrderByDescending(x => x.SortingNumber).ToList()); }
+    </div>
 </section>

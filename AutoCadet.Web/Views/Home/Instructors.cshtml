@@ -15,8 +15,9 @@
 }
 
 @section detailsH1 {
-    @(Model.InstructorDetails?.MetadataInfo?.H1)
-
+    <h1 class="section-heading">
+        @(Model.InstructorDetails?.MetadataInfo?.H1)
+    </h1>
     <span class="pull-right">
         @{ Html.RenderPartial("_SocialButtons", pageUrl); }
     </span>
@@ -89,24 +90,27 @@
                          alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
                 }
             </div>
-            <div class="col-md-4">
-                @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
-                {
-                    var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
-                }
+            <div class="col-md-8 text-left">
+                @Html.Raw(Model.InstructorDetails?.VehicleDescriprion)
             </div>
-            <div class="col-md-4">
-                @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
-                {
-                    var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
-                }
-            </div>
+            @*<div class="col-md-4">
+                    @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
+                    {
+                        var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
+                        <img class="img-responsive img-centered img-circle"
+                             src="@($"data:image/png;base64,{base64String}")"
+                             alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
+                    }
+                </div>
+                <div class="col-md-4">
+                    @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
+                    {
+                        var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
+                        <img class="img-responsive img-centered img-circle"
+                             src="@($"data:image/png;base64,{base64String}")"
+                             alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
+                    }
+                </div>*@
         </div>
     </div>
 </section>
