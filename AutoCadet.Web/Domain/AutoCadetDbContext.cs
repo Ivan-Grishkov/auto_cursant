@@ -21,6 +21,7 @@ namespace AutoCadet.Domain
         public IDbSet<Video> Video { get; set; }
         public IDbSet<Obuchenie> Obuchenie { get; set; }
         public IDbSet<Blog> Blogs { get; set; }
+        public IDbSet<ShareEvent> ShareEvents { get; set; }
 
         public static AutoCadetDbContext Create()
         {

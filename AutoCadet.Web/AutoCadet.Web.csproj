@@ -190,6 +190,7 @@
     <Compile Include="Domain\Entities\InstructorDetails.cs" />
     <Compile Include="Domain\Entities\Metadata.cs" />
     <Compile Include="Domain\Entities\Obuchenie.cs" />
+    <Compile Include="Domain\Entities\ShareEvent.cs" />
     <Compile Include="Domain\Entities\Video.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +214,10 @@
     <Compile Include="Domain\Migrations\201611280716195_IsPrimaryInstructor.Designer.cs">
       <DependentUpon>201611280716195_IsPrimaryInstructor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201611280828284_AddSare.cs" />
+    <Compile Include="Domain\Migrations\201611280828284_AddSare.Designer.cs">
+      <DependentUpon>201611280828284_AddSare.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BlogListPageViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\CallMeViewModel.cs" />
@@ -227,6 +232,7 @@
     <Compile Include="Models\MetadataInfoViewModel.cs" />
     <Compile Include="Models\ObuchenieListPageViewModel.cs" />
     <Compile Include="Models\ObuchenieViewModel.cs" />
+    <Compile Include="Models\ShareEventViewModel.cs" />
     <Compile Include="Models\VideoPageViewModel.cs" />
     <Compile Include="Models\VideoViewModel.cs" />
     <Compile Include="Notificators\CallMeNotificator.cs" />
@@ -394,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201611280716195_IsPrimaryInstructor.resx">
       <DependentUpon>201611280716195_IsPrimaryInstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201611280828284_AddSare.resx">
+      <DependentUpon>201611280828284_AddSare.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

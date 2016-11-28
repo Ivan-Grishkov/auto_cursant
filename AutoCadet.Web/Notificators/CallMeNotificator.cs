@@ -38,10 +38,14 @@ namespace AutoCadet.Notificators
                     message.CC.Add(new MailAddress(defaultEmail));
                 }
                 message.Subject = "Перезвоните uroki-vozhdeniya.by";
-                var messageText = $"Перезвоните, пожалуйста, на номер {phone}. {requesterName}";
+                var messageText = $"{instructor?.LastName} {instructor?.FirstName} перезвоните, пожалуйста, на номер {phone}. {requesterName}";
                 if (instructor != null)
                 {
-                    messageText += $" Инструктор {instructor.LastName} {instructor.FirstName}. тел. инструктора: {instructor.Phone}";
+                    messageText += $"тел. инструктора: {instructor.Phone}";
+                    if (!string.IsNullOrWhiteSpace(instructor.Phone2))
+                    {
+                        messageText += $" и {instructor.Phone2}";
+                    }
                 }
                 message.Body = messageText;
 

@@ -5,7 +5,7 @@
         @{
             var itemsCount = Model.Count;
             var itemsPerPage = 6;
-            var pagesCount = (double)itemsCount / (double)itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
+            var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
         }
 
         <ol class="carousel-indicators">

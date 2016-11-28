@@ -15,5 +15,6 @@ namespace AutoCadet.Models
         public IList<BlogViewModel> Blogs { get; set; }
         public CommentViewModel NewComment { get; set; }
         public IList<CommentViewModel> Comments { get; set; }
+        public ShareEventViewModel ShareEvent { get; set; }
     }
 }

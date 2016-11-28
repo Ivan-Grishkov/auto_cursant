@@ -79,10 +79,17 @@ namespace AutoCadet.Services.Impl
                 .ConfigureAwait(false);
             var blogsVms = blogs.Select(x => _mapper.Map<BlogViewModel>(x)).ToList();
 
+            var share = await _autoCadetDbContext.ShareEvents
+                .Where(x => x.IsActive)
+                .OrderByDescending(x => x.CreatedDate)
+                .FirstOrDefaultAsync()
+                .ConfigureAwait(false);
+            var shareVm = _mapper.Map<ShareEventViewModel>(share);
+
 
             Random rnd = new Random();
             var randomInstructors = vms.Where(x => x.IsPrimary).OrderBy(x => rnd.Next()).ToList();
-            randomInstructors.AddRange(vms.Where(x => !x.IsPrimary));
+            randomInstructors.AddRange(vms.Where(x => !x.IsPrimary).OrderByDescending(x => x.SortingNumber));
 
             return new HomePageViewModel
             {
@@ -90,7 +97,8 @@ namespace AutoCadet.Services.Impl
                 Comments = commentsVms,
                 VideoGridItems = videoVms,
                 Obuchenie = servicesVms,
-                Blogs = blogsVms
+                Blogs = blogsVms,
+                ShareEvent = shareVm
             };
         }
 

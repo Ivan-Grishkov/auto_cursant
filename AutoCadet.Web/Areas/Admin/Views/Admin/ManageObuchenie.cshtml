@@ -18,17 +18,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="firstName">ListHeader:</label>
+                    <label for="firstName">Заголовок на главной странице:</label>
                     @Html.TextBoxFor(x => x.ObuchenieViewModel.ListHeader, new { @class = "form-control", id = "firstName" })
                 </div>
 
                 <div class="form-group">
-                    <label for="ListDescription">ListDescription:</label>
+                    <label for="ListDescription">Описание на главной странице:</label>
                     @Html.TextBoxFor(x => x.ObuchenieViewModel.ListDescription, new { @class = "form-control", id = "ListDescription" })
                 </div>
 
                 <div class="form-group">
-                    <label for="ListIcon">ListIcon http://fontawesome.io/icons/#web-application  или http://www.w3schools.com/icons/fontawesome_icons_text.asp  (пример: fa-file) :   </label>
+                    <label for="ListIcon">Иконка на главной странице http://fontawesome.io/icons/#web-application  или http://www.w3schools.com/icons/fontawesome_icons_text.asp  (пример: fa-file) :   </label>
                     @Html.TextBoxFor(x => x.ObuchenieViewModel.ListIcon, new { @class = "form-control", id = "ListIcon" })
                 </div>
 
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="Price">DetailText </label>
+                    <label for="Price">Описание на детальной странице </label>
                     @Html.TextAreaFor(x => x.ObuchenieViewModel.DetailText, new { @class = "form-control", id = "Price" })
                 </div>
 
