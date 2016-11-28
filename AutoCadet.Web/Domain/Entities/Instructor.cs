@@ -21,6 +21,8 @@ namespace AutoCadet.Domain.Entities
         public int SortingNumber { get; set; }
         [Required]
         public bool IsActive { get; set; }
+        [Required]
+        public bool IsPrimary { get; set; }
         public virtual ImageFile ThumbnailImage { get; set; }
         public virtual InstructorDetails InstructorDetails { get; set; }
         public virtual ISet<Comment> Comments { get; set; }

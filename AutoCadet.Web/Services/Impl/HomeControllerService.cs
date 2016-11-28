@@ -63,7 +63,6 @@ namespace AutoCadet.Services.Impl
             var videoVms = videos.Select(x => _mapper.Map<VideoViewModel>(x)).ToList();
 
             var services = await _autoCadetDbContext.Obuchenie
-                .Include(x => x.ThumbnailImageFile)
                 .Include(x => x.Metadata)
                 .Where(x => x.IsActive)
                 .OrderByDescending(x => x.SortingNumber)
@@ -145,7 +144,6 @@ namespace AutoCadet.Services.Impl
             var items = await _autoCadetDbContext.Obuchenie
                 .Where(x => x.IsActive)
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
@@ -159,7 +157,6 @@ namespace AutoCadet.Services.Impl
         {
             var items = await _autoCadetDbContext.Obuchenie
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
             return _mapper.Map<ObuchenieViewModel>(items);
@@ -171,7 +168,6 @@ namespace AutoCadet.Services.Impl
                 .Where(x => x.IsActive)
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
-                .Include(x => x.DetailsImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
@@ -186,7 +182,6 @@ namespace AutoCadet.Services.Impl
             var items = await _autoCadetDbContext.Blogs
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
-                .Include(x => x.DetailsImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
             return _mapper.Map<BlogViewModel>(items);
@@ -199,8 +194,6 @@ namespace AutoCadet.Services.Impl
                 .Include(x => x.Comments)
                 .Include(x => x.InstructorDetails)
                 .Include(x => x.InstructorDetails.Metadata)
-                .Include(x => x.InstructorDetails.VehicleImage)
-                .Include(x => x.InstructorDetails.DetailsImage)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == instructorUrl.ToLower())
                 .ConfigureAwait(false);
 
@@ -225,7 +218,9 @@ namespace AutoCadet.Services.Impl
 
         public async Task<bool> SaveCommentAsync(CommentViewModel commentVm)
         {
-            var isSameExists = await _autoCadetDbContext.Comments.AnyAsync(x => x.Text == commentVm.Text && x.Name == commentVm.Name).ConfigureAwait(false);
+            var isSameExists = await _autoCadetDbContext.Comments
+                .AnyAsync(x => x.Text == commentVm.Text && x.Name == commentVm.Name)
+                .ConfigureAwait(false);
             if (!isSameExists)
             {
                 var instructor = await _autoCadetDbContext.Instructors.FirstOrDefaultAsync(x => x.Id == commentVm.InstructorId).ConfigureAwait(false);

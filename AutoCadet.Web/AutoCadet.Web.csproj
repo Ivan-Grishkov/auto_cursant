@@ -174,8 +174,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Models\BlogManagePageViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\TrainingManagePageViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\VideoLessonsManagePageViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ObuchenieManagePageViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\VideoManagePageViewModel.cs" />
     <Compile Include="Attributes\RequireRequestValueAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
@@ -189,8 +189,8 @@
     <Compile Include="Domain\Entities\Instructor.cs" />
     <Compile Include="Domain\Entities\InstructorDetails.cs" />
     <Compile Include="Domain\Entities\Metadata.cs" />
-    <Compile Include="Domain\Entities\Training.cs" />
-    <Compile Include="Domain\Entities\VideoLesson.cs" />
+    <Compile Include="Domain\Entities\Obuchenie.cs" />
+    <Compile Include="Domain\Entities\Video.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +205,14 @@
     <Compile Include="Domain\Migrations\201611210631188_Init.Designer.cs">
       <DependentUpon>201611210631188_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201611280646403_RemoveDetailsImage.cs" />
+    <Compile Include="Domain\Migrations\201611280646403_RemoveDetailsImage.Designer.cs">
+      <DependentUpon>201611280646403_RemoveDetailsImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\201611280716195_IsPrimaryInstructor.cs" />
+    <Compile Include="Domain\Migrations\201611280716195_IsPrimaryInstructor.Designer.cs">
+      <DependentUpon>201611280716195_IsPrimaryInstructor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BlogListPageViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\CallMeViewModel.cs" />
@@ -217,10 +225,10 @@
     <Compile Include="Areas\Admin\Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapper\AutoCadetMapperProfile.cs" />
     <Compile Include="Models\MetadataInfoViewModel.cs" />
-    <Compile Include="Models\TrainingListPageViewModel.cs" />
-    <Compile Include="Models\TrainingViewModel.cs" />
-    <Compile Include="Models\VideoLessonsPageViewModel.cs" />
-    <Compile Include="Models\VideoLessonViewModel.cs" />
+    <Compile Include="Models\ObuchenieListPageViewModel.cs" />
+    <Compile Include="Models\ObuchenieViewModel.cs" />
+    <Compile Include="Models\VideoPageViewModel.cs" />
+    <Compile Include="Models\VideoViewModel.cs" />
     <Compile Include="Notificators\CallMeNotificator.cs" />
     <Compile Include="Notificators\ICallMeNotificator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -315,6 +323,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -379,6 +388,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Domain\Migrations\201611210631188_Init.resx">
       <DependentUpon>201611210631188_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201611280646403_RemoveDetailsImage.resx">
+      <DependentUpon>201611280646403_RemoveDetailsImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201611280716195_IsPrimaryInstructor.resx">
+      <DependentUpon>201611280716195_IsPrimaryInstructor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

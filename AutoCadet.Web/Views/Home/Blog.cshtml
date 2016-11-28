@@ -48,16 +48,7 @@
             </div>
         </div>
         <div class="row text-center">
-            <div class="col-md-4">
-                @if (Model.DetailsImageFile != null && Model.DetailsImageFile.Length > 0)
-                {
-                    var base64String = Convert.ToBase64String(Model.DetailsImageFile);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.ListHeader}")"/>
-                }
-            </div>
-            <div class="col-md-8 text-left">
+            <div class="col-md-12 text-left">
                 @Html.Raw(Model.DetailsText)
             </div>
         </div>

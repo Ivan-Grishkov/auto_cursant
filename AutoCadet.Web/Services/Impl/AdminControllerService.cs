@@ -34,8 +34,6 @@ namespace AutoCadet.Services.Impl
             var instructor = await _autoCadetDbContext
                 .Instructors
                 .Include(x => x.InstructorDetails)
-                .Include(x => x.InstructorDetails.VehicleImage)
-                .Include(x => x.InstructorDetails.DetailsImage)
                 .Include(x => x.InstructorDetails.Metadata)
                 .Include(x => x.ThumbnailImage)
                 .FirstOrDefaultAsync(x => x.Id == instructorId)
@@ -77,26 +75,6 @@ namespace AutoCadet.Services.Impl
                 .ConfigureAwait(false)
                                     ?? new InstructorDetails();
             _mapper.Map(pageVm.InstructorDetails, instructorDetails);
-
-            if (pageVm.InstructorDetails.DetailsImage != null)
-            {
-                if (instructorDetails.DetailsImage == null)
-                {
-                    instructorDetails.DetailsImage = new ImageFile();
-                }
-
-                instructorDetails.DetailsImage.Bytes = pageVm.InstructorDetails.DetailsImage;
-            }
-
-            if (pageVm.InstructorDetails.VehicleImage != null)
-            {
-                if (instructorDetails.VehicleImage == null)
-                {
-                    instructorDetails.VehicleImage = new ImageFile();
-                }
-
-                instructorDetails.VehicleImage.Bytes = pageVm.InstructorDetails.VehicleImage;
-            }
 
             instructorDetails.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
             if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
@@ -223,7 +201,6 @@ namespace AutoCadet.Services.Impl
         {
             var entities = await _autoCadetDbContext.Obuchenie
                .Include(x => x.Metadata)
-               .Include(x => x.ThumbnailImageFile)
                .ToListAsync()
                .ConfigureAwait(false);
             return entities?.Select(i => _mapper.Map<ObuchenieViewModel>(i)).ToList();
@@ -234,7 +211,6 @@ namespace AutoCadet.Services.Impl
             var entity = await _autoCadetDbContext
                .Obuchenie
                .Include(x => x.Metadata)
-               .Include(x => x.ThumbnailImageFile)
                .FirstOrDefaultAsync(x => x.Id == obuchenieId)
                .ConfigureAwait(false);
 
@@ -281,16 +257,6 @@ namespace AutoCadet.Services.Impl
                     ?? new Obuchenie();
             _mapper.Map(pageVm.ObuchenieViewModel, entity);
 
-            if (pageVm.ObuchenieViewModel.ThumbnailImageFile != null)
-            {
-                if (entity.ThumbnailImageFile == null)
-                {
-                    entity.ThumbnailImageFile = new ImageFile();
-                }
-
-                entity.ThumbnailImageFile.Bytes = pageVm.ObuchenieViewModel.ThumbnailImageFile;
-            }
-
             entity.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
             if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
             {
@@ -309,7 +275,6 @@ namespace AutoCadet.Services.Impl
             var entities = await _autoCadetDbContext.Blogs
                .Include(x => x.Metadata)
                .Include(x => x.ThumbnailImageFile)
-               .Include(x => x.DetailsImageFile)
                .ToListAsync()
                .ConfigureAwait(false);
             return entities?.Select(i => _mapper.Map<BlogViewModel>(i)).ToList();
@@ -321,7 +286,6 @@ namespace AutoCadet.Services.Impl
                 .Blogs
                 .Include(x => x.Metadata)
                 .Include(x => x.ThumbnailImageFile)
-                .Include(x => x.DetailsImageFile)
                 .FirstOrDefaultAsync(x => x.Id == blogId)
                 .ConfigureAwait(false);
 
@@ -376,16 +340,6 @@ namespace AutoCadet.Services.Impl
                 }
 
                 entity.ThumbnailImageFile.Bytes = pageVm.BlogViewModel.ThumbnailImageFile;
-            }
-
-            if (pageVm.BlogViewModel.DetailsImageFile != null)
-            {
-                if (entity.DetailsImageFile == null)
-                {
-                    entity.DetailsImageFile = new ImageFile();
-                }
-
-                entity.DetailsImageFile.Bytes = pageVm.BlogViewModel.DetailsImageFile;
             }
 
             entity.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);

@@ -58,7 +58,7 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ManageInstructor(InstructorManagePageViewModel instructorVm, HttpPostedFileBase itemFile, HttpPostedFileBase detailsFile, HttpPostedFileBase vehicleFile)
+        public async Task<ActionResult> ManageInstructor(InstructorManagePageViewModel instructorVm, HttpPostedFileBase itemFile)
         {
             if (!ModelState.IsValid || instructorVm == null)
             {
@@ -66,8 +66,6 @@ namespace AutoCadet.Areas.Admin.Controllers
             }
 
             instructorVm.Instructor.ThumbnailImage = GetFileContent(itemFile);
-            instructorVm.InstructorDetails.DetailsImage = GetFileContent(detailsFile);
-            instructorVm.InstructorDetails.VehicleImage = GetFileContent(vehicleFile);
 
             await _adminControllerService.SaveInstructorAsync(instructorVm).ConfigureAwait(true);
             return RedirectToAction("Index");
@@ -163,13 +161,12 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ManageObuchenie(ObuchenieManagePageViewModel obuchenieVm, HttpPostedFileBase itemFile)
+        public async Task<ActionResult> ManageObuchenie(ObuchenieManagePageViewModel obuchenieVm)
         {
             if (!ModelState.IsValid || obuchenieVm == null)
             {
                 return View(obuchenieVm);
             }
-            obuchenieVm.ObuchenieViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
             await _adminControllerService.SaveObuchenieAsync(obuchenieVm).ConfigureAwait(true);
             return RedirectToAction("Obuchenie");
@@ -214,14 +211,13 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ManageBlog(BlogManagePageViewModel vm, HttpPostedFileBase itemFile, HttpPostedFileBase detailsFile)
+        public async Task<ActionResult> ManageBlog(BlogManagePageViewModel vm, HttpPostedFileBase itemFile)
         {
             if (!ModelState.IsValid || vm == null)
             {
                 return View(vm);
             }
             vm.BlogViewModel.ThumbnailImageFile = GetFileContent(itemFile);
-            vm.BlogViewModel.DetailsImageFile = GetFileContent(detailsFile);
 
             await _adminControllerService.SaveBlogAsync(vm).ConfigureAwait(true);
             return RedirectToAction("Blog");

@@ -120,18 +120,6 @@
                     </div>
 
                     <div class="form-group">
-                        @if (Model.InstructorDetails.DetailsImage != null && Model.InstructorDetails.DetailsImage.Length > 0)
-                        {
-                            string base64String = Convert.ToBase64String(Model.InstructorDetails.DetailsImage);
-                            <img src="@($"data:image/png;base64,{base64String}")" />
-                        }
-                    </div>
-                    <div class="form-group">
-                        <label for="detailsFile">Фото на детальной странице (600 x 450):</label>
-                        <input type="file" name="detailsFile" id="detailsFile" />
-                    </div>
-
-                    <div class="form-group">
                         <label for="VehicleTitle">InstructorDetails VehicleTitle:</label>
                         @Html.TextBoxFor(x => x.InstructorDetails.VehicleTitle, new { @class = "form-control", id = "VehicleTitle" })
                     </div>
@@ -144,25 +132,6 @@
                     <div class="form-group">
                         <label for="VehicleDescriprion">InstructorDetails VehicleDescriprion:</label>
                         @Html.TextAreaFor(x => x.InstructorDetails.VehicleDescriprion, new {@class = "form-control", id = "VehicleDescriprion"})
-                    </div>
-
-                    <div class="form-group">
-                        <label for="FuelConsumption">InstructorDetails FuelConsumption:</label>
-                        @Html.TextBoxFor(x => x.InstructorDetails.FuelConsumption, new {@class = "form-control", id = "FuelConsumption", type = "number" })
-                    </div>
-
-
-                    <div class="form-group">
-                        @if (Model.InstructorDetails.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
-                        {
-                            string base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
-                            <img src="@($"data:image/png;base64,{base64String}")"/>
-
-                        }
-                    </div>
-                    <div class="form-group">
-                        <label for="vehicleFile">Фото автомобиля (600 x 450):</label>
-                        <input type="file" name="vehicleFile" id="vehicleFile" />
                     </div>
                 }
                 <input type="submit" class="btn btn-primary" value="Save">

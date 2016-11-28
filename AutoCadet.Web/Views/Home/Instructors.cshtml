@@ -50,18 +50,8 @@
 
 <section id="person" class="bg-light-gray">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4">
-                @if (Model.InstructorDetails?.DetailsImage != null && Model.InstructorDetails.DetailsImage.Length > 0)
-                {
-                    var base64String = Convert.ToBase64String(Model.InstructorDetails.DetailsImage);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.Instructor.FirstName} {Model.Instructor.LastName}")"/>
-                }
-                @{ Html.RenderPartial("_SocialButtons", pageUrl); }
-            </div>
-            <div class="col-md-8 text-left">
+        <div class="row">
+            <div class="col-md-12 text-left">
                 <p>
                     <strong>Стоимость занятия: @Model.Instructor.Price р.</strong>
                 </p>
@@ -72,55 +62,79 @@
     </div>
 </section>
 
-<section id="car">
+@if (!string.IsNullOrWhiteSpace(Model.InstructorDetails?.VehicleTitle))
+{
+    <section id="car">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">@(Model.InstructorDetails?.VehicleTitle)</h2>
+                    <h3 class="section-subheading text-muted">@(Model.InstructorDetails?.VehicleSecondaryTitle)</h3>
+                </div>
+            </div>
+            <div class="row text-left">
+                <div class="col-md-12">
+                    @Html.Raw(Model.InstructorDetails?.VehicleDescriprion)
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<section id="callMe">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">@(Model.InstructorDetails?.VehicleTitle)</h2>
-                <h3 class="section-subheading text-muted">@(Model.InstructorDetails?.VehicleSecondaryTitle)</h3>
+                <h2 class="section-heading">Перезвоните мне</h2>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-4">
-                @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
+        <div class="row">
+            <div class="col-lg-12">
+                @using (Html.BeginForm("CallMe", "Home", FormMethod.Post, new {name = "callMeMessage", id = "callMeForm"}))
                 {
-                    var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
-                    <img class="img-responsive img-centered img-circle"
-                         src="@($"data:image/png;base64,{base64String}")"
-                         alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
+                    <div class="row">
+                        <div id="addCallMeError" class="alert alert-danger" role="alert" style="display: none">
+                            Произошла ошибка. Попробуйте еще раз.
+                        </div>
+                        <div id="addCallMeExists" class="alert alert-danger" role="alert" style="display: none">
+                            Произошла ошибка. Ваш запрос уже обрабатывается либо нет возможности отправить сообщение. Запрос будет обработан в ручном режиме.
+                        </div>
+                        <div id="addCallMeSuccess" class="alert alert-success" role="alert" style="display: none">
+                            Ваш Запрос отправлен.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." 
+                               id="Instructor_Id" name="Instructor.Id" type="hidden"
+                               value="@Model.Instructor.Id">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Ваше Имя" id="requesterName" name="requesterName">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Ваш Телефон" id="phone" name="phone" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-xl">Отправить</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 }
             </div>
-            <div class="col-md-8 text-left">
-                @Html.Raw(Model.InstructorDetails?.VehicleDescriprion)
-            </div>
-            @*<div class="col-md-4">
-                    @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
-                    {
-                        var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
-                        <img class="img-responsive img-centered img-circle"
-                             src="@($"data:image/png;base64,{base64String}")"
-                             alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
-                    }
-                </div>
-                <div class="col-md-4">
-                    @if (Model.InstructorDetails?.VehicleImage != null && Model.InstructorDetails.VehicleImage.Length > 0)
-                    {
-                        var base64String = Convert.ToBase64String(Model.InstructorDetails.VehicleImage);
-                        <img class="img-responsive img-centered img-circle"
-                             src="@($"data:image/png;base64,{base64String}")"
-                             alt="@($"{Model.InstructorDetails.VehicleTitle}")"/>
-                    }
-                </div>*@
         </div>
     </div>
 </section>
 
-<!-- Team Section -->
 <section id="team" class="bg-light-gray">
     @{ Html.RenderPartial("_IndexCommentsList", Model.Comments); }
 </section>
 
-<!-- Contact Section -->
 <section id="contact">
     <div class="container">
         <div class="row">
@@ -140,7 +154,7 @@
                             Произошла ошибка. Такой коментарий уже существует.
                         </div>
                         <div id="addCommentSuccess" class="alert alert-success" role="alert" style="display: none">
-                            Ваш Отзыв сохранен.
+                            Ваш Отзыв сохранен. Он появится на сайте после обработки администратором.
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">

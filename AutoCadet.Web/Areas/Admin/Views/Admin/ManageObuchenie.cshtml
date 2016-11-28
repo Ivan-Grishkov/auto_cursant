@@ -48,18 +48,6 @@
                 </div>
 
                 <div class="form-group">
-                    @if (Model.ObuchenieViewModel.ThumbnailImageFile != null && Model.ObuchenieViewModel.ThumbnailImageFile.Length > 0)
-                    {
-                        string base64String = Convert.ToBase64String(Model.ObuchenieViewModel.ThumbnailImageFile);
-                        <img src="@($"data:image/png;base64,{base64String}")" />
-                    }
-                </div>
-                <div class="form-group">
-                    <label for="itemFile">Фото details:</label>
-                    <input type="file" name="itemFile" id="itemFile" />
-                </div>
-
-                <div class="form-group">
                     <label for="IsActive">IsActive:</label>
                     @Html.CheckBoxFor(x => x.ObuchenieViewModel.IsActive, new { @class = "form-control", id = "IsActive" })
                 </div>

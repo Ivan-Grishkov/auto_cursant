@@ -14,14 +14,10 @@ namespace AutoCadet.Models.Mapper
                 .ForMember(x => x.ThumbnailImage, opt => opt.Ignore());
 
             CreateMap<InstructorDetails, InstructorDetailsViewModel>()
-                .ForMember(x => x.MetadataInfo, opt => opt.MapFrom(x => x.Metadata))
-                .ForMember(x => x.DetailsImage, opt => opt.ResolveUsing(x => x.DetailsImage?.Bytes))
-                .ForMember(x => x.VehicleImage, opt => opt.ResolveUsing(x => x.VehicleImage?.Bytes));
+                .ForMember(x => x.MetadataInfo, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<InstructorDetailsViewModel, InstructorDetails>()
-                .ForMember(x => x.Metadata, opt => opt.Ignore())
-                .ForMember(x => x.DetailsImage, opt => opt.Ignore())
-                .ForMember(x => x.VehicleImage, opt => opt.Ignore());
+                .ForMember(x => x.Metadata, opt => opt.Ignore());
 
             CreateMap<Comment, CommentViewModel>()
                 .ForMember(x => x.InstructorName, opt => opt.ResolveUsing(x => $"{x.Instructor?.LastName} {x.Instructor?.FirstName}"))
@@ -37,19 +33,15 @@ namespace AutoCadet.Models.Mapper
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<Obuchenie, ObuchenieViewModel>()
-                .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
             CreateMap<ObuchenieViewModel, Obuchenie>()
-                .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<Blog, BlogViewModel>()
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
-                .ForMember(x => x.DetailsImageFile, opt => opt.ResolveUsing(x => x.DetailsImageFile?.Bytes))
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
             CreateMap<BlogViewModel, Blog>()
                 .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
-                .ForMember(x => x.DetailsImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<Metadata, MetadataInfoViewModel>();

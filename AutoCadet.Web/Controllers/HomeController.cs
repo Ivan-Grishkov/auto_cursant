@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoCadet.Attributes;
@@ -119,7 +120,7 @@ namespace AutoCadet.Controllers
                 return new JsonResult {Data = new {error = true}};
             }
 
-            var isSuccess = await _homeControllerService.SaveCommentAsync(comment).ConfigureAwait(true);
+            bool isSuccess = await _homeControllerService.SaveCommentAsync(comment).ConfigureAwait(true);
             if (isSuccess)
             {
                 return new JsonResult {Data = new {success = true}};

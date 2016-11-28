@@ -30,7 +30,6 @@
                         <th>URL</th>
                         <th>Активен?</th>
                         <th>Номер в списке</th>
-                        <th>Картинка в списке</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -64,15 +63,6 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(x => Model[i].SortingNumber, new { @class = "form-control", type="number"})
-                                    </td>
-                                    <td>
-                                        @{
-                                            if (Model[i].ThumbnailImageFile != null && Model[i].ThumbnailImageFile.Length > 0)
-                                            {
-                                                var base64String = Convert.ToBase64String(Model[i].ThumbnailImageFile);
-                                                <img src="@($"data:image/png;base64,{base64String}")" width="50px" height="50px"/>
-                                            }
-                                        }
                                     </td>
                                 </tr>
                             }

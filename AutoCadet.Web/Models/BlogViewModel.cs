@@ -20,6 +20,5 @@ namespace AutoCadet.Models
         public DateTime CreatedDate { get; set; }
         public MetadataInfoViewModel Metadata { get; set; }
         public byte[] ThumbnailImageFile { get; set; }
-        public byte[] DetailsImageFile { get; set; }
     }
 }

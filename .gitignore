@@ -221,3 +221,4 @@ _Pvt_Extensions
 Code/Videa.OrderManagement.Web/wwwroot/app/
 *.tss
 *.map
+AutoCadet.Web/App_Data/Logs/
