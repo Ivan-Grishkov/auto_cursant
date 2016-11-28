@@ -24,6 +24,8 @@ namespace AutoCadet.Models
         [Required]
         public bool IsActive { get; set; }
         [Required]
+        public bool IsPrimary { get; set; }
+        [Required]
         public decimal Price { get; set; }
         public byte[] ThumbnailImage { get; set; }
         [UIHint("Score")]

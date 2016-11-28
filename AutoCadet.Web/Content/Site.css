@@ -15,18 +15,18 @@ header h3 i {
     background-color: rgba(254, 209, 54, 0.7);
 }
 
-.carousel-row {
+/*.carousel-row {
     padding: 10px;
-}
+}*/
 
-.section-container {
+/*.section-container {
     width: 100%;
     padding: 0;
     margin: 0;
-}
-.carousel-inner .row {
+}*/
+/*.carousel-inner .row {
     padding: 0 30px;
-}
+}*/
 
 .videoWrapper {
 	position: relative;

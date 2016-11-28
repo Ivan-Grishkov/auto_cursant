@@ -79,9 +79,14 @@ namespace AutoCadet.Services.Impl
                 .ConfigureAwait(false);
             var blogsVms = blogs.Select(x => _mapper.Map<BlogViewModel>(x)).ToList();
 
+
+            Random rnd = new Random();
+            var randomInstructors = vms.Where(x => x.IsPrimary).OrderBy(x => rnd.Next()).ToList();
+            randomInstructors.AddRange(vms.Where(x => !x.IsPrimary));
+
             return new HomePageViewModel
             {
-                InstructorGridItems = vms,
+                InstructorGridItems = randomInstructors,
                 Comments = commentsVms,
                 VideoGridItems = videoVms,
                 Obuchenie = servicesVms,

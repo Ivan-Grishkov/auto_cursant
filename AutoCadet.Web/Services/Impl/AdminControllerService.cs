@@ -102,6 +102,7 @@ namespace AutoCadet.Services.Impl
                 if (vm != null)
                 {
                     instructor.IsActive = vm.IsActive;
+                    instructor.IsPrimary = vm.IsPrimary;
                     instructor.SortingNumber = vm.SortingNumber;
                     instructor.Email = vm.Email;
                     instructor.UrlName = vm.UrlName;

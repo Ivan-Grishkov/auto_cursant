@@ -29,6 +29,7 @@
                         <th>URL</th>
                         <th>Цена</th>
                         <th>Активен?</th>
+                        <th>IsPrimary?</th>
                         <th>Номер в списке</th>
                         <th>Картинка в списке</th>
                     </tr>
@@ -63,6 +64,9 @@
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(x => Model[i].IsPrimary, new {@class = "form-control"})
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(x => Model[i].SortingNumber, new { @class = "form-control", type = "number" })

@@ -70,6 +70,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="IsPrimary">IsPrimary:</label>
+                    @Html.CheckBoxFor(x => x.Instructor.IsPrimary, new { @class = "form-control", id = "IsPrimary" })
+                </div>
+
+                <div class="form-group">
                     <label for="UrlName">UrlName:</label>
                     @Html.TextBoxFor(x => x.Instructor.UrlName, new { @class = "form-control", id = "UrlName" })
                 </div>

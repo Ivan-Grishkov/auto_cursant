@@ -11,7 +11,7 @@
 }
 
 @{
-    var pageUrl = Url.Action("Blog", "Home", Request?.Url?.Scheme);
+    var pageUrl = Url.Action("Blog", "Home", null, Request?.Url?.Scheme);
 }
 
 @section detailsH1 {

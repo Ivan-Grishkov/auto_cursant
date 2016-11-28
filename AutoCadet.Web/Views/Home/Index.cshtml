@@ -17,16 +17,16 @@
                 <a href="@Url.Action("Instructors")">
                     <h2 class="section-heading">Наши инструкторы</h2>
                 </a>
-                <div class="col-lg-8 col-lg-offset-2 text-left text-muted">
+                <div class="col-lg-12 text-left text-muted">
                     <p class="large">На многочисленных форумах автомобилистов часто всплывают негативные отзывы про автошколы, в которых практика не принесла должного результата, а обучение обошлось в приличную сумму.</p>
                     <p class="large">Для тех, кто разочаровался в школе, не приобрел необходимые навыки, или просто желает научиться управлять автомобилем, мы предлагаем платные уроки вождения машины c автоинструктором.</p>
                     <p class="large">Зайдите в раздел сайта с описанием инструкторов, узнайте отзывы наших учеников и запишитесь в ряды будущих водителей уже сегодня. Мы не просто натренируем сдавать экзамен, мы научим водить автомобиль!</p>
                 </div>
             </div>
         </div>
-        @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
+        @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems); }
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-left text-muted">
+            <div class="col-lg-12 text-left text-muted">
                 <p class="large">Преподавательский состав имеет колоссальный опыт, благодаря которому получить права на механике не составит труда даже &quot;для чайников&quot;.</p>
                 <p class="large">На курсы обучения вождению автомобиля в 2016-2017гг. определяется стоимость уроков вождения в индивидуальном порядке. Занятия с нашими инструкторами подходят для желающих сдать на права, вне зависимости от уровня подготовки ученика. У нас есть автокурсы:</p>
                 <ul>
@@ -52,7 +52,7 @@
         </div>
         @{ Html.RenderPartial("_IndexObuchenieList", Model.Obuchenie?.OrderByDescending(x => x.SortingNumber).ToList()); }
         <div class="row">
-            <div class="text-left text-muted">
+            <div class="col-lg-12 text-left text-muted">
                 <p class="large">Что дают уроки вождения автомобиля для начинающих с нуля:</p>
                 <ul>
                     <li class="large">Разбор основных ошибок на практике при поездке по городу в темное время суток, при сильных осадках или при гололеде.</li>
@@ -77,7 +77,7 @@
         </div>
         @{ Html.RenderPartial("_IndexVideoList", Model.VideoGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
+            <div class="col-lg-12 text-center">
                 <p class="large text-muted">Мы организуем дополнительные уроки вождения с инструктором в Минске по маршрутам ГАИ, для разбора основных хитростей вождения на данных участках.</p>
             </div>
         </div>
@@ -96,7 +96,7 @@
         </div>
         @{ Html.RenderPartial("_IndexBlogList", Model.Blogs?.OrderByDescending(x => x.SortingNumber).ToList()); }
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center large text-muted">
+            <div class="col-lg-12 text-center large text-muted">
                 <p class="large text-muted">У нас с первых уроков действуют скидки в частном порядке: мы индивидуально подбираем систему бонусов. Например, обучение в автошколе предоставляет возможность после 4-ёх дополнительных занятий получить машину для сдачи в ГАИ бесплатно. Также стоимость на доп.занятия может быть снижена при неудовлетворительной сдаче экзамена в ГАИ.</p>
             </div>
         </div>
