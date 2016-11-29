@@ -302,7 +302,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
-    <None Include="Areas\Admin\Views\Admin\ShareEvent.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ShareEvent.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
