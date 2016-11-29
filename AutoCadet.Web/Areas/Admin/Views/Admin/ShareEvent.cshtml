@@ -1,0 +1,53 @@
+﻿@model AutoCadet.Models.ShareEventViewModel
+
+@{
+    ViewBag.Title = "Акция";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutWithLogin.cshtml";
+}
+<section class="container-fluid">
+    <div class="container">
+        @if (ViewBag.IsSuccess == true)
+        {
+            <div class="row text-success">
+                Данные сохранены успешно
+            </div>
+        }
+        <div class="row text-danger">
+            @Html.ValidationSummary()
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("ShareEvent", "Admin"))
+            {
+                @Html.HiddenFor(x=>x.Id)
+                <div class="form-group error">
+                    @Html.ValidationSummary()
+                </div>
+
+                <div class="form-group">
+                    <label for="Header">Header:</label>
+                    @Html.TextBoxFor(x => x.Header, new { @class = "form-control", id = "Header" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Text">Text:</label>
+                    @Html.TextAreaFor(x => x.Text, new { @class = "form-control", id = "Text" })
+                </div>
+
+                <div class="form-group">
+                    <label for="TinyText">TinyText:</label>
+                    @Html.TextBoxFor(x => x.TinyText, new { @class = "form-control", id = "TinyText" })
+                </div>
+
+                <div class="form-group">
+                    <label for="IsActive">IsActive:</label>
+                    @Html.CheckBoxFor(x => x.IsActive, new { @class = "form-control", id = "IsActive" })
+                </div>
+
+                <br/>
+                <div class="row">
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                </div>
+            }
+        </div>
+    </div>
+</section>

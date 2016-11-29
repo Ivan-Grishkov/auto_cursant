@@ -269,5 +269,23 @@ namespace AutoCadet.Areas.Admin.Controllers
             }
             return View(callMeViewModels);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> ShareEvent()
+        {
+            ShareEventViewModel eventViewModel = await _adminControllerService.GetShareEventViewModelAsync().ConfigureAwait(true);
+            return View(eventViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ShareEvent(ShareEventViewModel shareEventViewModel)
+        {
+            if (ModelState.IsValid && shareEventViewModel != null)
+            {
+                await _adminControllerService.SaveShareEventViewModelAsync(shareEventViewModel).ConfigureAwait(true);
+                ViewBag.IsSuccess = true;
+            }
+            return View(shareEventViewModel);
+        }
     }
 }

@@ -103,9 +103,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." 
-                               id="Instructor_Id" name="Instructor.Id" type="hidden"
-                               value="@Model.Instructor.Id">
+                        @Html.Hidden("instructorId", Model.Instructor.Id)
                         <div class="col-md-4">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Ваше Имя" id="requesterName" name="requesterName">

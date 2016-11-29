@@ -412,5 +412,30 @@ namespace AutoCadet.Services.Impl
             }
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
+
+        public async Task<ShareEventViewModel> GetShareEventViewModelAsync()
+        {
+            var shareEvent = await _autoCadetDbContext.ShareEvents.FirstOrDefaultAsync().ConfigureAwait(false);
+            var shareEventViewModel = _mapper.Map<ShareEventViewModel>(shareEvent) ?? new ShareEventViewModel();
+            return shareEventViewModel;
+        }
+
+        public async Task SaveShareEventViewModelAsync(ShareEventViewModel shareEventViewModel)
+        {
+            if (shareEventViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(shareEventViewModel));
+            }
+
+            var entity = await _autoCadetDbContext.ShareEvents
+                .FirstOrDefaultAsync(x => x.Id == shareEventViewModel.Id)
+                .ConfigureAwait(false)
+                    ?? new ShareEvent();
+            _mapper.Map(shareEventViewModel, entity);
+            entity.CreatedDate = DateTime.Now;
+
+            _autoCadetDbContext.ShareEvents.AddOrUpdate(entity);
+            await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
 }

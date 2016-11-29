@@ -58,3 +58,8 @@ a h2.section-heading {
 textarea.form-control {
     height : 500px;
 }
+
+.share-event {
+    border-width: 5px;
+    margin-bottom: 0px;
+}

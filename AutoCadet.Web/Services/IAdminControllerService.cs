@@ -31,5 +31,8 @@ namespace AutoCadet.Services
         Task SaveCommentsAttributesAsync(IList<CommentViewModel> commentViewModels);
         Task<IList<CallMeViewModel>> GetAllCallMeViewModelsAsync();
         Task SaveCallMeViewModelsAsync(IList<CallMeViewModel> callMeViewModels);
+
+        Task<ShareEventViewModel> GetShareEventViewModelAsync();
+        Task SaveShareEventViewModelAsync(ShareEventViewModel shareEventViewModel);
     }
 }
