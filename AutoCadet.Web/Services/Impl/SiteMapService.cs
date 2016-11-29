@@ -16,6 +16,7 @@ namespace AutoCadet.Services.Impl
         private const string ActionBlog = "blog";
         private readonly string _pathToSiteMap = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/sitemap_base.xml");
         private readonly AutoCadetDbContext _autoCadetDbContext;
+        private readonly XNamespace _nameSpace = @"http://www.sitemaps.org/schemas/sitemap/0.9";
 
         public SiteMapService(AutoCadetDbContext autoCadetDbContext)
         {
@@ -53,9 +54,9 @@ namespace AutoCadet.Services.Impl
                 foreach (var prettyUrl in prettyUrls)
                 {
                     var location = GetUrlForAction(action, prettyUrl);
-                    var locElement = new XElement("loc", location);
-                    var changefreqElement = new XElement("changefreq", "monthly");
-                    var urlElement = new XElement("url");
+                    var locElement = new XElement(_nameSpace + "loc", location);
+                    var changefreqElement = new XElement(_nameSpace + "changefreq", "monthly");
+                    var urlElement = new XElement(_nameSpace + "url");
                     urlElement.Add(locElement);
                     urlElement.Add(changefreqElement);
                     root.Add(urlElement);
