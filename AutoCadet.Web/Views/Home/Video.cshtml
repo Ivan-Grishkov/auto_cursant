@@ -2,7 +2,6 @@
 @{
     Layout = "~/Views/Shared/_DetailsPageLayout.cshtml";
     ViewBag.HeaderTitle = Model.ListHeader;
-    ViewBag.HeaderSubTitle = $"{Model.Metadata?.Title}";
 
     ViewData["MetaInfo"] = Model.Metadata?.Info;
     ViewData["MetaDescription"] = Model.Metadata?.Description;
@@ -15,12 +14,16 @@
 }
 
 @section detailsH1 {
-    <h1 class="section-heading">
-        @(Model.Metadata?.H1)
-    </h1>
-    <span class="pull-right">
-        @{ Html.RenderPartial("_SocialButtons", pageUrl); }
-    </span>
+    <div class="col-md-9">
+        <h1 class="section-heading">
+            @(Model.Metadata?.H1)
+        </h1>
+    </div>
+    <div class="col-md-3">
+        <span class="pull-right">
+            @{ Html.RenderPartial("_SocialButtons", pageUrl); }
+        </span>
+    </div>
 }
 
 @section breadcrumb {

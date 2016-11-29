@@ -63,3 +63,8 @@ textarea.form-control {
     border-width: 5px;
     margin-bottom: 0px;
 }
+
+header.details-layout .intro-text {
+    padding-top: 150px;
+    padding-bottom: 30px
+}
