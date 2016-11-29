@@ -65,3 +65,33 @@
         </div>
     </div>
 </section>
+
+<section class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-left">
+                <div id="disqus_thread"></div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        var disqus_config = function() {
+            this.page.url = '@(HttpContext.Current.Request.Url)';
+            this.page.identifier = '@($"blog_{Model.UrlName}")';
+            this.page.title = "@($"uroki-vozhdeniya.by video {Model.UrlName}")";
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            const d = document;
+            const s = d.createElement('script');
+            s.src = '//localhost-10258.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+}
