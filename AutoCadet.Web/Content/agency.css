@@ -310,10 +310,14 @@ section h3.section-subheading {
   right: 0;
 }
 #portfolio .portfolio-item .portfolio-link {
+  background-color: #222222;
   display: block;
   position: relative;
   max-width: 400px;
   margin: 0 auto;
+}
+#portfolio .portfolio-item .portfolio-link img {
+  margin: auto;
 }
 #portfolio .portfolio-item .portfolio-link .portfolio-hover {
   background: rgba(254, 209, 54, 0.9);
