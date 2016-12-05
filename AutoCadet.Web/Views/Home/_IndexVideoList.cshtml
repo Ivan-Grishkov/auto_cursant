@@ -30,6 +30,11 @@
 
                         <div class="col-md-4 col-sm-6 portfolio-item">
                             <a href="@Url.Action("Video", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content">
+                                        <i class="fa fa-list fa-3x"></i>
+                                    </div>
+                                </div>
                                 @{
                                     if (Model[k].ThumbnailImageFile != null && Model[k].ThumbnailImageFile.Length > 0)
                                     {
