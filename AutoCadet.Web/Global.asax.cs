@@ -18,6 +18,12 @@ namespace AutoCadet
         {
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
             _log = LogManager.GetLogger("AutoCadet");
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
+                    BundleTable.EnableOptimizations = true;
+#endif
+
             RouteTable.Routes.Canonicalize().NoWww().Lowercase().NoTrailingSlash();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

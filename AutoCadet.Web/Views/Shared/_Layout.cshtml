@@ -18,9 +18,6 @@
     <meta name="title" content="@(ViewData["Title"] ?? "Уроки вождения") - uroki-vozhdeniya.by"/>
     <meta name="author" content="grishkov.ivan@gmail.com">
     <title>@(ViewData["Title"] ?? "Уроки вождения")</title>
-
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body id="page-top" class="index">
         @RenderBody()
@@ -36,11 +33,12 @@
         </div>
     </footer>
 
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
 
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
