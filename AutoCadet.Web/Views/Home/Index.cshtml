@@ -10,7 +10,7 @@
 @{ Html.RenderPartial("_IndexNavigation"); }
 @{ Html.RenderPartial("_IndexHeader"); }
 
-@if (Model.ShareEvent != null)
+@if (Model.ShareEvent != null && Model.ShareEvent.IsActive)
 {
     <div class="bg-light-gray">
         <div class="container alert alert-danger share-event">

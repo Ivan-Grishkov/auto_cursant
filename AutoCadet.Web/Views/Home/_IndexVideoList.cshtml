@@ -45,6 +45,10 @@
                             <div class="portfolio-caption" title="@Model[k].ListHeader">
                                 <h4>@($"{Model[k].ListHeader}")</h4>
                                 <div class="clearfix"></div>
+                                @{
+                                    var pageUrl = Url.Action("Video", "Home", new { prettyUrl = Model[k].UrlName }, Request?.Url?.Scheme);
+                                    Html.RenderPartial("_SocialButtons", pageUrl);
+                                }
                             </div>
                         </div>
                     }
