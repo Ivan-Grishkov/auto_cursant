@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoCadet.Models;
 
 namespace AutoCadet.Services
@@ -19,5 +20,7 @@ namespace AutoCadet.Services
         Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl);
         Task<bool> SaveCommentAsync(CommentViewModel commentVm);
         Task<bool> ProcessCallMeAsync(CallMeViewModel callMe);
+
+        Task<IList<CommentViewModel>> GetCommentsForListAsync();
     }
 }

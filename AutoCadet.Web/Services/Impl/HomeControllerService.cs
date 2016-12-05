@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 using System.Linq;
@@ -43,42 +44,6 @@ namespace AutoCadet.Services.Impl
                 return vm;
             }).ToList();
 
-            var comments = await _autoCadetDbContext.Comments
-                .Include(x => x.Instructor)
-                .Where(x => x.IsActive)
-                .Where(x => x.IsVisibleInList)
-                .OrderByDescending(x => x.CreatedDate)
-                .ToListAsync()
-                .ConfigureAwait(false);
-            var commentsVms = comments.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
-
-
-            var videos = await _autoCadetDbContext.Video
-                .Include(x => x.ThumbnailImageFile)
-                .Include(x => x.Metadata)
-                .Where(x => x.IsActive)
-                .OrderByDescending(x => x.SortingNumber)
-                .ToListAsync()
-                .ConfigureAwait(false);
-            var videoVms = videos.Select(x => _mapper.Map<VideoViewModel>(x)).ToList();
-
-            var services = await _autoCadetDbContext.Obuchenie
-                .Include(x => x.Metadata)
-                .Where(x => x.IsActive)
-                .OrderByDescending(x => x.SortingNumber)
-                .ToListAsync()
-                .ConfigureAwait(false);
-            var servicesVms = services.Select(x => _mapper.Map<ObuchenieViewModel>(x)).ToList();
-
-            var blogs = await _autoCadetDbContext.Blogs
-                .Include(x => x.ThumbnailImageFile)
-                .Include(x => x.Metadata)
-                .Where(x => x.IsActive)
-                .OrderByDescending(x => x.SortingNumber)
-                .ToListAsync()
-                .ConfigureAwait(false);
-            var blogsVms = blogs.Select(x => _mapper.Map<BlogViewModel>(x)).ToList();
-
             var share = await _autoCadetDbContext.ShareEvents
                 .Where(x => x.IsActive)
                 .OrderByDescending(x => x.CreatedDate)
@@ -94,10 +59,6 @@ namespace AutoCadet.Services.Impl
             return new HomePageViewModel
             {
                 InstructorGridItems = randomInstructors,
-                Comments = commentsVms,
-                VideoGridItems = videoVms,
-                Obuchenie = servicesVms,
-                Blogs = blogsVms,
                 ShareEvent = shareVm
             };
         }
@@ -275,6 +236,18 @@ namespace AutoCadet.Services.Impl
                 return _callMeNotificator.Notify(callMe.Phone, callMe.RequesterName, instructor);
             }
             return false;
+        }
+
+        public async Task<IList<CommentViewModel>> GetCommentsForListAsync()
+        {
+            var comments = await _autoCadetDbContext.Comments
+                .Include(x => x.Instructor)
+                .Where(x => x.IsActive)
+                .Where(x => x.IsVisibleInList)
+                .OrderByDescending(x => x.CreatedDate)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            return comments.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
         }
     }
 }

@@ -82,7 +82,7 @@
                 </a>
             </div>
         </div>
-        @{ Html.RenderPartial("_IndexObuchenieList", Model.Obuchenie?.OrderByDescending(x => x.SortingNumber).ToList()); }
+        @*@{ Html.RenderPartial("_IndexObuchenieList", Model.Obuchenie?.OrderByDescending(x => x.SortingNumber).ToList()); }*@
         <div class="row">
             <div class="col-lg-12 text-left text-muted">
                 <p class="large">Что дают уроки вождения автомобиля для начинающих с нуля:</p>
@@ -107,7 +107,7 @@
                 </a>
             </div>
         </div>
-        @{ Html.RenderPartial("_IndexVideoList", Model.VideoGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
+        @*@{ Html.RenderPartial("_IndexVideoList", Model.VideoGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }*@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <p class="large text-muted">Мы организуем дополнительные уроки вождения с инструктором в Минске по маршрутам ГАИ, для разбора основных хитростей вождения на данных участках.</p>
@@ -126,7 +126,7 @@
                 </a>
             </div>
         </div>
-        @{ Html.RenderPartial("_IndexBlogList", Model.Blogs?.OrderByDescending(x => x.SortingNumber).ToList()); }
+        @*@{ Html.RenderPartial("_IndexBlogList", Model.Blogs?.OrderByDescending(x => x.SortingNumber).ToList()); }*@
         <div class="row">
             <div class="col-lg-12 text-center large text-muted">
                 <p class="large text-muted">У нас с первых уроков действуют скидки в частном порядке: мы индивидуально подбираем систему бонусов. Например, обучение в автошколе предоставляет возможность после 4-ёх дополнительных занятий получить машину для сдачи в ГАИ бесплатно. Также стоимость на доп.занятия может быть снижена при неудовлетворительной сдаче экзамена в ГАИ.</p>
@@ -135,7 +135,7 @@
     </div>
 </section>
 
-<section id="team" class="bg-light-gray">
+<section id="comments" class="bg-light-gray">
     <div class="container section-container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -143,7 +143,7 @@
                 <h3 class="section-subheading text-muted">Всех послушай, но решай сам.</h3>
             </div>
         </div>
-        @{ Html.RenderPartial("_IndexCommentsList", Model.Comments?.OrderByDescending(x => x.CreatedDate).ToList()); }
+        @*@{ Html.RenderPartial("_IndexCommentsList", Model.Comments?.OrderByDescending(x => x.CreatedDate).ToList()); }*@
     </div>
 </section>
 
@@ -273,3 +273,38 @@
         </div>
     </div>
 </section>
+
+@section scripts {
+    <script>
+        (function ($) {
+            $.ajax({
+                type: 'GET',
+                url: '/getobuchenieitems',
+                success: function (data) {
+                    $($('#services .container .row')[0]).after(data);
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/getvideoitems',
+                success: function (data) {
+                    $($('#Video .container .row')[0]).after(data);
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/getblogitems',
+                success: function (data) {
+                    $($('#blog .container .row')[0]).after(data);
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/getcommentsitems',
+                success: function (data) {
+                    $($('#comments .container .row')[0]).after(data);
+                }
+            });
+        })(jQuery);
+    </script>
+}

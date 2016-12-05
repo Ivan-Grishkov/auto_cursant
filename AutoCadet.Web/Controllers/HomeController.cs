@@ -151,5 +151,37 @@ namespace AutoCadet.Controllers
             var sitemap = await _siteMapService.GenetateSiteMapAsync().ConfigureAwait(true);
             return Content(sitemap, "xml", Encoding.UTF8);
         }
+
+        #region API
+
+        [HttpGet]
+        public async Task<ActionResult> GetObuchenieItems()
+        {
+            var pageVm = await _homeControllerService.GetObucheniePageViewModelAsync().ConfigureAwait(true);
+            return PartialView("_IndexObuchenieList", pageVm.ItemsViewModels);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetVideoItems()
+        {
+            var pageVm = await _homeControllerService.GetVideoPageViewModelAsync().ConfigureAwait(true);
+            return PartialView("_IndexVideoList", pageVm.VideoViewModels);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetBlogItems()
+        {
+            var pageVm = await _homeControllerService.GetBlogListPageViewModelAsync().ConfigureAwait(true);
+            return PartialView("_IndexBlogList", pageVm.ItemsViewModels);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCommentsItems()
+        {
+            var commentsVms = await _homeControllerService.GetCommentsForListAsync().ConfigureAwait(true);
+            return PartialView("_IndexCommentsList", commentsVms);
+        }
+
+        #endregion API
     }
 }
