@@ -283,6 +283,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\priority.css" />
     <Content Include="Content\stars-rating-display.css" />
     <Content Include="Content\stars-rating-edit.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />

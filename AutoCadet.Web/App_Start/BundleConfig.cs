@@ -27,6 +27,9 @@ namespace AutoCadet
 
             bundles.Add(new StyleBundle("~/content/fonts")
                 .Include("~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new StyleBundle("~/content/priority")
+                .Include("~/Content/priority.css", new CssRewriteUrlTransform()));
         }
     }
 }

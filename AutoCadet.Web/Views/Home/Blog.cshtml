@@ -84,7 +84,7 @@
 
 @section scripts
 {
-    <script>
+    <script type="text/javascript">
         var disqus_config = function() {
             this.page.url = '@(HttpContext.Current.Request.Url)';
             this.page.identifier = '@($"blog_{Model.UrlName}")';
@@ -94,7 +94,7 @@
         (function() { // DON'T EDIT BELOW THIS LINE
             const d = document;
             const s = d.createElement('script');
-            s.src = '//localhost-10258.disqus.com/embed.js';
+            s.src = '//http-uroki-vozhdeniya-by.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
         })();

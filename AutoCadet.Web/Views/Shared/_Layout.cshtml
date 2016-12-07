@@ -18,10 +18,165 @@
     <meta name="title" content="@(ViewData["Title"] ?? "Уроки вождения") - uroki-vozhdeniya.by"/>
     <meta name="author" content="grishkov.ivan@gmail.com">
     <title>@(ViewData["Title"] ?? "Уроки вождения")</title>
+    <style>
+body {
+  overflow-x: hidden;
+  font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.text-muted {
+  color: #777777;
+}
+.text-primary {
+  color: #fed136;
+}
+p {
+  font-size: 14px;
+  line-height: 1.75;
+}
+p.large {
+  font-size: 16px;
+}
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  outline: none;
+}
+a {
+  color: #fed136;
+}
+a:hover,
+a:focus,
+a:active,
+a.active {
+  color: #fec503;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.img-centered {
+  margin: 0 auto;
+}
+.bg-light-gray {
+  background-color: #eeeeee;
+}
+.bg-darkest-gray {
+  background-color: #222222;
+}
+.navbar-custom {
+  background-color: #222222;
+  border-color: transparent;
+}
+.navbar-custom .navbar-brand {
+  color: #fed136;
+  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .navbar-brand:active,
+.navbar-custom .navbar-brand.active {
+  color: #fec503;
+}
+.navbar-custom .navbar-collapse {
+  border-color: rgba(255, 255, 255, 0.02);
+}
+.navbar-custom .navbar-toggle {
+  background-color: #fed136;
+  border-color: #fed136;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  color: white;
+  font-size: 12px;
+}
+.navbar-custom button.navbar-toggle {
+    width: 130px;
+}
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
+  background-color: #fed136;
+}
+.navbar-custom .nav li a {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: white;
+}
+.navbar-custom .nav li a:hover,
+.navbar-custom .nav li a:focus {
+  color: #fed136;
+  outline: none;
+}
+.navbar-custom .navbar-nav > .active > a {
+  border-radius: 0;
+  color: white;
+  background-color: #fed136;
+}
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus {
+  color: white;
+  background-color: #fec503;
+}
+@@media (min-width: 768px) {
+  .navbar-custom {
+    background-color: transparent;
+    padding: 25px 0;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+    border: none;
+  }
+  .navbar-custom .navbar-brand {
+    font-size: 2em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .navbar-custom .navbar-nav > .active > a {
+    border-radius: 3px;
+  }
+}
+@@media (min-width: 768px) {
+  .navbar-custom.affix {
+    background-color: #222222;
+    padding: 10px 0;
+  }
+  .navbar-custom.affix .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+header {
+  background-image: url('../img/header-bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  text-align: center;
+  color: white;
+}
+header .intro-text {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+.navbar-fixed-top.affix ul.nav {
+    background-color: #222222;
+}
+    </style>
 </head>
 <body id="page-top" class="index">
-        @RenderBody()
-        <hr />
+    @RenderBody()
+    <hr />
     <footer>
         <div class="container">
             <div class="row">
@@ -33,47 +188,62 @@
         </div>
     </footer>
 
-    @Styles.Render("~/content/css")
-    @Styles.Render("~/content/fonts")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.RenderFormat("<script type='text/javascript' src='{0}'></script>", "~/bundles/jquery")
+    @Scripts.RenderFormat("<script type='text/javascript' src='{0}' async></script>", "~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <noscript id="deferred-styles">
+        @Styles.Render("~/content/fonts")
+        @Styles.Render("~/content/css")
+    </noscript>
+    <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+          document.body.appendChild(replacement);
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+    </script>
 
-    <!-- Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter41138179 = new Ya.Metrika({
-                    id:41138179,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true,
-                    ecommerce:"dataLayer"
-                });
-            } catch(e) { }
-        });
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function () {
+                try {
+                    w.yaCounter41138179 = new Ya.Metrika({
+                        id: 41138179,
+                        clickmap: true,
+                        trackLinks: true,
+                        accurateTrackBounce: true,
+                        webvisor: true,
+                        ecommerce: "dataLayer"
+                    });
+                } catch (e) { }
+            });
 
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/watch.js";
 
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
     </script>
     <!-- /Yandex.Metrika counter -->
     <!-- Google.Analytics  -->
     <script>
-        (function(i, s, o, g, r, a, m) {
+        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] ||
-                function() {
+                function () {
                     (i[r].q = i[r].q || []).push(arguments)
                 }, i[r].l = 1 * new Date();
             a = s.createElement(o),
