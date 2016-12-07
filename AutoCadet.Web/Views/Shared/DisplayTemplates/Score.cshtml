@@ -1,15 +1,14 @@
 ﻿@model double?
-@{ var guid = Guid.NewGuid();}
 
-<fieldset class="rating-display" title="@($"{Model:N2}") stars">
-    <input type="radio" id="star5" name="Score-@guid" value="5" checked="@(Model >= 4.8 ? true : (bool?)null)" /><label class="full" for="star5"></label>
-    <input type="radio" id="star4half" name="Score-@guid" value="4.5" checked="@(Model < 4.8 && Model >= 4.3 ? true : (bool?)null)" /><label class="half" for="star4half"></label>
-    <input type="radio" id="star4" name="Score-@guid" value="4" checked="@(Model < 4.3 && Model >= 3.8 ? true : (bool?)null)" /><label class="full" for="star4"></label>
-    <input type="radio" id="star3half" name="Score-@guid" value="3.5" checked="@(Model < 3.8 && Model >= 3.3 ? true : (bool?)null)" /><label class="half" for="star3half"></label>
-    <input type="radio" id="star3" name="Score-@guid" value="3" checked="@(Model < 3.3 && Model >= 2.8 ? true : (bool?)null)" /><label class="full" for="star3"></label>
-    <input type="radio" id="star2half" name="Score-@guid" value="2.5" checked="@(Model < 2.8 && Model >= 2.3 ? true : (bool?)null)" /><label class="half" for="star2half"></label>
-    <input type="radio" id="star2" name="Score-@guid" value="2" checked="@(Model < 2.3 && Model >= 1.8 ? true : (bool?)null)" /><label class="full" for="star2"></label>
-    <input type="radio" id="star1half" name="Score-@guid" value="1.5" checked="@(Model < 1.8 && Model >= 1.3 ? true : (bool?)null)" /><label class="half" for="star1half"></label>
-    <input type="radio" id="star1" name="Score-@guid" value="1" checked="@(Model < 1.3 && Model >= 0.8 ? true : (bool?)null)" /><label class="full" for="star1"></label>
-    <input type="radio" id="starhalf" name="Score-@guid" value="0.5" checked="@(Model < 0.8 ? true : (bool?)null)" /><label class="half" for="starhalf"></label>
-</fieldset>
+<span class="rating-display" title="@($"{Model:N2}") stars">
+    <input type="radio" value="5" checked="@(Model >= 4.8 ? true : (bool?)null)" /><label class="full"></label>
+    <input type="radio" value="4.5" checked="@(Model < 4.8 && Model >= 4.3 ? true : (bool?)null)" /><label class="half"></label>
+    <input type="radio" value="4" checked="@(Model < 4.3 && Model >= 3.8 ? true : (bool?)null)" /><label class="full"></label>
+    <input type="radio" value="3.5" checked="@(Model < 3.8 && Model >= 3.3 ? true : (bool?)null)" /><label class="half"></label>
+    <input type="radio" value="3" checked="@(Model < 3.3 && Model >= 2.8 ? true : (bool?)null)" /><label class="full"></label>
+    <input type="radio" value="2.5" checked="@(Model < 2.8 && Model >= 2.3 ? true : (bool?)null)" /><label class="half"></label>
+    <input type="radio" value="2" checked="@(Model < 2.3 && Model >= 1.8 ? true : (bool?)null)" /><label class="full"></label>
+    <input type="radio" value="1.5" checked="@(Model < 1.8 && Model >= 1.3 ? true : (bool?)null)" /><label class="half"></label>
+    <input type="radio" value="1" checked="@(Model < 1.3 && Model >= 0.8 ? true : (bool?)null)" /><label class="full"></label>
+    <input type="radio" value="0.5" checked="@(Model < 0.8 ? true : (bool?)null)" /><label class="half"></label>
+</span>

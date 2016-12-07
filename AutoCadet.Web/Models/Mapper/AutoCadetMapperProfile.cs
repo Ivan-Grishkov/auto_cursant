@@ -8,6 +8,7 @@ namespace AutoCadet.Models.Mapper
         public AutoCadetMapperProfile()
         {
             CreateMap<Instructor, InstructorViewModel>()
+                .ForMember(x => x.ThumbnailImage, opt => opt.Condition((source, destination, sourceMember, destMember) => destMember == null))
                 .ForMember(x => x.ThumbnailImage, opt => opt.ResolveUsing(x => x.ThumbnailImage?.Bytes))
                 .ForMember(x => x.AverageScore, opt => opt.Ignore());
             CreateMap<InstructorViewModel, Instructor>()
