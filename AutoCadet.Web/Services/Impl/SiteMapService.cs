@@ -25,7 +25,7 @@ namespace AutoCadet.Services.Impl
 
         public async Task<string> GenetateSiteMapAsync()
         {
-            XDocument sitemap = XDocument.Load(_pathToSiteMap);
+            XDocument sitemap = XDocument.Load(_pathToSiteMap, LoadOptions.PreserveWhitespace);
             XElement root = sitemap.Root;
             if (root == null)
             {
@@ -44,7 +44,7 @@ namespace AutoCadet.Services.Impl
             var blogUrls = await _autoCadetDbContext.Blogs.Select(x => x.UrlName).ToListAsync().ConfigureAwait(false);
             AddNewNodes(root, ActionBlog, blogUrls);
 
-            return sitemap.ToString();
+            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?> {sitemap}";
         }
 
         private void AddNewNodes(XElement root, string action, List<string> prettyUrls)
