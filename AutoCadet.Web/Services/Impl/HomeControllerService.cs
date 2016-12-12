@@ -73,6 +73,7 @@ namespace AutoCadet.Services.Impl
         public async Task<ShareEventViewModel> GetShareEventViewModelAsync()
         {
             var share = await _autoCadetDbContext.ShareEvents
+                .Include(x => x.Metadata)
                 .Where(x => x.IsActive)
                 .OrderByDescending(x => x.CreatedDate)
                 .FirstOrDefaultAsync()

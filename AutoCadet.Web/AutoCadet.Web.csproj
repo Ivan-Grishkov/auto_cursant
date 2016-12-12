@@ -412,7 +412,7 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\_IndexBlogList.cshtml" />
     <Content Include="Views\Home\_SocialButtons.cshtml" />
-    <None Include="Views\Home\Akciya.cshtml" />
+    <Content Include="Views\Home\Akciya.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\app\directives\" />
