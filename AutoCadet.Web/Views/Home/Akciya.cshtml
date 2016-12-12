@@ -1,0 +1,82 @@
+﻿@model AutoCadet.Models.ShareEventViewModel
+
+@{
+    Layout = "~/Views/Shared/_DetailsPageLayout.cshtml";
+    ViewBag.HeaderTitle = Model.Header;
+
+    ViewData["MetaInfo"] = Model.Metadata?.Info;
+    ViewData["MetaDescription"] = Model.Metadata?.Description;
+    ViewData["MetaKeywords"] = Model.Metadata?.Keywords;
+    ViewData["Title"] = Model.Metadata?.Title;
+}
+
+@{
+    var pageUrl = Url.Action("Akciya", "Home", null, Request?.Url?.Scheme);
+}
+@section detailsH1 {
+    <div class="col-md-9">
+        @if (Model.Metadata != null)
+        {
+            <h1 class="section-heading">@Model.Metadata?.H1</h1>
+        }
+    </div>
+    <div class="col-md-3">
+        <span class="pull-right">
+            @{ Html.RenderPartial("_SocialButtons", pageUrl); }
+        </span>
+    </div>
+}
+
+@section breadcrumb {
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Главная</a>
+        </li>
+        <li class="active">Акция сайта</li>
+    </ul>
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-left">
+                @Model.Text
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right text-muted">
+                <small>@Model.TinyText</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-left">
+                <div id="disqus_thread"></div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var disqus_config = function() {
+            this.page.url = '@(HttpContext.Current.Request.Url)';
+            this.page.identifier = '@($"akciya")';
+            this.page.title = "@($"uroki-vozhdeniya.by akciya")";
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            const d = document;
+            const s = d.createElement('script');
+            s.src = '//http-uroki-vozhdeniya-by.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+}

@@ -43,6 +43,37 @@
                     @Html.CheckBoxFor(x => x.IsActive, new { @class = "form-control", id = "IsActive" })
                 </div>
 
+                if (Model.Metadata != null)
+                {
+
+                    @Html.HiddenFor(x => x.Metadata.Id)
+
+                    <div class="form-group">
+                        <label for="Title">Meta Title:</label>
+                        @Html.TextBoxFor(x => x.Metadata.Title, new { @class = "form-control", id = "Title" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="H1">Meta H1:</label>
+                        @Html.TextBoxFor(x => x.Metadata.H1, new { @class = "form-control", id = "H1" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Description">Meta Description:</label>
+                        @Html.TextBoxFor(x => x.Metadata.Description, new { @class = "form-control", id = "Description" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Info">Meta Info:</label>
+                        @Html.TextBoxFor(x => x.Metadata.Info, new { @class = "form-control", id = "Info" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Keywords">Meta Keywords:</label>
+                        @Html.TextBoxFor(x => x.Metadata.Keywords, new { @class = "form-control", id = "Keywords" })
+                    </div>
+                }
+
                 <br/>
                 <div class="row">
                     <input type="submit" value="Save" class="btn btn-primary"/>

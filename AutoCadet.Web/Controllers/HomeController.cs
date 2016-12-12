@@ -28,6 +28,15 @@ namespace AutoCadet.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> Akciya()
+        {
+            ShareEventViewModel pageViewModel = await _homeControllerService
+                .GetShareEventViewModelAsync()
+                .ConfigureAwait(true) ?? new ShareEventViewModel();
+            return View(pageViewModel);
+        }
+
+        [HttpGet]
         [RequireRequestValue("")]
         public async Task<ActionResult> Instructors()
         {

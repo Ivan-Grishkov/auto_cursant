@@ -48,8 +48,10 @@ namespace AutoCadet.Models.Mapper
             CreateMap<Metadata, MetadataInfoViewModel>();
             CreateMap<MetadataInfoViewModel, Metadata>();
 
-            CreateMap<ShareEvent, ShareEventViewModel>();
-            CreateMap<ShareEventViewModel, ShareEvent>();
+            CreateMap<ShareEvent, ShareEventViewModel>()
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
+            CreateMap<ShareEventViewModel, ShareEvent>()
+                .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<CallMe, CallMeViewModel>()
                 .ForMember(x => x.InstructorName, opt => opt.ResolveUsing(x => $"{x.Instructor?.LastName} {x.Instructor?.FirstName}"))

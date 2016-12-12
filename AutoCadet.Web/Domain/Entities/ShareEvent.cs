@@ -12,5 +12,6 @@ namespace AutoCadet.Domain.Entities
         [Required]
         public bool IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
+        public Metadata Metadata { get; set; }
     }
 }

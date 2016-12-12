@@ -59,12 +59,20 @@ textarea.form-control {
     height : 500px;
 }
 
-.share-event {
-    border-width: 5px;
-    margin-bottom: 0px;
-}
 
 header.details-layout .intro-text {
     padding-top: 150px;
     padding-bottom: 30px
+}
+
+#share-event-link {
+    border-width: 2px;
+    margin-right: 25px;
+    border-color:  rgba(254, 209, 54, 0.7);
+    -ms-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.navbar-header {
+    width: 100%;
 }

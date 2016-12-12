@@ -45,12 +45,18 @@ namespace AutoCadet.Services.Impl
                 return vm;
             }).ToList();
 
-            var share = await _autoCadetDbContext.ShareEvents
+            var shareVm = await _autoCadetDbContext.ShareEvents
                 .Where(x => x.IsActive)
                 .OrderByDescending(x => x.CreatedDate)
+                .Select(x=> new ShareEventViewModel
+                {
+                    Id = x.Id,
+                    CreatedDate = x.CreatedDate,
+                    Header = x.Header,
+                    IsActive = x.IsActive
+                })
                 .FirstOrDefaultAsync()
                 .ConfigureAwait(false);
-            var shareVm = _mapper.Map<ShareEventViewModel>(share);
 
 
             Random rnd = new Random();
@@ -62,6 +68,16 @@ namespace AutoCadet.Services.Impl
                 InstructorGridItems = randomInstructors,
                 ShareEvent = shareVm
             };
+        }
+
+        public async Task<ShareEventViewModel> GetShareEventViewModelAsync()
+        {
+            var share = await _autoCadetDbContext.ShareEvents
+                .Where(x => x.IsActive)
+                .OrderByDescending(x => x.CreatedDate)
+                .FirstOrDefaultAsync()
+                .ConfigureAwait(false);
+            return _mapper.Map<ShareEventViewModel>(share);
         }
 
         public async Task<InstructorsListPageViewModel> GetInstructorsPageViewModelAsync()

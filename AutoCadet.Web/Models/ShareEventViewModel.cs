@@ -15,5 +15,6 @@ namespace AutoCadet.Models
         [Required]
         public bool IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
+        public MetadataInfoViewModel Metadata { get; set; }
     }
 }

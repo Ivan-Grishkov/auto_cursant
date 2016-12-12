@@ -239,6 +239,10 @@
     <Compile Include="Domain\Migrations\201611280828284_AddSare.Designer.cs">
       <DependentUpon>201611280828284_AddSare.cs</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Migrations\201612120731576_UpdateShare.cs" />
+    <Compile Include="Domain\Migrations\201612120731576_UpdateShare.Designer.cs">
+      <DependentUpon>201612120731576_UpdateShare.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BlogListPageViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\CallMeViewModel.cs" />
@@ -408,6 +412,7 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\_IndexBlogList.cshtml" />
     <Content Include="Views\Home\_SocialButtons.cshtml" />
+    <None Include="Views\Home\Akciya.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\app\directives\" />
@@ -429,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201611280828284_AddSare.resx">
       <DependentUpon>201611280828284_AddSare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201612120731576_UpdateShare.resx">
+      <DependentUpon>201612120731576_UpdateShare.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

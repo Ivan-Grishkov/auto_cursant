@@ -25,4 +25,9 @@
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
+    <url>
+        <loc>http://uroki-vozhdeniya.by/akciya</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
 </urlset>

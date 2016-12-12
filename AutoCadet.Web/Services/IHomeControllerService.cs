@@ -7,6 +7,9 @@ namespace AutoCadet.Services
     public interface IHomeControllerService
     {
         Task<HomePageViewModel> GetHomePageViewModelAsync();
+        Task<ShareEventViewModel> GetShareEventViewModelAsync();
+
+
         Task<InstructorsListPageViewModel> GetInstructorsPageViewModelAsync();
         Task<VideoPageViewModel> GetVideoPageViewModelAsync();
         Task<VideoViewModel> GetVideoViewModelAsync(string prettyUrl);

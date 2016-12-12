@@ -417,6 +417,11 @@ namespace AutoCadet.Services.Impl
         {
             var shareEvent = await _autoCadetDbContext.ShareEvents.FirstOrDefaultAsync().ConfigureAwait(false);
             var shareEventViewModel = _mapper.Map<ShareEventViewModel>(shareEvent) ?? new ShareEventViewModel();
+            if (shareEventViewModel.Metadata == null)
+            {
+                shareEventViewModel.Metadata = new MetadataInfoViewModel();
+            }
+
             return shareEventViewModel;
         }
 
