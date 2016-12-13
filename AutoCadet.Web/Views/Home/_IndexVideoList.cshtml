@@ -1,65 +1,66 @@
 ﻿@model IList<AutoCadet.Models.VideoViewModel>
-
 <div class="row carousel-row">
     <div id="lessonsCarousel" class="carousel slide col-md-12" data-ride="carousel" data-interval="false">
         @{
             var itemsCount = Model.Count;
             var itemsPerPage = 6;
+            var itemsPerRow = 3;
             var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
         }
-
         <ol class="carousel-indicators">
             @for (var i = 0; i < pagesCount; i++)
             {
                 <li data-target="#lessonsCarousel" data-slide-to="@i" class="@(i == 0 ? " active" : string.Empty)"></li>
             }
         </ol>
-
         <div class="carousel-inner" role="listbox">
             @for (var j = 0; j < pagesCount; j++)
             {
-                <div class="row item@(j == 0 ? " active" : string.Empty)">
-                    @for (var i = 0; i < itemsPerPage; i++)
+                <div class="item@(j == 0 ? " active" : string.Empty)">
+                    @for (var i = 0; i < itemsPerPage; i += itemsPerRow)
                     {
-                        var k = j * itemsPerPage + i;
+                        <div class="row">
+                            @for (var r = 0; r < itemsPerRow; r++)
+                            {
+                                var k = j * itemsPerPage + i + r;
+                                if (itemsCount <= k)
+                                {
+                                    break;
+                                }
 
-                        if (itemsCount <= k)
-                        {
-                            break;
-                        }
-
-                        <div class="col-md-4 col-sm-6 portfolio-item">
-                            <a href="@Url.Action("Video", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content">
-                                        <i class="fa fa-list fa-3x"></i>
+                                <div class="col-md-4 col-sm-6 portfolio-item">
+                                    <a href="@Url.Action("Video", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
+                                        <div class="portfolio-hover">
+                                            <div class="portfolio-hover-content">
+                                                <i class="fa fa-list fa-3x"></i>
+                                            </div>
+                                        </div>
+                                        @if (!string.IsNullOrWhiteSpace(Model[k].ThumbnailImageName))
+                                        {
+                                            <img src="@($"/img/{Model[k].ThumbnailImageName}")" alt="@($"картинка: {Model[k].ListHeader}")"
+                                                 class="img-responsive img-list-instructors" width="400" height="289"/>
+                                        }
+                                        else
+                                        {
+                                            <img src="/img/paris.jpg" alt="@($"фото: {Model[k].ListHeader}")"
+                                                 class="img-responsive img-list-instructors" width="400" height="289">
+                                        }
+                                    </a>
+                                    <div class="portfolio-caption" title="@Model[k].ListHeader">
+                                        <h4>@($"{Model[k].ListHeader}")</h4>
+                                        <div class="clearfix"></div>
+                                        @{
+                                            var pageUrl = Url.Action("Video", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
+                                            Html.RenderPartial("_SocialButtons", pageUrl);
+                                        }
                                     </div>
                                 </div>
-                                @if (!string.IsNullOrWhiteSpace(Model[k].ThumbnailImageName))
-                                {
-                                    <img src="@($"/img/{Model[k].ThumbnailImageName}")" alt="@($"картинка: {Model[k].ListHeader}")"
-                                         class="img-responsive img-list-instructors" width="400" height="289" />
-                                }
-                                else
-                                {
-                                    <img src="/img/paris.jpg" alt="@($"фото: {Model[k].ListHeader}")"
-                                         class="img-responsive img-list-instructors" width="400" height="289">
-                                }
-                            </a>
-                            <div class="portfolio-caption" title="@Model[k].ListHeader">
-                                <h4>@($"{Model[k].ListHeader}")</h4>
-                                <div class="clearfix"></div>
-                                @{
-                                    var pageUrl = Url.Action("Video", "Home", new { prettyUrl = Model[k].UrlName }, Request?.Url?.Scheme);
-                                    Html.RenderPartial("_SocialButtons", pageUrl);
-                                }
-                            </div>
+                            }
                         </div>
                     }
                 </div>
             }
         </div>
-
         @if (itemsCount / itemsPerPage > 1)
         {
             <a class="right carousel-control" href="#lessonsCarousel" role="button" data-slide="next">

@@ -1,5 +1,4 @@
 ﻿@model IList<AutoCadet.Models.CommentViewModel>
-
 <div class="row carousel-row">
     @if (Model != null)
     {
@@ -7,52 +6,54 @@
             @{
                 var itemsCount = Model.Count;
                 var itemsPerPage = 6;
+                var itemsPerRow = 3;
                 var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
             }
-
             <ol class="carousel-indicators">
                 @for (var i = 0; i < pagesCount; i++)
                 {
                     <li data-target="#commentsCarousel" data-slide-to="@i" class="@(i == 0 ? " active" : string.Empty)"></li>
                 }
             </ol>
-
             <div class="carousel-inner" role="listbox">
                 @for (var j = 0; j < pagesCount; j++)
                 {
-                    <div class="row item@(j == 0 ? " active" : string.Empty)">
-                        @for (var i = 0; i < itemsPerPage; i++)
+                    <div class="item@(j == 0 ? " active" : string.Empty)">
+                        @for (var i = 0; i < itemsPerPage; i += itemsPerRow)
                         {
-                            var k = j * itemsPerPage + i;
+                            <div class="row">
+                                @for (var r = 0; r < itemsPerRow; r++)
+                                {
+                                    var k = j * itemsPerPage + i + r;
 
-                            if (itemsCount <= k)
-                            {
-                                break;
-                            }
+                                    if (itemsCount <= k)
+                                    {
+                                        break;
+                                    }
 
-                            <div class="col-sm-4">
-                                <div class="team-member">
-                                    @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
-                                    <blockquote>
-                                        <p title="@Model[k].InstructorName">
-                                            @Model[k].InstructorName
-                                        </p>
-                                        <p class="text-left" title="@Model[k].Text">@Model[k].Text</p>
-                                        <footer class="text-muted text-right">
-                                            <span class="text-left pull-left">
-                                                    @Html.DisplayFor(x => Model[k].Score)
-                                                </span>
-                                            <span class="text-right">@Model[k].Name</span>
-                                        </footer>
-                                    </blockquote>
-                                </div>
+                                    <div class="col-sm-4">
+                                        <div class="team-member">
+                                            @*<img src="img/team/1.jpg" class="img-responsive img-circle" alt="">*@
+                                            <blockquote>
+                                                <p title="@Model[k].InstructorName">
+                                                    @Model[k].InstructorName
+                                                </p>
+                                                <p class="text-left" title="@Model[k].Text">@Model[k].Text</p>
+                                                <footer class="text-muted text-right">
+                                                    <span class="text-left pull-left">
+                                                        @Html.DisplayFor(x => Model[k].Score)
+                                                    </span>
+                                                    <span class="text-right">@Model[k].Name</span>
+                                                </footer>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         }
                     </div>
                 }
-
             </div>
-
             @if (pagesCount > 1)
             {
                 <a class="right carousel-control" href="#commentsCarousel" role="button" data-slide="next">
