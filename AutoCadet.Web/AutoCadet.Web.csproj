@@ -206,7 +206,6 @@
     <Compile Include="Domain\Entities\CallMe.cs" />
     <Compile Include="Domain\Entities\Comment.cs" />
     <Compile Include="Domain\Entities\EntityBase.cs" />
-    <Compile Include="Domain\Entities\ImageFile.cs" />
     <Compile Include="Domain\Entities\Instructor.cs" />
     <Compile Include="Domain\Entities\InstructorDetails.cs" />
     <Compile Include="Domain\Entities\Metadata.cs" />
@@ -242,6 +241,18 @@
     <Compile Include="Domain\Migrations\201612120731576_UpdateShare.cs" />
     <Compile Include="Domain\Migrations\201612120731576_UpdateShare.Designer.cs">
       <DependentUpon>201612120731576_UpdateShare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\201612130540437_UseImagePathInsteadOfContent.cs" />
+    <Compile Include="Domain\Migrations\201612130540437_UseImagePathInsteadOfContent.Designer.cs">
+      <DependentUpon>201612130540437_UseImagePathInsteadOfContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\201612130549401_UseIntForPrice.cs" />
+    <Compile Include="Domain\Migrations\201612130549401_UseIntForPrice.Designer.cs">
+      <DependentUpon>201612130549401_UseIntForPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Migrations\201612130617075_ImgFileNotRequired.cs" />
+    <Compile Include="Domain\Migrations\201612130617075_ImgFileNotRequired.Designer.cs">
+      <DependentUpon>201612130617075_ImgFileNotRequired.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BlogListPageViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
@@ -437,6 +448,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201612120731576_UpdateShare.resx">
       <DependentUpon>201612120731576_UpdateShare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201612130540437_UseImagePathInsteadOfContent.resx">
+      <DependentUpon>201612130540437_UseImagePathInsteadOfContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201612130549401_UseIntForPrice.resx">
+      <DependentUpon>201612130549401_UseIntForPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Migrations\201612130617075_ImgFileNotRequired.resx">
+      <DependentUpon>201612130617075_ImgFileNotRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

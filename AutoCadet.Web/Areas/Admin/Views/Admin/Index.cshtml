@@ -60,7 +60,7 @@
                                         @Html.TextBoxFor(x => Model[i].UrlName, new { @class = "form-control" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(x => Model[i].Price, new { @class = "form-control", type = "number" })
+                                        @Html.TextBoxFor(x => Model[i].Price, new { @class = "form-control", type = "number" })
                                     </td>
                                     <td>
                                         @Html.CheckBoxFor(x => Model[i].IsActive, new {@class = "form-control"})
@@ -72,12 +72,9 @@
                                         @Html.TextBoxFor(x => Model[i].SortingNumber, new { @class = "form-control", type = "number" })
                                     </td>
                                     <td>
-                                        @{
-                                            if (Model[i].ThumbnailImage != null && Model[i].ThumbnailImage.Length > 0)
-                                            {
-                                                var base64String = Convert.ToBase64String(Model[i].ThumbnailImage);
-                                                <img src="@($"data:image/png;base64,{base64String}")" width="50px" height="50px"/>
-                                            }
+                                        @if (!string.IsNullOrWhiteSpace(Model[i].ThumbnailImageName))
+                                        {
+                                            <img src="@($"/img/{Model[i].ThumbnailImageName}")" width="50px" height="50px" />
                                         }
                                     </td>
                                 </tr>

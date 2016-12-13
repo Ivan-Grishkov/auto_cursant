@@ -19,6 +19,6 @@ namespace AutoCadet.Models
         public int SortingNumber { get; set; }
         public DateTime CreatedDate { get; set; }
         public MetadataInfoViewModel Metadata { get; set; }
-        public byte[] ThumbnailImageFile { get; set; }
+        public string ThumbnailImageName { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace AutoCadet.Domain.Entities
         public int SortingNumber { get; set; }
         public DateTime CreatedDate { get; set; }
         public Metadata Metadata { get; set; }
-        public ImageFile ThumbnailImageFile { get; set; }
+        public string ThumbnailImageName { get; set; }
     }
 }

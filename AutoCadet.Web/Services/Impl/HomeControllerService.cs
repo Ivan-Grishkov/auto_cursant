@@ -28,9 +28,8 @@ namespace AutoCadet.Services.Impl
         public async Task<HomePageViewModel> GetHomePageViewModelAsync()
         {
             var instructors = await _autoCadetDbContext.Instructors
-                .Include(x => x.ThumbnailImage)
                 .Where(x => x.IsActive)
-                .Select(x => new {Instr = x, ImageFile = x.ThumbnailImage.Bytes, AvS = x.Comments.Where(c => c.IsActive).Average(c => (double?)c.Score)})
+                .Select(x => new {Instr = x, AvS = x.Comments.Where(c => c.IsActive).Average(c => (double?)c.Score)})
                 .ToListAsync()
                 .ConfigureAwait(false);
 
@@ -38,8 +37,7 @@ namespace AutoCadet.Services.Impl
             {
                 var vm = new InstructorViewModel
                 {
-                    AverageScore =  x.AvS,
-                    ThumbnailImage = x.ImageFile
+                    AverageScore =  x.AvS
                 };
                 _mapper.Map(x.Instr, vm);
                 return vm;
@@ -85,8 +83,7 @@ namespace AutoCadet.Services.Impl
         {
             var instructors = await _autoCadetDbContext.Instructors
                 .Where(x => x.IsActive)
-                .Include(x => x.ThumbnailImage)
-                .Select(x => new { Instr = x, ImageFile = x.ThumbnailImage.Bytes, AvS = x.Comments.Where(c => c.IsActive).Average(c => (double?)c.Score) })
+                .Select(x => new { Instr = x, AvS = x.Comments.Where(c => c.IsActive).Average(c => (double?)c.Score) })
                 .ToListAsync()
                 .ConfigureAwait(false);
 
@@ -94,8 +91,7 @@ namespace AutoCadet.Services.Impl
             {
                 var vm = new InstructorViewModel
                 {
-                    AverageScore = x.AvS,
-                    ThumbnailImage = x.ImageFile
+                    AverageScore = x.AvS
                 };
                 _mapper.Map(x.Instr, vm);
                 return vm;
@@ -112,7 +108,6 @@ namespace AutoCadet.Services.Impl
             var video = await _autoCadetDbContext.Video
                 .Where(x => x.IsActive)
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
@@ -126,7 +121,6 @@ namespace AutoCadet.Services.Impl
         {
             var video = await _autoCadetDbContext.Video
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
             return _mapper.Map<VideoViewModel>(video);
@@ -160,7 +154,6 @@ namespace AutoCadet.Services.Impl
             var items = await _autoCadetDbContext.Blogs
                 .Where(x => x.IsActive)
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
@@ -174,7 +167,6 @@ namespace AutoCadet.Services.Impl
         {
             var items = await _autoCadetDbContext.Blogs
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.UrlName.ToLower() == prettyUrl.ToLower())
                 .ConfigureAwait(false);
             return _mapper.Map<BlogViewModel>(items);
@@ -183,7 +175,6 @@ namespace AutoCadet.Services.Impl
         public async Task<InstructorDetailsPageViewModel> GetInstructorDetailsViewModelAsync(string instructorUrl)
         {
             var instructor = await _autoCadetDbContext.Instructors
-                .Include(x => x.ThumbnailImage)
                 .Include(x => x.Comments)
                 .Include(x => x.InstructorDetails)
                 .Include(x => x.InstructorDetails.Metadata)

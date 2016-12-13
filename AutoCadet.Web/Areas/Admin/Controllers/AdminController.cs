@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,7 +14,6 @@ namespace AutoCadet.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminControllerService _adminControllerService;
-        // GET: Admin
         public AdminController(IAdminControllerService adminControllerService)
         {
             _adminControllerService = adminControllerService;
@@ -65,8 +65,7 @@ namespace AutoCadet.Areas.Admin.Controllers
                 return View(instructorVm);
             }
 
-            instructorVm.Instructor.ThumbnailImage = GetFileContent(itemFile);
-
+            instructorVm.Instructor.ThumbnailImageName = GetImageNameAndSaveContent("instructor", instructorVm.Instructor.UrlName, itemFile);
             await _adminControllerService.SaveInstructorAsync(instructorVm).ConfigureAwait(true);
             return RedirectToAction("Index");
         }
@@ -80,14 +79,14 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Video(IList<VideoViewModel> VideoGridItemViewModels)
+        public async Task<ActionResult> Video(IList<VideoViewModel> videoGridItemViewModels)
         {
-            if (ModelState.IsValid && VideoGridItemViewModels != null)
+            if (ModelState.IsValid && videoGridItemViewModels != null)
             {
-                await _adminControllerService.SaveVideoAttributesAsync(VideoGridItemViewModels).ConfigureAwait(true);
+                await _adminControllerService.SaveVideoAttributesAsync(videoGridItemViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
             }
-            return View(VideoGridItemViewModels);
+            return View(videoGridItemViewModels);
         }
 
         [HttpGet]
@@ -116,8 +115,8 @@ namespace AutoCadet.Areas.Admin.Controllers
             {
                 return View(lessonVm);
             }
-            lessonVm.VideoViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
+            lessonVm.VideoViewModel.ThumbnailImageName = GetImageNameAndSaveContent("video", lessonVm.VideoViewModel.UrlName, itemFile);
             await _adminControllerService.SaveVideoAsync(lessonVm).ConfigureAwait(true);
             return RedirectToAction("Video");
         }
@@ -131,14 +130,14 @@ namespace AutoCadet.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Obuchenie(IList<ObuchenieViewModel> ObuchenieGridItemViewModels)
+        public async Task<ActionResult> Obuchenie(IList<ObuchenieViewModel> obuchenieGridItemViewModels)
         {
-            if (ModelState.IsValid && ObuchenieGridItemViewModels != null)
+            if (ModelState.IsValid && obuchenieGridItemViewModels != null)
             {
-                await _adminControllerService.SaveObuchenieAttributesAsync(ObuchenieGridItemViewModels).ConfigureAwait(true);
+                await _adminControllerService.SaveObuchenieAttributesAsync(obuchenieGridItemViewModels).ConfigureAwait(true);
                 ViewBag.IsSuccess = true;
             }
-            return View(ObuchenieGridItemViewModels);
+            return View(obuchenieGridItemViewModels);
         }
 
         [HttpGet]
@@ -217,21 +216,10 @@ namespace AutoCadet.Areas.Admin.Controllers
             {
                 return View(vm);
             }
-            vm.BlogViewModel.ThumbnailImageFile = GetFileContent(itemFile);
 
+            vm.BlogViewModel.ThumbnailImageName = GetImageNameAndSaveContent("blog", vm.BlogViewModel.UrlName, itemFile);
             await _adminControllerService.SaveBlogAsync(vm).ConfigureAwait(true);
             return RedirectToAction("Blog");
-        }
-
-        private byte[] GetFileContent(HttpPostedFileBase file)
-        {
-            byte[] uploadedFile = null;
-            if (file != null && file.ContentLength > 0)
-            {
-                uploadedFile = new byte[file.InputStream.Length];
-                file.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
-            }
-            return uploadedFile;
         }
 
         [HttpGet]
@@ -286,6 +274,46 @@ namespace AutoCadet.Areas.Admin.Controllers
                 ViewBag.IsSuccess = true;
             }
             return View(shareEventViewModel);
+        }
+
+        private string GetImageNameAndSaveContent(string callerArea, string prettyUrl, HttpPostedFileBase imageFile)
+        {
+            string thumbnailImageName = null;
+            if (imageFile != null && imageFile.ContentLength > 0)
+            {
+
+                if (imageFile.ContentType.Contains("jpg") || imageFile.ContentType.Contains("jpeg"))
+                {
+                    thumbnailImageName = GetImageFileName($"video_{prettyUrl}", "jpeg");
+                }
+                else
+                {
+                    thumbnailImageName = GetImageFileName($"{callerArea}_{prettyUrl}", "png");
+                }
+
+                var path = GetImageFilePath(thumbnailImageName);
+                imageFile.SaveAs(path);
+            }
+
+            return thumbnailImageName;
+        }
+
+        private string GetImageFilePath(string imageName)
+        {
+            if (string.IsNullOrWhiteSpace(imageName))
+            {
+                imageName = Guid.NewGuid().ToString();
+            }
+            return Server.MapPath($"~/img/{imageName}");
+        }
+
+        private string GetImageFileName(string prettyUrl, string extension)
+        {
+            if (string.IsNullOrWhiteSpace(prettyUrl))
+            {
+                prettyUrl = Guid.NewGuid().ToString();
+            }
+            return $"{prettyUrl}.{extension}";
         }
     }
 }

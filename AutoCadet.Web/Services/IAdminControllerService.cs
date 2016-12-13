@@ -14,7 +14,7 @@ namespace AutoCadet.Services
 
         Task<IList<VideoViewModel>> GetAllVideoViewModelsAsync();
         Task<VideoManagePageViewModel> GetVideoViewModelAsync(int lessonId);
-        Task SaveVideoAttributesAsync(IList<VideoViewModel> VideoGridItemViewModels);
+        Task SaveVideoAttributesAsync(IList<VideoViewModel> videoGridItemViewModels);
         Task SaveVideoAsync(VideoManagePageViewModel lessonVm);
 
         Task<IList<ObuchenieViewModel>> GetAllObuchenieViewModelsAsync();

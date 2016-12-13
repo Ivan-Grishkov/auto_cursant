@@ -26,8 +26,8 @@ namespace AutoCadet.Models
         [Required]
         public bool IsPrimary { get; set; }
         [Required]
-        public decimal Price { get; set; }
-        public byte[] ThumbnailImage { get; set; }
+        public int Price { get; set; }
+        public string ThumbnailImageName { get; set; }
         [UIHint("Score")]
         public double? AverageScore { get; set; }
     }

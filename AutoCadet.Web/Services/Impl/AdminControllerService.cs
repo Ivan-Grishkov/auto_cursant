@@ -25,7 +25,7 @@ namespace AutoCadet.Services.Impl
 
         public async Task<IList<InstructorViewModel>> GetAllInstructorsViewModelsAsync()
         {
-            var instructors = await _autoCadetDbContext.Instructors.Include(x => x.ThumbnailImage).ToListAsync().ConfigureAwait(false);
+            var instructors = await _autoCadetDbContext.Instructors.ToListAsync().ConfigureAwait(false);
             return instructors?.Select(i => _mapper.Map<InstructorViewModel>(i)).ToList();
         }
 
@@ -35,7 +35,6 @@ namespace AutoCadet.Services.Impl
                 .Instructors
                 .Include(x => x.InstructorDetails)
                 .Include(x => x.InstructorDetails.Metadata)
-                .Include(x => x.ThumbnailImage)
                 .FirstOrDefaultAsync(x => x.Id == instructorId)
                 .ConfigureAwait(false);
 
@@ -60,16 +59,6 @@ namespace AutoCadet.Services.Impl
                     ?? new Instructor();
             _mapper.Map(pageVm.Instructor, instructor);
 
-            if (pageVm.Instructor.ThumbnailImage != null)
-            {
-                if (instructor.ThumbnailImage == null)
-                {
-                    instructor.ThumbnailImage = new ImageFile();
-                }
-
-                instructor.ThumbnailImage.Bytes = pageVm.Instructor.ThumbnailImage;
-            }
-
             var instructorDetails = await _autoCadetDbContext.InstructorDetails
                 .FirstOrDefaultAsync(x => x.Id == pageVm.InstructorDetails.Id)
                 .ConfigureAwait(false)
@@ -85,6 +74,7 @@ namespace AutoCadet.Services.Impl
             }
 
             instructor.InstructorDetails = instructorDetails;
+            instructor.UrlName = instructor.UrlName.ToLower();
             _autoCadetDbContext.Instructors.AddOrUpdate(instructor);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
@@ -105,7 +95,7 @@ namespace AutoCadet.Services.Impl
                     instructor.IsPrimary = vm.IsPrimary;
                     instructor.SortingNumber = vm.SortingNumber;
                     instructor.Email = vm.Email;
-                    instructor.UrlName = vm.UrlName;
+                    instructor.UrlName = vm.UrlName.ToLower();
                     instructor.Price = vm.Price;
                     instructor.Phone = vm.Phone;
                 }
@@ -115,12 +105,11 @@ namespace AutoCadet.Services.Impl
 
         public async Task<IList<VideoViewModel>> GetAllVideoViewModelsAsync()
         {
-            var Video = await _autoCadetDbContext.Video
+            var video = await _autoCadetDbContext.Video
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .ToListAsync()
                 .ConfigureAwait(false);
-            return Video?.Select(i => _mapper.Map<VideoViewModel>(i)).ToList();
+            return video?.Select(i => _mapper.Map<VideoViewModel>(i)).ToList();
         }
 
         public async Task<VideoManagePageViewModel> GetVideoViewModelAsync(int lessonId)
@@ -128,7 +117,6 @@ namespace AutoCadet.Services.Impl
             var instructor = await _autoCadetDbContext
                 .Video
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.Id == lessonId)
                 .ConfigureAwait(false);
 
@@ -139,21 +127,21 @@ namespace AutoCadet.Services.Impl
             };
         }
 
-        public async Task SaveVideoAttributesAsync(IList<VideoViewModel> VideoGridItemViewModels)
+        public async Task SaveVideoAttributesAsync(IList<VideoViewModel> videoGridItemViewModels)
         {
-            var ids = VideoGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
+            var ids = videoGridItemViewModels.Where(x => x != null).Select(i => i.Id).ToList();
             var lessons = await _autoCadetDbContext.Video
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync()
                 .ConfigureAwait(false);
             foreach (var instructor in lessons)
             {
-                var vm = VideoGridItemViewModels.FirstOrDefault(x => x.Id == instructor.Id);
+                var vm = videoGridItemViewModels.FirstOrDefault(x => x.Id == instructor.Id);
                 if (vm != null)
                 {
                     instructor.ListHeader = vm.ListHeader;
                     instructor.YoutubeUrl = vm.YoutubeUrl;
-                    instructor.UrlName = vm.UrlName;
+                    instructor.UrlName = vm.UrlName.ToLower();
                     instructor.Text = vm.Text;
                     instructor.IsActive = vm.IsActive;
                     instructor.SortingNumber = vm.SortingNumber;
@@ -175,16 +163,6 @@ namespace AutoCadet.Services.Impl
                     ?? new Video();
             _mapper.Map(pageVm.VideoViewModel, lesson);
 
-            if (pageVm.VideoViewModel.ThumbnailImageFile != null)
-            {
-                if (lesson.ThumbnailImageFile == null)
-                {
-                    lesson.ThumbnailImageFile = new ImageFile();
-                }
-
-                lesson.ThumbnailImageFile.Bytes = pageVm.VideoViewModel.ThumbnailImageFile;
-            }
-
             lesson.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
             if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
             {
@@ -194,6 +172,7 @@ namespace AutoCadet.Services.Impl
             }
             
             lesson.CreatedDate = DateTime.Now;
+            lesson.UrlName = lesson.UrlName.ToLower();
             _autoCadetDbContext.Video.AddOrUpdate(lesson);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
@@ -237,7 +216,7 @@ namespace AutoCadet.Services.Impl
                     entity.ListHeader = vm.ListHeader;
                     entity.ListDescription = vm.ListDescription;
                     entity.ListIcon = vm.ListIcon;
-                    entity.UrlName = vm.UrlName;
+                    entity.UrlName = vm.UrlName.ToLower();
                     entity.IsActive = vm.IsActive;
                     entity.SortingNumber = vm.SortingNumber;
                 }
@@ -267,6 +246,7 @@ namespace AutoCadet.Services.Impl
             }
 
             entity.CreatedDate = DateTime.Now;
+            entity.UrlName = entity.UrlName.ToLower();
             _autoCadetDbContext.Obuchenie.AddOrUpdate(entity);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
@@ -275,7 +255,6 @@ namespace AutoCadet.Services.Impl
         {
             var entities = await _autoCadetDbContext.Blogs
                .Include(x => x.Metadata)
-               .Include(x => x.ThumbnailImageFile)
                .ToListAsync()
                .ConfigureAwait(false);
             return entities?.Select(i => _mapper.Map<BlogViewModel>(i)).ToList();
@@ -286,7 +265,6 @@ namespace AutoCadet.Services.Impl
             var entity = await _autoCadetDbContext
                 .Blogs
                 .Include(x => x.Metadata)
-                .Include(x => x.ThumbnailImageFile)
                 .FirstOrDefaultAsync(x => x.Id == blogId)
                 .ConfigureAwait(false);
 
@@ -311,7 +289,7 @@ namespace AutoCadet.Services.Impl
                 {
                     entity.ListHeader = vm.ListHeader;
                     entity.ListDescription = vm.ListDescription;
-                    entity.UrlName = vm.UrlName;
+                    entity.UrlName = vm.UrlName.ToLower();
                     entity.YoutubeUrl = vm.YoutubeUrl;
                     entity.IsActive = vm.IsActive;
                     entity.SortingNumber = vm.SortingNumber;
@@ -333,16 +311,6 @@ namespace AutoCadet.Services.Impl
                     ?? new Blog();
             _mapper.Map(pageVm.BlogViewModel, entity);
 
-            if (pageVm.BlogViewModel.ThumbnailImageFile != null)
-            {
-                if (entity.ThumbnailImageFile == null)
-                {
-                    entity.ThumbnailImageFile = new ImageFile();
-                }
-
-                entity.ThumbnailImageFile.Bytes = pageVm.BlogViewModel.ThumbnailImageFile;
-            }
-
             entity.Metadata = _mapper.Map<Metadata>(pageVm.MetadataInfo);
             if (pageVm.MetadataInfo != null && pageVm.MetadataInfo.Id != 0)
             {
@@ -352,6 +320,7 @@ namespace AutoCadet.Services.Impl
             }
 
             entity.CreatedDate = DateTime.Now;
+            entity.UrlName = entity.UrlName.ToLower();
             _autoCadetDbContext.Blogs.AddOrUpdate(entity);
             await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
         }

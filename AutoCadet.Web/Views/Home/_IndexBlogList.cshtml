@@ -35,16 +35,15 @@
                                         <i class="fa fa-list fa-3x"></i>
                                     </div>
                                 </div>
-                                @{
-                                    if (Model[k].ThumbnailImageFile != null && Model[k].ThumbnailImageFile.Length > 0)
-                                    {
-                                        var base64String = Convert.ToBase64String(Model[k].ThumbnailImageFile);
-                                        <img src="@($"data:image/png;base64,{base64String}")" alt="@($"фото: {Model[k].ListHeader}")" class="img-responsive img-list-instructors"/>
-                                    }
-                                    else
-                                    {
-                                        <img src="img/paris.jpg" class="img-responsive img-list-instructors" alt="@($"фото: {Model[k].ListHeader}")">
-                                    }
+                                @if (!string.IsNullOrWhiteSpace(Model[k].ThumbnailImageName))
+                                {
+                                    <img src="@($"/img/{Model[k].ThumbnailImageName}")" alt="@($"картинка: {Model[k].ListHeader}")"
+                                         class="img-responsive img-list-instructors" width="400" height="289"/>
+                                }
+                                else
+                                {
+                                    <img src="/img/paris.jpg" alt="@($"фото: {Model[k].ListHeader}")"
+                                         class="img-responsive img-list-instructors" width="400" height="289">
                                 }
                             </a>
                             <div class="portfolio-caption" title="@Model[k].ListHeader">
@@ -54,7 +53,7 @@
                                     <p class="text-left">@($"{Model[k].ListDescription}")</p>
                                 }
                                 @{
-                                    var pageUrl = Url.Action("Blog", "Home", new { prettyUrl = Model[k].UrlName }, Request?.Url?.Scheme);
+                                    var pageUrl = Url.Action("Blog", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
                                     Html.RenderPartial("_SocialButtons", pageUrl);
                                 }
                             </div>

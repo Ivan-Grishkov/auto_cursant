@@ -15,7 +15,6 @@ namespace AutoCadet.Domain
         public IDbSet<Instructor> Instructors { get; set; }
         public IDbSet<InstructorDetails> InstructorDetails { get; set; }
         public IDbSet<Comment> Comments { get; set; }
-        public IDbSet<ImageFile> ImageFiles { get; set; }
         public IDbSet<Metadata> Metadatas { get; set; }
         public IDbSet<CallMe> CallMes { get; set; }
         public IDbSet<Video> Video { get; set; }

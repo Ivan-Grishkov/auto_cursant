@@ -8,11 +8,8 @@ namespace AutoCadet.Models.Mapper
         public AutoCadetMapperProfile()
         {
             CreateMap<Instructor, InstructorViewModel>()
-                .ForMember(x => x.ThumbnailImage, opt => opt.Condition((source, destination, sourceMember, destMember) => destMember == null))
-                .ForMember(x => x.ThumbnailImage, opt => opt.ResolveUsing(x => x.ThumbnailImage?.Bytes))
                 .ForMember(x => x.AverageScore, opt => opt.Ignore());
-            CreateMap<InstructorViewModel, Instructor>()
-                .ForMember(x => x.ThumbnailImage, opt => opt.Ignore());
+            CreateMap<InstructorViewModel, Instructor>();
 
             CreateMap<InstructorDetails, InstructorDetailsViewModel>()
                 .ForMember(x => x.MetadataInfo, opt => opt.MapFrom(x => x.Metadata));
@@ -27,10 +24,8 @@ namespace AutoCadet.Models.Mapper
                 .ForMember(x => x.Instructor, opt => opt.Ignore());
 
             CreateMap<Video, VideoViewModel>()
-                .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
             CreateMap<VideoViewModel, Video>()
-                .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<Obuchenie, ObuchenieViewModel>()
@@ -39,10 +34,8 @@ namespace AutoCadet.Models.Mapper
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<Blog, BlogViewModel>()
-                .ForMember(x => x.ThumbnailImageFile, opt => opt.ResolveUsing(x => x.ThumbnailImageFile?.Bytes))
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
             CreateMap<BlogViewModel, Blog>()
-                .ForMember(x => x.ThumbnailImageFile, opt => opt.Ignore())
                 .ForMember(x => x.Metadata, opt => opt.MapFrom(x => x.Metadata));
 
             CreateMap<Metadata, MetadataInfoViewModel>();
@@ -55,7 +48,7 @@ namespace AutoCadet.Models.Mapper
 
             CreateMap<CallMe, CallMeViewModel>()
                 .ForMember(x => x.InstructorName, opt => opt.ResolveUsing(x => $"{x.Instructor?.LastName} {x.Instructor?.FirstName}"))
-                .ForMember(x => x.InstructorId, opt => opt.ResolveUsing(x => x.Instructor?.Id)); ;
+                .ForMember(x => x.InstructorId, opt => opt.ResolveUsing(x => x.Instructor?.Id));
             CreateMap<CallMeViewModel, CallMe>()
                 .ForMember(x => x.Instructor, opt => opt.Ignore());
 

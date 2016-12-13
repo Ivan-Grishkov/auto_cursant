@@ -17,13 +17,13 @@ namespace AutoCadet.Domain.Entities
         [Required]
         public string UrlName { get; set; }
         [Required]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public int SortingNumber { get; set; }
         [Required]
         public bool IsActive { get; set; }
         [Required]
         public bool IsPrimary { get; set; }
-        public virtual ImageFile ThumbnailImage { get; set; }
+        public string ThumbnailImageName { get; set; }
         public virtual InstructorDetails InstructorDetails { get; set; }
         public virtual ISet<Comment> Comments { get; set; }
     }
