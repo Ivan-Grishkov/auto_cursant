@@ -37,7 +37,7 @@
 }
 <section id="portfolio" class="bg-light-gray">
     <div class="container">
-        @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems?.OrderByDescending(x => x.SortingNumber).ToList()); }
+        @{ Html.RenderPartial("_IndexInstructorsList", Model.InstructorGridItems); }
     </div>
 </section>
 

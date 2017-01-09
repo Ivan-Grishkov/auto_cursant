@@ -40,7 +40,7 @@
 
         <div class="base-content row">
             <div class="base-error text-center col-md-12">
-                We've been notified of the problem and are looking into the issue. Please start again from our <a href="/">homepage</a>.
+                Страница не найдена, вернитесь на <a href="/">главную</a>.
             </div>
 
             <hr />

@@ -97,9 +97,13 @@ namespace AutoCadet.Services.Impl
                 return vm;
             }).ToList();
 
+            Random rnd = new Random();
+            var randomInstructors = vms.Where(x => x.IsPrimary).OrderBy(x => rnd.Next()).ToList();
+            randomInstructors.AddRange(vms.Where(x => !x.IsPrimary).OrderByDescending(x => x.SortingNumber));
+
             return new InstructorsListPageViewModel
             {
-                InstructorGridItems = vms
+                InstructorGridItems = randomInstructors
             };
         }
 
