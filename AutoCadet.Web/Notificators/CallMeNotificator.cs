@@ -41,7 +41,7 @@ namespace AutoCadet.Notificators
                 var messageText = $"{instructor?.LastName} {instructor?.FirstName} перезвоните, пожалуйста, на номер {phone}. {requesterName}";
                 if (instructor != null)
                 {
-                    messageText += $"тел. инструктора: {instructor.Phone}";
+                    messageText += $" тел. инструктора: {instructor.Phone}";
                     if (!string.IsNullOrWhiteSpace(instructor.Phone2))
                     {
                         messageText += $" и {instructor.Phone2}";
