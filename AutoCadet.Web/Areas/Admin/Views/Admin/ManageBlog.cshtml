@@ -12,6 +12,7 @@
             @using (Html.BeginForm("ManageBlog", "Admin", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.HiddenFor(x => x.BlogViewModel.Id)
+                @Html.HiddenFor(x => x.BlogViewModel.ThumbnailImageName)
 
                 <div class="form-group error">
                     @Html.ValidationSummary()

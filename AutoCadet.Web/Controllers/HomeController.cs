@@ -28,12 +28,38 @@ namespace AutoCadet.Controllers
         }
 
         [HttpGet]
+        public ActionResult M()
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Mobile(string prettyUrl)
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Akciya()
         {
             ShareEventViewModel pageViewModel = await _homeControllerService
                 .GetShareEventViewModelAsync()
                 .ConfigureAwait(true) ?? new ShareEventViewModel();
             return View(pageViewModel);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAkciya()
+        {
+            ShareEventViewModel pageViewModel = await _homeControllerService
+                .GetShareEventViewModelAsync()
+                .ConfigureAwait(true);
+            if (pageViewModel == null || !pageViewModel.IsActive)
+            {
+                return null;
+            }
+
+            return PartialView("_GetAkciya", pageViewModel);
         }
 
         [HttpGet]

@@ -44,4 +44,11 @@
         return false; // prevent default action
     });
 
+    $.ajax({
+        type: 'GET',
+        url: '/getakciya',
+        success: function (data) {
+            $($('#akciyaLink')[0]).append(data);
+        }
+    });
 })(jQuery);

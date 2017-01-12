@@ -8,7 +8,7 @@
     ViewData["Title"] = "Уроки вождения с инструктором в Минске - Уроки вождения автомобиля для начинающих, стоимость";
 }
 
-@{ Html.RenderPartial("_IndexNavigation", Model.ShareEvent ?? new ShareEventViewModel()); }
+@{ Html.RenderPartial("_IndexNavigation"); }
 @{ Html.RenderPartial("_IndexHeader"); }
 
 <section id="portfolio" class="bg-light-gray">
@@ -232,7 +232,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-xl">Отправить</button>
+                                <button type="submit" class="btn btn-xl" onclick="yaCounter41138179.reachGoal('FormOrderSend')" onsubmit="ga('send', 'event', 'Form', 'SendForm');">Отправить</button>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -245,32 +245,32 @@
 
 @section scripts {
     <script type="text/javascript">
-        (function ($) {
+        (function($) {
             $.ajax({
                 type: 'GET',
                 url: '/getobuchenieitems',
-                success: function (data) {
+                success: function(data) {
                     $($('#services .container .row')[0]).after(data);
                 }
             });
             $.ajax({
                 type: 'GET',
                 url: '/getvideoitems',
-                success: function (data) {
+                success: function(data) {
                     $($('#Video .container .row')[0]).after(data);
                 }
             });
             $.ajax({
                 type: 'GET',
                 url: '/getblogitems',
-                success: function (data) {
+                success: function(data) {
                     $($('#blog .container .row')[0]).after(data);
                 }
             });
             $.ajax({
                 type: 'GET',
                 url: '/getcommentsitems',
-                success: function (data) {
+                success: function(data) {
                     $($('#comments .container .row')[0]).after(data);
                 }
             });

@@ -11,6 +11,5 @@ namespace AutoCadet.Models
 
         public IList<InstructorViewModel> InstructorGridItems { get; set; }
         public CommentViewModel NewComment { get; set; }
-        public ShareEventViewModel ShareEvent { get; set; }
     }
 }

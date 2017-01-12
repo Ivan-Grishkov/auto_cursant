@@ -1,5 +1,4 @@
-﻿@model AutoCadet.Models.ShareEventViewModel
-<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+﻿<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container">
         <div class="row">
             <div class="col-md-12 navbar-header page-scroll">
@@ -7,10 +6,7 @@
                     <span class="sr-only">Навигация</span> Меню <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">Уроки вождения</a>
-                @if (Model != null && Model.IsActive)
-                {
-                    <a id="share-event-link" class="page-scroll btn navbar-btn navbar-brand pull-right float-right" href="/akciya">Акция</a>
-                }
+                <span id="akciyaLink"></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

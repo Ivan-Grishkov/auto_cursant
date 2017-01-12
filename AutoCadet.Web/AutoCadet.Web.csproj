@@ -424,6 +424,7 @@
     <Content Include="Views\Home\_IndexBlogList.cshtml" />
     <Content Include="Views\Home\_SocialButtons.cshtml" />
     <Content Include="Views\Home\Akciya.cshtml" />
+    <Content Include="Views\Home\_GetAkciya.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\app\directives\" />

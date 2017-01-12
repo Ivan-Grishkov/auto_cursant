@@ -65,7 +65,8 @@ namespace AutoCadet.Areas.Admin.Controllers
                 return View(instructorVm);
             }
 
-            instructorVm.Instructor.ThumbnailImageName = GetImageNameAndSaveContent("instructor", instructorVm.Instructor.UrlName, itemFile);
+            instructorVm.Instructor.ThumbnailImageName = 
+                GetImageNameAndSaveContent("instructor", instructorVm.Instructor.UrlName, itemFile) ?? instructorVm.Instructor.ThumbnailImageName;
             await _adminControllerService.SaveInstructorAsync(instructorVm).ConfigureAwait(true);
             return RedirectToAction("Index");
         }
@@ -116,7 +117,8 @@ namespace AutoCadet.Areas.Admin.Controllers
                 return View(lessonVm);
             }
 
-            lessonVm.VideoViewModel.ThumbnailImageName = GetImageNameAndSaveContent("video", lessonVm.VideoViewModel.UrlName, itemFile);
+            lessonVm.VideoViewModel.ThumbnailImageName =
+                GetImageNameAndSaveContent("video", lessonVm.VideoViewModel.UrlName, itemFile) ?? lessonVm.VideoViewModel.ThumbnailImageName;
             await _adminControllerService.SaveVideoAsync(lessonVm).ConfigureAwait(true);
             return RedirectToAction("Video");
         }
@@ -217,7 +219,8 @@ namespace AutoCadet.Areas.Admin.Controllers
                 return View(vm);
             }
 
-            vm.BlogViewModel.ThumbnailImageName = GetImageNameAndSaveContent("blog", vm.BlogViewModel.UrlName, itemFile);
+            vm.BlogViewModel.ThumbnailImageName =
+                GetImageNameAndSaveContent("blog", vm.BlogViewModel.UrlName, itemFile) ?? vm.BlogViewModel.ThumbnailImageName;
             await _adminControllerService.SaveBlogAsync(vm).ConfigureAwait(true);
             return RedirectToAction("Blog");
         }

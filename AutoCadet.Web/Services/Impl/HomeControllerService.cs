@@ -43,28 +43,13 @@ namespace AutoCadet.Services.Impl
                 return vm;
             }).ToList();
 
-            var shareVm = await _autoCadetDbContext.ShareEvents
-                .Where(x => x.IsActive)
-                .OrderByDescending(x => x.CreatedDate)
-                .Select(x=> new ShareEventViewModel
-                {
-                    Id = x.Id,
-                    CreatedDate = x.CreatedDate,
-                    Header = x.Header,
-                    IsActive = x.IsActive
-                })
-                .FirstOrDefaultAsync()
-                .ConfigureAwait(false);
-
-
             Random rnd = new Random();
             var randomInstructors = vms.Where(x => x.IsPrimary).OrderBy(x => rnd.Next()).ToList();
             randomInstructors.AddRange(vms.Where(x => !x.IsPrimary).OrderByDescending(x => x.SortingNumber));
 
             return new HomePageViewModel
             {
-                InstructorGridItems = randomInstructors,
-                ShareEvent = shareVm
+                InstructorGridItems = randomInstructors
             };
         }
 
