@@ -18,12 +18,6 @@ namespace AutoCadet
                 "{action}/{prettyUrl}",
                 new { controller = "Home", action = "Index", prettyUrl = UrlParameter.Optional }
                 );
-
-            routes.MapRoute(
-                "Mobile",
-                "mobile/{action}/{prettyUrl}",
-                new { controller = "Home", action = "Mobile", prettyUrl = UrlParameter.Optional }
-                );
         }
     }
 }
