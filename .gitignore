@@ -213,8 +213,6 @@ _Pvt_Extensions
 
 # Custom
 *.zip
-*.min.css
-*.min.js
 *.orig
 *.local.*
 *.remote.*
