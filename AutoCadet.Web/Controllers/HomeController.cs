@@ -183,6 +183,11 @@ namespace AutoCadet.Controllers
         [HttpGet]
         public async Task<ActionResult> SiteMap()
         {
+            if (Request.Url == null || !Request.Url.AbsolutePath.Contains(".xml"))
+            {
+                return RedirectToActionPermanent("sitemap.xml");
+            }
+
             var sitemap = await _siteMapService.GenetateSiteMapAsync().ConfigureAwait(true);
             return Content(sitemap, "xml", Encoding.UTF8);
         }
