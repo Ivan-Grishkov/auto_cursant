@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
+using AutoCadet.Domain;
 using AutoCadet.Domain.Entities;
 using log4net;
 
@@ -10,12 +11,14 @@ namespace AutoCadet.Notificators
     public class CallMeNotificator : ICallMeNotificator
     {
         private readonly ILog _log;
+        private readonly AutoCadetDbContext _autoCadetDbContext;
         private const char EmailSplitter = ';';
         private readonly string _adminEmail = ConfigurationManager.AppSettings["NotifyMeDefaultEmails"] ?? "grishkov.ivan@gmail.com";
 
-        public CallMeNotificator(ILog log)
+        public CallMeNotificator(ILog log, AutoCadetDbContext autoCadetDbContext)
         {
             _log = log;
+            _autoCadetDbContext = autoCadetDbContext;
         }
 
         /// <param name="phone"></param>
@@ -26,6 +29,11 @@ namespace AutoCadet.Notificators
         {
             try
             {
+                if (instructor == null)
+                {
+                    instructor = _autoCadetDbContext.Instructors.Where(x => x.IsPrimary).OrderBy(x => Guid.NewGuid()).Take(3).FirstOrDefault();
+                }
+
                 MailMessage message = new MailMessage();
                 if (!string.IsNullOrWhiteSpace(instructor?.Email))
                 {
