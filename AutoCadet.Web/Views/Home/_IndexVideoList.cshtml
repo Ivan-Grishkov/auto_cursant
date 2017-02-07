@@ -14,6 +14,7 @@
             }
         </ol>
         <div class="carousel-inner" role="listbox">
+            @{ var k = 0; }
             @for (var j = 0; j < pagesCount; j++)
             {
                 <div class="item@(j == 0 ? " active" : string.Empty)">
@@ -22,7 +23,6 @@
                         <div class="row">
                             @for (var r = 0; r < itemsPerRow; r++)
                             {
-                                var k = j * itemsPerPage + i + r;
                                 if (itemsCount <= k)
                                 {
                                     break;
@@ -55,6 +55,9 @@
                                         }
                                     </div>
                                 </div>
+                                {
+                                    k++;
+                                }
                             }
                         </div>
                     }
