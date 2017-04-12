@@ -185,6 +185,7 @@ namespace AutoCadet.Controllers
         {
             if (Request.Url == null || !Request.Url.AbsolutePath.Contains(".xml"))
             {
+                // ReSharper disable once Mvc.ActionNotResolved
                 return RedirectToActionPermanent("sitemap.xml");
             }
 

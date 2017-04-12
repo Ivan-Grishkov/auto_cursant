@@ -314,9 +314,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
     <Content Include="Scripts\agency.js" />
-    <Content Include="Scripts\app\app.js" />
-    <Content Include="Scripts\app\controllers\admin-users-controller.js" />
-    <Content Include="Scripts\app\controllers\home-index-controller.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -426,11 +423,7 @@
     <Content Include="Views\Home\Akciya.cshtml" />
     <Content Include="Views\Home\_GetAkciya.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\app\directives\" />
-    <Folder Include="Scripts\app\services\" />
-    <Folder Include="Scripts\app\templates\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
