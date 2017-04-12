@@ -1,2 +1,5 @@
 ﻿@model AutoCadet.Models.ShareEventViewModel
-<a id="share-event-link" class="page-scroll btn navbar-btn navbar-brand pull-right float-right" href="/akciya">Акция</a>
+@if (Model.IsActive)
+{
+    <a id="share-event-link" class="page-scroll btn navbar-btn navbar-brand pull-right float-right" href="/akciya">Акция</a>
+}

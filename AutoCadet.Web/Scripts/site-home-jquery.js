@@ -48,7 +48,9 @@
         type: 'GET',
         url: '/getakciya',
         success: function (data) {
-            $($('#akciyaLink')[0]).append(data);
+            if (data) {
+               $($('#akciyaLink')[0]).append(data);
+            }
         }
     });
 })(jQuery);
