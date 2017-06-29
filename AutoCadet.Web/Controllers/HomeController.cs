@@ -63,6 +63,13 @@ namespace AutoCadet.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> GetPhoneNumber()
+        {
+            var randomPhone = await _homeControllerService.GetRandomInstructorNumberAsync().ConfigureAwait(true);
+            return new JsonResult { Data = randomPhone, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [HttpGet]
         [RequireRequestValue("")]
         public async Task<ActionResult> Instructors()
         {

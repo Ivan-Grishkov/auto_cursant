@@ -25,5 +25,6 @@ namespace AutoCadet.Services
         Task<bool> ProcessCallMeAsync(CallMeViewModel callMe);
 
         Task<IList<CommentViewModel>> GetCommentsForListAsync();
+        Task<string> GetRandomInstructorNumberAsync();
     }
 }
