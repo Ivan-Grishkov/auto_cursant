@@ -272,6 +272,7 @@
                 url: '/getcommentsitems',
                 success: function(data) {
                     $($('#comments .container .row')[0]).after(data);
+                    $('[data-toggle="popover"]').popover();
                 }
             });
         })(jQuery);

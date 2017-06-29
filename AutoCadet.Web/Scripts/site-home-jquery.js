@@ -1,4 +1,7 @@
 ﻿(function ($) {
+    $(function() {
+        $('[data-toggle="popover"]').popover();
+    });
 
     $('#addCommentForm').submit(function (e) {
         e.preventDefault();

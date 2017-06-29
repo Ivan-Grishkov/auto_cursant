@@ -37,7 +37,8 @@
                                                 <p title="@Model[k].InstructorName">
                                                     @Model[k].InstructorName
                                                 </p>
-                                                <p class="text-left" title="@Model[k].Text">@Model[k].Text</p>
+                                                <p data-toggle="popover" data-content="@Model[k].Text" data-container="body" data-placement="top" 
+                                                   class="text-left block-with-text cursor-poiner">@Model[k].Text</p>
                                                 <footer class="text-muted text-right">
                                                     <span class="text-left pull-left">
                                                         @Html.DisplayFor(x => Model[k].Score)
