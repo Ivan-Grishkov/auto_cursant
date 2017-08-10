@@ -93,6 +93,8 @@ namespace AutoCadet.Controllers
                 vm.Instructor = new InstructorViewModel();
             }
 
+            ViewBag.DisplayPhone = vm.Instructor.Phone;
+
             return View(vm);
         }
 
