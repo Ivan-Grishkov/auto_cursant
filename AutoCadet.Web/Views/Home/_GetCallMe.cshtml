@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<AutoCadet.Models.InstructorViewModel>
 
-
-<!-- Modal content-->
-<div class="modal-content" id="contact">
+<div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Заказать Звонок</h4>
@@ -10,8 +8,6 @@
     @using (Html.BeginForm("CallMe", "Home", FormMethod.Post, new {name = "callMeMessage", id = "callMeFormModal"}))
     {
         <div class="modal-body">
-
-
             <div id="addCallMeErrorModal" class="alert alert-danger" role="alert" style="display: none">
                 Произошла ошибка. Попробуйте еще раз.
             </div>
@@ -21,7 +17,6 @@
             <div id="addCallMeSuccessModal" class="alert alert-success" role="alert" style="display: none">
                 Ваш Запрос отправлен.
             </div>
-
 
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Ваше Имя" id="requesterName" name="requesterName">
@@ -49,8 +44,6 @@
                 </select>
                 <p class="help-block text-danger"></p>
             </div>
-
-
         </div>
         <div class="modal-footer">
             <div class="form-group">
