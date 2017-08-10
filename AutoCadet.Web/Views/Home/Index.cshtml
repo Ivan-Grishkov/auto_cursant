@@ -187,7 +187,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Перезвоните мне</h2>
+                <h2 class="section-heading">Заказать Звонок</h2>
             </div>
         </div>
         <div class="row">
@@ -224,7 +224,7 @@
                                     <option value="" disabled selected>Ваш Инструктор</option>
                                     @foreach (var instructor in Model.InstructorGridItems?.Where(x => x != null).OrderBy(x => x.LastName))
                                     {
-                                        <option value="@(instructor.Id)">@($"{instructor.LastName} {instructor.FirstName}")</option>
+                                        <option value="@(instructor.Id)">@($"Инструктор: {instructor.LastName} {instructor.FirstName}")</option>
                                     }
                                 </select>
                                 <p class="help-block text-danger"></p>

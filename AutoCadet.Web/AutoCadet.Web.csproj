@@ -422,6 +422,7 @@
     <Content Include="Views\Home\_SocialButtons.cshtml" />
     <Content Include="Views\Home\Akciya.cshtml" />
     <Content Include="Views\Home\_GetAkciya.cshtml" />
+    <Content Include="Views\Home\_GetCallMe.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

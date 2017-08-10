@@ -63,6 +63,16 @@ namespace AutoCadet.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> GetCallMe()
+        {
+            var pageViewModel = await _homeControllerService
+                .GetInstructorsPageViewModelAsync()
+                .ConfigureAwait(true);
+
+            return PartialView("_GetCallMe", pageViewModel?.InstructorGridItems);
+        }
+
+        [HttpGet]
         public async Task<ActionResult> GetPhoneNumber()
         {
             var randomPhone = await _homeControllerService.GetRandomInstructorNumberAsync().ConfigureAwait(true);

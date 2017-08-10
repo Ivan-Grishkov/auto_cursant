@@ -1,68 +1,109 @@
-﻿(function ($) {
+﻿(function($) {
     $(function() {
         $('[data-toggle="popover"]').popover();
     });
 
-    $('#addCommentForm').submit(function (e) {
+    $("#addCommentForm").submit(function(e) {
         e.preventDefault();
         $.ajax({
-            type: 'POST',
-            url: '/AddComment',
-            data: $('#addCommentForm').serialize(),
+            type: "POST",
+            url: "/AddComment",
+            data: $("#addCommentForm").serialize(),
             success: function(data) {
-                $('#addCommentError').hide();
-                $('#addCommentSuccess').hide();
-                $('#addCommentExists').hide();
+                $("#addCommentError").hide();
+                $("#addCommentSuccess").hide();
+                $("#addCommentExists").hide();
                 if (data && data.success) {
-                    $('#addCommentSuccess').show();
+                    $("#addCommentSuccess").show();
                 } else if (data && data.isSame) {
-                    $('#addCommentExists').show();
+                    $("#addCommentExists").show();
                 } else {
-                    $('#addCommentError').show();
+                    $("#addCommentError").show();
                 }
             }
         });
         return false; // prevent default action
     });
 
-    $('#callMeForm').submit(function (e) {
+    $("#callMeForm").submit(function(e) {
         e.preventDefault();
         $.ajax({
-            type: 'POST',
-            url: '/CallMe',
-            data: $('#callMeForm').serialize(),
+            type: "POST",
+            url: "/CallMe",
+            data: $("#callMeForm").serialize(),
             success: function(data) {
-                $('#addCallMeError').hide();
-                $('#addCallMeSuccess').hide();
-                $('#addCallMeExists').hide();
+                $("#addCallMeError").hide();
+                $("#addCallMeSuccess").hide();
+                $("#addCallMeExists").hide();
                 if (data && data.success) {
-                    $('#addCallMeSuccess').show();
+                    $("#addCallMeSuccess").show();
                 } else if (data && data.isSame) {
-                    $('#addCallMeExists').show();
+                    $("#addCallMeExists").show();
                 } else {
-                    $('#addCallMeError').show();
+                    $("#addCallMeError").show();
                 }
             }
         });
         return false; // prevent default action
     });
+
+    $("#showCallMe").click(function() {
+        $("#callMeModal").modal("show");
+
+        $.ajax({
+            type: "GET",
+            url: "/getcallme",
+            success: function(data) {
+                if (data) {
+                    const place = $($("#callMePlaceholder")[0]);
+                    place.append(data);
+                }
+            }
+        });
+    });
+
+
+    $("body").on("click",
+        "#callMeFormBtn",
+        function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/CallMe",
+                data: $("#callMeFormModal").serialize(),
+                success: function(data) {
+                    $("#addCallMeErrorModal").hide();
+                    $("#addCallMeSuccessModal").hide();
+                    $("#addCallMeExistsModal").hide();
+                    if (data && data.success) {
+                        $("#addCallMeSuccessModal").show();
+                    } else if (data && data.isSame) {
+                        $("#addCallMeExistsModal").show();
+                    } else {
+                        $("#addCallMeErrorModal").show();
+                    }
+                    return false;
+                }
+            });
+            return false; // prevent default action
+        });
 
     $.ajax({
-        type: 'GET',
-        url: '/getakciya',
-        success: function (data) {
+        type: "GET",
+        url: "/getakciya",
+        success: function(data) {
             if (data) {
-               $($('#akciyaLink')[0]).append(data);
+                $($("#akciyaLink")[0]).append(data);
             }
         }
     });
 
     $.ajax({
-        type: 'GET',
-        url: '/getphonenumber',
-        success: function (data) {
+        type: "GET",
+        url: "/getphonenumber",
+        success: function(data) {
             if (data) {
-               $($('#phoneNumber')[0]).append(data);
+                $($("#phoneNumber")[0]).append(data);
             }
         }
     });

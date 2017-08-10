@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AutoCadet.Models.InstructorViewModel>
+
+
+<!-- Modal content-->
+<div class="modal-content" id="contact">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Заказать Звонок</h4>
+    </div>
+    @using (Html.BeginForm("CallMe", "Home", FormMethod.Post, new {name = "callMeMessage", id = "callMeFormModal"}))
+    {
+        <div class="modal-body">
+
+
+            <div id="addCallMeErrorModal" class="alert alert-danger" role="alert" style="display: none">
+                Произошла ошибка. Попробуйте еще раз.
+            </div>
+            <div id="addCallMeExistsModal" class="alert alert-danger" role="alert" style="display: none">
+                Произошла ошибка. Ваш запрос уже обрабатывается либо нет возможности отправить сообщение. Запрос будет обработан в ручном режиме.
+            </div>
+            <div id="addCallMeSuccessModal" class="alert alert-success" role="alert" style="display: none">
+                Ваш Запрос отправлен.
+            </div>
+
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Ваше Имя" id="requesterName" name="requesterName">
+                <p class="help-block text-danger"></p>
+            </div>
+
+            <div class="form-group">
+                <input type="tel" class="form-control" placeholder="Ваш Телефон" id="phoneCallMe" name="phone" required>
+                <p class="help-block text-danger"></p>
+            </div>
+
+            <div class="form-group">
+                <select name="instructorId" class="dropdown form-control">
+                    <option value="" disabled selected>Ваш Инструктор</option>
+                    @{
+                        var instructorViewModels = Model?.Where(x => x != null).OrderBy(x => x.LastName);
+                        if (instructorViewModels != null)
+                        {
+                            foreach (var instructor in instructorViewModels)
+                            {
+                                <option value="@instructor.Id">@($"{instructor.LastName} {instructor.FirstName}")</option>
+                            }
+                        }
+                    }
+                </select>
+                <p class="help-block text-danger"></p>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <button id="callMeFormBtn" class="btn btn-primary" onclick="yaCounter41138179.reachGoal('FormOrderSend')" onsubmit="ga('send', 'event', 'Form', 'SendForm');">Отправить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    }
+</div>

@@ -26,7 +26,10 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-2">
+                    <button id="showCallMe" data-toggle="modal" class="btn btn-primary">Заказать Звонок</button>
+                </div>
+                <div class="col-md-6">
                     <ul class="list-group list-inline pull-right">
                         <li><a href="/instructors">ИНСТРУКТОРЫ</a></li>
                         <li><a href="/obuchenie">ОБУЧЕНИЕ</a></li>
@@ -40,6 +43,12 @@
             </div>
         </div>
     </footer>
+<!-- Call Me Modal Dialog -->
+<div id="callMeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" id="callMePlaceholder">
+
+    </div>
+</div>
 
     @Scripts.RenderFormat("<script type='text/javascript' src='{0}'></script>", "~/bundles/jquery")
     @Scripts.RenderFormat("<script type='text/javascript' src='{0}' async></script>", "~/bundles/bootstrap")
