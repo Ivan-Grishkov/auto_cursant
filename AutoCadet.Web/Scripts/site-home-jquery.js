@@ -56,4 +56,14 @@
             }
         }
     });
+
+    $.ajax({
+        type: 'GET',
+        url: '/getphonenumber',
+        success: function (data) {
+            if (data) {
+               $($('#phoneNumber')[0]).append(data);
+            }
+        }
+    });
 })(jQuery);

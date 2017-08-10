@@ -27,6 +27,14 @@
             </button>
             <a class="navbar-brand page-scroll" href="/">Уроки вождения</a>
             <span id="akciyaLink"></span>
+            @if (string.IsNullOrWhiteSpace(ViewBag.DisplayPhone))
+            {
+                <span id="phoneNumber" class="navbar-btn navbar-brand pull-right float-right"></span>
+            }
+            else
+            {
+                <span class="navbar-btn navbar-brand pull-right float-right">@ViewBag.DisplayPhone</span>
+            }
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -248,5 +248,17 @@ namespace AutoCadet.Services.Impl
                 .ConfigureAwait(false);
             return comments.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
         }
+
+        public async Task<string> GetRandomInstructorNumberAsync()
+        {
+            var phones = await _autoCadetDbContext.Instructors
+                .Where(x => x.IsPrimary)
+                .Select(x => x.Phone)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            Random rnd = new Random();
+            return phones.OrderBy(x => rnd.Next()).FirstOrDefault();
+        }
+
     }
 }
