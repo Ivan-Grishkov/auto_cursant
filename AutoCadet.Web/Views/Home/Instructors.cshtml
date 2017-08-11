@@ -15,16 +15,20 @@
 }
 
 @section detailsH1 {
-    <div class="col-md-9">
-        <h1 class="section-heading">
+    <h1 class="section-heading">
+        <label class="pull-left">
             @(Model.InstructorDetails?.MetadataInfo?.H1)
-        </h1>
-    </div>
-    <div class="col-md-3">
-        <span class="pull-right">
-        @{ Html.RenderPartial("_SocialButtons", pageUrl); }
-    </span>
-    </div>
+        </label>
+
+        <span>
+            @Html.DisplayFor(x => x.Instructor.AverageScore, new { id = "average-score" })
+        </span>
+
+        <label for="InstructorPhone" class="pull-right">
+            Тел:
+            <span id="InstructorPhone">@Model.Instructor.Phone</span>
+        </label>
+    </h1>
 }
 
 @section breadcrumb {
@@ -37,19 +41,6 @@
         </li>
         <li class="active">@($"{Model.Instructor.LastName} {Model.Instructor.FirstName}")</li>
     </ul>
-}
-
-@section detailsH2 {
-    <h2 class="section-subheading text-muted">
-        <label for="average-score">Средний рейтинг инструктора:</label>
-        <span class="pull-right">
-            @Html.DisplayFor(x => x.Instructor.AverageScore, new {id = "average-score"})
-        </span>
-    </h2>
-    <h3 class="section-subheading">
-        <label for="InstructorPhone">Телефон:</label>
-        <span id="InstructorPhone">@Model.Instructor.Phone</span>
-    </h3>
 }
 
 <section id="person" class="bg-light-gray">
@@ -91,7 +82,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Перезвоните мне</h2>
+                <h2 class="section-heading">
+                    Перезвоните мне
+                    <p>
+                        @{ Html.RenderPartial("_SocialButtons", pageUrl); }
+                    </p>
+                </h2>
             </div>
         </div>
         <div class="row">

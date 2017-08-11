@@ -53,10 +53,6 @@
                                         {
                                             <p class="text-left">@($"{Model[k].ListDescription}")</p>
                                         }
-                                        @{
-                                            var pageUrl = Url.Action("Blog", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
-                                            Html.RenderPartial("_SocialButtons", pageUrl);
-                                        }
                                     </div>
                                 </div>
                                 {k++;}
