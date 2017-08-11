@@ -271,8 +271,11 @@
     <Compile Include="Models\ShareEventViewModel.cs" />
     <Compile Include="Models\VideoPageViewModel.cs" />
     <Compile Include="Models\VideoViewModel.cs" />
+    <Compile Include="Notificators\BaseEmailSender.cs" />
     <Compile Include="Notificators\CallMeNotificator.cs" />
+    <Compile Include="Notificators\CommentAddedNotificator.cs" />
     <Compile Include="Notificators\ICallMeNotificator.cs" />
+    <Compile Include="Notificators\ICommentAddedNotificator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAdminControllerService.cs" />
     <Compile Include="Services\Impl\AdminControllerService.cs" />

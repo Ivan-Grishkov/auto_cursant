@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
-using System.Net.Mail;
 using AutoCadet.Domain;
 using AutoCadet.Domain.Entities;
 using log4net;
 
 namespace AutoCadet.Notificators
 {
-    public class CallMeNotificator : ICallMeNotificator
+    public class CallMeNotificator : BaseEmailSender, ICallMeNotificator
     {
         private readonly ILog _log;
         private readonly AutoCadetDbContext _autoCadetDbContext;
-        private const char EmailSplitter = ';';
-        private readonly string _adminEmail = ConfigurationManager.AppSettings["NotifyMeDefaultEmails"] ?? "grishkov.ivan@gmail.com";
 
         public CallMeNotificator(ILog log, AutoCadetDbContext autoCadetDbContext)
         {
@@ -34,18 +30,6 @@ namespace AutoCadet.Notificators
                     instructor = _autoCadetDbContext.Instructors.Where(x => x.IsPrimary).OrderBy(x => Guid.NewGuid()).Take(3).FirstOrDefault();
                 }
 
-                MailMessage message = new MailMessage();
-                if (!string.IsNullOrWhiteSpace(instructor?.Email))
-                {
-                    message.To.Add(instructor.Email);
-                }
-
-                var defaultEmails = _adminEmail.Split(EmailSplitter);
-                foreach (var defaultEmail in defaultEmails.Where(x => !string.IsNullOrWhiteSpace(x)))
-                {
-                    message.CC.Add(new MailAddress(defaultEmail));
-                }
-                message.Subject = "Перезвоните uroki-vozhdeniya.by";
                 var messageText = $"{instructor?.LastName} {instructor?.FirstName} перезвоните, пожалуйста, на номер {phone}. {requesterName}";
                 if (instructor != null)
                 {
@@ -55,14 +39,8 @@ namespace AutoCadet.Notificators
                         messageText += $" и {instructor.Phone2}";
                     }
                 }
-                message.Body = messageText;
 
-                SmtpClient client = new SmtpClient
-                {
-                    Timeout = 2000
-                };
-
-                client.Send(message);
+                SentEmail(messageText, "Перезвоните - uroki-vozhdeniya.by", instructor?.Email);
             }
             catch (Exception e)
             {

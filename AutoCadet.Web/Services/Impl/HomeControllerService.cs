@@ -17,12 +17,18 @@ namespace AutoCadet.Services.Impl
         private readonly AutoCadetDbContext _autoCadetDbContext;
         private readonly IMapper _mapper;
         private readonly ICallMeNotificator _callMeNotificator;
+        private readonly ICommentAddedNotificator _commentAddedNotificator;
 
-        public HomeControllerService(AutoCadetDbContext autoCadetDbContext, IMapper mapper, ICallMeNotificator callMeNotificator)
+        public HomeControllerService(
+            AutoCadetDbContext autoCadetDbContext,
+            IMapper mapper,
+            ICallMeNotificator callMeNotificator,
+            ICommentAddedNotificator commentAddedNotificator)
         {
             _autoCadetDbContext = autoCadetDbContext;
             _mapper = mapper;
             _callMeNotificator = callMeNotificator;
+            _commentAddedNotificator = commentAddedNotificator;
         }
 
         public async Task<HomePageViewModel> GetHomePageViewModelAsync()
@@ -204,7 +210,8 @@ namespace AutoCadet.Services.Impl
                     comment.Instructor = instructor;
                     _autoCadetDbContext.Comments.Add(comment);
                     await _autoCadetDbContext.SaveChangesAsync().ConfigureAwait(false);
-                    return true;
+
+                    return _commentAddedNotificator.Notify(comment);
                 }
             }
 
