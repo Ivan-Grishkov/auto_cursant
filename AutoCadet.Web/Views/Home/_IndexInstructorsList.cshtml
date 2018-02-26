@@ -3,8 +3,8 @@
     <div id="instructorsCarousel" class="carousel slide col-md-12" data-ride="carousel" data-interval="false">
         @{
             var itemsCount = Model.Count;
-            var itemsPerPage = 4;
-            var itemsPerRow = 2;
+            var itemsPerPage = 6;
+            var itemsPerRow = 3;
             var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
         }
         <ol class="carousel-indicators">
@@ -28,7 +28,7 @@
                                 {
                                     break;
                                 }
-                                <div class="col-md-6 col-sm-6 portfolio-item">
+                                <div class="col-md-4 col-sm-4 portfolio-item">
                                     <a href="@Url.Action("Instructors", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
                                         <div class="portfolio-hover">
                                             <div class="portfolio-hover-content">
