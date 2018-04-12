@@ -25,8 +25,7 @@ namespace AutoCadet.Models
         public bool IsActive { get; set; }
         [Required]
         public bool IsPrimary { get; set; }
-        [Required]
-        public int Price { get; set; }
+        public int? Price { get; set; }
         public string ThumbnailImageName { get; set; }
         [UIHint("Score")]
         public double? AverageScore { get; set; }

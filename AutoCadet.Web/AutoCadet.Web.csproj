@@ -254,6 +254,10 @@
     <Compile Include="Domain\Migrations\201612130617075_ImgFileNotRequired.Designer.cs">
       <DependentUpon>201612130617075_ImgFileNotRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804120742207_instructor_price_nummable.cs" />
+    <Compile Include="Migrations\201804120742207_instructor_price_nummable.Designer.cs">
+      <DependentUpon>201804120742207_instructor_price_nummable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BlogListPageViewModel.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\CallMeViewModel.cs" />
@@ -455,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\Migrations\201612130617075_ImgFileNotRequired.resx">
       <DependentUpon>201612130617075_ImgFileNotRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804120742207_instructor_price_nummable.resx">
+      <DependentUpon>201804120742207_instructor_price_nummable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

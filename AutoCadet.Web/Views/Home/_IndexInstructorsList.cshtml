@@ -3,8 +3,8 @@
     <div id="instructorsCarousel" class="carousel slide col-md-12" data-ride="carousel" data-interval="false">
         @{
             var itemsCount = Model.Count;
-            var itemsPerPage = 6;
-            var itemsPerRow = 3;
+            var itemsPerPage = 4;
+            var itemsPerRow = 2;
             var pagesCount = itemsCount / itemsPerPage + (itemsCount % itemsPerPage > 0 ? 1 : 0);
         }
         <ol class="carousel-indicators">
@@ -28,7 +28,7 @@
                                 {
                                     break;
                                 }
-                                <div class="col-md-4 col-sm-4 portfolio-item">
+                                <div class="col-md-6 col-sm-6 portfolio-item">
                                     <a href="@Url.Action("Instructors", new {prettyUrl = Model[k].UrlName})" class="portfolio-link">
                                         <div class="portfolio-hover">
                                             <div class="portfolio-hover-content">
@@ -47,15 +47,22 @@
                                         }
                                     </a>
                                     <div class="portfolio-caption" title="@Model[k].Phone">
-                                        <h4>@($"{Model[k].FirstName} {Model[k].LastName}")</h4>
+                                        <h4>
+                                            @($"{Model[k].FirstName} {Model[k].LastName}")
+                                            @if (Model[k].Price != null)
+                                            {
+                                                <span class="text-right pull-right text-danger">@($"{Model[k].Price} р.")</span>
+                                            }
+                                        </h4>
                                         <div class="row text-muted text-right">
                                             <span class="text-left pull-left">
                                                 @{
                                                     @Html.DisplayFor(x => Model[k].AverageScore)
                                                 }
                                             </span>
-                                            <span class="text-right pull-right text-danger">@($"{Model[k].Price} р.")</span>
+                                            <span class="text-right pull-right text-danger">@Model[k].Phone</span>
                                         </div>
+
                                         @{
                                             var pageUrl = Url.Action("Instructors", "Home", new {prettyUrl = Model[k].UrlName}, Request?.Url?.Scheme);
                                             Html.RenderPartial("_SocialButtons", pageUrl);
