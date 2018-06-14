@@ -60,7 +60,7 @@
                                                     @Html.DisplayFor(x => Model[k].AverageScore)
                                                 }
                                             </span>
-                                            <span class="text-right pull-right text-danger">@Model[k].Phone</span>
+                                            <a class="text-right pull-right text-danger" href="tel:@Model[k].Phone">@Model[k].Phone</a>
                                         </div>
 
                                         @{

@@ -122,3 +122,17 @@ header.details-layout .intro-text {
 .cursor-poiner {
     cursor: pointer;
 }
+
+a[href^="tel:"]:before {
+    content: "\260e";
+    margin-right: 0.5em;
+}
+a[href^="tel:"] {
+    text-decoration: none;
+}
+.phone-link {
+    text-decoration: none;
+}
+a[href^="tel:"]:hover, a[href^="tel:"]:focus {
+    text-decoration: none;
+}
