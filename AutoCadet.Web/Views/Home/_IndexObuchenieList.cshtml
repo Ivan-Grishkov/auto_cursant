@@ -3,7 +3,9 @@
     var itemsCount = Model.Count;
     var itemsPerRow = 4;
     var rowsCount = itemsCount / itemsPerRow + (itemsCount % itemsPerRow > 0 ? 1 : 0);
+    var sortedItems = Model.OrderBy(x => x.SortingNumber).ThenByDescending(x => x.CreatedDate).ToList();
 }
+
 @for (var j = 0; j < rowsCount; j++)
 {
     <div class="row text-center">
@@ -15,15 +17,15 @@
             {
                 break;
             }
-
+            var item = sortedItems[k];
             <div class="col-md-3">
-                <a href="@Url.Action("Obuchenie", new {prettyUrl = Model[k].UrlName})">
+                <a href="@Url.Action("Obuchenie", new {prettyUrl = item.UrlName})">
                     <span class="fa-stack fa-4x">
                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fa @Model[k].ListIcon fa-stack-1x fa-inverse"></i>
+                            <i class="fa @item.ListIcon fa-stack-1x fa-inverse"></i>
                         </span>
-                    <h4 class="service-heading">@Model[k].ListHeader</h4>
-                    <p class="text-muted">@Model[k].ListDescription</p>
+                    <h4 class="service-heading">@item.ListHeader</h4>
+                    <p class="text-muted">@item.ListDescription</p>
                 </a>
             </div>
         }

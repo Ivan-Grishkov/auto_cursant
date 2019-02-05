@@ -168,9 +168,9 @@ namespace AutoCadet.Controllers
         [HttpPost]
         public async Task<ActionResult> AddComment(CommentViewModel comment)
         {
-            if (!ModelState.IsValid || comment == null)
+            if (!ModelState.IsValid || comment == null || comment.CorrectAnswer != comment.Answer)
             {
-                return new JsonResult {Data = new {error = true}};
+                return new JsonResult {Data = new {error = true, wrongAnswer = true}};
             }
 
             bool isSuccess = await _homeControllerService.SaveCommentAsync(comment).ConfigureAwait(true);
