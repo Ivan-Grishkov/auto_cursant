@@ -159,6 +159,9 @@
                         <div id="addCommentExists" class="alert alert-danger" role="alert" style="display: none">
                             Произошла ошибка. Такой коментарий уже существует.
                         </div>
+                        <div id="addCommentWrongAnswer" class="alert alert-danger" role="alert" style="display: none">
+                            Произошла ошибка. Ответ на проверочный вопрос не верен.
+                        </div>
                         <div id="addCommentSuccess" class="alert alert-success" role="alert" style="display: none">
                             Ваш Отзыв сохранен. Он появится на сайте после обработки администратором.
                         </div>
@@ -186,6 +189,21 @@
                             <div class="form-group">
                                 <textarea class="form-control" placeholder="Отзыв *" id="message" name="text" required data-validation-required-message="Что же Вы хотели сказать?"></textarea>
                                 <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                @{
+                                    var rand = new Random();
+                                    var a = rand.Next(1, 10);
+                                    var b = rand.Next(1, 10);
+
+                                    var correctAnswer = a + b;
+                                    var questionStr = $"{a} + {b} = ?";
+                                }
+                                <input type="hidden" class="form-control" id="correctAnswer" name="correctAnswer" value="@correctAnswer">
+                                <h3 for="answer" class="text-left answer-label">
+                                    @questionStr
+                                </h3>
+                                <input type="number" placeholder="@correctAnswer" class="form-control" id="answer" name="answer">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-xl">Сохранить</button>

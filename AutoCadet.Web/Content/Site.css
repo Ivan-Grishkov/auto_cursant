@@ -56,7 +56,7 @@ a h2.section-heading {
 }
 
 textarea.form-control {
-    height : 500px;
+    height : 206px;
 }
 
 
@@ -135,4 +135,8 @@ a[href^="tel:"] {
 }
 a[href^="tel:"]:hover, a[href^="tel:"]:focus {
     text-decoration: none;
+}
+
+.answer-label {
+    color: white;
 }
