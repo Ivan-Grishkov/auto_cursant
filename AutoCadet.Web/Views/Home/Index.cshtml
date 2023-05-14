@@ -180,14 +180,14 @@
                                     var a = rand.Next(1, 10);
                                     var b = rand.Next(1, 10);
 
-                                    var correctAnswer = a + b;
+                                    var correctCheck = a + b;
                                     var questionStr = $"{a} + {b} = ?";
                                 }
-                                <input type="hidden" class="form-control" id="correctAnswer" name="correctAnswer" value="@correctAnswer">
-                                <h3 for="answer" class="text-left answer-label">
+                                <input type="hidden" class="form-control" id="correctCheck" name="correctCheck" value="@correctCheck">
+                                <h3 for="check" class="text-left answer-label">
                                     @questionStr
                                 </h3>
-                                <input type="number" placeholder="@correctAnswer" class="form-control" id="answer" name="answer">
+                                <input type="number" placeholder="@correctCheck" class="form-control" id="check" name="check">
                             </div>
                             <div class="form-group pull-right">
                                 <button type="submit" class="btn btn-xl">Сохранить</button>

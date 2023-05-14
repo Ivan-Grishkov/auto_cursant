@@ -30,7 +30,7 @@ namespace AutoCadet.Models
 
         public string InstructorName { get; set; }
 
-        public string Answer { get; set; }
-        public string CorrectAnswer { get; set; }
+        public string Check { get; set; }
+        public string CorrectCheck { get; set; }
     }
 }

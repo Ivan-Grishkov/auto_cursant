@@ -168,7 +168,7 @@ namespace AutoCadet.Controllers
         [HttpPost]
         public async Task<ActionResult> AddComment(CommentViewModel comment)
         {
-            if (!ModelState.IsValid || comment == null || comment.CorrectAnswer != comment.Answer)
+            if (!ModelState.IsValid || comment == null || comment.CorrectCheck != comment.Check)
             {
                 return new JsonResult {Data = new {error = true, wrongAnswer = true}};
             }
